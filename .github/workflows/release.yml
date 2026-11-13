@@ -4,11 +4,10 @@ on:
   push:
     tags:
       # One tag per package group: <group>-v<version>, releasing packages/<group>.
-      - "vue2-7-v*"
-      - "vue3-v*"
+      - "renderer-v*"
       - "plugins-v*"
+      - "materials-v*"
       - "tools-v*"
-      - "materials-vue2-7-v*"
 
 permissions:
   contents: read
@@ -36,10 +35,10 @@ jobs:
       # All packages of a group are released together under one version.
       - name: Resolve the group and check the package versions
         run: |
-          line="${GITHUB_REF_NAME%-v*}"
+          group="${GITHUB_REF_NAME%-v*}"
           tag="${GITHUB_REF_NAME##*-v}"
-          echo "LINE=$line" >> "$GITHUB_ENV"
-          for manifest in packages/"$line"/*/package.json; do
+          echo "GROUP=$group" >> "$GITHUB_ENV"
+          for manifest in packages/"$group"/*/package.json; do
             version="$(node -p "require('./$manifest').version")"
             if [ "$version" != "$tag" ]; then
               echo "::error file=$manifest::version $version does not match tag $GITHUB_REF_NAME"
@@ -62,4 +61,4 @@ jobs:
       # package must list this workflow as a trusted publisher on npmjs.com.
       # Versions already on the registry are skipped.
       - name: Publish to npm
-        run: pnpm publish -r --filter "./packages/${LINE}/*" --access public --no-git-checks
+        run: pnpm publish -r --filter "./packages/${GROUP}/*" --access public --no-git-checks

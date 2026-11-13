@@ -1,0 +1,47 @@
+{
+  "name": "@cdlab996/lowcode-designer-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Designer for the LowCode Engine running the Vue 2.7 or Vue 3 renderer (?vue=2|3).",
+  "author": "wudi",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nsl run -n lowcode-vue -c -- vite --port NSL_PORT --strictPort",
+    "dev:bare": "vite --port 5577",
+    "build": "vite build",
+    "preview": "vite preview --port 5577",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@alilc/lowcode-plugin-components-pane": "^1.0.7",
+    "@alilc/lowcode-plugin-datasource-pane": "^1.0.10",
+    "@alilc/lowcode-plugin-inject": "^1.2.2",
+    "@alilc/lowcode-plugin-schema": "^1.0.5",
+    "@alilc/lowcode-plugin-set-ref-prop": "^1.0.1",
+    "@alilc/lowcode-plugin-simulator-select": "^1.0.3",
+    "@alilc/lowcode-plugin-undo-redo": "^1.0.0",
+    "@alilc/lowcode-types": "catalog:shared",
+    "@alilc/lowcode-utils": "catalog:shared",
+    "@cdlab996/lowcode-plugin-directive-loading": "workspace:*",
+    "@cdlab996/lowcode-plugin-manual": "workspace:*",
+    "@cdlab996/lowcode-plugin-set-doc-url": "workspace:*",
+    "@cdlab996/lowcode-plugin-vue-code-editor": "workspace:*"
+  },
+  "devDependencies": {
+    "@alifd/next": "catalog:plugins",
+    "@alilc/lowcode-engine": "catalog:shared",
+    "@cdlab996/lowcode-engine-ext-vue": "1.0.6-beta.29",
+    "@cdlab996/lowcode-materials-antd-vue1": "workspace:*",
+    "@cdlab996/lowcode-materials-element-ui": "workspace:*",
+    "@cdlab996/lowcode-materials-vant2": "workspace:*",
+    "@cdlab996/lowcode-vue2": "workspace:*",
+    "@cdlab996/lowcode-vue3": "workspace:*",
+    "@types/prop-types": "^15.7.15",
+    "@types/react": "catalog:shared",
+    "events": "^3.3.0",
+    "less": "catalog:dev",
+    "react": "catalog:shared",
+    "sass": "catalog:dev",
+    "vite": "catalog:dev"
+  }
+}

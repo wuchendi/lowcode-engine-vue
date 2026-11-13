@@ -1,0 +1,128 @@
+{
+  "componentName": "Page",
+  "id": "node_dockcviv8fo1",
+  "props": {},
+  "docId": "doclibjmxow",
+  "fileName": "/",
+  "state": {
+    "text": "outer",
+    "vLoading": true,
+    "isShowDialog": false,
+    "info": {
+      "text": "",
+      "user": {
+        "username": "",
+        "password": ""
+      }
+    }
+  },
+  "dataSource": {
+    "list": [
+      {
+        "type": "fetch",
+        "isInit": true,
+        "options": {
+          "params": {},
+          "method": "GET",
+          "isCors": true,
+          "timeout": 5000,
+          "headers": {},
+          "uri": "/mock/info.json"
+        },
+        "id": "info"
+      }
+    ]
+  },
+  "css": "body {\n  font-size: 12px;\n}\n\n.button {\n  width: 100px;\n  color: #ff00ff\n}",
+  "lifeCycles": {
+    "mounted": {
+      "type": "JSFunction",
+      "value": "function () {\n    this.dataSourceMap.info.load()\n      .then(res => {\n        console.log(res);\n        this.info = res;\n      })\n      .catch((err) => {\n        console.log(err);\n      });\n    console.log('did mount');\n  }"
+    },
+    "beforeMount": {
+      "type": "JSFunction",
+      "value": "function () {\n    console.log('will unmount');\n  }"
+    }
+  },
+  "methods": {
+    "testFunc": {
+      "type": "JSFunction",
+      "value": "function () {\n      console.log('test func');\n    }"
+    }
+  },
+  "originCode": "class LowcodeComponent extends Component {\n  state = {\n    \"text\": \"outer\",\n    \"isShowDialog\": false,\n    \"info\": {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    }\n  }\n  componentDidMount() {\n    console.log('did mount');\n  }\n  componentWillUnmount() {\n    console.log('will unmount');\n  }\n  testFunc() {\n    console.log('test func');\n  }\n  onClick() {\n    this.setState({\n      isShowDialog: true\n    })\n  }\n  closeDialog() {\n    this.setState({\n      isShowDialog: false\n    })\n  }\n}",
+  "hidden": false,
+  "title": "",
+  "isLocked": false,
+  "condition": true,
+  "conditionGroup": "",
+  "meta": {
+    "originCode": "import { defineComponent } from 'vue';\n\nexport default defineComponent({\n  data: () => ({\n    text: \"outer\",\n    vLoading: true,\n    isShowDialog: false,\n    info: {\n      \"text\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    },\n  }),\n  methods: {\n    testFunc() {\n      console.log('test func');\n    },\n  },\n  mounted() {\n    this.dataSourceMap.info.load()\n      .then(res => {\n        console.log(res);\n        this.info = res;\n      })\n      .catch((err) => {\n        console.log(err);\n      });\n    console.log('did mount');\n  },\n  beforeMount() {\n    console.log('will unmount');\n  },\n})\n"
+  },
+  "children": [
+    {
+      "componentName": "VanButton",
+      "id": "node_oclib5q0x32",
+      "props": {
+        "children": {
+          "type": "JSExpression",
+          "value": "this.info.text",
+          "mock": "按钮"
+        },
+        "size": "large",
+        "type": "primary",
+        "icon": "",
+        "plain": false,
+        "round": false,
+        "disabled": false,
+        "hairline": false,
+        "loading": false,
+        "loading-text": "",
+        "loading-type": "circular",
+        "loading-size": "",
+        "url": "",
+        "to": "",
+        "replace": false,
+        "ref": "VanButtonRef",
+        "v-loading": false
+      },
+      "docId": "doclibjmxow",
+      "hidden": false,
+      "title": "",
+      "isLocked": false,
+      "condition": true,
+      "conditionGroup": ""
+    },
+    {
+      "componentName": "VanImage",
+      "id": "node_oclj447np51",
+      "props": {
+        "src": "https://img01.yzcdn.cn/vant/cat.jpeg",
+        "fit": "fill",
+        "radius": 0,
+        "round": false,
+        "lazy-load": false,
+        "show-error": true,
+        "show-loading": true,
+        "error-icon": "photo-fail",
+        "loading-icon": "photo",
+        "alt": "",
+        "width": "",
+        "height": "",
+        "icon-prefix": "",
+        "ref": "VanImage-74fe89f4",
+        "v-loading": {
+          "type": "JSExpression",
+          "value": "this.vLoading",
+          "mock": false
+        }
+      },
+      "docId": "doclj6jc36v",
+      "hidden": false,
+      "title": "",
+      "isLocked": false,
+      "condition": true,
+      "conditionGroup": ""
+    }
+  ]
+}

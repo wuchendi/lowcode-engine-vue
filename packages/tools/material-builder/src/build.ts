@@ -13,15 +13,13 @@ import type {
 } from './options'
 import { PLUGIN_NAME } from './options'
 
-/** Globals provided by the designer page (Vue renderers of both lines, React for setters). */
+/** Globals of the canvas and preview pages: Vue, the renderer API and React. */
 const DEFAULT_EXTERNALS: Record<string, string> = {
   vue: 'Vue',
   react: 'React',
   'react-dom': 'ReactDOM',
-  '@cdlab996/lowcode-vue-renderer': 'LCVueRenderer',
-  '@cdlab996/lowcode-vue-simulator-renderer': 'LCVueSimulatorRenderer',
-  '@cdlab996/lowcode-vue-renderer2.7': 'LCVueRenderer',
-  '@cdlab996/lowcode-vue-simulator-renderer2.7': 'LCVueSimulatorRenderer',
+  '@cdlab996/lowcode-vue2': 'LCVueRenderer',
+  '@cdlab996/lowcode-vue3': 'LCVueRenderer',
 }
 
 export interface CommonArgs {

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@12.16.1",
-  "description": "Lowcode Engine renderers, simulators and demos for Vue 2.7 and Vue 3.",
+  "description": "LowCode Engine renderer, designer simulator, plugins, materials and tooling for Vue 2.7 and Vue 3.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue",
@@ -20,19 +20,16 @@
   },
   "scripts": {
     "build": "pnpm -r --filter \"./packages/**\" build",
-    "build:vue2-7": "pnpm -r --filter \"./packages/vue2-7/*\" build",
-    "build:vue3": "pnpm -r --filter \"./packages/vue3/*\" build",
     "prepare": "pnpm build",
+    "dev": "pnpm -C apps/designer dev",
+    "build:designer": "pnpm -C apps/designer build",
     "lint": "biome check",
-    "lint:type": "pnpm build && pnpm -r --filter \"./packages/**\" lint:type",
+    "lint:type": "pnpm build && pnpm -r lint:type",
     "format": "biome format --write",
-    "test": "vitest --run",
-    "dev:vue2-7": "pnpm -C apps/demo-vue2-7 start",
-    "dev:vue3": "pnpm -C apps/demo-vue3 start"
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:dev",
-    "@vitejs/plugin-vue-jsx": "catalog:dev",
     "jsdom": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:dev"

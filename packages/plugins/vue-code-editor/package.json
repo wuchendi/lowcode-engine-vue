@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@alilc/lowcode-plugin-base-monaco-editor": "^1.1.2",
-    "@cdlab996/lowcode-utils": "workspace:^",
+    "@alilc/lowcode-utils": "catalog:shared",
     "acorn": "^8.10.0",
     "magic-string": "^0.30.3",
     "prop-types": "^15.8.1",
@@ -64,7 +64,9 @@
     "monaco-editor": "^0.41.0",
     "react": "catalog:shared",
     "unocss": "catalog:dev",
-    "vite": "catalog:dev"
+    "vite": "catalog:dev",
+    "vue-2-7": "npm:vue@^2.7.16",
+    "vue-router-3": "npm:vue-router@^3.6.5"
   },
   "publishConfig": {
     "access": "public",

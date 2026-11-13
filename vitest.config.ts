@@ -1,64 +1,47 @@
+import { realpathSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vitest/config'
 
-const src = (path: string) =>
-  fileURLToPath(new URL(`./packages/${path}`, import.meta.url))
+const path = (p: string) => fileURLToPath(new URL(p, import.meta.url))
+const real = (p: string) => realpathSync(path(p))
 
-const exact = (name: string, path: string) => ({
-  find: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`),
-  replacement: src(path),
-})
-
-// Each line resolves its own Vue: tests run against package sources, and the
-// workspace packages are aliased to their `src` entry.
-export default defineConfig({
-  test: {
-    projects: [
+/**
+ * One project per Vue version. Both run the core suites against their own
+ * `vue` / `vue-router` and adapter; each also runs its adapter's suites.
+ */
+const project = (version: 'vue2' | 'vue3') => ({
+  resolve: {
+    alias: [
       {
-        resolve: {
-          alias: [
-            exact('@cdlab996/lowcode-hooks2.7', 'vue2-7/hooks/src/index.ts'),
-            exact('@cdlab996/lowcode-utils2.7', 'vue2-7/utils/src/index.ts'),
-            exact(
-              '@cdlab996/lowcode-vue-renderer2.7',
-              'vue2-7/renderer/src/index.ts',
-            ),
-          ],
-          dedupe: ['vue'],
-        },
-        test: {
-          name: 'vue2-7',
-          root: src('vue2-7'),
-          environment: 'jsdom',
-          include: ['*/tests/**/*.test.ts'],
-        },
+        find: /^vue$/,
+        replacement: real(`./packages/renderer/${version}/node_modules/vue`),
       },
       {
-        plugins: [vueJsx()],
-        resolve: {
-          alias: [
-            exact('@cdlab996/lowcode-hooks', 'vue3/hooks/src/index.ts'),
-            exact('@cdlab996/lowcode-utils', 'vue3/utils/src/index.ts'),
-            exact(
-              '@cdlab996/lowcode-data-source',
-              'vue3/data-source/src/index.ts',
-            ),
-            exact(
-              '@cdlab996/lowcode-vue-renderer',
-              'vue3/renderer/src/index.ts',
-            ),
-          ],
-          dedupe: ['vue'],
-        },
-        test: {
-          name: 'vue3',
-          root: src('vue3'),
-          globals: true,
-          environment: 'jsdom',
-          include: ['*/__tests__/**/*.spec.{ts,tsx}'],
-        },
+        find: /^vue-router$/,
+        replacement: real(
+          `./packages/renderer/${version}/node_modules/vue-router`,
+        ),
+      },
+      {
+        find: /^@cdlab996\/lowcode-vue-core$/,
+        replacement: path('./packages/renderer/core/src/index.ts'),
       },
     ],
+    dedupe: ['vue', 'vue-router'],
+  },
+  test: {
+    name: version,
+    environment: 'jsdom',
+    include: [
+      'packages/renderer/core/tests/**/*.test.ts',
+      `packages/renderer/${version}/tests/**/*.test.ts`,
+    ],
+    setupFiles: [path(`./packages/renderer/core/tests/setup/${version}.ts`)],
+  },
+})
+
+export default defineConfig({
+  test: {
+    projects: [project('vue2'), project('vue3')],
   },
 })

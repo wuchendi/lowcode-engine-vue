@@ -64,7 +64,11 @@
       }
     },
     {
-      "includes": ["packages/plugins/**", "packages/materials-vue2-7/**"],
+      "includes": [
+        "packages/plugins/**",
+        "packages/materials/**",
+        "apps/designer/**"
+      ],
       "javascript": {
         "jsxRuntime": "reactClassic"
       }

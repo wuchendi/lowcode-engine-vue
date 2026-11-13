@@ -17,13 +17,13 @@ import React, {
 import '@alilc/lowcode-plugin-base-monaco-editor/lib/style'
 
 import type { IEditorInstance } from '@alilc/lowcode-plugin-base-monaco-editor/lib/helper'
-import { isFunction } from '@cdlab996/lowcode-utils'
 import { parse } from 'acorn'
 import MagicString from 'magic-string'
 import { generate } from 'short-uuid'
+import { isFunction } from '../../utils'
 import { findOptionNode, parseCode } from './parse'
-import vueTypeCode from './types/vue'
-import vueRouterTypeCode from './types/vue-router'
+import type { VueVersion } from './types'
+import { loadVueTypes } from './types'
 
 export interface FunctionEventParams {
   functionName: string
@@ -33,6 +33,8 @@ export interface FunctionEventParams {
 export interface JsEditorProps {
   jsCode?: string
   material: IPublicApiMaterial
+  /** Vue version the code targets; selects the type declarations. */
+  vue: VueVersion
 }
 
 export interface JsEditorInst {
@@ -229,14 +231,16 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
       typeRoots: ['node_modules/@types'],
     })
 
-    monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      vueTypeCode,
-      'vue.d.ts',
-    )
-    monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      vueRouterTypeCode,
-      'vue-router.d.ts',
-    )
+    // Declarations are registered as models: in the designer page extra libs
+    // (`addExtraLib`) do not reach the TypeScript worker, models always do
+    void loadVueTypes(props.vue).then((libs) => {
+      for (const lib of libs) {
+        const uri = monaco.Uri.parse(lib.path)
+        if (!monaco.editor.getModel(uri)) {
+          monaco.editor.createModel(lib.content, 'typescript', uri)
+        }
+      }
+    })
   }, [])
 
   return (
@@ -253,6 +257,7 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
 JsEditor.displayName = 'JsEditor'
 JsEditor.propTypes = {
   jsCode: PropTypes.string,
+  vue: PropTypes.oneOf<2 | 3>([2, 3]).isRequired,
 }
 
 export default JsEditor

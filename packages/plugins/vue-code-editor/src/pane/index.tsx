@@ -8,16 +8,13 @@ import type {
   IPublicTypeRootSchema,
 } from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
-import {
-  isJSExpression,
-  isJSFunction,
-  isObject,
-  isString,
-} from '@cdlab996/lowcode-utils'
+import { isJSExpression, isJSFunction } from '@alilc/lowcode-utils'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { JsEditor, SaveIcon } from '../components'
+import { isObject, isString } from '../utils'
 import './index.less'
 import type { JsEditorInst } from '../components/JsEditor/JsEditor'
+import type { VueVersion } from '../components/JsEditor/types'
 import { defaultCode, defaultStateCode } from '../config'
 
 interface CodeEditorPaneProps {
@@ -25,6 +22,7 @@ interface CodeEditorPaneProps {
   event: IPublicApiEvent
   skeleton: IPublicApiSkeleton
   material: IPublicApiMaterial
+  vue: VueVersion
 }
 
 enum TAB_KEY {
@@ -145,6 +143,7 @@ export const CodeEditorPane = ({
   project,
   material,
   event,
+  vue,
 }: CodeEditorPaneProps) => {
   const editor = useRef<JsEditorInst | null>(null)
   const [currentTab, setCurrentTab] = useState(TAB_KEY.JS)
@@ -234,7 +233,12 @@ export const CodeEditorPane = ({
         extra={<SaveIcon onClick={doSave}></SaveIcon>}
       >
         <Tab.Item key={TAB_KEY.JS} title="index.js">
-          <JsEditor material={material} ref={editor} jsCode={jsCode}></JsEditor>
+          <JsEditor
+            material={material}
+            ref={editor}
+            jsCode={jsCode}
+            vue={vue}
+          ></JsEditor>
         </Tab.Item>
         <Tab.Item key={TAB_KEY.CSS} title="index.css">
           <MonacoEditor

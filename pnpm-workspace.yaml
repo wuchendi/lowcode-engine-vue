@@ -1,9 +1,8 @@
 packages:
-  - packages/vue2-7/*
-  - packages/vue3/*
+  - packages/renderer/*
   - packages/plugins/*
   - packages/tools/*
-  - packages/materials-vue2-7/*
+  - packages/materials/*
   - apps/*
 
 catalogs:
@@ -11,9 +10,9 @@ catalogs:
     "@biomejs/biome": ^2.6.7
     "@types/node": ^26.6.6
     "@vitejs/plugin-react": ^6.3.0
-    "@vitejs/plugin-vue-jsx": ^5.1.1
     jsdom: ^31.0.1
     less: ^4.9.1
+    sass: ^1.108.2
     tsdown: ^0.23.7
     typescript: ^7.0.2
     unocss: ^66.13.0
@@ -28,7 +27,7 @@ catalogs:
     "@types/react": ^16.14.70
     intl-messageformat: ^10.7.18
     react: ^16.14.0
-  materials-vue2-7:
+  materials:
     "@types/lodash": ^4.17.27
     lodash: ^4.17.21
   plugins:
@@ -42,6 +41,11 @@ catalogs:
     uuid: ^9.0.1
     vue: ^3.5.0
     vue-router: ^4.2.4
+
+peerDependencyRules:
+  allowedVersions:
+    # @formily/grid (official datasource panel) only uses TypeScript for types
+    "@formily/grid>typescript": "7"
 
 allowBuilds:
   "@parcel/watcher": true
