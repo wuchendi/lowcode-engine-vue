@@ -1,0 +1,73 @@
+{
+  "name": "@cdlab996/lowcode-utils2.7",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Utility methods for renderer/simulator",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/cdLab996/lowcode-engine-vue/tree/main/packages/vue2-7/utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdLab996/lowcode-engine-vue.git",
+    "directory": "packages/vue2-7/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/cdLab996/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "vue",
+    "lowcode",
+    "lowcode-engine"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "vue": ">= 2.7.x < 3"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "@alilc/lowcode-designer": {
+      "optional": true
+    },
+    "@alilc/lowcode-types": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@alilc/lowcode-designer": "catalog:shared",
+    "@alilc/lowcode-shell": "catalog:shared",
+    "@alilc/lowcode-types": "catalog:shared",
+    "vue": "catalog:vue2-7",
+    "tsdown": "catalog:dev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "componentName": "Page",
+  "id": "node_dockcviv8fo1",
+  "props": {},
+  "docId": "doclupc274w",
+  "fileName": "/",
+  "state": {
+    "text": "outer",
+    "isShowDialog": false,
+    "info": { "info": "", "user": { "username": "", "password": "" } }
+  },
+  "dataSource": { "list": [] },
+  "css": "body {\n  font-size: 12px;\n}\n\n.button {\n  width: 100px;\n  color: #ff00ff\n}",
+  "lifeCycles": {
+    "mounted": {
+      "type": "JSFunction",
+      "value": "function () {\n    console.log('did mount');\n  }"
+    },
+    "beforeMount": {
+      "type": "JSFunction",
+      "value": "function () {\n    console.log('will unmount');\n  }"
+    }
+  },
+  "methods": {
+    "testFunc": {
+      "type": "JSFunction",
+      "value": "function () {\n      console.log('test func');\n    }"
+    }
+  },
+  "originCode": "class LowcodeComponent extends Component {\n  state = {\n    \"text\": \"outer\",\n    \"isShowDialog\": false,\n    \"info\": {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    }\n  }\n  componentDidMount() {\n    console.log('did mount');\n  }\n  componentWillUnmount() {\n    console.log('will unmount');\n  }\n  testFunc() {\n    console.log('test func');\n  }\n  onClick() {\n    this.setState({\n      isShowDialog: true\n    })\n  }\n  closeDialog() {\n    this.setState({\n      isShowDialog: false\n    })\n  }\n\n\tonClick_new(){\n    this.$message.success('hhhhhh')\n\t}\n\n\tonSubmit(ev){\n    ev.preventDefault();\n    this.dataSourceMap.submit.load()\n\t}\n}",
+  "hidden": false,
+  "title": "",
+  "isLocked": false,
+  "condition": true,
+  "conditionGroup": "",
+  "meta": {
+    "originCode": "import { defineComponent } from 'vue';\n\nexport default defineComponent({\n  data: () => ({\n    text: \"outer\",\n    isShowDialog: false,\n    info: {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    },\n  }),\n  methods: {\n    testFunc() {\n      console.log('test func');\n    },\n  },\n  mounted() {\n    console.log('did mount');\n  },\n  beforeMount() {\n    console.log('will unmount');\n  },\n})\n"
+  },
+  "children": [
+    {
+      "componentName": "VanTabs",
+      "id": "node_ocluqshvky1",
+      "props": {
+        "items": [
+          { "primaryKey": "2438", "title": "标签项0" },
+          { "primaryKey": "8925", "title": "标签项1" }
+        ],
+        "color": "#ee0a24",
+        "background": "#fff",
+        "duration": "0.3",
+        "line-width": "40px",
+        "line-height": "3px",
+        "animated": false,
+        "border": false,
+        "ellipsis": false,
+        "sticky": false,
+        "swipeable": false,
+        "lazy-render": true,
+        "scrollspy": false,
+        "offset-top": "0",
+        "swipe-threshold": "5"
+      },
+      "hidden": false,
+      "title": "",
+      "isLocked": false,
+      "condition": true,
+      "conditionGroup": "",
+      "children": [
+        {
+          "componentName": "VanTab",
+          "id": "node_ocluqshvky2",
+          "props": { "primaryKey": "2438", "title": "标签项0" },
+          "hidden": false,
+          "title": "",
+          "isLocked": false,
+          "condition": true,
+          "conditionGroup": "",
+          "children": [
+            {
+              "componentName": "AButton",
+              "id": "node_ocluqp1per1",
+              "props": {
+                "type": "primary",
+                "children": "主按钮",
+                "htmlType": "button",
+                "size": "middle",
+                "shape": "default",
+                "block": false,
+                "danger": false,
+                "ghost": false,
+                "disabled": false
+              },
+              "hidden": false,
+              "title": "",
+              "isLocked": false,
+              "condition": true,
+              "conditionGroup": ""
+            },
+            {
+              "componentName": "AButton",
+              "id": "node_ocluqp1per2",
+              "props": {
+                "type": "default",
+                "children": "次按钮",
+                "htmlType": "button",
+                "size": "middle",
+                "shape": "default",
+                "block": false,
+                "danger": false,
+                "ghost": false,
+                "disabled": false
+              },
+              "hidden": false,
+              "title": "",
+              "isLocked": false,
+              "condition": true,
+              "conditionGroup": ""
+            }
+          ]
+        },
+        {
+          "componentName": "VanTab",
+          "id": "node_ocluqshvky3",
+          "props": { "primaryKey": "8925", "title": "标签项1" },
+          "hidden": false,
+          "title": "",
+          "isLocked": false,
+          "condition": true,
+          "conditionGroup": "",
+          "children": [
+            {
+              "componentName": "VanImage",
+              "id": "node_ocluqshvky4",
+              "props": {
+                "src": "https://img01.yzcdn.cn/vant/cat.jpeg",
+                "fit": "fill",
+                "radius": 0,
+                "round": false,
+                "lazy-load": false,
+                "show-error": true,
+                "show-loading": true,
+                "error-icon": "photo-fail",
+                "loading-icon": "photo",
+                "alt": "",
+                "width": "",
+                "height": "",
+                "icon-prefix": ""
+              },
+              "hidden": false,
+              "title": "",
+              "isLocked": false,
+              "condition": true,
+              "conditionGroup": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

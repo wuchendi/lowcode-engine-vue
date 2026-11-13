@@ -1,0 +1,64 @@
+{
+  "name": "@knxcloud/lowcode-utils",
+  "type": "module",
+  "version": "1.6.0",
+  "license": "MIT",
+  "homepage": "https://github.com/cdLab996/lowcode-engine-vue/tree/main/packages/vue3/utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdLab996/lowcode-engine-vue.git",
+    "directory": "packages/vue3/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/cdLab996/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "vue",
+    "lowcode",
+    "lowcode-engine"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@alilc/lowcode-types": "^1.0.0",
+    "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@alilc/lowcode-types": "catalog:shared",
+    "tsdown": "catalog:dev",
+    "vue": "catalog:vue3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

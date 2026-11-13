@@ -1,0 +1,5 @@
+export { type Config, default as config } from './config'
+export * from './core'
+export type { BlockScope, I18nMessages, RendererProps } from './renderer'
+export { Renderer as default } from './renderer'
+export * from './utils/Vue3Adapter'

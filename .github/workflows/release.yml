@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  # Lets the job request an OIDC token for npm trusted publishing.
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      # Reads the pnpm version from "packageManager" in package.json.
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # All four packages are released together under one version.
+      - name: Check that the tag matches the package versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          for manifest in packages/*/package.json; do
+            version="$(node -p "require('./$manifest').version")"
+            if [ "$version" != "$tag" ]; then
+              echo "::error file=$manifest::version $version does not match tag $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
+
+      - name: Lint
+        run: pnpm lint
+
+      # Builds every package first, then type-checks them.
+      - name: Build and type-check
+        run: pnpm lint:type
+
+      - name: Test
+        run: pnpm test
+
+      # Authenticates through npm trusted publishing (OIDC): no token is stored
+      # in the repository, and provenance is attached automatically. Each
+      # package must list this workflow as a trusted publisher on npmjs.com.
+      # Versions already on the registry are skipped.
+      - name: Publish to npm
+        run: pnpm publish -r --filter "@cdlab996/*" --access public --no-git-checks

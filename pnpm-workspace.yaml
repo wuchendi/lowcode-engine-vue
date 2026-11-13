@@ -1,0 +1,41 @@
+packages:
+  - packages/vue2-7/*
+  - packages/vue3/*
+  - apps/*
+
+catalogs:
+  dev:
+    "@biomejs/biome": ^2.6.7
+    "@vitejs/plugin-vue-jsx": ^5.1.1
+    jsdom: ^31.0.1
+    tsdown: ^0.23.7
+    typescript: ^7.0.2
+    vitest: ^5.1.0
+  shared:
+    "@alilc/lowcode-designer": ^1.3.4
+    "@alilc/lowcode-engine": ^1.3.4
+    "@alilc/lowcode-shell": ^1.3.4
+    "@alilc/lowcode-types": ^1.3.4
+    "@alilc/lowcode-utils": ^1.3.4
+    intl-messageformat: ^10.7.18
+  vue2-7:
+    vue: ^2.7.16
+    vue-router: ^3.6.5
+  vue3:
+    "@vue/test-utils": ^2.4.6
+    lodash: ^4.17.21
+    uuid: ^9.0.1
+    vue: ^3.5.0
+    vue-router: ^4.2.4
+
+allowBuilds:
+  "@parcel/watcher": true
+  ant-design-vue: true
+  core-js: true
+  core-js-pure: true
+  ejs: true
+  esbuild: true
+  swiper: true
+
+minimumReleaseAgeExclude:
+  - jsdom@31.0.1
