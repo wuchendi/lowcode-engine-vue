@@ -137,6 +137,10 @@ directives and fragments) has its own suite in each distribution.
 - Plugins are React components and independent of the Vue version. The Vue
   source panel takes `{ vue: 2 | 3 }` and loads the matching Vue and
   vue-router declarations into its editor.
+- `engine-ext-vue` is the engine's setter and binding-dialog bundle
+  (`window.AliLowCodeEngineExt`), adapted to Vue component metas. It is an
+  IIFE build that reads React, Fusion, moment, lodash and the engine from the
+  page; the designer serves it from `/runtime/engine-ext/`.
 - Materials are named after their UI library
   (`@cdlab996/lowcode-materials-<library>`) and built with
   `@cdlab996/lowcode-material-builder`.

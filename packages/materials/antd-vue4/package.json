@@ -1,0 +1,42 @@
+{
+  "name": "@cdlab996/lowcode-materials-antd-vue4",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Ant Design Vue 4 materials for the LowCode Engine (Vue 3).",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/materials/antd-vue4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/materials/antd-vue4"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "main": "./dist/index.js",
+  "unpkg": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "lowcode-material dev",
+    "build": "lowcode-material build --clean",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "ant-design-vue": "^4.1.2"
+  },
+  "devDependencies": {
+    "@alilc/lowcode-types": "catalog:shared",
+    "@cdlab996/lowcode-material-builder": "workspace:*",
+    "vite": "catalog:dev",
+    "vue": "catalog:vue3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

@@ -21,6 +21,7 @@ packages/
     vue3/                 @cdlab996/lowcode-vue3  (Vue 3 adapter + core)
   plugins/                designer plugins (React), Vue-version independent
     directive-loading/    @cdlab996/lowcode-plugin-directive-loading
+    engine-ext-vue/       @cdlab996/lowcode-engine-ext-vue (setters and binding dialogs)
     manual/               @cdlab996/lowcode-plugin-manual
     set-doc-url/          @cdlab996/lowcode-plugin-set-doc-url
     vue-code-editor/      @cdlab996/lowcode-plugin-vue-code-editor
@@ -28,6 +29,9 @@ packages/
     antd-vue1/            @cdlab996/lowcode-materials-antd-vue1   (Vue 2.7)
     element-ui/           @cdlab996/lowcode-materials-element-ui  (Vue 2.7)
     vant2/                @cdlab996/lowcode-materials-vant2       (Vue 2.7)
+    antd-vue4/            @cdlab996/lowcode-materials-antd-vue4   (Vue 3)
+    element-plus/         @cdlab996/lowcode-materials-element-plus (Vue 3)
+    vant4/                @cdlab996/lowcode-materials-vant4       (Vue 3)
   tools/
     material-builder/     @cdlab996/lowcode-material-builder (lowcode-material CLI)
 apps/

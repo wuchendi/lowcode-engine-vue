@@ -2,31 +2,25 @@
   "version": "0.1.0",
   "packages": [
     {
-      "package": "@cdlab996/antd-lowcode-materials",
-      "version": "0.0.1",
-      "library": "Cdlab996AntdLowcodeMaterials",
+      "package": "@cdlab996/lowcode-materials-antd-vue4",
+      "library": "Cdlab996LowcodeMaterialsAntdVue4",
       "urls": [
-        "https://unpkg.com/@cdlab996/antd-lowcode-materials@latest/dist/index.css",
-        "https://unpkg.com/@cdlab996/antd-lowcode-materials@latest/dist/index.js"
+        "/materials/antd-vue4/index.css",
+        "/materials/antd-vue4/index.js"
       ]
     },
     {
-      "package": "@cdlab996/element-plus-lowcode-materials",
-      "version": "0.0.1",
-      "library": "Cdlab996ElementPlusLowcodeMaterials",
+      "package": "@cdlab996/lowcode-materials-element-plus",
+      "library": "Cdlab996LowcodeMaterialsElementPlus",
       "urls": [
-        "https://unpkg.com/@cdlab996/element-plus-lowcode-materials@latest/dist/index.css",
-        "https://unpkg.com/@cdlab996/element-plus-lowcode-materials@latest/dist/index.js"
+        "/materials/element-plus/index.css",
+        "/materials/element-plus/index.js"
       ]
     },
     {
-      "package": "@cdlab996/vant-lowcode-materials",
-      "version": "1.0.0",
-      "library": "Cdlab996VantLowcodeMaterials",
-      "urls": [
-        "https://unpkg.com/@cdlab996/vant-lowcode-materials@latest/dist/index.css",
-        "https://unpkg.com/@cdlab996/vant-lowcode-materials@latest/dist/index.js"
-      ]
+      "package": "@cdlab996/lowcode-materials-vant4",
+      "library": "Cdlab996LowcodeMaterialsVant4",
+      "urls": ["/materials/vant4/index.css", "/materials/vant4/index.js"]
     }
   ],
   "components": [
@@ -161,24 +155,24 @@
       }
     },
     {
-      "exportName": "Cdlab996AntdLowcodeMaterialsMeta",
-      "url": "https://unpkg.com/@cdlab996/antd-lowcode-materials@latest/dist/meta.js",
+      "exportName": "Cdlab996LowcodeMaterialsAntdVue4Meta",
+      "url": "/materials/antd-vue4/meta.js",
       "package": {
-        "npm": "@cdlab996/antd-lowcode-materials"
+        "npm": "@cdlab996/lowcode-materials-antd-vue4"
       }
     },
     {
-      "exportName": "Cdlab996ElementPlusLowcodeMaterialsMeta",
-      "url": "https://unpkg.com/@cdlab996/element-plus-lowcode-materials@latest/dist/meta.js",
+      "exportName": "Cdlab996LowcodeMaterialsElementPlusMeta",
+      "url": "/materials/element-plus/meta.js",
       "package": {
-        "npm": "@cdlab996/element-plus-lowcode-materials"
+        "npm": "@cdlab996/lowcode-materials-element-plus"
       }
     },
     {
-      "exportName": "Cdlab996VantLowcodeMaterialsMeta",
-      "url": "https://unpkg.com/@cdlab996/vant-lowcode-materials@latest/dist/meta.js",
+      "exportName": "Cdlab996LowcodeMaterialsVant4Meta",
+      "url": "/materials/vant4/meta.js",
       "package": {
-        "npm": "@cdlab996/vant-lowcode-materials"
+        "npm": "@cdlab996/lowcode-materials-vant4"
       }
     }
   ],

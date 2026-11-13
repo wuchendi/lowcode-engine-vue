@@ -14,9 +14,10 @@ const setterRegistry = (ctx: IPublicModelPluginContext) => {
 
       /**
        * 注册内置 Setter
+       * (React's ComponentClass<any> does not accept classes with a typed
+       * getDerivedStateFromProps, hence `never`)
        */
-      // @ts-expect-error
-      setters.registerSetter({ ...setterMap, ExpressionSetter })
+      setters.registerSetter({ ...setterMap, ExpressionSetter } as never)
 
       setters.registerSetter('CIconSetter', IconSetter as never)
 

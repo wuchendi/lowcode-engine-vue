@@ -31,13 +31,23 @@ function runtimeFiles(): Record<string, string> {
       'dist/vue.runtime.global.js',
     ),
   }
+  const ext = join(packages, 'plugins', 'engine-ext-vue', 'dist')
+  files['runtime/engine-ext/engine-ext.js'] = join(ext, 'engine-ext.js')
+  files['runtime/engine-ext/engine-ext.css'] = join(ext, 'engine-ext.css')
   for (const version of ['vue2', 'vue3']) {
     const dist = join(packages, 'renderer', version, 'dist')
     files[`runtime/${version}/renderer.js`] = join(dist, 'renderer.umd.js')
     files[`runtime/${version}/simulator.js`] = join(dist, 'simulator.umd.js')
     files[`runtime/${version}/simulator.css`] = join(dist, 'simulator.css')
   }
-  for (const material of ['antd-vue1', 'element-ui', 'vant2']) {
+  for (const material of [
+    'antd-vue1',
+    'element-ui',
+    'vant2',
+    'antd-vue4',
+    'element-plus',
+    'vant4',
+  ]) {
     files[`materials/${material}`] = join(
       packages,
       'materials',
