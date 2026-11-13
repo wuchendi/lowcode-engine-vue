@@ -3,14 +3,14 @@
   "type": "module",
   "version": "1.6.0",
   "license": "MIT",
-  "homepage": "https://github.com/cdLab996/lowcode-engine-vue/tree/main/packages/vue3/hooks",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/hooks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cdLab996/lowcode-engine-vue.git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
     "directory": "packages/vue3/hooks"
   },
   "bugs": {
-    "url": "https://github.com/cdLab996/lowcode-engine-vue/issues"
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
   },
   "keywords": [
     "vue",

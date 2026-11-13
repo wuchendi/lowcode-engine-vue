@@ -3,7 +3,9 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      # One tag per line, e.g. vue2-7-v1.0.0. Only the Vue 2.7 line is published:
+      # the Vue 3 packages still use the upstream @knxcloud scope.
+      - "vue2-7-v*"
 
 permissions:
   contents: read
@@ -28,11 +30,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # All four packages are released together under one version.
+      # All Vue 2.7 packages are released together under one version.
       - name: Check that the tag matches the package versions
         run: |
-          tag="${GITHUB_REF_NAME#v}"
-          for manifest in packages/*/package.json; do
+          tag="${GITHUB_REF_NAME#vue2-7-v}"
+          for manifest in packages/vue2-7/*/package.json; do
             version="$(node -p "require('./$manifest').version")"
             if [ "$version" != "$tag" ]; then
               echo "::error file=$manifest::version $version does not match tag $GITHUB_REF_NAME"
@@ -55,4 +57,4 @@ jobs:
       # package must list this workflow as a trusted publisher on npmjs.com.
       # Versions already on the registry are skipped.
       - name: Publish to npm
-        run: pnpm publish -r --filter "@cdlab996/*" --access public --no-git-checks
+        run: pnpm publish -r --filter "./packages/vue2-7/*" --access public --no-git-checks

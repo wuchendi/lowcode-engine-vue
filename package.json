@@ -7,13 +7,13 @@
   "description": "Lowcode Engine renderers, simulators and demos for Vue 2.7 and Vue 3.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/cdLab996/lowcode-engine-vue",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cdLab996/lowcode-engine-vue.git"
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git"
   },
   "bugs": {
-    "url": "https://github.com/cdLab996/lowcode-engine-vue/issues"
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
   },
   "engines": {
     "node": ">=24.15"

@@ -31,13 +31,13 @@ docs/
   audit/             Renderer and simulator audit notes
 ```
 
-| Package | Role |
-| --- | --- |
-| `renderer` | Renders a LowCode Engine schema into Vue components (runtime / live mode). |
+| Package              | Role                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| `renderer`           | Renders a LowCode Engine schema into Vue components (runtime / live mode).             |
 | `simulator-renderer` | Runs inside the designer canvas iframe and connects the renderer to the designer host. |
-| `hooks` | Renderer context and current-node hooks shared by the renderer and simulator. |
-| `utils` | Asset loading, component/utils building and type guards. |
-| `data-source` | Data-source engine (Vue 3 line only). |
+| `hooks`              | Renderer context and current-node hooks shared by the renderer and simulator.          |
+| `utils`              | Asset loading, component/utils building and type guards.                               |
+| `data-source`        | Data-source engine (Vue 3 line only).                                                  |
 
 ## Dependency catalogs
 
@@ -69,21 +69,25 @@ restart the demo.
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm build` | Build all packages. |
-| `pnpm build:vue2-7` / `pnpm build:vue3` | Build one line. |
-| `pnpm lint` | Biome lint and format check. |
-| `pnpm lint:type` | Build, then type-check every package. |
-| `pnpm test` | Run all Vitest suites (both lines). |
-| `pnpm format` | Format with Biome. |
+| Command                                 | Description                           |
+| --------------------------------------- | ------------------------------------- |
+| `pnpm build`                            | Build all packages.                   |
+| `pnpm build:vue2-7` / `pnpm build:vue3` | Build one line.                       |
+| `pnpm lint`                             | Biome lint and format check.          |
+| `pnpm lint:type`                        | Build, then type-check every package. |
+| `pnpm test`                             | Run all Vitest suites (both lines).   |
+| `pnpm format`                           | Format with Biome.                    |
 
 ## CI and release
 
 - `.github/workflows/ci.yml` runs lint, build + type-check and tests on Node 24
   and 26 for every push to `main` and every pull request.
-- `.github/workflows/release.yml` runs on `v*` tags and publishes
-  `@cdlab996/*` packages to npm through trusted publishing (OIDC).
+- `.github/workflows/release.yml` runs on `vue2-7-v*` tags (for example
+  `vue2-7-v1.0.0`) and publishes the Vue 2.7 packages to npm through trusted
+  publishing (OIDC). The tag must match the version of every package in
+  `packages/vue2-7`.
+- The Vue 3 line is not published from this repository yet: its packages still
+  use the upstream `@knxcloud` npm scope.
 
 ## License
 
