@@ -1,4 +1,4 @@
-import { isArray } from '@knxcloud/lowcode-utils'
+import { isArray } from '@cdlab996/lowcode-utils'
 import type { ComponentInternalInstance, VNode } from 'vue'
 import { isVNode } from 'vue'
 import type { ComponentInstance } from '../interface'

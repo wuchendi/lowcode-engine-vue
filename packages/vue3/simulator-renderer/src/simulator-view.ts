@@ -1,4 +1,4 @@
-import LowCodeRenderer from '@knxcloud/lowcode-vue-renderer'
+import LowCodeRenderer from '@cdlab996/lowcode-vue-renderer'
 import type { PropType } from 'vue'
 import { defineComponent, h, ref, renderSlot, Suspense } from 'vue'
 import { RouterView } from 'vue-router'

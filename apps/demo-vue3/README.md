@@ -56,9 +56,9 @@ Code built with the help of these related projects:
 - [@alilc/lowcode-plugin-undo-redo](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-undo-redo) Lowcode Plugin Undo and Redo
 - [@alilc/lowcode-types](https://github.com/alibaba/lowcode-engine/tree/main/packages/types) Type Definitions
 - [@knxcloud/lowcode-plugin-vue-code-editor](https://github.com/KNXCloud/lowcode-engine-plugins/tree/main/packages/plugin-vue-code-editor) Vue Code Editor
-- [@knxcloud/lowcode-utils](https://github.com/KNXCloud/lowcode-engine-vue/tree/main/packages/utils) Utility Library for @knxcloud Packages
-- [@knxcloud/lowcode-vue-renderer](https://github.com/KNXCloud/lowcode-engine-vue/tree/main/packages/vue-renderer) Vue Renderer
-- [@knxcloud/lowcode-vue-simulator-renderer](https://github.com/KNXCloud/lowcode-engine-vue/tree/main/packages/vue-simulator-renderer) Vue Simulator Renderer
+- [@cdlab996/lowcode-utils](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/utils) Utility Library
+- [@cdlab996/lowcode-vue-renderer](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/renderer) Vue Renderer
+- [@cdlab996/lowcode-vue-simulator-renderer](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/simulator-renderer) Vue Simulator Renderer
 - [@cdlab996/lowcode-plugin-manual](https://github.com/cdlab996/lowcode-plugin-manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
 - [@cdlab996/lowcode-engine-ext-vue](https://github.com/cdlab996/lowcode-engine-ext-vue) Adapting Vue Setters
 - [@cdlab996/plugin-directive-loading](https://github.com/cdlab996/plugin-directive-loading) Vue Custom Directive

@@ -9,13 +9,13 @@ import {
   exportSchema,
   getSubComponent,
   isArray,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import {
   config,
   LOWCODE_ROUTE_META,
   SchemaParser,
   setupLowCodeRouteGuard,
-} from '@knxcloud/lowcode-vue-renderer'
+} from '@cdlab996/lowcode-vue-renderer'
 import type { Ref } from 'vue'
 import {
   computed,

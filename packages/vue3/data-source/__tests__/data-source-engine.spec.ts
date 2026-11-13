@@ -1,4 +1,4 @@
-import { noop } from '@knxcloud/lowcode-utils'
+import { noop } from '@cdlab996/lowcode-utils'
 import { createDataSourceEngine } from '../src'
 
 describe('data source engine', async () => {

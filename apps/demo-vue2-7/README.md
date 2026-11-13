@@ -53,9 +53,9 @@ Code built with the help of these related projects:
 - [@alilc/lowcode-plugin-simulator-select](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-simulator-size) Canvas Switching
 - [@alilc/lowcode-plugin-undo-redo](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-undo-redo) Lowcode Plugin Undo and Redo
 - [@alilc/lowcode-types](https://github.com/alibaba/lowcode-engine/tree/main/packages/types) Type Definitions
-- [@cdlab996/lowcode-utils2.7](https://github.com/KNXCloud/lowcode-engine-vue/tree/main/packages/utils) Utility Library for @cdlab996 Packages for Vue2.7
-- [@cdlab996/lowcode-vue-renderer2.7](https://github.com/cdLab996/lowcode-engine-vue2.7/tree/main/packages/vue-renderer) Vue Renderer for Vue2.7
-- [@cdlab996/lowcode-vue-simulator-renderer2.7](https://github.com/cdLab996/lowcode-engine-vue2.7/tree/main/packages/vue-simulator-renderer) Vue Simulator Renderer for Vue2.7
+- [@cdlab996/lowcode-utils2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/utils) Utility Library for Vue2.7
+- [@cdlab996/lowcode-vue-renderer2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/renderer) Vue Renderer for Vue2.7
+- [@cdlab996/lowcode-vue-simulator-renderer2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/simulator-renderer) Vue Simulator Renderer for Vue2.7
 - [@cdlab996/lowcode-plugin-manual](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
 - [@cdlab996/lowcode-engine-ext-vue](https://github.com/cdlab996/lowcode-engine-ext-vue) Adapting Vue Setters
 - [@cdlab996/plugin-directive-loading](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-directive-loading) Vue Custom Directive for v-loading

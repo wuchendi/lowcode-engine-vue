@@ -3,7 +3,7 @@ import type {
   IPublicTypeNodeSchema as NodeSchema,
   RequestHandler,
 } from '@alilc/lowcode-types'
-import type { INode } from '@knxcloud/lowcode-hooks'
+import type { INode } from '@cdlab996/lowcode-hooks'
 import type {
   Component,
   ComponentPublicInstance,

@@ -1,4 +1,4 @@
-import { isFunction } from '@knxcloud/lowcode-utils'
+import { isFunction } from '@cdlab996/lowcode-utils'
 import type { RuntimeScope, SchemaParser } from '../../utils'
 
 export function created(

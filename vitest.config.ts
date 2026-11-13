@@ -38,14 +38,14 @@ export default defineConfig({
         plugins: [vueJsx()],
         resolve: {
           alias: [
-            exact('@knxcloud/lowcode-hooks', 'vue3/hooks/src/index.ts'),
-            exact('@knxcloud/lowcode-utils', 'vue3/utils/src/index.ts'),
+            exact('@cdlab996/lowcode-hooks', 'vue3/hooks/src/index.ts'),
+            exact('@cdlab996/lowcode-utils', 'vue3/utils/src/index.ts'),
             exact(
-              '@knxcloud/lowcode-data-source',
+              '@cdlab996/lowcode-data-source',
               'vue3/data-source/src/index.ts',
             ),
             exact(
-              '@knxcloud/lowcode-vue-renderer',
+              '@cdlab996/lowcode-vue-renderer',
               'vue3/renderer/src/index.ts',
             ),
           ],

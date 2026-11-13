@@ -1,4 +1,4 @@
-import { isArray, isObject } from '@knxcloud/lowcode-utils'
+import { isArray, isObject } from '@cdlab996/lowcode-utils'
 import type { Ref } from 'vue'
 import { inject, isRef } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'

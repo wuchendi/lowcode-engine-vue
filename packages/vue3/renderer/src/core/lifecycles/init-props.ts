@@ -4,7 +4,7 @@ import {
   isFunction,
   isObject,
   isString,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import type { ComponentInternalInstance, Prop, PropType } from 'vue'
 import { withCtx } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'

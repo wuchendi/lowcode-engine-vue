@@ -7,8 +7,8 @@ import type {
   IPublicTypeNpmInfo as NpmInfo,
   IPublicTypeRootSchema as RootSchema,
 } from '@alilc/lowcode-types'
-import type { DesignMode } from '@knxcloud/lowcode-hooks'
-import type { Config, I18nMessages } from '@knxcloud/lowcode-vue-renderer'
+import type { DesignMode } from '@cdlab996/lowcode-hooks'
+import type { Config, I18nMessages } from '@cdlab996/lowcode-vue-renderer'
 import type { App, Component, ComponentPublicInstance } from 'vue'
 import type { Router } from 'vue-router'
 

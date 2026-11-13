@@ -1,7 +1,7 @@
 {
-  "name": "@knxcloud/lowcode-vue-simulator-renderer",
+  "name": "@cdlab996/lowcode-vue-simulator-renderer",
   "type": "module",
-  "version": "1.6.1",
+  "version": "1.0.0",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/simulator-renderer",
   "repository": {
@@ -41,9 +41,9 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@knxcloud/lowcode-hooks": "workspace:*",
-    "@knxcloud/lowcode-utils": "workspace:*",
-    "@knxcloud/lowcode-vue-renderer": "workspace:*"
+    "@cdlab996/lowcode-hooks": "workspace:*",
+    "@cdlab996/lowcode-utils": "workspace:*",
+    "@cdlab996/lowcode-vue-renderer": "workspace:*"
   },
   "peerDependencies": {
     "@alilc/lowcode-types": "^1.0.0",

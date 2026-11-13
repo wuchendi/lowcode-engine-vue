@@ -1,4 +1,4 @@
-import { isFunction, isObject } from '@knxcloud/lowcode-utils'
+import { isFunction, isObject } from '@cdlab996/lowcode-utils'
 import { provide } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'
 

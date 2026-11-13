@@ -5,8 +5,8 @@ import type {
   IPublicTypeNodeSchema as NodeSchema,
   IPublicTypeSlotSchema as SlotSchema,
 } from '@alilc/lowcode-types'
-import type { CurrentNode, INode } from '@knxcloud/lowcode-hooks'
-import { getCurrentNodeKey, useRendererContext } from '@knxcloud/lowcode-hooks'
+import type { CurrentNode, INode } from '@cdlab996/lowcode-hooks'
+import { getCurrentNodeKey, useRendererContext } from '@cdlab996/lowcode-hooks'
 import {
   camelCase,
   createObjectSplitter,
@@ -24,7 +24,7 @@ import {
   isSlotSchema,
   isString,
   toString,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import type {
   Component,
   ComponentPublicInstance,

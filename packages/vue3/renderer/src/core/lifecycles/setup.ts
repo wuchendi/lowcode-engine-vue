@@ -4,7 +4,7 @@ import {
   isObject,
   isPromise,
   toString,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import { toRaw } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'
 import { AccessTypes, addToScope, warn } from '../../utils'

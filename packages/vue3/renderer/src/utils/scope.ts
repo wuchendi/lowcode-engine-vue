@@ -1,5 +1,5 @@
-import type { DataSource } from '@knxcloud/lowcode-data-source'
-import { isBoolean, isObject, isUndefined } from '@knxcloud/lowcode-utils'
+import type { DataSource } from '@cdlab996/lowcode-data-source'
+import { isBoolean, isObject, isUndefined } from '@cdlab996/lowcode-utils'
 import type { ComponentPublicInstance } from 'vue'
 import { isProxy, isReactive, proxyRefs, reactive } from 'vue'
 import type { MaybeArray } from './array'

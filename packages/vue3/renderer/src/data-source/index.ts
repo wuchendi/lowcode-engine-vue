@@ -7,9 +7,9 @@ import type {
   RequestHandler,
   WillFetch,
 } from '@alilc/lowcode-types'
-import type { DataSourceConfig } from '@knxcloud/lowcode-data-source'
-import { createDataSourceEngine } from '@knxcloud/lowcode-data-source'
-import { isJSExpression, isJSFunction } from '@knxcloud/lowcode-utils'
+import type { DataSourceConfig } from '@cdlab996/lowcode-data-source'
+import { createDataSourceEngine } from '@cdlab996/lowcode-data-source'
+import { isJSExpression, isJSFunction } from '@cdlab996/lowcode-utils'
 import type { RuntimeScope, SchemaParser } from '../utils'
 import { AccessTypes, addToScope } from '../utils'
 

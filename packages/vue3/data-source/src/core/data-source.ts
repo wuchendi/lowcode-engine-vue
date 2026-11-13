@@ -1,5 +1,5 @@
 import type { RequestHandler, RequestHandlersMap } from '@alilc/lowcode-types'
-import { isFunction, isPlainObject, isUndefined } from '@knxcloud/lowcode-utils'
+import { isFunction, isPlainObject, isUndefined } from '@cdlab996/lowcode-utils'
 import { computed, reactive, ref, shallowRef } from 'vue'
 import { fetchRequest } from '../handlers'
 import type {

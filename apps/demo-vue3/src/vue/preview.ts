@@ -6,8 +6,8 @@ import type {
   IPublicTypeComponentMap,
   IPublicTypeProjectSchema,
 } from '@alilc/lowcode-types'
-import { AssetLoader, buildComponents } from '@knxcloud/lowcode-utils'
-import VueRenderer from '@knxcloud/lowcode-vue-renderer'
+import { AssetLoader, buildComponents } from '@cdlab996/lowcode-utils'
+import VueRenderer from '@cdlab996/lowcode-vue-renderer'
 import { createApp, h, Suspense, toRaw } from 'vue'
 
 // import { getPackgesToLocalStorage, getProjectSchemaToLocalStorage } from '../utils/store'

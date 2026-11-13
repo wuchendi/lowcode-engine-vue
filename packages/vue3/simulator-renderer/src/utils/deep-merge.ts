@@ -1,4 +1,4 @@
-import { isObject } from '@knxcloud/lowcode-utils'
+import { isObject } from '@cdlab996/lowcode-utils'
 
 export function deepMerge<TL, TR>(o1: TL, o2: TR): TL & TR {
   if (isObject(o1) && isObject(o2)) {

@@ -2,7 +2,7 @@
 
 Scope: all four packages (`hooks`, `utils`, `vue-renderer`, `vue-simulator-renderer`) at
 commit `5dbc13b` on `chore/modernize-tooling-vue27`, checked against Vue 2.7.16 source and
-the upstream Vue 3 implementation (`KNXCloud/lowcode-engine-vue`).
+the Vue 3 implementation (now `packages/vue3`).
 
 Status: findings R-01 to R-11 and S-01 to S-19 have since been fixed on `chore/modernize-tooling-vue27`; S-20 (low-code components and Block) is still open. The locations below refer to the audited commit.
 

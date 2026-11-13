@@ -1,5 +1,5 @@
 {
-  "name": "@knxcloud/lowcode-data-source",
+  "name": "@cdlab996/lowcode-data-source",
   "type": "module",
   "version": "1.0.0",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@knxcloud/lowcode-utils": "workspace:*"
+    "@cdlab996/lowcode-utils": "workspace:*"
   },
   "peerDependencies": {
     "@alilc/lowcode-types": "^1.0.0",

@@ -1,4 +1,4 @@
-import { isElement } from '@knxcloud/lowcode-utils'
+import { isElement } from '@cdlab996/lowcode-utils'
 
 // a range for test TextNode clientRect
 const cycleRange = document.createRange()

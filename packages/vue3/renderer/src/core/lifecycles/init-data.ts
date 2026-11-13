@@ -1,4 +1,4 @@
-import { isFunction, isObject } from '@knxcloud/lowcode-utils'
+import { isFunction, isObject } from '@cdlab996/lowcode-utils'
 import type { RuntimeScope, SchemaParser } from '../../utils'
 import { AccessTypes, addToScope } from '../../utils'
 

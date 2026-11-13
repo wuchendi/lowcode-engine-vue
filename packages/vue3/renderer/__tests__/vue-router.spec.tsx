@@ -1,5 +1,5 @@
 import type { IPublicTypePageSchema } from '@alilc/lowcode-types'
-import { sleep } from '@knxcloud/lowcode-utils'
+import { sleep } from '@cdlab996/lowcode-utils'
 import { flushPromises } from '@vue/test-utils'
 import { createApp, Suspense } from 'vue'
 import { createMemoryHistory, createRouter, RouterView } from 'vue-router'

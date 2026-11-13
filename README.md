@@ -16,12 +16,12 @@ packages/
     utils/           @cdlab996/lowcode-utils2.7
     renderer/        @cdlab996/lowcode-vue-renderer2.7
     simulator-renderer/  @cdlab996/lowcode-vue-simulator-renderer2.7
-  vue3/              Vue 3 line (@knxcloud/*, based on KNXCloud/lowcode-engine-vue)
-    hooks/           @knxcloud/lowcode-hooks
-    utils/           @knxcloud/lowcode-utils
-    data-source/     @knxcloud/lowcode-data-source
-    renderer/        @knxcloud/lowcode-vue-renderer
-    simulator-renderer/  @knxcloud/lowcode-vue-simulator-renderer
+  vue3/              Vue 3 line (@cdlab996/*)
+    hooks/           @cdlab996/lowcode-hooks
+    utils/           @cdlab996/lowcode-utils
+    data-source/     @cdlab996/lowcode-data-source
+    renderer/        @cdlab996/lowcode-vue-renderer
+    simulator-renderer/  @cdlab996/lowcode-vue-simulator-renderer
 apps/
   demo-vue2-7/       Designer demo running the Vue 2.7 line
   demo-vue3/         Designer demo running the Vue 3 line
@@ -82,12 +82,10 @@ restart the demo.
 
 - `.github/workflows/ci.yml` runs lint, build + type-check and tests on Node 24
   and 26 for every push to `main` and every pull request.
-- `.github/workflows/release.yml` runs on `vue2-7-v*` tags (for example
-  `vue2-7-v1.0.0`) and publishes the Vue 2.7 packages to npm through trusted
-  publishing (OIDC). The tag must match the version of every package in
-  `packages/vue2-7`.
-- The Vue 3 line is not published from this repository yet: its packages still
-  use the upstream `@knxcloud` npm scope.
+- `.github/workflows/release.yml` publishes one line per tag to npm through
+  trusted publishing (OIDC): `vue2-7-v<version>` releases `packages/vue2-7`,
+  `vue3-v<version>` releases `packages/vue3`. Every package of the line must
+  already carry that version.
 
 ## License
 

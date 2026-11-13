@@ -1,5 +1,5 @@
 import type { RuntimeOptionsConfig } from '@alilc/lowcode-types'
-import { isPlainObject, isString, toString } from '@knxcloud/lowcode-utils'
+import { isPlainObject, isString, toString } from '@cdlab996/lowcode-utils'
 
 function isFormData(o: unknown): o is FormData {
   return toString(o) === '[object FormData]'

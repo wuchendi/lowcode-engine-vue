@@ -1,4 +1,4 @@
-import { isFunction, isPlainObject, noop } from '@knxcloud/lowcode-utils'
+import { isFunction, isPlainObject, noop } from '@cdlab996/lowcode-utils'
 import type { ComputedOptions } from 'vue'
 import { computed } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'

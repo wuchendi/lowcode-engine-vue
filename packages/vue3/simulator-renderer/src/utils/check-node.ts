@@ -1,4 +1,4 @@
-import { isObject } from '@knxcloud/lowcode-utils'
+import { isObject } from '@cdlab996/lowcode-utils'
 
 export function isCommentNode(
   el: Element | Text | Comment | Node,

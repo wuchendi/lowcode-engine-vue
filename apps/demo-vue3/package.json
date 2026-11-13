@@ -27,9 +27,9 @@
     "@cdlab996/plugin-directive-loading": "^1.0.0",
     "@cdlab996/vant-lowcode-materials": "^0.0.1",
     "@knxcloud/lowcode-plugin-vue-code-editor": "0.1.2",
-    "@knxcloud/lowcode-utils": "workspace:*",
-    "@knxcloud/lowcode-vue-renderer": "workspace:*",
-    "@knxcloud/lowcode-vue-simulator-renderer": "workspace:*",
+    "@cdlab996/lowcode-utils": "workspace:*",
+    "@cdlab996/lowcode-vue-renderer": "workspace:*",
+    "@cdlab996/lowcode-vue-simulator-renderer": "workspace:*",
     "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {

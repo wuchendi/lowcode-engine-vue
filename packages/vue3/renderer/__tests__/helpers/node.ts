@@ -6,8 +6,8 @@ import type {
   IPublicTypeNodeSchema,
   IPublicTypeSlotSchema,
 } from '@alilc/lowcode-types'
-import type { INode } from '@knxcloud/lowcode-hooks'
-import { isArray, isNodeSchema, isString } from '@knxcloud/lowcode-utils'
+import type { INode } from '@cdlab996/lowcode-hooks'
+import { isArray, isNodeSchema, isString } from '@cdlab996/lowcode-utils'
 import { cloneDeep, get, set } from 'lodash'
 import * as uuid from 'uuid'
 import type { Ref } from 'vue'

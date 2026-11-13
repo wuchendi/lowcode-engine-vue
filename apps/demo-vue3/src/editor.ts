@@ -1,5 +1,5 @@
 import { init, project } from '@alilc/lowcode-engine'
-import { setupHostEnvironment } from '@knxcloud/lowcode-utils'
+import { setupHostEnvironment } from '@cdlab996/lowcode-utils'
 
 import registerPlugins from './plugins/registry'
 import './editor.less'

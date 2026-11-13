@@ -1,7 +1,7 @@
 {
-  "name": "@knxcloud/lowcode-hooks",
+  "name": "@cdlab996/lowcode-hooks",
   "type": "module",
-  "version": "1.6.0",
+  "version": "1.0.0",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/hooks",
   "repository": {

@@ -395,6 +395,15 @@ importers:
       '@cdlab996/lowcode-plugin-set-doc-url':
         specifier: ^1.0.1
         version: 1.0.1(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(react@16.14.0)
+      '@cdlab996/lowcode-utils':
+        specifier: workspace:*
+        version: link:../../packages/vue3/utils
+      '@cdlab996/lowcode-vue-renderer':
+        specifier: workspace:*
+        version: link:../../packages/vue3/renderer
+      '@cdlab996/lowcode-vue-simulator-renderer':
+        specifier: workspace:*
+        version: link:../../packages/vue3/simulator-renderer
       '@cdlab996/plugin-directive-loading':
         specifier: ^1.0.0
         version: 1.0.0(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(react@16.14.0)
@@ -404,15 +413,6 @@ importers:
       '@knxcloud/lowcode-plugin-vue-code-editor':
         specifier: 0.1.2
         version: 0.1.2(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@alilc/lowcode-types@1.3.4)(monaco-editor@0.57.0)(react@16.14.0)(vue@3.5.45(typescript@5.9.3))
-      '@knxcloud/lowcode-utils':
-        specifier: workspace:*
-        version: link:../../packages/vue3/utils
-      '@knxcloud/lowcode-vue-renderer':
-        specifier: workspace:*
-        version: link:../../packages/vue3/renderer
-      '@knxcloud/lowcode-vue-simulator-renderer':
-        specifier: workspace:*
-        version: link:../../packages/vue3/simulator-renderer
       regenerator-runtime:
         specifier: ^0.13.11
         version: 0.13.11
@@ -551,7 +551,7 @@ importers:
 
   packages/vue3/data-source:
     dependencies:
-      '@knxcloud/lowcode-utils':
+      '@cdlab996/lowcode-utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -579,13 +579,13 @@ importers:
 
   packages/vue3/renderer:
     dependencies:
-      '@knxcloud/lowcode-data-source':
+      '@cdlab996/lowcode-data-source':
         specifier: workspace:*
         version: link:../data-source
-      '@knxcloud/lowcode-hooks':
+      '@cdlab996/lowcode-hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@knxcloud/lowcode-utils':
+      '@cdlab996/lowcode-utils':
         specifier: workspace:*
         version: link:../utils
       intl-messageformat:
@@ -616,13 +616,13 @@ importers:
 
   packages/vue3/simulator-renderer:
     dependencies:
-      '@knxcloud/lowcode-hooks':
+      '@cdlab996/lowcode-hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@knxcloud/lowcode-utils':
+      '@cdlab996/lowcode-utils':
         specifier: workspace:*
         version: link:../utils
-      '@knxcloud/lowcode-vue-renderer':
+      '@cdlab996/lowcode-vue-renderer':
         specifier: workspace:*
         version: link:../renderer
     devDependencies:

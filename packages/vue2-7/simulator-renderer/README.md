@@ -11,5 +11,4 @@ This package is used to adapt to Vue 2.7 version.
 
 ## 📝 License
 
-This is a fork
-from [vue-simulator-renderer](https://github.com/KNXCloud/lowcode-engine-vue/tree/main/packages/vue-simulator-renderer)
+[MIT](https://github.com/wuchendi/lowcode-engine-vue/blob/main/LICENSE)

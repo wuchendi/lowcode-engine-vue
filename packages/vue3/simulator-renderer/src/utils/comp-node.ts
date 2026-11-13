@@ -1,4 +1,4 @@
-import { isNil, isObject } from '@knxcloud/lowcode-utils'
+import { isNil, isObject } from '@cdlab996/lowcode-utils'
 import type { ComponentInternalInstance, VNode } from 'vue'
 import { isProxy } from 'vue'
 import type { ComponentInstance, ComponentRecord } from '../interface'

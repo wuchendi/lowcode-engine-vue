@@ -3,7 +3,7 @@ import {
   isFunction,
   isObject,
   isString,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import { warn, watch } from 'vue'
 import type { RuntimeScope, SchemaParser } from '../../utils'
 import { AccessTypes, getAccessTarget } from '../../utils'

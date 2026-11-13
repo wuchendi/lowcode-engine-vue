@@ -5,7 +5,7 @@ import {
   isObject,
   isPromise,
   sleep,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import type { ComponentPublicInstance } from 'vue'
 import type {
   NavigationGuardWithThis,

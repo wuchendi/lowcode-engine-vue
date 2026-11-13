@@ -1,6 +1,6 @@
 import type { IPublicTypeNodeSchema } from '@alilc/lowcode-types'
-import { useRendererContext } from '@knxcloud/lowcode-hooks'
-import { debounce, exportSchema, isJSSlot } from '@knxcloud/lowcode-utils'
+import { useRendererContext } from '@cdlab996/lowcode-hooks'
+import { debounce, exportSchema, isJSSlot } from '@cdlab996/lowcode-utils'
 import type { InjectionKey } from 'vue'
 import {
   defineComponent,

@@ -3,8 +3,8 @@ import type {
   IPublicTypeComponentMetadata,
   IPublicTypeContainerSchema,
 } from '@alilc/lowcode-types'
-import type { INode } from '@knxcloud/lowcode-hooks'
-import { isArray } from '@knxcloud/lowcode-utils'
+import type { INode } from '@cdlab996/lowcode-hooks'
+import { isArray } from '@cdlab996/lowcode-utils'
 import { get } from 'lodash'
 import { shallowRef } from 'vue'
 import { createNode } from './node'

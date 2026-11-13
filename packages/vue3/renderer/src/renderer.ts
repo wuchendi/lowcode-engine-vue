@@ -2,14 +2,14 @@ import type {
   IPublicTypeContainerSchema as ContainerSchema,
   IPublicTypeNodeSchema as NodeSchema,
 } from '@alilc/lowcode-types'
-import type { DesignMode, INode } from '@knxcloud/lowcode-hooks'
-import { getRendererContextKey } from '@knxcloud/lowcode-hooks'
+import type { DesignMode, INode } from '@cdlab996/lowcode-hooks'
+import { getRendererContextKey } from '@cdlab996/lowcode-hooks'
 import {
   createObjectSplitter,
   debounce,
   exportSchema,
   isBoolean,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import type { Component, ComponentPublicInstance, PropType } from 'vue'
 import {
   computed,

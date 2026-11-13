@@ -12,7 +12,7 @@ import {
   isJSFunction,
   isPlainObject,
   isString,
-} from '@knxcloud/lowcode-utils'
+} from '@cdlab996/lowcode-utils'
 import { ensureArray } from './array'
 import type { BlockScope, RuntimeScope } from './scope'
 
