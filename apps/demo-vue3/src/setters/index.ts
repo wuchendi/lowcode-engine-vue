@@ -14,7 +14,6 @@ const setterRegistry = (ctx: IPublicModelPluginContext) => {
       /**
        * 注册内置 Setter
        */
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       setters.registerSetter({ ...setterMap, ExpressionSetter })
 

@@ -1,0 +1,106 @@
+{
+  "title": "弹框",
+  "group": "基础组件",
+  "category": "Element 组件",
+  "docUrl": "https://fe.wshoto.com/components/#/zh-CN/component/ElDialog",
+  "componentName": "ElDialog",
+  "npm": {
+    "package": "element-ui",
+    "version": "2.30.6",
+    "exportName": "Dialog",
+    "destructuring": true
+  },
+  "props": [
+    {
+      "name": "v-model:visible",
+      "description": "是否显示",
+      "propType": "bool"
+    },
+    {
+      "name": "title",
+      "description": "标题",
+      "propType": "string"
+    },
+    {
+      "name": "width",
+      "description": "宽度",
+      "propType": "string"
+    },
+    {
+      "name": "size",
+      "title": {
+        "label": "尺寸",
+        "tip": "默认的宽度尺寸：400px、960px，在设置 width 属性时，此属性无效"
+      },
+      "propType": {
+        "type": "oneOf",
+        "value": ["small", "medium"]
+      }
+    },
+    {
+      "name": "border",
+      "title": {
+        "tip": "是否对 body 内容添加上下边框",
+        "label": "上下边框"
+      },
+      "propType": "bool",
+      "defaultValue": false
+    },
+    {
+      "name": "fullscreen",
+      "description": "是否全屏",
+      "propType": "bool",
+      "defaultValue": false
+    },
+    {
+      "name": "top",
+      "description": "顶部距离",
+      "propType": "string",
+      "defaultValue": "15vh"
+    },
+    {
+      "name": "modal",
+      "description": "是否需要遮罩层",
+      "propType": "bool",
+      "defaultValue": true
+    },
+    {
+      "name": "showClose",
+      "description": "是否显示关闭按钮",
+      "propType": "bool",
+      "defaultValue": true
+    },
+    {
+      "name": "footer",
+      "description": "底部插槽",
+      "propType": "node"
+    }
+  ],
+  "configure": {
+    "supports": {
+      "events": ["onOpen", "onOpened", "onClose", "onClosed"]
+    },
+    "component": {
+      "isContainer": true,
+      "isModal": true,
+      "nestingRule": {
+        "parentWhitelist": ["Page"]
+      }
+    }
+  },
+  "snippets": [
+    {
+      "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_dialog.png",
+      "title": "弹框",
+      "schema": {
+        "componentName": "ElDialog",
+        "props": {
+          "v-model:visible": true,
+          "title": "弹框标题",
+          "top": "15vh",
+          "modal": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+import 'vant/lib/index.less'
+import packagesInfo from '../package.json'
+
+export {
+  Button as VanButton,
+  Image as VanImage,
+  Switch as VanSwitch,
+  Tab as VanTab,
+  Tabs as VanTabs,
+} from 'vant'
+
+// export * from './lowcode/button';
+// export * from './lowcode/image';
+// export * from './lowcode/switch';
+
+console.log(
+  `%c ${packagesInfo.name} %c v`.concat(packagesInfo.version, ' '),
+  'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #5584ff; font-weight: bold;',
+  'padding: 2px 1px; border-radius: 0 3px 3px 0; color: #fff; background: #42c02e; font-weight: bold;',
+)

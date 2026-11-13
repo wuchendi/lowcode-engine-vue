@@ -3,9 +3,12 @@ name: Release
 on:
   push:
     tags:
-      # One tag per line: vue2-7-v<version> or vue3-v<version>.
+      # One tag per package group: <group>-v<version>, releasing packages/<group>.
       - "vue2-7-v*"
       - "vue3-v*"
+      - "plugins-v*"
+      - "tools-v*"
+      - "materials-vue2-7-v*"
 
 permissions:
   contents: read
@@ -30,8 +33,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # All packages of a line are released together under one version.
-      - name: Resolve the line and check the package versions
+      # All packages of a group are released together under one version.
+      - name: Resolve the group and check the package versions
         run: |
           line="${GITHUB_REF_NAME%-v*}"
           tag="${GITHUB_REF_NAME##*-v}"

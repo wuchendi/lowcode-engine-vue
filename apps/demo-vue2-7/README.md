@@ -56,13 +56,13 @@ Code built with the help of these related projects:
 - [@cdlab996/lowcode-utils2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/utils) Utility Library for Vue2.7
 - [@cdlab996/lowcode-vue-renderer2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/renderer) Vue Renderer for Vue2.7
 - [@cdlab996/lowcode-vue-simulator-renderer2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue2-7/simulator-renderer) Vue Simulator Renderer for Vue2.7
-- [@cdlab996/lowcode-plugin-manual](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
+- [@cdlab996/lowcode-plugin-manual](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
 - [@cdlab996/lowcode-engine-ext-vue](https://github.com/cdlab996/lowcode-engine-ext-vue) Adapting Vue Setters
-- [@cdlab996/plugin-directive-loading](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-directive-loading) Vue Custom Directive for v-loading
-- [@cdlab996/lowcode-plugin-set-doc-url](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-set-doc-url) Lowcode Plugin Component material new documentation address
-- [@cdlab996/antd-lowcode-materials2.7](https://github.com/cdLab996/lowcode-engine-materials-vue2.7/tree/main/packages/antd) Ant Design Vue Materials
-- [@cdlab996/element-lowcode-materials2.7](https://github.com/cdLab996/lowcode-engine-materials-vue2.7/tree/main/packages/element) Element Materials
-- [@cdlab996/vant-lowcode-materials2.7](https://github.com/cdLab996/lowcode-engine-materials-vue2.7/tree/main/packages/vant) Vant Materials
+- [@cdlab996/lowcode-plugin-directive-loading](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/directive-loading) Vue Custom Directive for v-loading
+- [@cdlab996/lowcode-plugin-set-doc-url](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/set-doc-url) Lowcode Plugin Component material new documentation address
+- [@cdlab996/antd-lowcode-materials2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/materials-vue2-7/antd) Ant Design Vue Materials
+- [@cdlab996/element-lowcode-materials2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/materials-vue2-7/element) Element Materials
+- [@cdlab996/vant-lowcode-materials2.7](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/materials-vue2-7/vant) Vant Materials
 
 ## 📜 License
 

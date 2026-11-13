@@ -1,8 +1,8 @@
 # lowcode-engine-vue
 
-Vue renderers, designer simulators and demo designers for
-[Alibaba LowCode Engine](https://github.com/alibaba/lowcode-engine), for both
-**Vue 2.7** and **Vue 3**, kept in one pnpm workspace.
+Vue renderers, designer simulators, designer plugins, materials, tooling and
+demo designers for [Alibaba LowCode Engine](https://github.com/alibaba/lowcode-engine),
+for both **Vue 2.7** and **Vue 3**, kept in one pnpm workspace.
 
 Both lines target the same engine and share one set of `@alilc/*` dependencies
 (currently `1.3.4`), so a change to the engine contract is made once for both.
@@ -22,6 +22,17 @@ packages/
     data-source/     @cdlab996/lowcode-data-source
     renderer/        @cdlab996/lowcode-vue-renderer
     simulator-renderer/  @cdlab996/lowcode-vue-simulator-renderer
+  plugins/           Designer plugins, shared by both lines (@cdlab996/*)
+    directive-loading/   @cdlab996/lowcode-plugin-directive-loading
+    manual/              @cdlab996/lowcode-plugin-manual
+    set-doc-url/         @cdlab996/lowcode-plugin-set-doc-url
+    vue-code-editor/     @cdlab996/lowcode-plugin-vue-code-editor
+  tools/             Tooling shared by both lines (@cdlab996/*)
+    material-builder/    @cdlab996/lowcode-material-builder
+  materials-vue2-7/  Component materials for the Vue 2.7 line (@cdlab996/*)
+    antd/                @cdlab996/antd-lowcode-materials2.7
+    element/             @cdlab996/element-lowcode-materials2.7
+    vant/                @cdlab996/vant-lowcode-materials2.7
 apps/
   demo-vue2-7/       Designer demo running the Vue 2.7 line
   demo-vue3/         Designer demo running the Vue 3 line
@@ -39,13 +50,21 @@ docs/
 | `utils`              | Asset loading, component/utils building and type guards.                               |
 | `data-source`        | Data-source engine (Vue 3 line only).                                                  |
 
+| Group              | Contents                                                                                                                         |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| `plugins`          | React designer plugins: `v-loading` setter, manual link, per-component doc URL, Vue source-code panel. Built with tsdown / Vite. |
+| `tools`            | `lowcode-material build` / `lowcode-material dev`: Vite-based material build and dev server for both lines.                      |
+| `materials-vue2-7` | Ant Design Vue 1, Element UI and Vant 2 materials, built with `lowcode-material`.                                                |
+
 ## Dependency catalogs
 
 Versions are managed through catalogs in `pnpm-workspace.yaml`:
 
-- `shared` — `@alilc/*` and other dependencies used by both lines. Keep
-  `@alilc/*` here; never pin it per line.
+- `shared` — `@alilc/*`, React 16 (the engine's React) and other dependencies
+  used by both lines. Keep `@alilc/*` here; never pin it per line.
 - `vue2-7` / `vue3` — framework versions for each line.
+- `plugins` — Fusion (`@alifd/next`) for the designer plugins.
+- `materials-vue2-7` — lodash, bundled into the material metas.
 - `dev` — tooling (Biome, TypeScript, Vitest, tsdown).
 
 ## Requirements
@@ -82,10 +101,11 @@ restart the demo.
 
 - `.github/workflows/ci.yml` runs lint, build + type-check and tests on Node 24
   and 26 for every push to `main` and every pull request.
-- `.github/workflows/release.yml` publishes one line per tag to npm through
-  trusted publishing (OIDC): `vue2-7-v<version>` releases `packages/vue2-7`,
-  `vue3-v<version>` releases `packages/vue3`. Every package of the line must
-  already carry that version.
+- `.github/workflows/release.yml` publishes one group per tag to npm through
+  trusted publishing (OIDC). The tag is `<group>-v<version>` and releases
+  `packages/<group>`: `vue2-7`, `vue3`, `plugins`, `tools` or
+  `materials-vue2-7` (for example `plugins-v1.1.0`). Every package of the group
+  must already carry that version.
 
 ## License
 

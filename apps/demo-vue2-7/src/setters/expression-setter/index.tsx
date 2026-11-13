@@ -21,10 +21,8 @@ function flatObject(
 ): Record<string, any> {
   if (obj && isPlainObject(obj)) {
     for (const key in obj) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const value = obj[key]
       const path = parentPath.concat(key)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       target[path.join('.')] = value
       isPlainObject(value) && flatObject(value, path, target)
     }
@@ -47,7 +45,6 @@ class ExpressionSetterView extends ReactExpressionSetterView {
       const state = stateMap[key]
       if (isJSExpression(state)) {
         try {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-implied-eval, no-new-func
           const data = new Function(`return ${state.value}`)()
           const flatted = flatObject(data, ['this', key])
           if (isPlainObject(flatted)) {

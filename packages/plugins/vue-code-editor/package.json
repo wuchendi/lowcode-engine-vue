@@ -1,0 +1,73 @@
+{
+  "name": "@cdlab996/lowcode-plugin-vue-code-editor",
+  "type": "module",
+  "version": "1.1.0",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/vue-code-editor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/plugins/vue-code-editor"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "lowcode",
+    "lowcode-engine",
+    "lowcode-plugin"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "vite build && tsc -p ./tsconfig.build.json",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@alilc/lowcode-plugin-base-monaco-editor": "^1.1.2",
+    "@cdlab996/lowcode-utils": "workspace:^",
+    "acorn": "^8.10.0",
+    "magic-string": "^0.30.3",
+    "prop-types": "^15.8.1",
+    "short-uuid": "^4.2.2"
+  },
+  "peerDependencies": {
+    "@alifd/next": "*",
+    "@alilc/lowcode-types": "^1.0.0",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@alifd/next": "catalog:plugins",
+    "@alilc/lowcode-types": "catalog:shared",
+    "@babel/types": "^7.22.11",
+    "@monaco-editor/loader": "^1.3.3",
+    "@types/prop-types": "^15.7.15",
+    "@types/react": "catalog:shared",
+    "@vitejs/plugin-react": "catalog:dev",
+    "less": "catalog:dev",
+    "monaco-editor": "^0.41.0",
+    "react": "catalog:shared",
+    "unocss": "catalog:dev",
+    "vite": "catalog:dev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

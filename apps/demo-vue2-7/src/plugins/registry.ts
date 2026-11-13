@@ -15,9 +15,9 @@ import SchemaPlugin from '@alilc/lowcode-plugin-schema'
 import SetRefPropPlugin from '@alilc/lowcode-plugin-set-ref-prop'
 import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select'
 import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo'
+import DirectiveLoading from '@cdlab996/lowcode-plugin-directive-loading'
 import ManualPlugin from '@cdlab996/lowcode-plugin-manual'
 import PluginSetDocUrlProp from '@cdlab996/lowcode-plugin-set-doc-url'
-import DirectiveLoading from '@cdlab996/plugin-directive-loading'
 import { Logo } from '../components/logo/logo'
 // setters
 import SetterPlugin from '../setters/index'
@@ -26,8 +26,8 @@ import ResourceInit from './init'
 
 // vue editor
 // TODO: 需要兼容 2.7 版本（未完成）
-// import CodeEditor from '@cdlab996/lowcode-plugin-vue-code-editor2.7'
-// import '@cdlab996/lowcode-plugin-vue-code-editor2.7/dist/style.css'
+// import CodeEditor from '@cdlab996/lowcode-plugin-vue-code-editor'
+// import '@cdlab996/lowcode-plugin-vue-code-editor/style.css'
 
 export default async function registerPlugins() {
   // Inject：支持调试功能

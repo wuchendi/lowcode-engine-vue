@@ -7,7 +7,6 @@ import type {
 } from '@alilc/lowcode-types'
 
 export type ReturnValueFunc<T> = (...args: unknown[]) => T
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type MaybyFunc<T = unknown> = ReturnValueFunc<T> | T
 
 export interface DataSourceOptions {

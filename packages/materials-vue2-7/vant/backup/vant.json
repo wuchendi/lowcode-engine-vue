@@ -1,0 +1,3175 @@
+{
+  "version": "0.0.1",
+  "components": [
+    {
+      "category": "Vant 组件",
+      "componentName": "van-button",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/button",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Button",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "children",
+          "description": "文本内容",
+          "propType": "string"
+        },
+        {
+          "name": "size",
+          "description": "尺寸",
+          "propType": {
+            "type": "oneOf",
+            "value": ["large", "normal", "small", "mini"]
+          }
+        },
+        {
+          "name": "type",
+          "description": "类型",
+          "propType": {
+            "type": "oneOf",
+            "value": ["primary", "info", "warning", "danger"]
+          }
+        },
+        {
+          "name": "icon",
+          "description": "左侧图标名称或图片链接",
+          "propType": "string"
+        },
+        {
+          "name": "plain",
+          "description": "是否朴素按钮",
+          "propType": "bool"
+        },
+        {
+          "name": "round",
+          "description": "是否为圆形按钮",
+          "propType": "bool"
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用按钮",
+          "propType": "bool"
+        },
+        {
+          "name": "hairline",
+          "description": "是否使用 0.5px 边框",
+          "propType": "bool"
+        },
+        {
+          "name": "loading",
+          "description": "是否显示为加载状态",
+          "propType": "bool"
+        },
+        {
+          "name": "loadingText",
+          "description": "加载状态提示文字",
+          "propType": "string"
+        },
+        {
+          "name": "loadingType",
+          "description": "加载图标类型",
+          "propType": {
+            "type": "oneOf",
+            "value": ["circular", "spinner"]
+          }
+        },
+        {
+          "name": "loadingSize",
+          "description": "加载图标大小",
+          "propType": "string"
+        },
+        {
+          "name": "url",
+          "description": "点击后跳转的链接地址",
+          "propType": "string"
+        },
+        {
+          "name": "to",
+          "description": "点击后跳转的目标路由对象，同 vue-router 的 to 属性",
+          "propType": "string"
+        },
+        {
+          "name": "replace",
+          "description": "是否在跳转时替换当前页面历史",
+          "propType": "bool"
+        }
+      ],
+      "configure": {
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "icon",
+              "title": {
+                "label": "图标类名",
+                "tip": "icon | 图标类名"
+              },
+              "setter": {
+                "componentName": "CIconSetter"
+              }
+            }
+          ]
+        },
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        },
+        "component": {
+          "isContainer": false,
+          "isLayout": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-cell-group",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/cell",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "CellGroup",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "title",
+          "description": "分组标题",
+          "propType": "string"
+        },
+        {
+          "name": "border",
+          "description": "是否显示外边框",
+          "propType": "bool"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        },
+        "component": {
+          "isContainer": true,
+          "nestingRule": {
+            "childWhiteList": ["van-cell"]
+          }
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-cell",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/cell",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Cell",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "title",
+          "description": "左侧标题",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "value",
+          "description": "右侧内容",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "label",
+          "description": "标题下方的描述信息",
+          "propType": "string"
+        },
+        {
+          "name": "size",
+          "description": "单元格大小",
+          "propType": {
+            "type": "oneOf",
+            "value": ["default", "large"]
+          }
+        },
+        {
+          "name": "icon",
+          "description": "左侧图标名称或图片链接",
+          "propType": "string"
+        },
+        {
+          "name": "iconPrefix",
+          "description": "图标类名前缀，同 Icon 组件的 class-prefix 属性",
+          "propType": "string",
+          "defaultValue": "van-icon"
+        },
+        {
+          "name": "url",
+          "description": "点击后跳转的链接地址",
+          "propType": "string"
+        },
+        {
+          "name": "to",
+          "description": "点击后跳转的目标路由对象，同 vue-router 的 to 属性",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "object"]
+          }
+        },
+        {
+          "name": "border",
+          "description": "是否显示内边框",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "replace",
+          "description": "是否在跳转时替换当前页面历史",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "clickable",
+          "description": "是否开启点击反馈",
+          "propType": "bool",
+          "defaultValue": null
+        },
+        {
+          "name": "isLink",
+          "description": "是否展示右侧箭头并开启点击反馈",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "required",
+          "description": "是否显示表单必填星号",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "center",
+          "description": "是否使内容垂直居中",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "arrowDirection",
+          "description": "箭头方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["left", "up", "right", "down"]
+          },
+          "defaultValue": "right"
+        },
+        {
+          "name": "titleStyle",
+          "description": "左侧标题额外样式",
+          "propType": "object"
+        },
+        {
+          "name": "titleClass",
+          "description": "左侧标题额外类名",
+          "propType": "string"
+        },
+        {
+          "name": "valueClass",
+          "description": "右侧内容额外类名",
+          "propType": "string"
+        },
+        {
+          "name": "labelClass",
+          "description": "描述信息额外类名",
+          "propType": "string"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "style": true
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "value",
+              "setter": "StringSetter",
+              "defaultValue": "内容"
+            },
+            {
+              "name": "icon",
+              "description": "左侧图标名称或图片链接",
+              "setter": {
+                "componentName": "CIconSetter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "icon": "",
+      "componentName": "van-icon",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/icon",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Icon",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "type",
+          "propType": "string",
+          "setter": "IconSetter",
+          "description": "图标类型"
+        },
+        {
+          "name": "className",
+          "propType": "string"
+        },
+        {
+          "name": "style",
+          "propType": "object"
+        }
+      ],
+      "configure": {
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "setter": {
+                "componentName": "IconSetter",
+                "props": {
+                  "hasClear": false
+                }
+              }
+            }
+          ]
+        },
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-image",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/image",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Image",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "src",
+          "description": "图片链接",
+          "propType": "string",
+          "defaultValue": "https://img01.yzcdn.cn/vant/cat.jpeg"
+        },
+        {
+          "name": "alt",
+          "description": "替代文本",
+          "propType": "string"
+        },
+        {
+          "name": "fit",
+          "description": "图片填充模式",
+          "propType": {
+            "type": "oneOf",
+            "value": ["contain", "cover", "fill", "none", "scale-down"]
+          }
+        },
+        {
+          "name": "width",
+          "description": "宽度，默认单位为px",
+          "propType": "string"
+        },
+        {
+          "name": "height",
+          "description": "高度，默认单位为px",
+          "propType": "string"
+        },
+        {
+          "name": "radius",
+          "description": "圆角大小，默认单位为px",
+          "propType": "string"
+        },
+        {
+          "name": "round",
+          "description": "是否显示为圆形",
+          "propType": "bool"
+        },
+        {
+          "name": "lazyLoad",
+          "description": "是否开启图片懒加载，须配合 Lazyload 组件使用",
+          "propType": "bool"
+        },
+        {
+          "name": "showError",
+          "description": "是否展示图片加载失败提示",
+          "propType": "bool"
+        },
+        {
+          "name": "showLoading",
+          "description": "是否展示图片加载中提示",
+          "propType": "bool"
+        },
+        {
+          "name": "errorIcon",
+          "description": "失败时提示的图标名称或图片链接",
+          "propType": "string"
+        },
+        {
+          "name": "loadingIcon",
+          "description": "加载时提示的图标名称或图片链接",
+          "propType": "string"
+        },
+        {
+          "name": "iconPrefix",
+          "description": "图标类名前缀，同 Icon 组件的 class-prefix 属性",
+          "propType": "string"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClick", "onLoad", "onError"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        },
+        "component": {
+          "isContainer": false,
+          "isLayout": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-popup",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/popup",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Popup",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "default",
+          "title": "默认插槽",
+          "propType": "node"
+        },
+        {
+          "name": "v-model",
+          "description": "是否显示弹出层",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "overlay",
+          "description": "是否显示遮罩层",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "position",
+          "description": "弹出位置",
+          "propType": {
+            "type": "oneOf",
+            "value": ["top", "bottom", "right", "left", "center"]
+          },
+          "defaultValue": "center"
+        },
+        {
+          "name": "overlayClass",
+          "description": "自定义遮罩层类名",
+          "propType": "string"
+        },
+        {
+          "name": "overlayStyle",
+          "description": "自定义遮罩层样式",
+          "propType": "object"
+        },
+        {
+          "name": "duration",
+          "description": "动画时长，单位秒",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 0.3
+        },
+        {
+          "name": "round",
+          "description": "是否显示圆角",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "lockScroll",
+          "description": "是否锁定背景滚动",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "lazyRender",
+          "description": "是否在显示弹层时才渲染节点",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "closeOnPopstate",
+          "description": "是否在页面回退时自动关闭",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeOnClickOverlay",
+          "description": "是否在点击遮罩层后关闭",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "closeable",
+          "description": "是否显示关闭图标",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeIcon",
+          "description": "关闭图标名称或图片链接",
+          "propType": "string",
+          "defaultValue": "cross"
+        },
+        {
+          "name": "closeIconPosition",
+          "description": "关闭图标位置",
+          "propType": {
+            "type": "oneOf",
+            "value": ["top-left", "top-right", "bottom-left", "bottom-right"]
+          },
+          "defaultValue": "top-right"
+        },
+        {
+          "name": "transition",
+          "description": "动画类名，等价于 transition 的 name 属性",
+          "propType": "string"
+        },
+        {
+          "name": "transitionAppear",
+          "description": "是否在初始渲染时启用过渡动画",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "safeAreaInsetBottom",
+          "description": "是否开启底部安全区适配",
+          "propType": "bool",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true
+        },
+        "component": {
+          "isContainer": false,
+          "isLayout": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-radio-group",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/radio",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "RadioGroup",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "绑定的值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "bool", "number"]
+          }
+        },
+        {
+          "name": "direction",
+          "description": "排列方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["vertical", "horizontal"]
+          }
+        },
+        {
+          "name": "iconSize",
+          "description": "所有单选框的图标大小，默认单位为px",
+          "propType": "string",
+          "defaultValue": "20px"
+        },
+        {
+          "name": "checkedColor",
+          "description": "所有单选框的选中状态颜色",
+          "propType": "string",
+          "defaultValue": "#1989fa"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "loop": true,
+          "events": ["onInput"]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-radio",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/radio",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Radio",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "children",
+          "description": "文本内容",
+          "propType": "string"
+        },
+        {
+          "name": "name",
+          "description": "标识符",
+          "propType": "string"
+        },
+        {
+          "name": "shape",
+          "description": "形状",
+          "propType": {
+            "type": "oneOf",
+            "value": ["round", "square"]
+          }
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用状态",
+          "propType": "bool"
+        },
+        {
+          "name": "labelDisabled",
+          "description": "是否禁用文本内容点击",
+          "propType": "bool"
+        },
+        {
+          "name": "labelPosition",
+          "description": "文本位置",
+          "propType": {
+            "type": "oneOf",
+            "value": ["right", "left"]
+          }
+        },
+        {
+          "name": "iconSize",
+          "description": "图标大小，默认单位为px",
+          "propType": "string"
+        },
+        {
+          "name": "checkedColor",
+          "description": "选中状态颜色",
+          "propType": "string"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "loop": true,
+          "events": ["onInput"]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-switch",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/switch",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Switch",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "开关选中状态",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "loading",
+          "description": "是否为加载状态",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用状态",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "size",
+          "description": "开关尺寸，默认单位为px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "30px"
+        },
+        {
+          "name": "activeColor",
+          "description": "打开时的背景色",
+          "propType": "string",
+          "defaultValue": "#1989fa"
+        },
+        {
+          "name": "inactiveColor",
+          "description": "关闭时的背景色",
+          "propType": "string",
+          "defaultValue": "white"
+        },
+        {
+          "name": "activeValue",
+          "description": "打开时对应的值",
+          "propType": "any",
+          "defaultValue": true
+        },
+        {
+          "name": "inactiveValue",
+          "description": "关闭时对应的值",
+          "propType": "any",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": ["onClick", "onChange"]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-action-sheet",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/action-sheet",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "ActionSheet",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "是否显示动作面板",
+          "propType": "bool"
+        },
+        {
+          "name": "actions",
+          "description": "面板选项列表",
+          "propType": {
+            "type": "arrayOf",
+            "value": "object"
+          }
+        },
+        {
+          "name": "title",
+          "description": "顶部标题",
+          "propType": "string"
+        },
+        {
+          "name": "cancelText",
+          "description": "取消按钮文字",
+          "propType": "string"
+        },
+        {
+          "name": "description",
+          "description": "选项上方的描述信息",
+          "propType": "string"
+        },
+        {
+          "name": "closeable",
+          "description": "是否显示关闭图标",
+          "propType": "bool"
+        },
+        {
+          "name": "closeIcon",
+          "description": "关闭图标名称或图片链接",
+          "propType": "string"
+        },
+        {
+          "name": "duration",
+          "description": "动画时长，单位秒",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 0.3
+        },
+        {
+          "name": "round",
+          "description": "是否显示圆角",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "overlay",
+          "description": "是否显示遮罩层",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "lazyRender",
+          "description": "是否在显示弹层时才渲染节点",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "closeOnPopstate",
+          "description": "是否在页面回退时自动关闭",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeOnClickAction",
+          "description": "是否在点击选项后关闭",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeOnClickOverlay",
+          "description": "是否在点击遮罩层后关闭",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "safeAreaInsetBottom",
+          "description": "是否开启底部安全区适配",
+          "propType": "bool",
+          "defaultValue": true
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": ["onClick"]
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "actions",
+              "title": "面板选项列表",
+              "setter": "JsonSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-dropdown-menu",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/dropdown-menu",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "DropdownMenu",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "activeColor",
+          "description": "菜单标题和选项的选中态颜色",
+          "propType": "string",
+          "defaultValue": "#ee0a24"
+        },
+        {
+          "name": "direction",
+          "description": "菜单展开方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["up", "down"]
+          },
+          "defaultValue": "down"
+        },
+        {
+          "name": "zIndex",
+          "description": "菜单栏 z-index 层级",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 10
+        },
+        {
+          "name": "duration",
+          "description": "动画时长，单位秒",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 0.2
+        },
+        {
+          "name": "overlay",
+          "description": "是否显示遮罩层",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "closeOnClickOverlay",
+          "description": "是否在点击遮罩层后关闭菜单",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "closeOnClickOutside",
+          "description": "是否在点击外部元素后关闭菜单",
+          "propType": "bool",
+          "defaultValue": true
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "activeColor",
+              "description": "菜单标题和选项的选中态颜色",
+              "setter": "ColorSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-dropdown-item",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/dropdown-menu",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "DropdownItem",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "当前选中项对应的 value",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "title",
+          "description": "菜单项标题",
+          "propType": "string",
+          "defaultValue": "当前选中项文字"
+        },
+        {
+          "name": "options",
+          "description": "选项数组",
+          "propType": {
+            "type": "arrayOf",
+            "value": "object"
+          }
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用菜单",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "lazyRender",
+          "description": "是否在首次展开时才渲染菜单内容",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "titleClass",
+          "description": "标题额外类名",
+          "propType": "string"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "options",
+              "title": "选项数组",
+              "setter": "JsonSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-stepper",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/stepper",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Stepper",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "当前输入的值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "min",
+          "description": "最小值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "1"
+        },
+        {
+          "name": "max",
+          "description": "最大值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "defaultValue",
+          "description": "初始值，当 v-model 为空时生效",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "1"
+        },
+        {
+          "name": "step",
+          "description": "步长，每次点击时改变的值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "1"
+        },
+        {
+          "name": "name",
+          "description": "标识符，可以在change事件回调参数中获取",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "inputWidth",
+          "description": "输入框宽度，默认单位为px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "32px"
+        },
+        {
+          "name": "buttonSize",
+          "description": "按钮大小以及输入框高度，默认单位为px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "28px"
+        },
+        {
+          "name": "decimalLength",
+          "description": "固定显示的小数位数",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "placeholder",
+          "description": "输入框占位提示文字",
+          "propType": "string"
+        },
+        {
+          "name": "integer",
+          "description": "是否只允许输入整数",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用步进器",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "disablePlus",
+          "description": "是否禁用增加按钮",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "disableMinus",
+          "description": "是否禁用减少按钮",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "disableInput",
+          "description": "是否禁用输入框",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "asyncChange",
+          "description": "是否开启异步变更，开启后需要手动控制输入值",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "showPlus",
+          "description": "是否显示增加按钮",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "showMinus",
+          "description": "是否显示减少按钮",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "showInput",
+          "description": "是否显示输入框",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "longPress",
+          "description": "是否开启长按手势",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "allowEmpty",
+          "description": "是否允许输入的值为空",
+          "propType": "bool",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": [
+            "onChange",
+            "onOverlimit",
+            "onPlus",
+            "onMinus",
+            "onFocus",
+            "onBlur"
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-field",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/field",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Field",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "当前输入的值",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "label",
+          "description": "输入框左侧文本",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "node"]
+          }
+        },
+        {
+          "name": "name",
+          "description": "名称，提交表单的标识符",
+          "propType": "string"
+        },
+        {
+          "name": "type",
+          "description": "输入框类型",
+          "propType": {
+            "type": "oneOf",
+            "value": ["tel", "digit", "number", "textarea", "password"]
+          },
+          "defaultValue": "text"
+        },
+        {
+          "name": "size",
+          "description": "大小",
+          "propType": "string"
+        },
+        {
+          "name": "maxlength",
+          "description": "输入的最大字符数",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          }
+        },
+        {
+          "name": "placeholder",
+          "description": "输入框占位提示文字",
+          "propType": "string"
+        },
+        {
+          "name": "border",
+          "description": "是否显示内边框",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用输入框",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "readonly",
+          "description": "是否只读",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "colon",
+          "description": "是否在 label 后面添加冒号",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "required",
+          "description": "是否显示表单必填星号",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "center",
+          "description": "是否使内容垂直居中",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "clearable",
+          "description": "是否启用清除图标，点击清除图标后会清空输入框",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "clearTrigger",
+          "description": "显示清除图标的时机",
+          "propType": {
+            "type": "oneOf",
+            "value": ["always", "focus"]
+          },
+          "defaultValue": "focus"
+        },
+        {
+          "name": "clickable",
+          "description": "是否开启点击反馈",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "isLink",
+          "description": "是否展示右侧箭头并开启点击反馈",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "autofocus",
+          "description": "是否自动聚焦，iOS 系统不支持该属性",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "showWordLimit",
+          "description": "是否显示字数统计，需要设置maxlength属性",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "error",
+          "description": "是否将输入内容标红",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "errorMessage",
+          "description": "底部错误提示文案，为空时不展示",
+          "propType": "string"
+        },
+        {
+          "name": "formatter",
+          "description": "输入内容格式化函数",
+          "propType": "func"
+        },
+        {
+          "name": "formatTrigger",
+          "description": "格式化函数触发的时机",
+          "propType": {
+            "type": "oneOf",
+            "value": ["onChange", "onBlur"]
+          },
+          "defaultValue": "onChange"
+        },
+        {
+          "name": "arrowDirection",
+          "description": "箭头方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["left", "up", "down", "right"]
+          },
+          "defaultValue": "right"
+        },
+        {
+          "name": "labelClass",
+          "description": "左侧文本额外类名",
+          "propType": "string"
+        },
+        {
+          "name": "labelWidth",
+          "description": "左侧文本宽度",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "6.2em"
+        },
+        {
+          "name": "labelAlign",
+          "description": "左侧文本对齐方式",
+          "propType": {
+            "type": "oneOf",
+            "value": ["center", "right", "left"]
+          },
+          "defaultValue": "left"
+        },
+        {
+          "name": "inputAlign",
+          "description": "输入框对齐方式",
+          "propType": {
+            "type": "oneOf",
+            "value": ["center", "right", "left"]
+          },
+          "defaultValue": "left"
+        },
+        {
+          "name": "errorMessageAlign",
+          "description": "错误提示文案对齐方式",
+          "propType": {
+            "type": "oneOf",
+            "value": ["center", "right", "left"]
+          },
+          "defaultValue": "left"
+        },
+        {
+          "name": "autosize",
+          "description": "是否自适应内容高度，只对 textarea 有效",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["bool", "object"]
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "leftIcon",
+          "description": "左侧图标名称或图片链接",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "node"]
+          }
+        },
+        {
+          "name": "rightIcon",
+          "description": "右侧图标名称或图片链接",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "node"]
+          }
+        },
+        {
+          "name": "iconPrefix",
+          "description": "图标类名前缀，同 Icon 组件的 class-prefix 属性",
+          "propType": "string",
+          "defaultValue": "van-icon"
+        },
+        {
+          "name": "rules",
+          "description": "表单校验规则，详见 Form 组件",
+          "propType": "array",
+          "defaultValue": "[]"
+        },
+        {
+          "name": "autocomplete",
+          "description": "input 标签原生的自动完成属性",
+          "propType": "string"
+        },
+        {
+          "name": "input",
+          "description": "自定义输入框",
+          "propType": "node"
+        },
+        {
+          "name": "button",
+          "description": "自定义输入框尾部按钮",
+          "propType": "node"
+        },
+        {
+          "name": "extra",
+          "description": "自定义输入框最右侧的额外内容",
+          "propType": "node"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": [
+            "onInput",
+            "onFocus",
+            "onBlur",
+            "onClear",
+            "onClick",
+            "onClick-input",
+            "onClick-left-icon",
+            "onClick-right-icon"
+          ]
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "rules",
+              "title": {
+                "label": "表单校验规则",
+                "tip": "详见 Form 组件"
+              },
+              "setter": "ExpressionSetter"
+            },
+            {
+              "name": "leftIcon",
+              "description": "左侧图标名称或图片链接",
+              "setter": [
+                {
+                  "componentName": "CIconSetter"
+                },
+                {
+                  "componentName": "StringSetter"
+                }
+              ]
+            },
+            {
+              "name": "rightIcon",
+              "description": "右侧图标名称或图片链接",
+              "setter": [
+                {
+                  "componentName": "CIconSetter"
+                },
+                {
+                  "componentName": "StringSetter"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-picker",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/picker",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Picker",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "columns",
+          "description": "对象数组，配置每一列显示的数据",
+          "propType": {
+            "type": "arrayOf",
+            "value": "object"
+          }
+        },
+        {
+          "name": "title",
+          "description": "顶部栏标题",
+          "propType": "string"
+        },
+        {
+          "name": "confirmButtonText",
+          "description": "确认按钮文字",
+          "propType": "string",
+          "defaultValue": "确认"
+        },
+        {
+          "name": "cancelButtonText",
+          "description": "取消按钮文字",
+          "propType": "string",
+          "defaultValue": "取消"
+        },
+        {
+          "name": "valueKey",
+          "description": "选项对象中，选项文字对应的键名",
+          "propType": "string",
+          "defaultValue": "text"
+        },
+        {
+          "name": "toolbarPosition",
+          "description": "顶部栏位置",
+          "propType": {
+            "type": "oneOf",
+            "value": ["top", "bottom"]
+          },
+          "defaultValue": "top"
+        },
+        {
+          "name": "loading",
+          "description": "是否显示加载状态",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "readonly",
+          "description": "是否为只读状态，只读状态下无法切换选项",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "showToolbar",
+          "description": "是否显示顶部栏",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "allowHtml",
+          "description": "是否允许选项内容中渲染 HTML",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "defaultIndex",
+          "description": "单列选择时，默认选中项的索引",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 0
+        },
+        {
+          "name": "itemHeight",
+          "description": "选项高度，支持 px vw vh rem 单位，默认 px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 44
+        },
+        {
+          "name": "visibleItemCount",
+          "description": "可见的选项个数",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 6
+        },
+        {
+          "name": "swipeDuration",
+          "description": "快速滑动时惯性滚动的时长，单位 ms",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 1000
+        },
+        {
+          "name": "default",
+          "description": "自定义整个顶部栏的内容",
+          "propType": "node"
+        },
+        {
+          "name": "title",
+          "description": "自定义标题内容",
+          "propType": "node"
+        },
+        {
+          "name": "confirm",
+          "description": "自定义确认按钮内容",
+          "propType": "node"
+        },
+        {
+          "name": "cancel",
+          "description": "自定义取消按钮内容",
+          "propType": "node"
+        },
+        {
+          "name": "option",
+          "description": "自定义选项内容",
+          "propType": "node"
+        },
+        {
+          "name": "columns-top",
+          "description": "自定义选项上方内容",
+          "propType": "node"
+        },
+        {
+          "name": "columns-bottom",
+          "description": "自定义选项下方内容",
+          "propType": "node"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": ["onConfirm", "onCancel", "onChange"]
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "columns",
+              "title": "对象数组，配置每一列显示的数据",
+              "setter": "JsonSetter"
+            },
+            {
+              "name": "label",
+              "title": "输入框左侧文本",
+              "setter": "StringSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-datetime-picker",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/datetime-picker",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "DatetimePicker",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "type",
+          "description": "时间类型",
+          "propType": {
+            "type": "oneOf",
+            "value": [
+              "datetime",
+              "date",
+              "time",
+              "year-month",
+              "month-day",
+              "datehour"
+            ]
+          },
+          "defaultValue": "datetime"
+        },
+        {
+          "name": "title",
+          "description": "顶部栏标题",
+          "propType": "string",
+          "defaultValue": "顶部栏标题"
+        },
+        {
+          "name": "confirmButtonText",
+          "description": "确认按钮文字",
+          "propType": "string",
+          "defaultValue": "确认"
+        },
+        {
+          "name": "cancelButtonText",
+          "description": "取消按钮文字",
+          "propType": "string",
+          "defaultValue": "取消"
+        },
+        {
+          "name": "showToolbar",
+          "description": "是否显示顶部栏",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "loading",
+          "description": "是否显示加载状态",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "readonly",
+          "description": "是否为只读状态，只读状态下无法切换选项",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "filter",
+          "description": "选项过滤函数",
+          "setter": "FunctionSetter"
+        },
+        {
+          "name": "formatter",
+          "description": "选项格式化函数",
+          "setter": "FunctionSetter"
+        },
+        {
+          "name": "columnsOrder",
+          "description": "对象数组，配置每一列显示的数据",
+          "propType": {
+            "type": "arrayOf",
+            "value": "string"
+          }
+        },
+        {
+          "name": "itemHeight",
+          "description": "选项高度，支持 px vw vh rem 单位，默认 px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "44px"
+        },
+        {
+          "name": "visibleItemCount",
+          "title": "可见的选项个数",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 6
+        },
+        {
+          "name": "swipeDuration",
+          "title": "快速滑动时惯性滚动的时长，单位ms",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 1000
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-loading",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/loading",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Loading",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "default",
+          "title": "默认插槽",
+          "propType": "node"
+        },
+        {
+          "name": "color",
+          "description": "颜色",
+          "propType": "string",
+          "defaultValue": "#c9c9c9"
+        },
+        {
+          "name": "type",
+          "description": "类型",
+          "propType": {
+            "type": "oneOf",
+            "value": ["circular", "spinner"]
+          },
+          "defaultValue": "circular"
+        },
+        {
+          "name": "size",
+          "description": "加载图标大小，默认单位为 px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "30px"
+        },
+        {
+          "name": "textSize",
+          "description": "文字大小，默认单位为 px",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": "14px"
+        },
+        {
+          "name": "textColor",
+          "description": "文字颜色",
+          "propType": "string",
+          "defaultValue": "#c9c9c9"
+        },
+        {
+          "name": "vertical",
+          "description": "是否垂直排列图标和文字内容",
+          "propType": "bool",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "color",
+              "title": "颜色",
+              "setter": "ColorSetter"
+            },
+            {
+              "name": "textColor",
+              "title": "文字颜色",
+              "setter": "ColorSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-pull-refresh",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/pull-refresh",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "PullRefresh",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "是否处于加载中状态",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "pullingText",
+          "description": "下拉过程提示文案",
+          "propType": "string",
+          "defaultValue": "下拉即可刷新..."
+        },
+        {
+          "name": "loosingText",
+          "description": "释放过程提示文案",
+          "propType": "string",
+          "defaultValue": "释放即可刷新..."
+        },
+        {
+          "name": "loadingText",
+          "description": "加载过程提示文案",
+          "propType": "string",
+          "defaultValue": "加载中..."
+        },
+        {
+          "name": "successText",
+          "description": "刷新成功提示文案",
+          "propType": "string"
+        },
+        {
+          "name": "successDuration",
+          "description": "刷新成功提示展示时长(ms)",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 500
+        },
+        {
+          "name": "animationDuration",
+          "description": "动画时长",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 300
+        },
+        {
+          "name": "headHeight",
+          "description": "顶部内容高度",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 50
+        },
+        {
+          "name": "pullDistance",
+          "description": "触发下拉刷新的距离",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 50
+        },
+        {
+          "name": "disabled",
+          "description": "是否禁用下拉刷新",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "default",
+          "title": "自定义内容",
+          "propType": "node"
+        },
+        {
+          "name": "normal",
+          "title": "非下拉状态时顶部内容",
+          "propType": "node"
+        },
+        {
+          "name": "pulling",
+          "title": "下拉过程中顶部内容",
+          "propType": "node"
+        },
+        {
+          "name": "loosing",
+          "title": "释放过程中顶部内容",
+          "propType": "node"
+        },
+        {
+          "name": "loading",
+          "title": "加载过程中顶部内容",
+          "propType": "node"
+        },
+        {
+          "name": "success",
+          "title": "刷新成功提示内容",
+          "propType": "node"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "style": true,
+          "events": ["onRefresh"]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-image-preview",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/image-preview",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "ImagePreview",
+        "subName": "Component",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model",
+          "description": "是否显示图片预览",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "images",
+          "description": "需要预览的图片 URL 数组",
+          "propType": {
+            "type": "arrayOf",
+            "value": "object"
+          }
+        },
+        {
+          "name": "startPosition",
+          "description": "图片预览起始位置索引",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 0
+        },
+        {
+          "name": "swipeDuration",
+          "description": "动画时长，单位为 ms",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 300
+        },
+        {
+          "name": "showIndex",
+          "description": "是否显示页码",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "showIndicators",
+          "description": "是否显示轮播指示器",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "loop",
+          "description": "是否开启循环播放",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "asyncClose",
+          "description": "是否开启异步关闭",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeOnPopstate",
+          "description": "是否在页面回退时自动关闭",
+          "propType": "bool"
+        },
+        {
+          "name": "className",
+          "description": "自定义类名",
+          "propType": "string"
+        },
+        {
+          "name": "maxZoom",
+          "description": "手势缩放时，最大缩放比例",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["number", "string"]
+          },
+          "defaultValue": 3
+        },
+        {
+          "name": "minZoom",
+          "description": "手势缩放时，最小缩放比例",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["number", "string"]
+          },
+          "defaultValue": 1
+        },
+        {
+          "name": "closeable",
+          "description": "是否显示关闭图标",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "closeIcon",
+          "description": "关闭图标名称或图片链接",
+          "propType": "string",
+          "defaultValue": "clear"
+        },
+        {
+          "name": "closeIconPosition",
+          "description": "关闭图标位置",
+          "propType": {
+            "type": "oneOf",
+            "value": ["top-left", "top-right", "bottom-left", "bottom-right"]
+          },
+          "defaultValue": "top-right"
+        },
+        {
+          "name": "transition",
+          "description": "动画类名，等价于 transition 的 name 属性",
+          "propType": "string",
+          "defaultValue": "van-fade"
+        },
+        {
+          "name": "index",
+          "description": "自定义页码内容",
+          "propType": "node"
+        },
+        {
+          "name": "cover",
+          "description": "自定义覆盖在图片预览上方的内容",
+          "propType": "node"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClose", "onClosed", "onChange", "onScale"],
+          "style": true
+        },
+        "props": {
+          "isExtends": true,
+          "override": [
+            {
+              "name": "images",
+              "title": "需要预览的图片 URL 数组",
+              "setter": "JsonSetter"
+            },
+            {
+              "name": "closeIcon",
+              "title": "关闭图标名称或图片链接",
+              "setter": "CIconSetter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-list",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/list",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "List",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "v-model:loading",
+          "title": {
+            "label": "是否处于加载状态",
+            "tip": "加载过程中不触发load事件"
+          },
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "finished",
+          "description": "是否已加载完成，加载完成后不再触发load事件",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "error",
+          "description": "是否加载失败，加载失败后点击错误提示可以重新触发load事件，必须使用sync修饰符",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "offset",
+          "description": "滚动条与底部距离小于 offset 时触发load事件",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "number"]
+          },
+          "defaultValue": 300
+        },
+        {
+          "name": "loadingText",
+          "description": "加载过程中的提示文案",
+          "propType": "string",
+          "defaultValue": "加载中..."
+        },
+        {
+          "name": "finishedText",
+          "description": "加载完成后的提示文案",
+          "propType": "string"
+        },
+        {
+          "name": "errorText",
+          "description": "加载失败后的提示文案",
+          "propType": "string"
+        },
+        {
+          "name": "immediateCheck",
+          "description": "是否在初始化时立即执行滚动位置检查",
+          "propType": "bool",
+          "defaultValue": true
+        },
+        {
+          "name": "direction",
+          "description": "滚动触发加载的方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["down", "up"]
+          },
+          "defaultValue": "down"
+        },
+        {
+          "name": "default",
+          "description": "列表内容",
+          "propType": "node"
+        },
+        {
+          "name": "loading",
+          "description": "自定义底部加载中提示",
+          "propType": "node"
+        },
+        {
+          "name": "finished",
+          "description": "自定义加载完成后的提示文案",
+          "propType": "node"
+        },
+        {
+          "name": "error",
+          "description": "自定义加载失败后的提示文案",
+          "propType": "node"
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onLoad"],
+          "style": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-grid",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/grid",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "Grid",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "columnNum",
+          "title": "列数",
+          "propType": "number",
+          "defaultValue": "4"
+        },
+        {
+          "name": "gutter",
+          "title": "格子间隔",
+          "propType": "number",
+          "defaultValue": "0"
+        },
+        {
+          "name": "direction",
+          "title": "排列方向",
+          "propType": {
+            "type": "oneOf",
+            "value": ["vertical", "horizontal"]
+          },
+          "defaultValue": "vertical"
+        },
+        {
+          "name": "border",
+          "propType": "bool",
+          "title": "显示边框",
+          "defaultValue": true
+        },
+        {
+          "name": "center",
+          "propType": "bool",
+          "title": "居中显示",
+          "defaultValue": true
+        },
+        {
+          "name": "square",
+          "propType": "bool",
+          "title": "显示正方形",
+          "defaultValue": false
+        },
+        {
+          "name": "clickable",
+          "propType": "bool",
+          "title": "开启点击反馈",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        },
+        "component": {
+          "isContainer": true,
+          "isLayout": true
+        }
+      }
+    },
+    {
+      "category": "Vant 组件",
+      "componentName": "van-grid-item",
+      "docUrl": "https://vant-contrib.gitee.io/vant/v2/#/zh-CN/grid",
+      "npm": {
+        "package": "vant",
+        "version": "2.12.53",
+        "exportName": "GridItem",
+        "destructuring": true
+      },
+      "props": [
+        {
+          "name": "default",
+          "title": "默认插槽",
+          "propType": "node"
+        },
+        {
+          "name": "text",
+          "description": "文本内容",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "node"]
+          },
+          "defaultValue": ""
+        },
+        {
+          "name": "icon",
+          "propType": {
+            "type": "oneOfType",
+            "value": ["string", "node"]
+          },
+          "defaultValue": ""
+        },
+        {
+          "name": "dot",
+          "propType": "bool",
+          "defaultValue": false
+        },
+        {
+          "name": "badge",
+          "propType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "url",
+          "propType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "to",
+          "propType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "replace",
+          "propType": "bool",
+          "defaultValue": false
+        }
+      ],
+      "configure": {
+        "supports": {
+          "events": ["onClick"],
+          "loop": true,
+          "condition": true,
+          "style": true
+        },
+        "component": {
+          "isContainer": false,
+          "isLayout": true
+        }
+      }
+    }
+  ],
+  "componentList": [
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-button",
+          "library": "vant",
+          "title": "按钮",
+          "snippets": [
+            {
+              "title": "按钮",
+              "screenshot": "https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/button.png",
+              "schema": {
+                "componentName": "van-button",
+                "props": {
+                  "children": "按钮"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-cell-group",
+          "library": "vant",
+          "title": "单元格",
+          "snippets": [
+            {
+              "title": "单元格",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_radio.png",
+              "schema": {
+                "componentName": "van-cell-group",
+                "props": {
+                  "title": "单元格组",
+                  "border": true
+                },
+                "children": [
+                  {
+                    "componentName": "van-cell",
+                    "props": {
+                      "title": "单元格",
+                      "value": "内容",
+                      "label": "描述信息",
+                      "iconPrefix": "van-icon",
+                      "border": true,
+                      "replace": false,
+                      "clickable": null,
+                      "isLink": false,
+                      "required": false,
+                      "center": false,
+                      "arrowDirection": "right"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-cell",
+          "library": "vant",
+          "title": "单元格-子项",
+          "snippets": [
+            {
+              "title": "单元格-子项",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_radio.png",
+              "schema": {
+                "componentName": "van-cell",
+                "props": {
+                  "title": "单元格",
+                  "value": "内容",
+                  "label": "描述信息",
+                  "iconPrefix": "van-icon",
+                  "border": true,
+                  "replace": false,
+                  "clickable": null,
+                  "isLink": false,
+                  "required": false,
+                  "center": false,
+                  "arrowDirection": "right"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-image",
+          "library": "vant",
+          "title": "Image 图片",
+          "snippets": [
+            {
+              "title": "图片",
+              "screenshot": "https://img.alicdn.com/imgextra/i3/O1CN01tnhXhk1GUIFhsXwzA_!!6000000000625-55-tps-56-56.svg",
+              "schema": {
+                "componentName": "van-image",
+                "props": {
+                  "src": "https://img01.yzcdn.cn/vant/cat.jpeg",
+                  "fit": "fill",
+                  "radius": 0,
+                  "round": false,
+                  "lazyLoad": false,
+                  "showError": true,
+                  "showLoading": true,
+                  "errorIcon": "photo-fail",
+                  "loadingIcon": "photo"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-popup",
+          "library": "vant",
+          "title": "弹出层",
+          "snippets": [
+            {
+              "title": "弹出层",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/modal-1.png",
+              "schema": {
+                "componentName": "van-popup",
+                "props": {
+                  "v-model": true,
+                  "overlay": true,
+                  "position": "center",
+                  "duration": 0.3,
+                  "round": true,
+                  "lockScroll": true,
+                  "lazyRender": true,
+                  "closeOnPopstate": false,
+                  "closeOnClickOverlay": true,
+                  "closeable": false,
+                  "closeIcon": "cross",
+                  "closeIconPosition": "top-right",
+                  "transitionAppear": false,
+                  "safeAreaInsetBottom": false
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-radio-group",
+          "library": "vant",
+          "title": "单选-组",
+          "snippets": [
+            {
+              "title": "单选-组",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/radio-group-1.png",
+              "schema": {
+                "componentName": "van-radio-group",
+                "children": [
+                  {
+                    "componentName": "van-cell",
+                    "props": {
+                      "children": ["单选按钮"]
+                    }
+                  },
+                  {
+                    "componentName": "van-radio",
+                    "props": {
+                      "children": ["单选按钮"]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-radio",
+          "library": "vant",
+          "title": "单选-子项",
+          "snippets": [
+            {
+              "title": "单选-子项",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/radio-1.png",
+              "schema": {
+                "componentName": "van-radio"
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-switch",
+          "library": "vant",
+          "title": "开关组件",
+          "snippets": [
+            {
+              "title": "开关组件",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_switch.png",
+              "schema": {
+                "componentName": "van-switch"
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-action-sheet",
+          "library": "vant",
+          "title": "动作面板",
+          "snippets": [
+            {
+              "screenshot": "https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/card.png",
+              "title": "动作面板",
+              "schema": {
+                "componentName": "van-action-sheet",
+                "props": {
+                  "v-model": true,
+                  "actions": [
+                    {
+                      "name": "选项一"
+                    },
+                    {
+                      "name": "选项二"
+                    },
+                    {
+                      "name": "选项三",
+                      "subname": "描述信息"
+                    }
+                  ],
+                  "title": "标题",
+                  "cancelText": "取消",
+                  "description": "这是一段描述信息",
+                  "closeable": true,
+                  "closeIcon": "cross",
+                  "duration": 0.3,
+                  "round": true,
+                  "overlay": true,
+                  "lockScroll": true,
+                  "lazyRender": true,
+                  "closeOnPopstate": false,
+                  "closeOnClickAction": false,
+                  "closeOnClickOverlay": true,
+                  "safeAreaInsetBottom": true
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-dropdown-menu",
+          "library": "vant",
+          "title": "下拉菜单",
+          "snippets": [
+            {
+              "title": "下拉菜单",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/dropdown-1.png",
+              "schema": {
+                "componentName": "van-dropdown-menu",
+                "props": {
+                  "activeColor": "#ee0a24",
+                  "direction": "down",
+                  "zIndex": 10,
+                  "duration": 0.2,
+                  "overlay": true,
+                  "closeOnClickOverlay": true,
+                  "closeOnClickOutside": true
+                },
+                "children": [
+                  {
+                    "componentName": "van-dropdown-item",
+                    "props": {
+                      "v-model": 0,
+                      "title": "当前选中项文字",
+                      "options": [
+                        {
+                          "text": "全部商品",
+                          "value": 0
+                        },
+                        {
+                          "text": "新款商品",
+                          "value": 1
+                        },
+                        {
+                          "text": "活动商品",
+                          "value": 2
+                        }
+                      ],
+                      "disabled": false,
+                      "lazyRender": true
+                    }
+                  },
+                  {
+                    "componentName": "van-dropdown-item",
+                    "props": {
+                      "props": {
+                        "v-model": "a",
+                        "title": "当前选中项文字",
+                        "options": [
+                          {
+                            "text": "默认排序",
+                            "value": "a"
+                          },
+                          {
+                            "text": "好评排序",
+                            "value": "b"
+                          },
+                          {
+                            "text": "活动商品",
+                            "value": "c"
+                          }
+                        ],
+                        "disabled": false,
+                        "lazyRender": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-stepper",
+          "library": "vant",
+          "title": "步进器",
+          "snippets": [
+            {
+              "title": "步进器",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_number-picker.png",
+              "schema": {
+                "componentName": "van-stepper",
+                "props": {
+                  "min": 1,
+                  "defaultValue": 1,
+                  "step": 1,
+                  "inputWidth": "32px",
+                  "buttonSize": "28px",
+                  "integer": false,
+                  "disabled": false,
+                  "disablePlus": false,
+                  "disableMinus": false,
+                  "disableInput": false,
+                  "asyncChange": false,
+                  "showPlus": true,
+                  "showMinus": true,
+                  "showInput": true,
+                  "longPress": true,
+                  "allowEmpty": false
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-field",
+          "library": "vant",
+          "title": "输入框",
+          "snippets": [
+            {
+              "title": "输入框",
+              "screenshot": "https://img.alicdn.com/tfs/TB1ysp3u8v0gK0jSZKbXXbK2FXa-112-64.png",
+              "schema": {
+                "componentName": "van-field",
+                "props": {
+                  "type": "text",
+                  "placeholder": "请输入",
+                  "border": true,
+                  "disabled": false,
+                  "readonly": false,
+                  "colon": false,
+                  "required": false,
+                  "center": false,
+                  "clearable": false,
+                  "clearTrigger": "focus",
+                  "clickable": false,
+                  "isLink": false,
+                  "autofocus": false,
+                  "showWordLimit": false,
+                  "error": false,
+                  "formatTrigger": "onChange",
+                  "arrowDirection": "right",
+                  "labelWidth": "6.2em",
+                  "labelAlign": "left",
+                  "inputAlign": "left",
+                  "errorMessageAlign": "left",
+                  "autosize": true,
+                  "iconPrefix": "van-icon"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-picker",
+          "library": "vant",
+          "title": "选择器",
+          "snippets": [
+            {
+              "title": "选择器",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_select.png",
+              "schema": {
+                "componentName": "van-picker",
+                "props": {
+                  "columns": ["选项1", "选项2", "选项3"],
+                  "title": "标题",
+                  "confirmButtonText": "确定",
+                  "cancelButtonText": "取消",
+                  "valueKey": "text",
+                  "toolbarPosition": "top",
+                  "loading": false,
+                  "readonly": false,
+                  "showToolbar": true,
+                  "allowHtml": false,
+                  "defaultIndex": 0,
+                  "itemHeight": 44,
+                  "visibleItemCount": 6,
+                  "swipeDuration": 1000
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-datetime-picker",
+          "library": "vant",
+          "title": "时间选择",
+          "snippets": [
+            {
+              "title": "时间选择",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_time-picker.png",
+              "schema": {
+                "componentName": "van-datetime-picker",
+                "props": {
+                  "type": "datetime",
+                  "title": "标题",
+                  "confirmButtonText": "确定",
+                  "cancelButtonText": "取消",
+                  "showToolbar": true,
+                  "loading": false,
+                  "readonly": false,
+                  "filter": null,
+                  "formatter": null,
+                  "columnsOrder": [],
+                  "itemHeight": "44px",
+                  "visibleItemCount": 6,
+                  "swipeDuration": 1000
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-loading",
+          "library": "vant",
+          "title": "加载",
+          "snippets": [
+            {
+              "title": "加载",
+              "screenshot": "https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_loading.png",
+              "schema": {
+                "componentName": "van-loading",
+                "props": {
+                  "color": "#c9c9c9",
+                  "type": "circular",
+                  "size": "30px",
+                  "textSize": "14px",
+                  "vertical": false,
+                  "textColor": "#c9c9c9"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-pull-refresh",
+          "library": "vant",
+          "title": "下拉刷新",
+          "snippets": [
+            {
+              "title": "下拉刷新",
+              "screenshot": "https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/card.png",
+              "schema": {
+                "componentName": "van-pull-refresh",
+                "props": {
+                  "v-model": false,
+                  "pullingText": "下拉即可刷新...",
+                  "loosingText": "释放即可刷新...",
+                  "loadingText": "加载中...",
+                  "successText": "刷新成功",
+                  "successDuration": 500,
+                  "animationDuration": 300,
+                  "pullDistance": 50,
+                  "disabled": false
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-image-preview",
+          "library": "vant",
+          "title": "图片预览",
+          "snippets": [
+            {
+              "title": "图片预览",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/image-1.png",
+              "schema": {
+                "componentName": "van-image-preview",
+                "props": {
+                  "v-model": true,
+                  "images": [
+                    "https://img01.yzcdn.cn/vant/apple-1.jpg",
+                    "https://img01.yzcdn.cn/vant/apple-2.jpg"
+                  ],
+                  "startPosition": 0,
+                  "swipeDuration": 300,
+                  "showIndicators": false,
+                  "loop": true,
+                  "asyncClose": false,
+                  "closeOnPopstate": true,
+                  "maxZoom": 3,
+                  "minZoom": 1,
+                  "closeIcon": "clear",
+                  "closeIconPosition": "top-right",
+                  "transition": "van-fade"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-list",
+          "library": "vant",
+          "title": "列表",
+          "snippets": [
+            {
+              "title": "列表",
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/list-1.png",
+              "schema": {
+                "componentName": "van-list",
+                "props": {
+                  "v-model:loading": false,
+                  "finished": false,
+                  "error": false,
+                  "offset": 300,
+                  "loadingText": "加载中...",
+                  "immediateCheck": true,
+                  "direction": "down"
+                }
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-grid",
+          "library": "vant",
+          "snippets": [
+            {
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/1-1.png",
+              "title": "宫格-容器",
+              "schema": {
+                "componentName": "van-grid",
+                "children": []
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    },
+    {
+      "group": "基础组件",
+      "title": "Vant 组件",
+      "children": [
+        {
+          "componentName": "van-grid-item",
+          "library": "vant",
+          "snippets": [
+            {
+              "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/1-1.png",
+              "title": "宫格-子项",
+              "schema": {
+                "componentName": "van-grid-item",
+                "children": []
+              }
+            }
+          ],
+          "sort": {
+            "group": "基础组件"
+          }
+        }
+      ]
+    }
+  ]
+}

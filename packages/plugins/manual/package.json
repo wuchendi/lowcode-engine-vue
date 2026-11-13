@@ -1,0 +1,62 @@
+{
+  "name": "@cdlab996/lowcode-plugin-manual",
+  "type": "module",
+  "version": "1.1.0",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/manual",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/plugins/manual"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "lowcode",
+    "lowcode-engine",
+    "lowcode-plugin"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "peerDependencies": {
+    "@alifd/next": "*",
+    "@alilc/lowcode-types": "^1.0.0",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@alifd/next": "catalog:plugins",
+    "@alilc/lowcode-types": "catalog:shared",
+    "@types/react": "catalog:shared",
+    "react": "catalog:shared",
+    "tsdown": "catalog:dev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

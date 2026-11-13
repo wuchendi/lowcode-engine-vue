@@ -14,10 +14,10 @@ import SchemaPlugin from '@alilc/lowcode-plugin-schema'
 import SetRefPropPlugin from '@alilc/lowcode-plugin-set-ref-prop'
 import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select'
 import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo'
+import DirectiveLoading from '@cdlab996/lowcode-plugin-directive-loading'
 import ManualPlugin from '@cdlab996/lowcode-plugin-manual'
 import PluginSetDocUrlProp from '@cdlab996/lowcode-plugin-set-doc-url'
-import DirectiveLoading from '@cdlab996/plugin-directive-loading'
-import CodeEditor from '@knxcloud/lowcode-plugin-vue-code-editor'
+import CodeEditor from '@cdlab996/lowcode-plugin-vue-code-editor'
 import { Logo } from '../components/logo/logo'
 // setters
 import SetterPlugin from '../setters/index'
@@ -71,14 +71,10 @@ export default async function registerPlugins() {
             description: '组件库',
           },
         })
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         componentsPane?.disable?.()
         project.onSimulatorRendererReady(() => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           componentsPane?.enable?.()
         })
       },

@@ -14,7 +14,7 @@ module.exports = ({ onGetWebpackConfig }) => {
       .test(/\.mjs$/)
       .include.add(/node_modules/)
       // workspace packages resolve to their real path outside node_modules
-      .add(/packages[\\/](vue2-7|vue3)[\\/][^\\/]+[\\/]dist/)
+      .add(/packages[\\/][^\\/]+[\\/][^\\/]+[\\/]dist/)
       .end()
       .type('javascript/auto')
 

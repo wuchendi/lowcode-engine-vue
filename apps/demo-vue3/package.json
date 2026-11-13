@@ -22,14 +22,14 @@
     "@alilc/lowcode-utils": "catalog:shared",
     "@cdlab996/antd-lowcode-materials": "^0.0.1",
     "@cdlab996/element-plus-lowcode-materials": "^0.0.1",
-    "@cdlab996/lowcode-plugin-manual": "^1.0.2",
-    "@cdlab996/lowcode-plugin-set-doc-url": "^1.0.1",
-    "@cdlab996/plugin-directive-loading": "^1.0.0",
-    "@cdlab996/vant-lowcode-materials": "^0.0.1",
-    "@knxcloud/lowcode-plugin-vue-code-editor": "0.1.2",
+    "@cdlab996/lowcode-plugin-directive-loading": "workspace:*",
+    "@cdlab996/lowcode-plugin-manual": "workspace:*",
+    "@cdlab996/lowcode-plugin-set-doc-url": "workspace:*",
+    "@cdlab996/lowcode-plugin-vue-code-editor": "workspace:*",
     "@cdlab996/lowcode-utils": "workspace:*",
     "@cdlab996/lowcode-vue-renderer": "workspace:*",
     "@cdlab996/lowcode-vue-simulator-renderer": "workspace:*",
+    "@cdlab996/vant-lowcode-materials": "^0.0.1",
     "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {
@@ -44,6 +44,7 @@
     "build-plugin-component": "^1.12.1",
     "build-plugin-moment-locales": "^0.1.3",
     "build-plugin-react-app": "^1.8.5",
+    "html-webpack-plugin": "^4.5.2",
     "typescript": "^5.4.3",
     "vue": "^3.4.21"
   }

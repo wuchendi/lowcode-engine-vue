@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable no-console */
-
 function getTimestamp() {
   return `${new Date().toLocaleString()}.${new Date().getMilliseconds()}`
 }

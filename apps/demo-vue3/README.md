@@ -55,14 +55,14 @@ Code built with the help of these related projects:
 - [@alilc/lowcode-plugin-simulator-select](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-simulator-size) Canvas Switching
 - [@alilc/lowcode-plugin-undo-redo](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-undo-redo) Lowcode Plugin Undo and Redo
 - [@alilc/lowcode-types](https://github.com/alibaba/lowcode-engine/tree/main/packages/types) Type Definitions
-- [@knxcloud/lowcode-plugin-vue-code-editor](https://github.com/KNXCloud/lowcode-engine-plugins/tree/main/packages/plugin-vue-code-editor) Vue Code Editor
+- [@cdlab996/lowcode-plugin-vue-code-editor](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/vue-code-editor) Vue Code Editor
 - [@cdlab996/lowcode-utils](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/utils) Utility Library
 - [@cdlab996/lowcode-vue-renderer](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/renderer) Vue Renderer
 - [@cdlab996/lowcode-vue-simulator-renderer](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/vue3/simulator-renderer) Vue Simulator Renderer
-- [@cdlab996/lowcode-plugin-manual](https://github.com/cdlab996/lowcode-plugin-manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
+- [@cdlab996/lowcode-plugin-manual](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/manual) Lowcode Plugin Manual (Due to the official plugins not supporting URL configuration, it has been separated)
 - [@cdlab996/lowcode-engine-ext-vue](https://github.com/cdlab996/lowcode-engine-ext-vue) Adapting Vue Setters
-- [@cdlab996/plugin-directive-loading](https://github.com/cdlab996/plugin-directive-loading) Vue Custom Directive
-- [@cdlab996/lowcode-plugin-set-doc-url](https://github.com/cdLab996/lowcode-engine-plugins/tree/main/packages/plugin-set-doc-url) Lowcode Plugin Component material new documentation address
+- [@cdlab996/lowcode-plugin-directive-loading](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/directive-loading) Vue Custom Directive
+- [@cdlab996/lowcode-plugin-set-doc-url](https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/set-doc-url) Lowcode Plugin Component material new documentation address
 - [@cdlab996/antd-lowcode-materials](https://github.com/cdLab996/lowcode-engine-materials-vue/tree/main/packages/ant-design-vue) Ant Design Vue Materials
 - [@cdlab996/element-plus-lowcode-materials](https://github.com/cdLab996/lowcode-engine-materials-vue/tree/main/packages/element-plus) Element Plus Materials
 - [@cdlab996/vant-lowcode-materials](https://github.com/cdLab996/lowcode-engine-materials-vue/tree/main/packages/vant) Vant Materials

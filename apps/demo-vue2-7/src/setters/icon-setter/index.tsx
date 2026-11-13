@@ -87,7 +87,6 @@ export default class IconSetter extends PureComponent<
     if (type === 'string') {
       onChange(icon)
     } else if (type === 'node') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       onChange({
         componentName: 'Icon',
