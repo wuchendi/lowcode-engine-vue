@@ -50,7 +50,7 @@
     "less": "catalog:dev",
     "lodash": "catalog:materials",
     "moment": "^2.31.0",
-    "monaco-editor": "0.52.2",
+    "monaco-editor": "0.57.0",
     "prop-types": "^15.8.1",
     "react": "catalog:shared",
     "react-dom": "catalog:shared",

@@ -63,7 +63,7 @@
     "@types/react": "catalog:shared",
     "@vitejs/plugin-react": "catalog:dev",
     "less": "catalog:dev",
-    "monaco-editor": "0.52.2",
+    "monaco-editor": "0.57.0",
     "react": "catalog:shared",
     "unocss": "catalog:dev",
     "vite": "catalog:dev",

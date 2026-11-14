@@ -284,13 +284,13 @@ importers:
         version: 1.0.7
       '@alilc/lowcode-plugin-datasource-pane':
         specifier: ^1.0.10
-        version: 1.0.11(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/node@26.6.6)(@types/react-dom@16.9.25(@types/react@16.14.70))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(prop-types@15.8.1)(react-is@18.3.1)(supports-color@6.1.0)(typescript@7.0.2)
+        version: 1.0.11(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/node@26.6.6)(@types/react-dom@16.9.25(@types/react@16.14.70))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(prop-types@15.8.1)(react-is@18.3.1)(supports-color@6.1.0)(typescript@7.0.2)
       '@alilc/lowcode-plugin-inject':
         specifier: ^1.2.2
-        version: 1.2.3(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+        version: 1.2.3(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-plugin-schema':
         specifier: ^1.0.5
-        version: 1.0.5(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)
+        version: 1.0.5(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)
       '@alilc/lowcode-plugin-set-ref-prop':
         specifier: ^1.0.1
         version: 1.0.1(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)
@@ -333,7 +333,7 @@ importers:
         version: 0.2.1(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
-        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@cdlab996/lowcode-engine-ext-vue':
         specifier: workspace:*
         version: link:../../packages/plugins/engine-ext-vue
@@ -383,8 +383,8 @@ importers:
         specifier: ^2.31.0
         version: 2.31.0
       monaco-editor:
-        specifier: 0.52.2
-        version: 0.52.2
+        specifier: 0.57.0
+        version: 0.57.0
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
@@ -564,7 +564,7 @@ importers:
     dependencies:
       '@alilc/lowcode-plugin-base-monaco-editor':
         specifier: ^1.1.2
-        version: 1.1.2(monaco-editor@0.52.2)
+        version: 1.1.2(monaco-editor@0.57.0)
       '@cdlab996/lowcode-code-generator':
         specifier: workspace:*
         version: link:../../tools/code-generator
@@ -595,7 +595,7 @@ importers:
         version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
-        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-types':
         specifier: catalog:shared
         version: 1.3.4
@@ -619,10 +619,10 @@ importers:
         version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
-        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-plugin-base-monaco-editor':
         specifier: ^1.1.2
-        version: 1.1.2(monaco-editor@0.52.2)
+        version: 1.1.2(monaco-editor@0.57.0)
       '@alilc/lowcode-types':
         specifier: catalog:shared
         version: 1.3.4
@@ -703,7 +703,7 @@ importers:
         version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
-        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+        version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-types':
         specifier: catalog:shared
         version: 1.3.4
@@ -724,7 +724,7 @@ importers:
     dependencies:
       '@alilc/lowcode-plugin-base-monaco-editor':
         specifier: ^1.1.2
-        version: 1.1.2(monaco-editor@0.52.2)
+        version: 1.1.2(monaco-editor@0.57.0)
       '@alilc/lowcode-utils':
         specifier: catalog:shared
         version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
@@ -769,8 +769,8 @@ importers:
         specifier: catalog:dev
         version: 4.9.1(supports-color@6.1.0)
       monaco-editor:
-        specifier: 0.52.2
-        version: 0.52.2
+        specifier: 0.57.0
+        version: 0.57.0
       react:
         specifier: catalog:shared
         version: 16.14.0
@@ -2498,6 +2498,9 @@ packages:
   '@types/scheduler@0.16.8':
     resolution: {integrity: sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==}
 
+  '@types/trusted-types@2.0.7':
+    resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
+
   '@types/web-bluetooth@0.0.21':
     resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
 
@@ -3282,6 +3285,9 @@ packages:
     resolution: {integrity: sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==}
     engines: {node: '>= 4'}
 
+  dompurify@3.4.15:
+    resolution: {integrity: sha512-EUBjM+B+lkDE41iE82DDSCfkoPGfXx8IxFxPMjNzm/Uk4xDet77rTN9wqlxlVg71kK7XGuUMv6wUxJUwwv+Xyw==}
+
   domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
 
@@ -3922,6 +3928,11 @@ packages:
     resolution: {integrity: sha512-IfpFq6UM39dUNiphpA6uDezNx/AvWyhwfICWPR3t1VspkgkMZrL+Rk1RbN1bx+aeNYwOrqGJgEgV3yotk+ZUVw==}
     engines: {node: '>=18'}
 
+  marked@14.0.0:
+    resolution: {integrity: sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==}
+    engines: {node: '>= 18'}
+    hasBin: true
+
   material-colors@1.2.6:
     resolution: {integrity: sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==}
 
@@ -3991,8 +4002,8 @@ packages:
   moment@2.31.0:
     resolution: {integrity: sha512-0acOTfMiWOheYS4eoWb80yYMb/JLvVv9SHbs2PehaDzfUG0Bw855SKyk0IKTnPGa5+U2bmi3W68l1+sGLX/pvw==}
 
-  monaco-editor@0.52.2:
-    resolution: {integrity: sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==}
+  monaco-editor@0.57.0:
+    resolution: {integrity: sha512-5BkI9KGoqrNvBGUe15/QlZq3OooZ8WLg1AxTpaqHRCP3HNpzPPZKE2EDz8M7c+VRmCeUw1Brp4cx/PWm3kI/5A==}
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -5495,10 +5506,10 @@ snapshots:
       - reflect-metadata
       - supports-color
 
-  '@alilc/lowcode-engine-ext@1.0.6(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)':
+  '@alilc/lowcode-engine-ext@1.0.6(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)':
     dependencies:
       '@alifd/next': 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
-      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.52.2)
+      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.57.0)
       '@alilc/lowcode-types': 1.3.4
       '@alilc/lowcode-utils': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
       antd: 5.29.3(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
@@ -5516,13 +5527,13 @@ snapshots:
       - monaco-editor
       - react-dom
 
-  '@alilc/lowcode-engine@1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)':
+  '@alilc/lowcode-engine@1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)':
     dependencies:
       '@alifd/next': 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-designer': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-editor-core': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-editor-skeleton': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
-      '@alilc/lowcode-engine-ext': 1.0.6(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
+      '@alilc/lowcode-engine-ext': 1.0.6(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-plugin-command': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
       '@alilc/lowcode-plugin-designer': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-plugin-outline-pane': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)
@@ -5542,9 +5553,9 @@ snapshots:
       - reflect-metadata
       - supports-color
 
-  '@alilc/lowcode-plugin-base-monaco-editor@1.1.2(monaco-editor@0.52.2)':
+  '@alilc/lowcode-plugin-base-monaco-editor@1.1.2(monaco-editor@0.57.0)':
     dependencies:
-      '@monaco-editor/loader': 1.3.0(monaco-editor@0.52.2)
+      '@monaco-editor/loader': 1.3.0(monaco-editor@0.57.0)
       classnames: 2.5.1
     transitivePeerDependencies:
       - monaco-editor
@@ -5566,10 +5577,10 @@ snapshots:
       lodash.debounce: 4.0.8
       react: 16.14.0
 
-  '@alilc/lowcode-plugin-datasource-pane@1.0.11(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/node@26.6.6)(@types/react-dom@16.9.25(@types/react@16.14.70))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(prop-types@15.8.1)(react-is@18.3.1)(supports-color@6.1.0)(typescript@7.0.2)':
+  '@alilc/lowcode-plugin-datasource-pane@1.0.11(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/node@26.6.6)(@types/react-dom@16.9.25(@types/react@16.14.70))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(prop-types@15.8.1)(react-is@18.3.1)(supports-color@6.1.0)(typescript@7.0.2)':
     dependencies:
       '@alifd/next': 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
-      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.52.2)
+      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.57.0)
       '@alilc/lowcode-types': 1.3.4
       '@babel/core': 7.29.13(supports-color@6.1.0)
       '@babel/parser': 7.29.14
@@ -5625,10 +5636,10 @@ snapshots:
       - reflect-metadata
       - supports-color
 
-  '@alilc/lowcode-plugin-inject@1.2.3(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)':
+  '@alilc/lowcode-plugin-inject@1.2.3(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)':
     dependencies:
       '@alifd/next': 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
-      '@alilc/lowcode-engine': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(reflect-metadata@0.2.2)(supports-color@6.1.0)
+      '@alilc/lowcode-engine': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)(reflect-metadata@0.2.2)(supports-color@6.1.0)
       '@alilc/lowcode-types': 1.3.4
       '@alilc/lowcode-utils': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
       case: 1.6.3
@@ -5661,10 +5672,10 @@ snapshots:
       - '@types/react'
       - moment
 
-  '@alilc/lowcode-plugin-schema@1.0.5(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)':
+  '@alilc/lowcode-plugin-schema@1.0.5(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.57.0)':
     dependencies:
       '@alifd/next': 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
-      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.52.2)
+      '@alilc/lowcode-plugin-base-monaco-editor': 1.1.2(monaco-editor@0.57.0)
       classnames: 2.5.1
       lodash: 4.18.1
       react: 16.14.0
@@ -6843,9 +6854,9 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@monaco-editor/loader@1.3.0(monaco-editor@0.52.2)':
+  '@monaco-editor/loader@1.3.0(monaco-editor@0.57.0)':
     dependencies:
-      monaco-editor: 0.52.2
+      monaco-editor: 0.57.0
       state-local: 1.0.7
 
   '@monaco-editor/loader@1.7.0':
@@ -7236,6 +7247,9 @@ snapshots:
       '@types/react': 16.14.70
 
   '@types/scheduler@0.16.8': {}
+
+  '@types/trusted-types@2.0.7':
+    optional: true
 
   '@types/web-bluetooth@0.0.21': {}
 
@@ -8152,6 +8166,10 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
+  dompurify@3.4.15:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
   domutils@2.8.0:
     dependencies:
       dom-serializer: 1.4.1
@@ -8857,6 +8875,8 @@ snapshots:
   make-dir@5.1.0:
     optional: true
 
+  marked@14.0.0: {}
+
   material-colors@1.2.6: {}
 
   math-intrinsics@1.1.0: {}
@@ -8903,7 +8923,10 @@ snapshots:
 
   moment@2.31.0: {}
 
-  monaco-editor@0.52.2: {}
+  monaco-editor@0.57.0:
+    dependencies:
+      dompurify: 3.4.15
+      marked: 14.0.0
 
   ms@2.0.0:
     optional: true
