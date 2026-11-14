@@ -36,14 +36,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT || 'lowcode-vue' }}
       # The commit CI tested
       COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:
+      # The secrets reach only the steps that need them (not the install
+      # scripts of the dependencies)
       - name: Check the Cloudflare settings
         id: settings
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "configured=true" >> "$GITHUB_OUTPUT"
@@ -77,12 +80,18 @@ jobs:
       # Fails when the project exists already: then the deploy goes on
       - name: Create the Pages project if missing
         if: steps.settings.outputs.configured == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: >-
           pnpm dlx wrangler@4 pages project create "$PROJECT"
           --production-branch main || true
 
       - name: Deploy
         if: steps.settings.outputs.configured == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: >-
           pnpm dlx wrangler@4 pages deploy apps/designer/dist
           --project-name "$PROJECT"
