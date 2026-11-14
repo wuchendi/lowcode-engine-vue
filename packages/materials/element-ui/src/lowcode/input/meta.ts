@@ -1,153 +1,370 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the element-ui docs (input); see https://element.eleme.cn/#/zh-CN/component/input
+const meta = {
+  componentName: 'ElInput',
   title: '输入框',
   group: 'Element 组件',
-  category: 'Form',
-  priority: 998,
-  docUrl: 'https://element.eleme.cn/2.14/#/zh-CN/component/input',
-  componentName: 'ElInput',
-  // npm: {
-  //   package: 'element-ui',
-  //   version: '2.30.6',
-  //   exportName: 'Input',
-  //   destructuring: true,
-  // },
+  category: '表单组件',
+  docUrl: 'https://element.eleme.cn/#/zh-CN/component/input',
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'v-model',
-        title: '绑定值',
-        setter: 'StringSetter',
-      },
-      {
         name: 'type',
-        title: '类型',
-        setter: {
-          componentName: 'SelectSetter',
-          props: {
-            options: [
-              {
-                title: '文本',
-                value: 'text',
-              },
-              {
-                title: '多行文本',
-                value: 'textarea',
-              },
-              {
-                title: '密码',
-                value: 'password',
-              },
-              {
-                title: '数字',
-                value: 'number',
-              },
-              {
-                title: '邮箱',
-                value: 'email',
-              },
-              {
-                title: 'URL',
-                value: 'url',
-              },
-              {
-                title: '电话',
-                value: 'tel',
-              },
-            ],
-          },
-        },
-        defaultValue: 'text',
-        extraProps: {
-          setValue(target, value) {
-            if (!/text/.test(value)) {
-              target.parent.setPropValue('show-word-limit', false)
-              target.parent.setPropValue('maxlength', '')
-            }
-          },
-        },
-      },
-      {
-        name: 'rows',
         title: {
-          label: '输入框行数',
-          tip: '输入框行数，只对 type="textarea" 有效',
+          label: {
+            type: 'i18n',
+            'zh-CN': '类型',
+            'en-US': 'type',
+          },
+          tip: '类型',
         },
         setter: 'StringSetter',
-        defaultValue: 2,
-        condition(target) {
-          return target.getProps().getPropValue('type') === 'textarea'
-        },
+        supportVariable: true,
+        defaultValue: 'text',
       },
       {
-        name: 'autosize',
+        name: 'v-model',
         title: {
-          label: '自适应内容高度',
-          tip: '自适应内容高度，只对 type="textarea" 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }',
+          label: {
+            type: 'i18n',
+            'zh-CN': '绑定值',
+            'en-US': 'v-model',
+          },
+          tip: '绑定值',
         },
         setter: [
           {
-            componentName: 'BoolSetter',
-            initialValue: false,
+            componentName: 'StringSetter',
           },
           {
-            componentName: 'JsonSetter',
-            initialValue: { minRows: 2, maxRows: 6 },
+            componentName: 'NumberSetter',
           },
         ],
-        condition(target) {
-          return target.getProps().getPropValue('type') === 'textarea'
+        supportVariable: true,
+      },
+      {
+        name: 'maxlength',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'maxlength',
+          },
+          tip: '原生属性，最大输入长度',
         },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'minlength',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'minlength',
+          },
+          tip: '原生属性，最小输入长度',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'showWordLimit',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示输入字数统计',
+            'en-US': 'showWordLimit',
+          },
+          tip: '是否显示输入字数统计，只在 type = "text" 或 type = "textarea" 时有效',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'placeholder',
-        title: '占位符',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框占位文本',
+            'en-US': 'placeholder',
+          },
+          tip: '输入框占位文本',
+        },
         setter: 'StringSetter',
+        supportVariable: true,
       },
       {
-        name: 'prefix-icon',
-        title: '前缀图标',
-        setter: 'CIconSetter',
+        name: 'clearable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否可清空',
+            'en-US': 'clearable',
+          },
+          tip: '是否可清空',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'suffix-icon',
-        title: '后缀图标',
-        setter: 'CIconSetter',
+        name: 'showPassword',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示切换密码图标',
+            'en-US': 'showPassword',
+          },
+          tip: '是否显示切换密码图标',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '禁用',
+            'en-US': 'disabled',
+          },
+          tip: '禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'size',
-        title: '尺寸',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框尺寸',
+            'en-US': 'size',
+          },
+          tip: '输入框尺寸，只在 type!="textarea" 时有效',
+        },
         setter: {
-          componentName: 'SelectSetter',
+          componentName: 'RadioGroupSetter',
           props: {
             options: [
               {
-                title: '默认',
-                value: '',
-              },
-              {
-                title: '中',
+                title: 'medium',
                 value: 'medium',
               },
               {
-                title: '小',
+                title: 'small',
                 value: 'small',
               },
               {
-                title: '迷你',
+                title: 'mini',
                 value: 'mini',
               },
             ],
           },
         },
-        defaultValue: '',
+        supportVariable: true,
+      },
+      {
+        name: 'prefixIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框头部图标',
+            'en-US': 'prefixIcon',
+          },
+          tip: '输入框头部图标',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'suffixIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框尾部图标',
+            'en-US': 'suffixIcon',
+          },
+          tip: '输入框尾部图标',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'rows',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框行数',
+            'en-US': 'rows',
+          },
+          tip: '输入框行数，只对 type="textarea" 有效',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 2,
+      },
+      {
+        name: 'autosize',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自适应内容高度',
+            'en-US': 'autosize',
+          },
+          tip: '自适应内容高度，只对 type="textarea" 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }',
+        },
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'autocomplete',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'autocomplete',
+          },
+          tip: '原生属性，自动补全',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'on',
+                value: 'on',
+              },
+              {
+                title: 'off',
+                value: 'off',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'off',
+      },
+      {
+        name: 'autoComplete',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '下个主版本弃用',
+            'en-US': 'autoComplete',
+          },
+          tip: '下个主版本弃用',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'on',
+                value: 'on',
+              },
+              {
+                title: 'off',
+                value: 'off',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'off',
+      },
+      {
+        name: 'name',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'name',
+          },
+          tip: '原生属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'readonly',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'readonly',
+          },
+          tip: '原生属性，是否只读',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'max',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'max',
+          },
+          tip: '原生属性，设置最大值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'min',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'min',
+          },
+          tip: '原生属性，设置最小值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'step',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'step',
+          },
+          tip: '原生属性，设置输入字段的合法数字间隔',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'resize',
-        title: '用户缩放',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '控制是否能被用户缩放',
+            'en-US': 'resize',
+          },
+          tip: '控制是否能被用户缩放',
+        },
         setter: {
-          componentName: 'SelectSetter',
+          componentName: 'RadioGroupSetter',
           props: {
             options: [
               {
@@ -169,242 +386,198 @@ const meta: IPublicTypeComponentMetadata = {
             ],
           },
         },
+        supportVariable: true,
       },
       {
-        name: 'readonly',
-        title: '只读',
-        setter: 'BoolSetter',
-        defaultValue: false,
-      },
-      {
-        name: 'disabled',
-        title: '禁用',
-        setter: 'BoolSetter',
-        defaultValue: false,
-      },
-      {
-        name: 'clearable',
-        title: '可清空',
-        setter: 'BoolSetter',
-        defaultValue: false,
-      },
-      {
-        name: 'show-word-limit',
-        title: '显示字数统计',
-        setter: 'BoolSetter',
-        defaultValue: false,
-        condition(target) {
-          const type = target.getProps().getPropValue('type')
-          if (/text/.test(type)) {
-            return true
-          } else {
-            return false
-          }
-        },
-        extraProps: {
-          setValue(target, value) {
-            // 切换到以周为日期单位后调整显示格式
-            if (value) {
-              target.parent.setPropValue('maxlength', 30)
-            } else {
-              target.parent.setPropValue('maxlength', '')
-            }
-          },
-        },
-      },
-      {
-        name: 'maxlength',
-        title: '最大输入长度',
-        setter: 'NumberSetter',
-      },
-      {
-        name: 'minlength',
-        title: '最小输入长度',
-        setter: 'NumberSetter',
-      },
-      {
-        name: '自定义插槽',
-        display: 'accordion',
-        type: 'group',
-        items: [
-          // {
-          //   name: 'prefix',
-          //   title: '头部内容',
-          //   setter: {
-          //     componentName: 'SlotSetter',
-          //     initialValue: {
-          //       type: 'JSSlot',
-          //       title: '输入框头部内容插槽',
-          //       value: [],
-          //     },
-          //   },
-          // },
-          // {
-          //   name: 'suffix',
-          //   title: '尾部内容',
-          //   setter: {
-          //     componentName: 'SlotSetter',
-          //     initialValue: {
-          //       type: 'JSSlot',
-          //       title: '输入框尾部内容插槽',
-          //       value: [],
-          //     },
-          //   },
-          // },
-          {
-            name: 'prepend',
-            title: '前置内容',
-            setter: {
-              componentName: 'SlotSetter',
-              initialValue: {
-                type: 'JSSlot',
-                title: '输入框前置内容插槽',
-                value: [],
-              },
-            },
-          },
-          {
-            name: 'append',
-            title: '后置内容',
-            setter: {
-              componentName: 'SlotSetter',
-              initialValue: {
-                type: 'JSSlot',
-                title: '输入框后置内容插槽',
-                value: [],
-              },
-            },
-          },
-        ],
-        condition(target) {
-          return target.getProps().getPropValue('type') === 'text'
-        },
-      },
-      {
-        name: '原生属性',
+        name: 'autofocus',
         title: {
-          label: '原生属性',
-          tip: '原生 HTML 属性',
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'autofocus',
+          },
+          tip: '原生属性，自动获取焦点',
         },
-        display: 'accordion',
-        type: 'group',
-        items: [
-          {
-            name: 'name',
-            title: 'name',
-            setter: 'StringSetter',
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'form',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生属性',
+            'en-US': 'form',
           },
-          {
-            name: 'form',
-            title: 'form',
-            setter: 'StringSetter',
+          tip: '原生属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'label',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框关联的label文字',
+            'en-US': 'label',
           },
-          {
-            name: 'autofocus',
-            title: 'autofocus',
-            setter: 'BoolSetter',
-            defaultValue: false,
+          tip: '输入框关联的label文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'tabindex',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框的tabindex',
+            'en-US': 'tabindex',
           },
-          {
-            name: 'autocomplete',
-            title: '原生属性，自动补全',
-            setter: {
-              componentName: 'SelectSetter',
-              props: {
-                options: [
-                  {
-                    title: 'on',
-                    value: 'on',
-                  },
-                  {
-                    title: 'off',
-                    value: 'off',
-                  },
-                ],
-              },
-            },
-            defaultValue: 'off',
+          tip: '输入框的tabindex',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'validateEvent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入时是否触发表单的校验',
+            'en-US': 'validateEvent',
           },
-          {
-            name: 'max',
-            title: 'max',
-            setter: 'NumberSetter',
+          tip: '输入时是否触发表单的校验',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'prefix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框头部内容',
+            'en-US': 'prefix',
           },
-          {
-            name: 'min',
-            title: 'min',
-            setter: 'NumberSetter',
+          tip: '输入框头部内容，只对 type="text" 有效',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
           },
-          {
-            name: 'step',
-            title: 'step',
-            setter: 'StringSetter',
+        },
+      },
+      {
+        name: 'suffix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框尾部内容',
+            'en-US': 'suffix',
           },
-        ],
+          tip: '输入框尾部内容，只对 type="text" 有效',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'prepend',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框前置内容',
+            'en-US': 'prepend',
+          },
+          tip: '输入框前置内容，只对 type="text" 有效',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'append',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框后置内容',
+            'en-US': 'append',
+          },
+          tip: '输入框后置内容，只对 type="text" 有效',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
       },
     ],
     supports: {
       style: true,
-      loop: true,
+      className: true,
       events: [
         {
-          name: 'onInput',
-          description: '输入框值改变时触发',
-          template:
-            'onInput(value, ${extParams}){\n//在 Input 值改变时触发\nconsole.log("onInput", value);\n}\n',
-        },
-        {
-          name: 'onClear',
-          description: '点击清空按钮时触发',
-          template:
-            'onClear(${extParams}){\n//在点击由 clearable 属性生成的清空按钮时触发\nconsole.log("onClear");\n}\n',
-        },
-        {
-          name: 'onChange',
-          description: '输入框失去焦点或按下回车时触发',
-          template:
-            'onChange(value, ${extParams}){\n//仅在输入框失去焦点或用户按下回车时触发\nconsole.log("onChange", value);\n}\n',
-        },
-        {
           name: 'onBlur',
-          description: '输入框失去焦点时触发',
+          description: '在 Input 失去焦点时触发',
           template:
-            'onBlur(ev, ${extParams}){\n//在 Input 失去焦点时触发\nconsole.log("onBlur");\n}\n',
+            "onBlur(extParams) {\n  // 在 Input 失去焦点时触发\n  console.log('onBlur', extParams)\n}",
         },
         {
           name: 'onFocus',
-          description: '输入框获得焦点时触发',
+          description: '在 Input 获得焦点时触发',
           template:
-            'onFocus(ev, ${extParams}){\n//在 Input 获得焦点时触发\nconsole.log("onFocus");\n}\n',
+            "onFocus(extParams) {\n  // 在 Input 获得焦点时触发\n  console.log('onFocus', extParams)\n}",
+        },
+        {
+          name: 'onChange',
+          description: '仅在输入框失去焦点或用户按下回车时触发',
+          template:
+            "onChange(extParams) {\n  // 仅在输入框失去焦点或用户按下回车时触发\n  console.log('onChange', extParams)\n}",
+        },
+        {
+          name: 'onInput',
+          description: '在 Input 值改变时触发',
+          template:
+            "onInput(extParams) {\n  // 在 Input 值改变时触发\n  console.log('onInput', extParams)\n}",
+        },
+        {
+          name: 'onClear',
+          description: '在点击由 clearable 属性生成的清空按钮时触发',
+          template:
+            "onClear(extParams) {\n  // 在点击由 clearable 属性生成的清空按钮时触发\n  console.log('onClear', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      screenshot:
-        'https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/input.png',
       title: '输入框',
+      screenshot: './screenshots/input.webp',
       schema: {
         componentName: 'ElInput',
-        props: {
-          type: 'text',
-          'show-word-limit': false,
-          placeholder: '请输入',
-          clearable: false,
-          'show-password': false,
-          disabled: false,
-          rows: 2,
-          autosize: false,
-          autocomplete: 'off',
-          autofocus: false,
-          tabindex: '',
-          'validate-event': true,
-          'prefix-icon': '',
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

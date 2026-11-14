@@ -1,91 +1,86 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (space); see https://1x.antdv.com/components/space-cn/
+const meta = {
   componentName: 'ASpace',
   title: '间距',
-  category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'ASpace',
-  },
-  props: [
-    {
-      name: 'align',
-      title: { label: '对齐方式', tip: '对齐方式' },
-      propType: {
-        type: 'oneOf',
-        value: ['start', 'end', 'center', 'baseline'],
-      },
-    },
-    {
-      name: 'direction',
-      title: { label: '间距方向', tip: '间距方向' },
-      propType: { type: 'oneOf', value: ['vertical', 'horizontal'] },
-    },
-    {
-      name: 'size',
-      title: { label: '间距大小', tip: '间距大小' },
-      propType: {
-        type: 'oneOfType',
-        value: [
-          {
-            type: 'oneOf',
-            value: ['small', 'middle', 'large'],
-          },
-          'number',
-        ],
-      },
-      defaultValue: 'middle',
-    },
-    {
-      name: 'wrap',
-      title: { label: '是否自动换行', tip: '是否自动换行' },
-      propType: 'bool',
-      condition: {
-        type: 'JSFunction',
-        value:
-          'target => target.getProps().getPropValue("direction")==="horizontal"',
-      },
-    },
-    {
-      name: 'split',
-      title: {
-        label: '间隔组件',
-        tip: '间隔组件,可拖组件进来， 常用的有竖向分隔线',
-      },
-      propType: 'node',
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '布局',
+  docUrl: 'https://1x.antdv.com/components/space-cn/',
+  devMode: 'proCode',
   configure: {
-    component: {
-      isContainer: true,
-    },
+    props: [
+      {
+        name: 'align',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '对齐方式',
+            'en-US': 'align',
+          },
+          tip: '对齐方式',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'direction',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '间距方向',
+            'en-US': 'direction',
+          },
+          tip: '间距方向',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'horizontal',
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '间距大小',
+            'en-US': 'size',
+          },
+          tip: '间距大小',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '间距',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/space-1.png',
+      screenshot: './screenshots/space.webp',
       schema: {
         componentName: 'ASpace',
-        props: {},
         children: [
           {
             componentName: 'AButton',
-            props: {
-              children: 'Button-lyl',
-            },
+            props: {},
+            children: '按钮一',
           },
           {
             componentName: 'AButton',
-            props: {
-              children: 'Button-lemon',
-            },
+            props: {},
+            children: '按钮二',
           },
         ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

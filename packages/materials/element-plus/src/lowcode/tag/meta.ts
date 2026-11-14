@@ -1,35 +1,25 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
-  title: '标签',
-  group: 'Element-plus',
-  category: 'Data',
-  priority: 1003,
-  docUrl: 'https://element-plus.org/zh-CN/component/tag.html',
+// Generated from the element-plus docs (tag); see https://element-plus.org/zh-CN/component/tag.html
+const meta = {
   componentName: 'ElTag',
-
+  title: '标签',
+  group: 'Element 组件',
+  category: '数据展示',
+  docUrl: 'https://element-plus.org/zh-CN/component/tag.html',
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'children',
-        title: '文本',
-        setter: [
-          {
-            componentName: 'StringSetter',
-          },
-          {
-            componentName: 'SlotSetter',
-            initialValue: {
-              type: 'JSSlot',
-              params: ['slotProps'],
-              value: [],
-            },
-          },
-        ],
-      },
-      {
         name: 'type',
-        title: '类型',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'Tag 的类型',
+            'en-US': 'type',
+          },
+          tip: 'Tag 的类型',
+        },
         setter: {
           componentName: 'SelectSetter',
           props: {
@@ -56,12 +46,75 @@ const meta: IPublicTypeComponentMetadata = {
               },
             ],
           },
-          initialValue: 'primary',
         },
+        supportVariable: true,
+        defaultValue: 'primary',
+      },
+      {
+        name: 'closable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否可关闭',
+            'en-US': 'closable',
+          },
+          tip: '是否可关闭',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'disableTransitions',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用渐变动画',
+            'en-US': 'disableTransitions',
+          },
+          tip: '是否禁用渐变动画',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'hit',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否有边框描边',
+            'en-US': 'hit',
+          },
+          tip: '是否有边框描边',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'color',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '背景色',
+            'en-US': 'color',
+          },
+          tip: '背景色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
       },
       {
         name: 'size',
-        title: '尺寸',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'Tag 的尺寸',
+            'en-US': 'size',
+          },
+          tip: 'Tag 的尺寸',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -80,41 +133,19 @@ const meta: IPublicTypeComponentMetadata = {
               },
             ],
           },
-          initialValue: 'default',
         },
-      },
-      {
-        name: 'closable',
-        title: '可关闭',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
-      },
-      {
-        name: 'disable-transitions',
-        title: '禁用渐变动画',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
-      },
-      {
-        name: 'hit',
-        title: '边框描边',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
-      },
-      {
-        name: 'color',
-        title: '背景色',
-        setter: 'ColorSetter',
+        supportVariable: true,
       },
       {
         name: 'effect',
-        title: '主题',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'Tag 的主题',
+            'en-US': 'effect',
+          },
+          tip: 'Tag 的主题',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -133,56 +164,58 @@ const meta: IPublicTypeComponentMetadata = {
               },
             ],
           },
-          initialValue: 'light',
         },
+        supportVariable: true,
+        defaultValue: 'light',
       },
       {
         name: 'round',
-        title: '否为圆形',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'Tag 是否为圆角',
+            'en-US': 'round',
+          },
+          tip: 'Tag 是否为圆角',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
     ],
     supports: {
+      style: true,
+      className: true,
       events: [
         {
           name: 'onClick',
           description: '点击 Tag 时触发的事件',
           template:
-            'onClick(${extParams}){\n  //点击 Tag 时触发的事件\n  console.log("onClick");\n}',
+            "onClick(...args, extParams) {\n  // 点击 Tag 时触发的事件\n  console.log('onClick', ...args)\n}",
         },
         {
           name: 'onClose',
           description: '关闭 Tag 时触发的事件',
           template:
-            'onClose(${extParams}){\n  //关闭 Tag 时触发的事件 \n  console.log("onClose");\n}',
+            "onClose(...args, extParams) {\n  // 关闭 Tag 时触发的事件\n  console.log('onClose', ...args)\n}",
         },
       ],
-      style: true,
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      screenshot:
-        'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_tag.png',
       title: '标签',
+      screenshot: './screenshots/tag.webp',
       schema: {
         componentName: 'ElTag',
-        props: {
-          children: '标签',
-          type: 'primary',
-          closable: false,
-          'disable-transitions': false,
-          hit: false,
-          color: '',
-          size: 'default',
-          close: false,
-        },
+        props: {},
+        children: '标签',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

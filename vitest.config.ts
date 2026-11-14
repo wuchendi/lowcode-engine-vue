@@ -58,6 +58,15 @@ const designer = {
   },
 }
 
+/** Material metas checked against their component libraries. */
+const materials = {
+  test: {
+    name: 'materials',
+    environment: 'jsdom',
+    include: ['packages/materials/*/tests/**/*.test.ts'],
+  },
+}
+
 /** Node tooling: the material builder and the project scaffold. */
 const tools = {
   test: {
@@ -69,6 +78,13 @@ const tools = {
 
 export default defineConfig({
   test: {
-    projects: [project('vue2'), project('vue3'), plugins, designer, tools],
+    projects: [
+      project('vue2'),
+      project('vue3'),
+      plugins,
+      designer,
+      materials,
+      tools,
+    ],
   },
 })

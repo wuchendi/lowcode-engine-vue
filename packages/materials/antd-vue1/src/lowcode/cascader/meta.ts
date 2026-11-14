@@ -1,249 +1,381 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (cascader); see https://1x.antdv.com/components/cascader-cn/
+const meta = {
   componentName: 'ACascader',
-  title: '级联选择框',
+  title: '级联选择',
+  group: 'Ant Design 组件',
   category: '数据录入',
-  npm: {
-    destructuring: true,
-    componentName: 'ACascader',
-  },
-  props: [
-    {
-      name: 'defaultValue',
-      title: { label: '默认的选中项', tip: '默认的选中项' },
-      propType: {
-        type: 'arrayOf',
-        value: { type: 'oneOfType', value: ['string', 'number'] },
-      },
-    },
-    {
-      name: 'value',
-      title: { label: '当前选中项', tip: '当前选中项' },
-      propType: {
-        type: 'arrayOf',
-        value: { type: 'oneOfType', value: ['string', 'number'] },
-      },
-    },
-    {
-      name: 'options',
-      title: { label: '选项数据', tip: '可选项数据源' },
-      setter: 'JsonSetter',
-    },
-    {
-      name: 'allowClear',
-      title: { label: '支持清除', tip: '是否允许清除' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'autoFocus',
-      title: { label: '自动聚焦', tip: '自动获取焦点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'bordered',
-      title: { label: '显示边框', tip: '是否有边框' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'changeOnSelect',
-      title: {
-        label: '点选触发',
-        tip: '点选每级菜单选项值都会触发onChange',
-      },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'expandTrigger',
-      title: { label: '菜单触发方式', tip: '触发次级菜单的展开的方式' },
-      propType: { type: 'oneOf', value: ['click', 'hover'] },
-    },
-    {
-      name: 'notFoundContent',
-      title: { label: '无数据展示', tip: '无数据' },
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'placeholder',
-      title: { label: '输入框占位文本', tip: '输入框占位文本' },
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'placement',
-      title: { label: '浮层预设位置', tip: '浮层预设位置' },
-      propType: {
-        type: 'oneOf',
-        value: ['bottomLeft', 'bottomRight', 'topLeft', 'topRight'],
-      },
-      defaultValue: 'bottomLeft',
-    },
-    {
-      name: 'searchValue',
-      title: '设置搜索的值，需要与 showSearch 配合使用',
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'showSearch',
-      title: { label: '支持搜索', tip: '在选择框中显示搜索框' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'size',
-      title: { label: '尺寸', tip: '输入框大小' },
-      propType: { type: 'oneOf', value: ['large', 'middle', 'small'] },
-      setter: {
-        componentName: 'SelectSetter',
-        props: {
-          options: [
-            {
-              title: '大',
-              value: 'large',
-            },
-            {
-              title: '中',
-              value: 'middle',
-            },
-            {
-              title: '小',
-              value: 'small',
-            },
-          ],
+  docUrl: 'https://1x.antdv.com/components/cascader-cn/',
+  devMode: 'proCode',
+  configure: {
+    props: [
+      {
+        name: 'allowClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否支持清除',
+            'en-US': 'allowClear',
+          },
+          tip: '是否支持清除',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
       },
-      defaultValue: 'middle',
-    },
-    {
-      name: 'multiple',
-      title: { label: '多选', tip: '支持多选节点' },
-      propType: 'bool',
-      setter: 'BoolSetter',
-      defaultValue: false,
-    },
-    {
-      name: 'tagRender',
-      title: '自定义 tag 内容，多选时生效',
-      condition: (target: any) => {
-        return target.getProps().getPropValue('multiple') === true
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获取焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
-      setter: [
-        {
+      {
+        name: 'changeOnSelect',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '当此项为 true 时',
+            'en-US': 'changeOnSelect',
+          },
+          tip: '当此项为 true 时，点选每级菜单选项值都会发生变化，具体见上面的演示',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认的选中项',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认的选中项',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '禁用',
+            'en-US': 'disabled',
+          },
+          tip: '禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'displayRender',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '选择后展示的渲染函数',
+            'en-US': 'displayRender',
+          },
+          tip: '选择后展示的渲染函数,可使用 slot="displayRender" 和 slot-scope="{labels, selectedOptions}"',
+        },
+        setter: [
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'expandTrigger',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '次级菜单的展开方式',
+            'en-US': 'expandTrigger',
+          },
+          tip: "次级菜单的展开方式，可选 'click' 和 'hover'",
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'click',
+      },
+      {
+        name: 'fieldNames',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'fieldNames',
+            'en-US': 'fieldNames',
+          },
+          tip: '自定义 options 中 label name children 的字段',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单渲染父节点',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'loadData',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '用于动态加载选项',
+            'en-US': 'loadData',
+          },
+          tip: '用于动态加载选项，无法与 showSearch 一起使用',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'notFoundContent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '当下拉列表为空时显示的内容',
+            'en-US': 'notFoundContent',
+          },
+          tip: '当下拉列表为空时显示的内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'Not Found',
+      },
+      {
+        name: 'options',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '可选项数据源',
+            'en-US': 'options',
+          },
+          tip: '可选项数据源',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'placeholder',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框占位文本',
+            'en-US': 'placeholder',
+          },
+          tip: '输入框占位文本',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'popupClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义浮层类名',
+            'en-US': 'popupClassName',
+          },
+          tip: '自定义浮层类名',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'popupStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义浮层样式',
+            'en-US': 'popupStyle',
+          },
+          tip: '自定义浮层样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'popupPlacement',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '浮层预设位置',
+            'en-US': 'popupPlacement',
+          },
+          tip: '浮层预设位置：bottomLeft bottomRight topLeft topRight',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'bottomLeft',
+      },
+      {
+        name: 'popupVisible',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '控制浮层显隐',
+            'en-US': 'popupVisible',
+          },
+          tip: '控制浮层显隐',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'showSearch',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '在选择框中显示搜索框',
+            'en-US': 'showSearch',
+          },
+          tip: '在选择框中显示搜索框',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框大小',
+            'en-US': 'size',
+          },
+          tip: '输入框大小，可选 large default small',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'default',
+      },
+      {
+        name: 'suffixIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义的选择框后缀图标',
+            'en-US': 'suffixIcon',
+          },
+          tip: '自定义的选择框后缀图标',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定选中项',
+            'en-US': 'v-model',
+          },
+          tip: '指定选中项',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'render',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'render',
+            'en-US': 'render',
+          },
+          tip: '用于渲染 filter 后的选项,可使用 slot="showSearchRender" 和 slot-scope="{inputValue, path}"',
+        },
+        setter: {
           componentName: 'SlotSetter',
-          title: '展开行插槽',
           initialValue: {
             type: 'JSSlot',
-            params: ['value', 'label'],
             value: [],
           },
         },
-      ],
-    },
-    {
-      name: 'popupVisible',
-      title: '控制浮层显隐',
-      propType: 'bool',
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'onChange',
-      title: '选择完成回调',
-      propType: 'func',
-    },
-    {
-      name: 'onPopupVisibleChange',
-      title: { label: '显隐回调', tip: 'onPopupVisibleChange|显隐浮层的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onSearch',
-      title: { label: 'onSearch', tip: 'onSearch|监听搜索，返回输入的值' },
-      propType: 'func',
-    },
-  ],
-  configure: {
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
+          description: '选择完成后的回调',
           template:
-            "onChange(value,selectedOptions,${extParams}){\n//选择完成后回调\nconsole.log('onChange',value,selectedOptions);}",
+            "onChange(extParams) {\n  // 选择完成后的回调\n  console.log('onChange', extParams)\n}",
         },
         {
           name: 'onPopupVisibleChange',
+          description: '显示/隐藏浮层的回调',
           template:
-            "onPopupVisibleChange(value){\n//显示/隐藏浮层的回调\nconsole.log('onPopupVisibleChange',value);}",
+            "onPopupVisibleChange(extParams) {\n  // 显示/隐藏浮层的回调\n  console.log('onPopupVisibleChange', extParams)\n}",
         },
         {
           name: 'onSearch',
+          description: '输入框变化时的回调',
           template:
-            "onSearch(value){\n//监听搜索，返回输入的值\nconsole.log('onSearch',value);}",
+            "onSearch(extParams) {\n  // 输入框变化时的回调\n  console.log('onSearch', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
-  snippets: {
-    title: '级联选择框',
-    screenshot:
-      'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/cascader-1.png',
-    schema: {
-      componentName: 'ACascader',
-      props: {
-        options: [
-          {
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [
-              {
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [
-                  {
-                    value: 'xihu',
-                    label: 'West Lake',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [
-              {
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [
-                  {
-                    value: 'zhonghuamen',
-                    label: 'Zhong Hua Men',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-        placeholder: '请选择',
+  snippets: [
+    {
+      title: '级联选择',
+      screenshot: './screenshots/cascader.webp',
+      schema: {
+        componentName: 'ACascader',
+        props: {},
       },
     },
-  },
-}
+  ],
+} as IPublicTypeComponentMetadata
+
+export default meta

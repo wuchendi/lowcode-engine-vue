@@ -1,295 +1,542 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (tree-select); see https://1x.antdv.com/components/tree-select-cn/
+const meta = {
   componentName: 'ATreeSelect',
   title: '树型选择控件',
-  category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'ATreeSelect',
-  },
-  props: [
-    {
-      name: 'treeData',
-      title: { label: '数据源', tip: '数据源' },
-      setter: 'JsonSetter',
-    },
-    {
-      name: 'defaultValue',
-      title: { label: '默认值', tip: '默认选中值' },
-      propType: {
-        type: 'oneOfType',
-        value: ['string', { type: 'arrayOf', value: 'string' }],
-      },
-    },
-    {
-      name: 'value',
-      title: { label: '当前值', tip: '当前值' },
-      propType: {
-        type: 'oneOfType',
-        value: ['string', { type: 'arrayOf', value: 'string' }],
-      },
-    },
-    {
-      name: 'allowClear',
-      title: { label: '支持清除', tip: '是否允许清除' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'autoClearSearchValue',
-      title: {
-        label: '自动清空搜索',
-        tip: '当多选模式下值被选择，自动清空搜索框',
-      },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'bordered',
-      title: { label: '显示边框', tip: '是否显示边框' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'dropdownMatchSelectWidth',
-      title: {
-        label: '下拉列表同款',
-        tip: '下拉菜单和选择器同宽',
-      },
-      propType: 'bool',
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'filterTreeNode',
-      title: {
-        label: '筛选节点',
-        tip: '是否根据输入项进行筛选，默认用 treeNodeFilterProp 的值作为要筛选的 TreeNode 的属性值',
-      },
-      propType: {
-        type: 'oneOfType',
-        value: ['bool', 'func'],
-      },
-    },
-    {
-      name: 'labelInValue',
-      title: {
-        label: '值包含标签',
-        tip: '是否把每个选项的 label 包装到 value 中，会把 value 类型从 `string` 变为 {value: string, label: ReactNode, halfChecked(treeCheckStrictly 时有效): string[] } 的格式',
-      },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'listHeight',
-      title: { label: '设置弹窗滚动高度', tip: '设置弹窗滚动高度' },
-      propType: 'number',
-      setter: 'NumberSetter',
-    },
-    {
-      name: 'loadData',
-      title: { label: '异步加载数据', tip: '异步加载数据' },
-      propType: 'func',
-    },
-    {
-      name: 'maxTagCount',
-      title: { label: '最多显示多少个 tag', tip: '最多显示多少个 tag' },
-      propType: 'number',
-      setter: 'NumberSetter',
-    },
-    {
-      name: 'maxTagPlaceholder',
-      title: { label: '隐藏 tag 时显示的内容', tip: '隐藏 tag 时显示的内容' },
-      propType: { type: 'oneOfType', value: ['node', 'func'] },
-    },
-    {
-      name: 'multiple',
-      title: {
-        label: '支持多选',
-        tip: '支持多选（当设置 treeCheckable 时自动变为 true）',
-      },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'placeholder',
-      title: { label: '选择框默认文字', tip: '选择框默认文字' },
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'showCheckedStrategy',
-      title: {
-        label: '定义选中项回填的方式',
-        tip: '定义选中项回填的方式。`SHOW_ALL`: 显示所有选中节点(包括父节点)。`SHOW_PARENT`: 只显示父节点(当父节点下所有子节点都选中时)。 默认只显示子节点',
-      },
-      propType: {
-        type: 'oneOf',
-        value: ['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD'],
-      },
-    },
-    {
-      name: 'showSearch',
-      title: { label: '是否支持搜索框', tip: '是否支持搜索框' },
-      propType: 'bool',
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'size',
-      title: { label: '尺寸', tip: '选择框大小' },
-      propType: { type: 'oneOf', value: ['large', 'middle', 'small'] },
-      setter: {
-        componentName: 'SelectSetter',
-        props: {
-          options: [
-            {
-              title: '大',
-              value: 'large',
-            },
-            {
-              title: '中',
-              value: 'middle',
-            },
-            {
-              title: '小',
-              value: 'small',
-            },
-          ],
-        },
-      },
-      defaultValue: 'middle',
-    },
-    {
-      name: 'showArrow',
-      title: {
-        label: '下拉图标',
-        tip: '是否显示下拉图标，单选模式下默认 `true`',
-      },
-      propType: 'bool',
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'treeCheckable',
-      title: { label: '显示勾选框', tip: '显示勾选框' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'treeDefaultExpandAll',
-      title: { label: '默认展开所有树节点', tip: '默认展开所有树节点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'treeDefaultExpandedKeys',
-      title: { label: '默认展开的树节点', tip: '默认展开的树节点' },
-      propType: { type: 'arrayOf', value: 'string' },
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'StringSetter',
-          },
-        },
-      },
-    },
-    {
-      name: 'treeExpandedKeys',
-      title: { label: '设置展开的树节点', tip: '设置展开的树节点' },
-      propType: { type: 'arrayOf', value: 'string' },
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'StringSetter',
-          },
-        },
-      },
-    },
-    {
-      name: 'virtual',
-      title: {
-        label: '设置 false 时关闭虚拟滚动',
-        tip: '设置 false 时关闭虚拟滚动',
-      },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/tree-select-cn/',
+  devMode: 'proCode',
   configure: {
-    supports: {
-      style: true,
-    },
-    events: [
+    props: [
       {
-        name: 'onChange',
-        template:
-          "onChange(value,label,extra,${extParams}){\n// 选中树节点时调用此函数\nconsole.log('onChange',value,label,extra);}",
+        name: 'allowClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '显示清除按钮',
+            'en-US': 'allowClear',
+          },
+          tip: '显示清除按钮',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'onSearch',
-        template:
-          "onSearch(value,${extParams}){\n// 文本框值变化时回调\nconsole.log('onSearch',value);}",
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定默认选中的条目',
+            'en-US': 'defaultValue',
+          },
+          tip: '指定默认选中的条目',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
-        name: 'onSelect',
-        template:
-          "onSelect(value,node,extra,${extParams}){\n// 被选中时调用\nconsole.log('onSelect',value,node,extra);}",
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'onTreeExpand',
-        template:
-          "onTreeExpand(expandedKeys,${extParams}){\n// 展示节点时调用\nconsole.log('onTreeExpand',expandedKeys);}",
+        name: 'dropdownClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'dropdownClassName',
+            'en-US': 'dropdownClassName',
+          },
+          tip: '下拉菜单的 className 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'dropdownMatchSelectWidth',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '下拉菜单和选择器同宽',
+            'en-US': 'dropdownMatchSelectWidth',
+          },
+          tip: '下拉菜单和选择器同宽',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'dropdownStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '下拉菜单的样式',
+            'en-US': 'dropdownStyle',
+          },
+          tip: '下拉菜单的样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'filterTreeNode',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否根据输入项进行筛选',
+            'en-US': 'filterTreeNode',
+          },
+          tip: '是否根据输入项进行筛选，默认用 treeNodeFilterProp 的值作为要筛选的 TreeNode 的属性值',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'Function',
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单渲染父节点',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'labelInValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'labelInValue',
+            'en-US': 'labelInValue',
+          },
+          tip: '是否把每个选项的 label 包装到 value 中，会把 value 类型从 string 变为 {value: string, label: VNode, halfChecked(treeCheckStrictly 时有效): string[] } 的格式',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'loadData',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '异步加载数据',
+            'en-US': 'loadData',
+          },
+          tip: '异步加载数据',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'maxTagCount',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '最多显示多少个 tag',
+            'en-US': 'maxTagCount',
+          },
+          tip: '最多显示多少个 tag',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'maxTagPlaceholder',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '隐藏 tag 时显示的内容',
+            'en-US': 'maxTagPlaceholder',
+          },
+          tip: '隐藏 tag 时显示的内容',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'multiple',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '支持多选',
+            'en-US': 'multiple',
+          },
+          tip: '支持多选（当设置 treeCheckable 时自动变为 true）',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'placeholder',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '选择框默认文字',
+            'en-US': 'placeholder',
+          },
+          tip: '选择框默认文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'searchPlaceholder',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '搜索框默认文字',
+            'en-US': 'searchPlaceholder',
+          },
+          tip: '搜索框默认文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'searchValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '搜索框的值',
+            'en-US': 'searchValue',
+          },
+          tip: '搜索框的值，可以通过 search 事件获取用户输入',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'treeIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'treeIcon',
+            'en-US': 'treeIcon',
+          },
+          tip: '是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'showCheckedStrategy',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '定义选中项回填的方式',
+            'en-US': 'showCheckedStrategy',
+          },
+          tip: '定义选中项回填的方式。TreeSelect.SHOW_ALL: 显示所有选中节点(包括父节点). TreeSelect.SHOW_PARENT: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点.',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+        defaultValue: 'TreeSelect.SHOW_CHILD',
+      },
+      {
+        name: 'showSearch',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '在下拉中显示搜索框',
+            'en-US': 'showSearch',
+          },
+          tip: '在下拉中显示搜索框(仅在单选模式下生效)',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '选择框大小',
+            'en-US': 'size',
+          },
+          tip: '选择框大小，可选 large small',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'default',
+      },
+      {
+        name: 'suffixIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义的选择框后缀图标',
+            'en-US': 'suffixIcon',
+          },
+          tip: '自定义的选择框后缀图标',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'treeCheckable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '显示 checkbox',
+            'en-US': 'treeCheckable',
+          },
+          tip: '显示 checkbox',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'treeCheckStrictly',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'treeCheckStrictly',
+            'en-US': 'treeCheckStrictly',
+          },
+          tip: 'checkable 状态下节点选择完全受控（父子节点选中状态不再关联），会使得 labelInValue 强制为 true',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'treeData',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'treeNodes 数据',
+            'en-US': 'treeData',
+          },
+          tip: 'treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（value 在整个树范围内唯一）',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'replaceFields',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'replaceFields',
+            'en-US': 'replaceFields',
+          },
+          tip: '替换 treeNode 中 title,value,key,children 字段为 treeData 中对应的字段',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'treeDataSimpleMode',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'treeDataSimpleMode',
+            'en-US': 'treeDataSimpleMode',
+          },
+          tip: '使用简单格式的 treeData，具体设置参考可设置的类型 (此时 treeData 应变为这样的数据结构: [{id:1, pId:0, value:\'1\', label:"test1",...},...], pId 是父节点的 id)',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+        defaultValue: 'false',
+      },
+      {
+        name: 'treeDefaultExpandAll',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认展开所有树节点',
+            'en-US': 'treeDefaultExpandAll',
+          },
+          tip: '默认展开所有树节点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'treeDefaultExpandedKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认展开的树节点',
+            'en-US': 'treeDefaultExpandedKeys',
+          },
+          tip: '默认展开的树节点',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'treeExpandedKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置展开的树节点',
+            'en-US': 'treeExpandedKeys',
+          },
+          tip: '设置展开的树节点',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'treeNodeFilterProp',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'treeNodeFilterProp',
+            'en-US': 'treeNodeFilterProp',
+          },
+          tip: '输入项过滤对应的 treeNode 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'value',
+      },
+      {
+        name: 'treeNodeLabelProp',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '作为显示的 prop 设置',
+            'en-US': 'treeNodeLabelProp',
+          },
+          tip: '作为显示的 prop 设置',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'title',
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定当前选中的条目',
+            'en-US': 'v-model',
+          },
+          tip: '指定当前选中的条目',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
       },
     ],
+    supports: {
+      style: true,
+      className: true,
+      events: [
+        {
+          name: 'onChange',
+          description: '选中树节点时调用此函数',
+          template:
+            "onChange(extParams) {\n  // 选中树节点时调用此函数\n  console.log('onChange', extParams)\n}",
+        },
+        {
+          name: 'onSearch',
+          description: '文本框值变化时回调',
+          template:
+            "onSearch(extParams) {\n  // 文本框值变化时回调\n  console.log('onSearch', extParams)\n}",
+        },
+        {
+          name: 'onSelect',
+          description: '被选中时调用',
+          template:
+            "onSelect(extParams) {\n  // 被选中时调用\n  console.log('onSelect', extParams)\n}",
+        },
+        {
+          name: 'onTreeExpand',
+          description: '展开节点时调用',
+          template:
+            "onTreeExpand(extParams) {\n  // 展开节点时调用\n  console.log('onTreeExpand', extParams)\n}",
+        },
+      ],
+      loop: true,
+      condition: true,
+    },
+    component: {},
   },
   snippets: [
     {
       title: '树型选择控件',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/tree-select-1.png',
+      screenshot: './screenshots/tree-select.webp',
       schema: {
         componentName: 'ATreeSelect',
-        props: {
-          treeData: [
-            {
-              title: 'parent 0',
-              value: '0-0',
-              children: [
-                { title: 'leaf 0-0', value: '0-0-0', isLeaf: true },
-                { title: 'leaf 0-1', value: '0-0-1', isLeaf: true },
-              ],
-            },
-            {
-              title: 'parent 1',
-              value: '0-1',
-              children: [
-                { title: 'leaf 1-0', value: '0-1-0', isLeaf: true },
-                { title: 'leaf 1-1', value: '0-1-1', isLeaf: true },
-              ],
-            },
-          ],
-          treeDefaultExpandAll: true,
-          placeholder: '请选择',
-          style: {
-            width: '300px',
-          },
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

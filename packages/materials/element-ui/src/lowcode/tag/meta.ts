@@ -1,84 +1,115 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the element-ui docs (tag); see https://element.eleme.cn/#/zh-CN/component/tag
+const meta = {
+  componentName: 'ElTag',
   title: '标签',
   group: 'Element 组件',
-  category: 'Data',
-  priority: 1003,
+  category: '数据展示',
   docUrl: 'https://element.eleme.cn/#/zh-CN/component/tag',
-  componentName: 'ElTag',
-
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'children',
-        title: '文本',
-        setter: 'StringSetter',
-      },
-      {
         name: 'type',
-        title: '类型',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '类型',
+            'en-US': 'type',
+          },
+          tip: '类型',
+        },
         setter: {
-          componentName: 'SelectSetter',
+          componentName: 'RadioGroupSetter',
           props: {
             options: [
               {
-                title: '默认标签',
-                value: 'default',
-              },
-              {
-                title: '成功标签',
+                title: 'success',
                 value: 'success',
               },
               {
-                title: '警告标签',
+                title: 'info',
+                value: 'info',
+              },
+              {
+                title: 'warning',
                 value: 'warning',
               },
               {
-                title: '危险标签',
+                title: 'danger',
                 value: 'danger',
-              },
-              {
-                title: '信息标签',
-                value: 'info',
               },
             ],
           },
-          initialValue: 'default',
         },
+        supportVariable: true,
       },
       {
         name: 'closable',
-        title: '可关闭',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否可关闭',
+            'en-US': 'closable',
+          },
+          tip: '是否可关闭',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'disable-transitions',
-        title: '禁用渐变动画',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
+        name: 'disableTransitions',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用渐变动画',
+            'en-US': 'disableTransitions',
+          },
+          tip: '是否禁用渐变动画',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'hit',
-        title: '边框描边',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否有边框描边',
+            'en-US': 'hit',
+          },
+          tip: '是否有边框描边',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'color',
-        title: '背景色',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '背景色',
+            'en-US': 'color',
+          },
+          tip: '背景色',
+        },
         setter: 'ColorSetter',
+        supportVariable: true,
       },
       {
         name: 'size',
-        title: '尺寸',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '尺寸',
+            'en-US': 'size',
+          },
+          tip: '尺寸',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -97,12 +128,19 @@ const meta: IPublicTypeComponentMetadata = {
               },
             ],
           },
-          initialValue: '',
         },
+        supportVariable: true,
       },
       {
         name: 'effect',
-        title: '主题',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '主题',
+            'en-US': 'effect',
+          },
+          tip: '主题',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -121,58 +159,44 @@ const meta: IPublicTypeComponentMetadata = {
               },
             ],
           },
-          initialValue: 'light',
         },
+        supportVariable: true,
+        defaultValue: 'light',
       },
-      // {
-      //   name: 'click',
-      //   title: '点击 Tag 时触发的事件',
-      //   propType: 'func',
-      // },
-      // {
-      //   name: 'close',
-      //   title: '关闭 Tag 时触发的事件',
-      //   propType: 'func',
-      // },
     ],
     supports: {
+      style: true,
+      className: true,
       events: [
         {
           name: 'onClick',
           description: '点击 Tag 时触发的事件',
           template:
-            'onClick(${extParams}){\n//点击 Tag 时触发的事件\nconsole.log("onClick");\n}\n',
+            "onClick(extParams) {\n  // 点击 Tag 时触发的事件\n  console.log('onClick', extParams)\n}",
         },
         {
           name: 'onClose',
           description: '关闭 Tag 时触发的事件',
           template:
-            'onClose(${extParams}){\n//关闭 Tag 时触发的事件 \nconsole.log("onClose");\n}\n',
+            "onClose(extParams) {\n  // 关闭 Tag 时触发的事件\n  console.log('onClose', extParams)\n}",
         },
       ],
-      style: true,
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      screenshot:
-        'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_tag.png',
       title: '标签',
+      screenshot: './screenshots/tag.webp',
       schema: {
         componentName: 'ElTag',
-        props: {
-          children: '标签',
-          type: 'default',
-          closable: false,
-          'disable-transitions': false,
-          hit: false,
-          color: '',
-          size: '',
-          close: false,
-        },
+        props: {},
+        children: '标签',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

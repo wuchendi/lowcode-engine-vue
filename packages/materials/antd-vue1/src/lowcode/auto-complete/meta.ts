@@ -1,151 +1,81 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
-import snippets from './snippets'
 
-const meta: IPublicTypeComponentMetadata = {
-  title: '辅助提示输入框',
-  group: 'Antd 组件',
-  category: '表单',
-  docUrl: 'https://1x.antdv.com/components/auto-complete-cn/',
+// Generated from the ant-design-vue docs (auto-complete); see https://1x.antdv.com/components/auto-complete-cn/
+const meta = {
   componentName: 'AAutoComplete',
-
-  // npm: {
-  //   destructuring: true,
-  //   componentName: 'AAutoComplete',
-  // },
+  title: '自动完成',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/auto-complete-cn/',
+  devMode: 'proCode',
   configure: {
     props: [
-      {
-        name: 'defaultValue',
-        title: {
-          label: {
-            type: 'i18n',
-            zh_CN: '默认值',
-            en_US: 'Default Value',
-          },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: defaultValue | 说明: 默认值',
-            en_US: 'prop: defaultValue | description: defaultValue',
-          },
-        },
-        setter: 'StringSetter',
-        supportVariable: true,
-      },
-      {
-        name: 'value',
-        title: {
-          label: {
-            type: 'i18n',
-            zh_CN: '当前值',
-            en_US: 'Value',
-          },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: Value | 说明: 当前值',
-            en_US: 'prop: Value | description: Value',
-          },
-        },
-        setter: 'StringSetter',
-        supportVariable: true,
-      },
       {
         name: 'allowClear',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '支持清除',
-            en_US: 'Allow Clear',
+            'zh-CN': '支持清除',
+            'en-US': 'allowClear',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: allowClear | 说明：是否允许清除',
-            en_US: 'prop: allowClear | description: Allow Clear',
-          },
+          tip: '支持清除, 单选模式有效',
         },
         setter: 'BoolSetter',
         supportVariable: true,
-      },
-      {
-        name: 'dataSource',
-        title: {
-          label: {
-            type: 'i18n',
-            zh_CN: '选项内容',
-            en_US: 'Options',
-          },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: options | 说明：选项列表',
-            en_US: 'prop: options | description: Options',
-          },
-        },
-        setter: {
-          componentName: 'ArraySetter',
-          props: {
-            itemSetter: {
-              componentName: 'ObjectSetter',
-              props: {
-                config: {
-                  items: [
-                    {
-                      name: 'text',
-                      title: '选项名',
-                      setter: 'StringSetter',
-                      isRequired: true,
-                    },
-                    {
-                      name: 'value',
-                      title: '选项值',
-                      setter: 'StringSetter',
-                      isRequired: true,
-                    },
-                  ],
-                },
-              },
-              initialValue: () => {
-                return {
-                  text: '选项名' + String(Math.floor(Math.random() * 10000)),
-                  value: '请选择' + String(Math.floor(Math.random() * 10000)),
-                }
-              },
-            },
-          },
-        },
+        defaultValue: false,
       },
       {
         name: 'autoFocus',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '自动聚焦',
-            en_US: 'Auto Focus',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: autoFocus | 说明：自动获取焦点',
-            en_US: 'prop: autoFocus | description: Auto Focus',
-          },
+          tip: '自动获取焦点',
         },
         setter: 'BoolSetter',
         supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'backfill',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '键盘选中回填',
-            en_US: 'Backfill',
+            'zh-CN': 'backfill',
+            'en-US': 'backfill',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN:
-              '属性: backfill | 说明：使用键盘选择选项的时候把选中项回填到输入框中',
-            en_US:
-              'prop: backfill | description: When using the keyboard to onSelect options, backfill the onSelected items into the input box',
-          },
+          tip: '使用键盘选择选项的时候把选中项回填到输入框中',
         },
         setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'dataSource',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动完成的数据源',
+            'en-US': 'dataSource',
+          },
+          tip: '自动完成的数据源',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'dropdownMenuStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'dropdownMenuStyle',
+            'en-US': 'dropdownMenuStyle',
+          },
+          tip: 'dropdown 菜单自定义样式',
+        },
+        setter: 'JsonSetter',
         supportVariable: true,
       },
       {
@@ -153,19 +83,33 @@ const meta: IPublicTypeComponentMetadata = {
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '默认高亮首个选项',
-            en_US: 'Default Active First Option',
+            'zh-CN': '是否默认高亮第一个选项',
+            'en-US': 'defaultActiveFirstOption',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN:
-              '属性: defaultActiveFirstOption | 说明：是否默认高亮第一个选项',
-            en_US:
-              'prop: defaultActiveFirstOption | description: Whether to highlight the first option by default',
-          },
+          tip: '是否默认高亮第一个选项。',
         },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: true,
+      },
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定默认选中的条目',
+            'en-US': 'defaultValue',
+          },
+          tip: '指定默认选中的条目',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
         supportVariable: true,
       },
       {
@@ -173,134 +117,180 @@ const meta: IPublicTypeComponentMetadata = {
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '是否禁用',
-            en_US: 'Disabled',
+            'zh-CN': '是否禁用',
+            'en-US': 'disabled',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: disabled | 说明：是否为禁用状态',
-            en_US: 'prop: disabled | description: Disable',
-          },
+          tip: '是否禁用',
         },
         setter: 'BoolSetter',
         supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'filterOption',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '可选项筛选',
-            en_US: 'Filter Option',
+            'zh-CN': '是否根据输入项进行筛选',
+            'en-US': 'filterOption',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: filterOption | 说明：是否根据输入项进行筛选',
-            en_US: 'prop: filterOption | description: Filter based on input',
-          },
+          tip: '是否根据输入项进行筛选。当其为一个函数时，会接收 inputValue option 两个参数，当 option 符合筛选条件时，应返回 true，反之则返回 false。',
         },
-        setter: 'BoolSetter',
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
         supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'optionLabelProp',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'optionLabelProp',
+            'en-US': 'optionLabelProp',
+          },
+          tip: '回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 value。',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'children',
       },
       {
         name: 'placeholder',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '输入框提示',
-            en_US: 'Placeholder',
+            'zh-CN': '输入框提示',
+            'en-US': 'placeholder',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: placeholder | 说明: 输入框提示',
-            en_US: 'prop: placeholder | description: Placeholder',
-          },
+          tip: '输入框提示',
         },
         setter: 'StringSetter',
         supportVariable: true,
       },
       {
-        name: 'defaultOpen',
-        // propType: 'bool',
+        name: 'v-model',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '默认展开菜单',
-            en_US: 'Default Open',
+            'zh-CN': '指定当前选中的条目',
+            'en-US': 'v-model',
           },
-          tip: {
+          tip: '指定当前选中的条目',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'defaultOpen',
+        title: {
+          label: {
             type: 'i18n',
-            zh_CN: '属性: defaultOpen | 说明：是否默认展开下拉菜单',
-            en_US:
-              'prop: defaultOpen | description: Expand drop-down menu by default',
+            'zh-CN': '是否默认展开下拉菜单',
+            'en-US': 'defaultOpen',
           },
+          tip: '是否默认展开下拉菜单',
         },
         setter: 'BoolSetter',
         supportVariable: true,
       },
       {
-        name: 'notFoundContent',
+        name: 'open',
         title: {
           label: {
             type: 'i18n',
-            zh_CN: '无数据展示',
-            en_US: 'Not Found Content',
+            'zh-CN': '是否展开下拉菜单',
+            'en-US': 'open',
           },
-          tip: {
-            type: 'i18n',
-            zh_CN: '属性: notFoundContent | 说明: 当下拉列表为空时显示的内容',
-            en_US:
-              'prop: notFoundContent | description: Content displayed when the drop-down list is empty',
-          },
+          tip: '是否展开下拉菜单',
         },
-        setter: 'StringSetter',
+        setter: 'BoolSetter',
         supportVariable: true,
       },
     ],
     supports: {
       style: true,
-      loop: false,
+      className: true,
       events: [
+        {
+          name: 'onChange',
+          description: '选中 option，或 input 的 value 变化时，调用此函数',
+          template:
+            "onChange(extParams) {\n  // 选中 option，或 input 的 value 变化时，调用此函数\n  console.log('onChange', extParams)\n}",
+        },
         {
           name: 'onBlur',
           description: '失去焦点时的回调',
           template:
-            "onBlur(${extParams}){\n// 失去焦点时的回调\nconsole.log('onBlur');}",
-        },
-        {
-          name: 'onChange',
-          description: '选中或值变化时调用该函数',
-          template:
-            "onChange(value){\n//选中 option，或 input 的 value 变化时，调用此函数\nconsole.log('onChange',value);}",
-        },
-        {
-          name: 'onDropdownVisibleChange',
-          description: '展开下拉菜单的回调',
-          template:
-            "onDropdownVisibleChange(open){\nconsole.log('onDropdownVisibleChange',open);}",
+            "onBlur(extParams) {\n  // 失去焦点时的回调\n  console.log('onBlur', extParams)\n}",
         },
         {
           name: 'onFocus',
           description: '获得焦点时的回调',
           template:
-            "onFocus(${extParams}){\n// 获得焦点时的回调\nconsole.log('onFocus');}",
+            "onFocus(extParams) {\n  // 获得焦点时的回调\n  console.log('onFocus', extParams)\n}",
         },
         {
           name: 'onSearch',
           description: '搜索补全项的时候调用',
           template:
-            "onSearch(value){\n// 搜索补全项的时候调用\nconsole.log('onSearch',value);}",
+            "onSearch(extParams) {\n  // 搜索补全项的时候调用\n  console.log('onSearch', extParams)\n}",
         },
         {
           name: 'onSelect',
-          description: '选中时调用，参数为选中项的值',
+          description: '被选中时调用，参数为选中项的 value 值',
           template:
-            "onSelect(value,option){\n//被选中时调用，参数为选中项的 value 值\nconsole.log('onSelect',value,option);}",
+            "onSelect(extParams) {\n  // 被选中时调用，参数为选中项的 value 值\n  console.log('onSelect', extParams)\n}",
+        },
+        {
+          name: 'onDropdownVisibleChange',
+          description: '展开下拉菜单的回调',
+          template:
+            "onDropdownVisibleChange(extParams) {\n  // 展开下拉菜单的回调\n  console.log('onDropdownVisibleChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
-  snippets,
-}
+  snippets: [
+    {
+      title: '自动完成',
+      screenshot: './screenshots/auto-complete.webp',
+      schema: {
+        componentName: 'AAutoComplete',
+        props: {
+          style: {
+            width: '200px',
+          },
+          options: [
+            {
+              value: 'a',
+              label: '选项一',
+            },
+            {
+              value: 'b',
+              label: '选项二',
+            },
+          ],
+        },
+      },
+    },
+  ],
+} as IPublicTypeComponentMetadata
 
 export default meta

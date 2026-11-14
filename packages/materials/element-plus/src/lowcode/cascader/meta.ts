@@ -1,34 +1,72 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
-  title: '级联选择器',
-  group: 'Element-plus',
-  category: 'Form',
-  priority: 996,
-  docUrl: 'https://element-plus.org/zh-CN/component/cascader.html',
+// Generated from the element-plus docs (cascader); see https://element-plus.org/zh-CN/component/cascader.html
+const meta = {
   componentName: 'ElCascader',
+  title: '级联选择器',
+  group: 'Element 组件',
+  category: '表单组件',
+  docUrl: 'https://element-plus.org/zh-CN/component/cascader.html',
+  devMode: 'proCode',
   configure: {
     props: [
       {
         name: 'v-model',
         title: {
-          label: '绑定值',
+          label: {
+            type: 'i18n',
+            'zh-CN': '选中项绑定值',
+            'en-US': 'v-model',
+          },
           tip: '选中项绑定值',
         },
-        setter: 'JsonSetter',
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
         name: 'options',
         title: {
-          label: '可选项数据源',
-          tip: '可选项数据源',
+          label: {
+            type: 'i18n',
+            'zh-CN': '选项的数据源',
+            'en-US': 'options',
+          },
+          tip: '选项的数据源， value 和 label 可以通过 CascaderProps 自定义.',
         },
         setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'props',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '配置选项',
+            'en-US': 'props',
+          },
+          tip: '配置选项, 请参阅下面 CascaderProps 表。',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
       },
       {
         name: 'size',
         title: {
-          label: '尺寸',
+          label: {
+            type: 'i18n',
+            'zh-CN': '尺寸',
+            'en-US': 'size',
+          },
           tip: '尺寸',
         },
         setter: {
@@ -36,439 +74,796 @@ const meta: IPublicTypeComponentMetadata = {
           props: {
             options: [
               {
-                title: 'medium',
-                value: 'medium',
+                title: 'large',
+                value: 'large',
+              },
+              {
+                title: 'default',
+                value: 'default',
               },
               {
                 title: 'small',
                 value: 'small',
               },
-              {
-                title: 'mini',
-                value: 'mini',
-              },
             ],
           },
-          initialValue: '',
         },
+        supportVariable: true,
       },
       {
         name: 'placeholder',
         title: {
-          label: '占位文本',
-          tip: '占位文本',
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框占位文本',
+            'en-US': 'placeholder',
+          },
+          tip: '输入框占位文本',
         },
-        setter: {
-          componentName: 'StringSetter',
-          initialValue: '请选择',
-        },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'disabled',
         title: {
-          label: '禁用',
-          tip: '禁用',
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用',
         },
-        description: '禁用',
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
+        setter: 'BoolSetter',
+        supportVariable: true,
       },
       {
         name: 'clearable',
         title: {
-          label: '支持清空',
-          tip: '支持清空选项',
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否支持清空选项',
+            'en-US': 'clearable',
+          },
+          tip: '是否支持清空选项',
         },
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
+        setter: 'BoolSetter',
+        supportVariable: true,
       },
       {
-        name: 'show-all-levels',
+        name: 'clearIcon',
         title: {
-          label: '显示完整路径',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'clearIcon',
+            'en-US': 'clearIcon',
+          },
+          tip: 'custom clear icon component',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'CircleClose',
+      },
+      {
+        name: 'showAllLevels',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'showAllLevels',
+            'en-US': 'showAllLevels',
+          },
           tip: '输入框中是否显示选中值的完整路径',
         },
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: true,
-        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
       },
       {
-        name: 'collapse-tags',
+        name: 'collapseTags',
         title: {
-          label: '折叠标签',
-          tip: '多选模式折叠标签',
+          label: {
+            type: 'i18n',
+            'zh-CN': '多选模式下是否折叠Tag',
+            'en-US': 'collapseTags',
+          },
+          tip: '多选模式下是否折叠Tag',
         },
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'collapseTagsTooltip',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '当鼠标悬停于折叠标签的文本时',
+            'en-US': 'collapseTagsTooltip',
+          },
+          tip: '当鼠标悬停于折叠标签的文本时，是否显示所有选中的标签。要使用此属性，collapse-tags属性必须设定为 true',
         },
-        condition(target) {
-          return !!target.getProps().getPropValue('props.multiple')
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'maxCollapseTagsTooltipHeight',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'maxCollapseTagsTooltipHeight',
+            'en-US': 'maxCollapseTagsTooltipHeight',
+          },
+          tip: 'max height of collapse-tags tooltip.',
         },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
         name: 'separator',
         title: {
-          label: '选项分隔符',
-          tip: '选项分隔符',
+          label: {
+            type: 'i18n',
+            'zh-CN': '用于分隔选项的字符',
+            'en-US': 'separator',
+          },
+          tip: '用于分隔选项的字符',
         },
-        setter: {
-          componentName: 'StringSetter',
-          initialValue: '/',
-        },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'filterable',
-        description: '',
         title: {
-          label: '选项可搜索',
-          tip: '是否可搜索选项',
+          label: {
+            type: 'i18n',
+            'zh-CN': '该选项是否可以被搜索',
+            'en-US': 'filterable',
+          },
+          tip: '该选项是否可以被搜索',
         },
-        setter: {
-          componentName: 'BoolSetter',
-          initialValue: false,
-        },
+        setter: 'BoolSetter',
+        supportVariable: true,
       },
       {
         name: 'filterMethod',
         title: {
-          label: '自定义搜索',
-          tip: '自定义搜索逻辑，第一个参数是节点 node，第二个参数是搜索关键词 keyword，通过返回布尔值表示是否命中',
-        },
-        setter: {
-          componentName: 'FunctionSetter',
-          props: {
-            template:
-              'function filterMethod(node, keyword ,${extParams}) {\n  return node.label.includes(keyword);\n}\n',
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义搜索逻辑',
+            'en-US': 'filterMethod',
           },
+          tip: '自定义搜索逻辑，第一个参数是node，第二个参数是keyword，返回的布尔值表示是否保留该选项',
         },
-        condition(target) {
-          return !!target.getProps().getPropValue('filterable')
-        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
         name: 'debounce',
         title: {
-          label: '防抖延迟',
-          tip: '搜索关键词输入的防抖延迟，毫秒',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'debounce',
+            'en-US': 'debounce',
+          },
+          tip: '搜索关键词正在输入时的去抖延迟，单位为毫秒',
         },
         setter: 'NumberSetter',
-        condition(target) {
-          return !!target.getProps().getPropValue('filterable')
-        },
+        supportVariable: true,
+        defaultValue: 300,
       },
       {
         name: 'beforeFilter',
         title: {
-          label: '筛选前的钩子',
-          tip: '筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选',
+          label: {
+            type: 'i18n',
+            'zh-CN': '过滤函数调用前',
+            'en-US': 'beforeFilter',
+          },
+          tip: '过滤函数调用前，所要调用的钩子函数，该函数接收要过滤的值作为参数。如果该函数的返回值是 false 或者是一个被拒绝的 Promise，那么接下来的过滤逻辑便不会执行。',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'popperClass',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'popperClass',
+            'en-US': 'popperClass',
+          },
+          tip: 'Cascader 下拉菜单和标签提示的自定义类名',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'popperStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'popperStyle',
+            'en-US': 'popperStyle',
+          },
+          tip: 'Cascader 下拉菜单和标签提示的自定义样式',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'teleported',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'teleported',
+            'en-US': 'teleported',
+          },
+          tip: '弹层是否使用 teleport',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'effect',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'effect',
+            'en-US': 'effect',
+          },
+          tip: 'tooltip theme, built-in theme: dark / light',
         },
         setter: {
-          componentName: 'FunctionSetter',
+          componentName: 'RadioGroupSetter',
           props: {
-            template:
-              'function beforeFilter(value, ${extParams}) {\n  return true;\n}\n',
+            options: [
+              {
+                title: 'dark',
+                value: 'dark',
+              },
+              {
+                title: 'light',
+                value: 'light',
+              },
+            ],
           },
         },
-        condition(target) {
-          return !!target.getProps().getPropValue('filterable')
-        },
+        supportVariable: true,
+        defaultValue: 'light',
       },
       {
-        name: 'popper-class',
+        name: 'tagType',
         title: {
-          label: '浮层类名',
-          tip: '自定义浮层类名',
+          label: {
+            type: 'i18n',
+            'zh-CN': '标签类型',
+            'en-US': 'tagType',
+          },
+          tip: '标签类型',
         },
         setter: {
-          componentName: 'StringSetter',
-          initialValue: '',
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'success',
+                value: 'success',
+              },
+              {
+                title: 'info',
+                value: 'info',
+              },
+              {
+                title: 'warning',
+                value: 'warning',
+              },
+              {
+                title: 'danger',
+                value: 'danger',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'info',
+      },
+      {
+        name: 'tagEffect',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tagEffect',
+            'en-US': 'tagEffect',
+          },
+          tip: 'tag effect',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'light',
+                value: 'light',
+              },
+              {
+                title: 'dark',
+                value: 'dark',
+              },
+              {
+                title: 'plain',
+                value: 'plain',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'light',
+      },
+      {
+        name: 'validateEvent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入时是否触发表单的校验',
+            'en-US': 'validateEvent',
+          },
+          tip: '输入时是否触发表单的校验',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'maxCollapseTags',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'maxCollapseTags',
+            'en-US': 'maxCollapseTags',
+          },
+          tip: 'The max tags number to be shown. To use this, collapse-tags must be true',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 1,
+      },
+      {
+        name: 'emptyValues',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'emptyValues',
+            'en-US': 'emptyValues',
+          },
+          tip: 'empty values of component, see config-provider',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'valueOnClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'valueOnClear',
+            'en-US': 'valueOnClear',
+          },
+          tip: 'clear return value, see config-provider',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'persistent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'persistent',
+            'en-US': 'persistent',
+          },
+          tip: 'when dropdown is inactive and persistent is false, dropdown will be destroyed',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'fallbackPlacements',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'fallbackPlacements',
+            'en-US': 'fallbackPlacements',
+          },
+          tip: 'list of possible positions for Tooltip popper.js',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'placement',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'placement',
+            'en-US': 'placement',
+          },
+          tip: 'position of dropdown',
+        },
+        setter: {
+          componentName: 'SelectSetter',
+          props: {
+            options: [
+              {
+                title: 'top',
+                value: 'top',
+              },
+              {
+                title: 'top-start',
+                value: 'top-start',
+              },
+              {
+                title: 'top-end',
+                value: 'top-end',
+              },
+              {
+                title: 'bottom',
+                value: 'bottom',
+              },
+              {
+                title: 'bottom-start',
+                value: 'bottom-start',
+              },
+              {
+                title: 'bottom-end',
+                value: 'bottom-end',
+              },
+              {
+                title: 'left',
+                value: 'left',
+              },
+              {
+                title: 'left-start',
+                value: 'left-start',
+              },
+              {
+                title: 'left-end',
+                value: 'left-end',
+              },
+              {
+                title: 'right',
+                value: 'right',
+              },
+              {
+                title: 'right-start',
+                value: 'right-start',
+              },
+              {
+                title: 'right-end',
+                value: 'right-end',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'bottom-start',
+      },
+      {
+        name: 'showCheckedStrategy',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'showCheckedStrategy',
+            'en-US': 'showCheckedStrategy',
+          },
+          tip: 'strategy for displaying checked nodes in multiple selection mode. Use parent when you want things tidy. Use child when every single item matters',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'parent',
+                value: 'parent',
+              },
+              {
+                title: 'child',
+                value: 'child',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'child',
+      },
+      {
+        name: 'virtualScroll',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'virtualScroll',
+            'en-US': 'virtualScroll',
+          },
+          tip: 'whether to enable virtual scrolling for large data',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'fitInputWidth',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'fitInputWidth',
+            'en-US': 'fitInputWidth',
+          },
+          tip: 'whether the width of the suggestion panel is the same as the input, if the value is number, then the width is fixed',
+        },
+        setter: [
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'itemSize',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'itemSize',
+            'en-US': 'itemSize',
+          },
+          tip: 'node height for virtual scrolling (px)',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 34,
+      },
+      {
+        name: 'height',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'height',
+            'en-US': 'height',
+          },
+          tip: 'menu height for virtual scrolling (px)',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 204,
+      },
+      {
+        name: 'empty',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '无匹配选项时的内容',
+            'en-US': 'empty',
+          },
+          tip: '无匹配选项时的内容',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
         },
       },
       {
-        display: 'accordion',
-        name: 'props',
-        title: '配置选项',
+        name: 'prefix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'prefix',
+            'en-US': 'prefix',
+          },
+          tip: 'content as Input prefix',
+        },
         setter: {
-          componentName: 'ObjectSetter',
-          props: {
-            config: {
-              items: [
-                {
-                  name: 'expandTrigger',
-                  title: {
-                    label: '菜单展开方式',
-                    tip: '次级菜单展开方式',
-                  },
-                  setter: {
-                    componentName: 'RadioGroupSetter',
-                    props: {
-                      options: [
-                        {
-                          title: 'click',
-                          value: 'click',
-                        },
-                        {
-                          title: 'hover',
-                          value: 'hover',
-                        },
-                      ],
-                    },
-                    initialValue: 'click',
-                  },
-                },
-                {
-                  name: 'multiple',
-                  title: '是否多选',
-                  setter: {
-                    componentName: 'BoolSetter',
-                    initialValue: false,
-                  },
-                },
-                {
-                  name: 'checkStrictly',
-                  title: {
-                    label: '父子节点不互相关联',
-                    tip: '父子节点取消关联，选择任意一级选项',
-                  },
-                  setter: {
-                    componentName: 'BoolSetter',
-                    initialValue: false,
-                  },
-                },
-                {
-                  name: 'emitPath',
-                  title: {
-                    label: '选中值为数组形式',
-                    tip: '在选中节点改变时，是否返回由该节点所在的各级菜单的值所组成的数组，若设置 false，则只返回该节点的值（开启后，多选模式选中值是二维数组）',
-                  },
-                  setter: {
-                    componentName: 'BoolSetter',
-                    initialValue: true,
-                  },
-                },
-                {
-                  name: 'lazy',
-                  title: {
-                    label: '动态加载子节点',
-                    tip: '是否动态加载子节点，需与 lazyLoad 方法结合使用',
-                  },
-                  setter: {
-                    componentName: 'BoolSetter',
-                    initialValue: false,
-                  },
-                },
-                {
-                  name: 'lazyLoad',
-                  title: {
-                    label: '加载动态数据的方法',
-                    tip: '加载动态数据的方法，仅在 lazy 为 true 时有效',
-                  },
-                  setter: 'FunctionSetter',
-                  condition(target: any) {
-                    return !!target.getProps().getPropValue('props.lazy')
-                  },
-                },
-                {
-                  name: 'label',
-                  title: {
-                    label: '选项标签',
-                    tip: '指定选项标签为选项对象的某个属性值',
-                  },
-                  setter: 'StringSetter',
-                  defaultValue: 'label',
-                },
-                {
-                  name: 'value',
-                  title: {
-                    label: '选项值',
-                    tip: '指定选项的值为选项对象的某个属性值',
-                  },
-                  setter: 'StringSetter',
-                  defaultValue: 'value',
-                },
-                {
-                  name: 'children',
-                  title: {
-                    label: '子选项',
-                    tip: '指定选项的子选项为选项对象的某个属性值',
-                  },
-                  setter: 'StringSetter',
-                  defaultValue: 'children',
-                },
-                {
-                  name: 'disabled',
-                  title: {
-                    label: '禁用选项',
-                    tip: '指定选项的禁用为选项对象的某个属性值',
-                  },
-                  setter: 'StringSetter',
-                  defaultValue: 'disabled',
-                },
-                {
-                  name: 'leaf',
-                  title: {
-                    label: '叶子节点',
-                    tip: '指定选项的叶子节点的标志位为选项对象的某个属性值',
-                  },
-                  setter: 'StringSetter',
-                  defaultValue: 'leaf',
-                },
-              ],
-            },
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'suggestion-item',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'suggestion-item',
+            'en-US': 'suggestion-item',
+          },
+          tip: 'custom content for suggestion item when searching',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'tag',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tag',
+            'en-US': 'tag',
+          },
+          tip: 'custom tags style',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'header',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'header',
+            'en-US': 'header',
+          },
+          tip: 'content at the top of the dropdown',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'footer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'footer',
+            'en-US': 'footer',
+          },
+          tip: 'content at the bottom of the dropdown',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
           },
         },
       },
     ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
-          description: '当选中节点变化时触发',
+          description: '当绑定值变化时触发的事件',
           template:
-            'onChange(value, ${extParams}){\n// 当选中节点变化时触发,回调参数为选中节点的值\nconsole.log("onChange", value);\n}\n',
+            "onChange(...args, extParams) {\n  // 当绑定值变化时触发的事件\n  console.log('onChange', ...args)\n}",
+        },
+        {
+          name: 'onExpandChange',
+          description: '当展开节点发生变化时触发',
+          template:
+            "onExpandChange(...args, extParams) {\n  // 当展开节点发生变化时触发\n  console.log('onExpandChange', ...args)\n}",
         },
         {
           name: 'onBlur',
           description: '当失去焦点时触发',
           template:
-            'onBlur(ev, ${extParams}){\n// 当失去焦点时触发 \nconsole.log("onBlur", ev);\n}\n',
+            "onBlur(...args, extParams) {\n  // 当失去焦点时触发\n  console.log('onBlur', ...args)\n}",
         },
         {
           name: 'onFocus',
-          description: '当获取焦点时触发',
+          description: '当获得焦点时触发',
           template:
-            'handleFocus(ev, ${extParams}){\n// 当获取焦点时触发 \nconsole.log("onFocus", ev);\n}\n',
+            "onFocus(...args, extParams) {\n  // 当获得焦点时触发\n  console.log('onFocus', ...args)\n}",
         },
         {
-          name: 'onExpand-change',
-          description: '当展开节点发生变化时触发',
+          name: 'onClear',
+          description:
+            'triggers when the clear icon is clicked in a clearable Select',
           template:
-            'onExpandChange(value, ${extParams}){\n// 当展开节点发生变化时触发，回调参数为各父级选项值组成的数组\nconsole.log("onExpandChange", value);\n}\n',
+            "onClear(...args, extParams) {\n  // triggers when the clear icon is clicked in a clearable Select\n  console.log('onClear', ...args)\n}",
         },
         {
-          name: 'onVisible-change',
+          name: 'onVisibleChange',
           description: '下拉框出现/隐藏时触发',
           template:
-            'onVisibleChange(value, ${extParams}){\n//下拉框出现/隐藏时触发 \nconsole.log("onVisibleChange", value);\n}\n',
+            "onVisibleChange(...args, extParams) {\n  // 下拉框出现/隐藏时触发\n  console.log('onVisibleChange', ...args)\n}",
         },
-        // {
-        //   name: 'onRemove-tag',
-        //   description: '在多选模式下，移除Tag时触发',
-        //   // @ts-ignore
-        //   template:
-        //     'onRemoveTag(value, ${extParams}){\n//	在多选模式下，移除Tag时触发,回调参数为移除的Tag对应的节点的值 \nconsole.log("onRemoveTag", value);\n}\n',
-        // },
+        {
+          name: 'onRemoveTag',
+          description: '在多选模式下，移除Tag时触发',
+          template:
+            "onRemoveTag(...args, extParams) {\n  // 在多选模式下，移除Tag时触发\n  console.log('onRemoveTag', ...args)\n}",
+        },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/cascader-1.png',
       title: '级联选择器',
+      screenshot: './screenshots/cascader.webp',
       schema: {
         componentName: 'ElCascader',
-        props: {
-          options: [
-            {
-              value: 'zhinan',
-              label: '指南',
-              children: [
-                {
-                  value: 'shejiyuanze',
-                  label: '设计原则',
-                  children: [
-                    {
-                      value: 'yizhi',
-                      label: '一致',
-                    },
-                    {
-                      value: 'fankui',
-                      label: '反馈',
-                    },
-                    {
-                      value: 'xiaolv',
-                      label: '效率',
-                    },
-                    {
-                      value: 'kekong',
-                      label: '可控',
-                    },
-                  ],
-                },
-                {
-                  value: 'daohang',
-                  label: '导航',
-                  children: [
-                    {
-                      value: 'cexiangdaohang',
-                      label: '侧向导航',
-                    },
-                    {
-                      value: 'dingbudaohang',
-                      label: '顶部导航',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              value: 'zujian',
-              label: '组件',
-              children: [
-                {
-                  value: 'basic',
-                  label: 'Basic',
-                  children: [
-                    {
-                      value: 'layout',
-                      label: 'Layout 布局',
-                    },
-                    {
-                      value: 'color',
-                      label: 'Color 色彩',
-                    },
-                    {
-                      value: 'typography',
-                      label: 'Typography 字体',
-                    },
-                    {
-                      value: 'icon',
-                      label: 'Icon 图标',
-                    },
-                  ],
-                },
-                {
-                  value: 'form',
-                  label: 'Form',
-                  children: [
-                    {
-                      value: 'radio',
-                      label: 'Radio 单选框',
-                    },
-                    {
-                      value: 'checkbox',
-                      label: 'Checkbox 多选框',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-          placeholder: '请选择',
-          'show-all-levels': true,
-          separator: '/',
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

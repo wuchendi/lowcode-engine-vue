@@ -2,7 +2,7 @@
 
 <a href="https://element.eleme.cn/#/en-US"><img alt="element" src="https://camo.githubusercontent.com/5c4691bfa141b2d01f0f2314a0e6495d3c051a8dd8aea54fc57b81e6fe1b840e/68747470733a2f2f63646e2e7261776769742e636f6d2f456c656d6546452f656c656d656e742f6465762f656c656d656e745f6c6f676f2e737667" width="150"/></a>
 
-## Element(2.15.13) Materials
+## Element(2.15.14) Materials
 
 <br />
 
@@ -10,6 +10,17 @@
 [![npm downloads](https://img.shields.io/npm/dm/@cdlab996/lowcode-materials-element-ui)](https://www.npmjs.com/package/@cdlab996/lowcode-materials-element-ui)
 
 </div>
+
+## Components
+
+Every component documented by `element-ui` 2.15.14 (Vue 2.7, the last Element UI release) has a meta:
+77 components, with the props, events and slots of [its docs](https://element.eleme.cn/#/zh-CN/component/installation)
+and a `docUrl` to its page. The material pins `element-ui` to 2.15.14;
+`tests/meta.test.ts` checks the metas against the components of that version
+(declared props, handler names, doc links, code generation exports,
+screenshots). `screenshots/` holds a thumbnail of every component rendered
+from its snippet in the designer canvas; components with nothing to show
+(modals, sub-components) use `screenshots/fallback.svg`.
 
 ## Usage Example
 

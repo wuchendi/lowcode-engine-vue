@@ -1,389 +1,441 @@
-import type {
-  IPublicModelSettingField,
-  IPublicTypeComponentMetadata,
-} from '@alilc/lowcode-types'
-import { isEqual, throttle } from 'lodash'
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-type VanTabItemProps = {
-  primaryKey: string
-  title: string
-}
-
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the vant docs (tab); see https://vant-ui.github.io/vant/v2/#/zh-CN/tab
+const meta = {
+  componentName: 'VanTabs',
+  title: '标签页',
   group: 'Vant 组件',
   category: '导航组件',
-  priority: 1003,
-  docUrl: 'https://vant-contrib.gitee.io/vant/v2/#/zh-CN/tab',
-  componentName: 'VanTabs',
-  // npm: {
-  //   package: 'vant',
-  //   version: '2.12.53',
-  //   exportName: 'Tabs',
-  //   destructuring: true,
-  // },
-  props: [
-    {
-      name: 'v-model',
-      description: '绑定的值',
-      propType: {
-        type: 'oneOfType',
-        value: ['string', 'number'],
-      },
-    },
-    {
-      name: 'type',
-      description: '样式风格',
-      propType: {
-        type: 'oneOf',
-        value: ['line', 'card'],
-      },
-      defaultValue: 'line',
-    },
-    {
-      name: 'color',
-      description: '主题色',
-      propType: 'string',
-      defaultValue: '#ee0a24',
-    },
-    {
-      name: 'background',
-      description: '背景色',
-      propType: 'string',
-      defaultValue: 'white',
-    },
-    {
-      name: 'default',
-      description: '默认插槽',
-      propType: 'node',
-    },
-  ],
+  docUrl: 'https://vant-ui.github.io/vant/v2/#/zh-CN/tab',
+  devMode: 'proCode',
   configure: {
     props: [
       {
         name: 'v-model',
-        title: '绑定的值',
-        setter: 'StringSetter',
-      },
-      {
-        name: 'items',
-        setter: {
-          componentName: 'ArraySetter',
-          props: {
-            itemSetter: {
-              componentName: 'ObjectSetter',
-              props: {
-                config: {
-                  items: [
-                    {
-                      name: 'title',
-                      title: '名称',
-                      initialValue: '标签项',
-                      setter: {
-                        componentName: 'StringSetter',
-                      },
-                      isRequired: true,
-                    },
-                  ],
-                },
-              },
-              initialValue: () => {
-                return {
-                  primaryKey: String(Math.floor(Math.random() * 10000)),
-                  title: '标签项' + String(Math.floor(Math.random() * 10000)),
-                }
-              },
-            },
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '绑定当前选中标签的标识符',
+            'en-US': 'v-model',
           },
+          tip: '绑定当前选中标签的标识符',
         },
-        extraProps: {
-          getValue: (target) => {
-            console.log('🚀 ~ file: van-tabs.ts: 触发 ~ getValue')
-            const map = target.node?.children?.map((child) => {
-              const primaryKey = child.getPropValue('primaryKey')
-                ? String(child.getPropValue('primaryKey'))
-                : child.id
-              return {
-                primaryKey: primaryKey,
-                title: child.getPropValue('title'),
-              }
-            })
-            return map
+        setter: [
+          {
+            componentName: 'StringSetter',
           },
-          setValue: throttle((target: IPublicModelSettingField, value: any) => {
-            console.log(
-              '🚀 ~ file: van-tabs.ts: 触发 ~ setValue',
-              target,
-              value,
-            )
-            const { node } = target
-            const mergedValueMap: Record<string, VanTabItemProps> = {}
-            const mergedValues: VanTabItemProps[] = []
-            const map: Record<string, VanTabItemProps> = {}
-            if (!Array.isArray(value)) {
-              value = []
-            }
-            value.forEach((item: VanTabItemProps) => {
-              if (!mergedValueMap[item.primaryKey]) {
-                mergedValueMap[item.primaryKey] = item
-                mergedValues.push(item)
-              }
-
-              map[item.primaryKey] = item
-            })
-
-            const children = node?.children?.filter((child: any) => {
-              if (!mergedValueMap[child.propsData.primaryKey]) {
-                mergedValueMap[child.propsData.primaryKey] = child.propsData
-                mergedValues.push(child.propsData)
-              }
-              return true
-            })
-
-            const preValue = children.map((child: any) => {
-              return child.propsData
-            })
-
-            if (isEqual(preValue, value)) {
-              return
-            }
-
-            node?.children?.mergeChildren(
-              (child, idx) => {
-                console.log('remover', child, idx)
-                const primaryKey = String(
-                  child.getPropValue('primaryKey') ||
-                    child.schema.id ||
-                    child.id,
-                )
-                if (Object.hasOwnProperty.call(map, primaryKey)) {
-                  child.setPropValue('title', map[primaryKey].title)
-
-                  delete map[primaryKey]
-                  return false
-                }
-
-                return true
-              },
-              () => {
-                console.log('adder')
-                const items = []
-                for (const primaryKey in map) {
-                  if (Object.hasOwnProperty.call(map, primaryKey)) {
-                    items.push({
-                      componentName: 'VanTab',
-                      props: map[primaryKey],
-                    })
-                  }
-                }
-                return items
-              },
-              (child1, child2) => {
-                console.log('sorter')
-                const a = value.findIndex(
-                  (item: any) =>
-                    String(item.primaryKey) ===
-                    String(child1.getPropValue('primaryKey')),
-                )
-                const b = value.findIndex(
-                  (item: any) =>
-                    String(item.primaryKey) ===
-                    String(child2.getPropValue('primaryKey')),
-                )
-                return a - b
-              },
-            )
-          }),
-        },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: '0',
       },
       {
         name: 'type',
-        title: '样式风格',
-        setter: {
-          componentName: 'SelectSetter',
-          props: {
-            options: [
-              {
-                title: 'line',
-                value: 'line',
-              },
-              {
-                title: 'card',
-                value: 'card',
-              },
-            ],
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '样式风格类型',
+            'en-US': 'type',
           },
+          tip: '样式风格类型，可选值为 card',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
         defaultValue: 'line',
       },
       {
         name: 'color',
-        title: '标签主题色',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标签主题色',
+            'en-US': 'color',
+          },
+          tip: '标签主题色',
+        },
         setter: 'ColorSetter',
+        supportVariable: true,
         defaultValue: '#ee0a24',
       },
       {
         name: 'background',
-        title: '标签栏背景色',
-        setter: 'ColorSetter',
-        defaultValue: '#fff',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标签栏背景色',
+            'en-US': 'background',
+          },
+          tip: '标签栏背景色',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'white',
       },
       {
         name: 'duration',
         title: {
-          label: '动画时间',
-          tip: '动画时间(单位：秒)',
+          label: {
+            type: 'i18n',
+            'zh-CN': '动画时间',
+            'en-US': 'duration',
+          },
+          tip: '动画时间，单位秒',
         },
-        setter: 'StringSetter',
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
         defaultValue: '0.3',
       },
       {
-        name: 'line-width',
-        title: '底部条宽度',
-        setter: 'StringSetter',
+        name: 'lineWidth',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '底部条宽度',
+            'en-US': 'lineWidth',
+          },
+          tip: '底部条宽度，默认单位 px',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
         defaultValue: '40px',
       },
       {
-        name: 'line-height',
-        title: '底部条高度',
-        setter: 'StringSetter',
+        name: 'lineHeight',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '底部条高度',
+            'en-US': 'lineHeight',
+          },
+          tip: '底部条高度，默认单位 px',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
         defaultValue: '3px',
       },
       {
         name: 'animated',
         title: {
-          label: '转场动画',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'animated',
+            'en-US': 'animated',
+          },
           tip: '是否开启切换标签内容时的转场动画',
         },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: false,
       },
       {
         name: 'border',
         title: {
-          label: '显示标签栏外边框',
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示标签栏外边框',
+            'en-US': 'border',
+          },
           tip: '是否显示标签栏外边框，仅在 type="line" 时有效',
         },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: false,
       },
       {
         name: 'ellipsis',
-        title: '省略过长的标题文字',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否省略过长的标题文字',
+            'en-US': 'ellipsis',
+          },
+          tip: '是否省略过长的标题文字',
+        },
         setter: 'BoolSetter',
-        defaultValue: false,
+        supportVariable: true,
+        defaultValue: true,
       },
       {
         name: 'sticky',
-        title: '粘性定位布局',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否使用粘性定位布局',
+            'en-US': 'sticky',
+          },
+          tip: '是否使用粘性定位布局',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: false,
       },
       {
         name: 'swipeable',
-        title: '手势滑动切换',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否开启手势滑动切换',
+            'en-US': 'swipeable',
+          },
+          tip: '是否开启手势滑动切换',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: false,
       },
       {
-        name: 'lazy-render',
+        name: 'lazyRender',
         title: {
-          label: '延迟渲染',
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否开启延迟渲染',
+            'en-US': 'lazyRender',
+          },
           tip: '是否开启延迟渲染（首次切换到标签时才触发内容渲染）',
         },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: true,
       },
       {
         name: 'scrollspy',
-        title: '是否开启滚动导航',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否开启滚动导航',
+            'en-US': 'scrollspy',
+          },
+          tip: '是否开启滚动导航',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
         defaultValue: false,
       },
       {
-        name: 'offset-top',
+        name: 'offsetTop',
         title: {
-          label: '粘性定位与顶部的最小距离',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'offsetTop',
+            'en-US': 'offsetTop',
+          },
           tip: '粘性定位布局下与顶部的最小距离，支持 px vw vh rem 单位，默认 px',
         },
-        setter: 'StringSetter',
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
         defaultValue: '0',
       },
       {
-        name: 'swipe-threshold',
+        name: 'swipeThreshold',
         title: {
-          label: '滚动阈值',
+          label: {
+            type: 'i18n',
+            'zh-CN': '滚动阈值',
+            'en-US': 'swipeThreshold',
+          },
           tip: '滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动',
         },
-        setter: 'StringSetter',
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
         defaultValue: '5',
       },
       {
-        name: 'title-active-color',
-        title: '标题选中态颜色',
-        setter: 'ColorSetter',
-      },
-      {
-        name: 'title-inactive-color',
-        title: '标题默认态颜色',
-        setter: 'ColorSetter',
-      },
-      {
-        name: 'before-change',
+        name: 'titleActiveColor',
         title: {
-          label: '回调函数',
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题选中态颜色',
+            'en-US': 'titleActiveColor',
+          },
+          tip: '标题选中态颜色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'titleInactiveColor',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题默认态颜色',
+            'en-US': 'titleInactiveColor',
+          },
+          tip: '标题默认态颜色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'beforeChange',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '切换标签前的回调函数',
+            'en-US': 'beforeChange',
+          },
           tip: '切换标签前的回调函数，返回 false 可阻止切换，支持返回 Promise',
         },
-        setter: 'FunctionSetter',
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'nav-left',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题左侧内容',
+            'en-US': 'nav-left',
+          },
+          tip: '标题左侧内容',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'nav-right',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题右侧内容',
+            'en-US': 'nav-right',
+          },
+          tip: '标题右侧内容',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
       },
     ],
     supports: {
+      style: true,
+      className: true,
       events: [
         {
           name: 'onClick',
           description: '点击标签时触发',
+          template:
+            "onClick(extParams) {\n  // 点击标签时触发\n  console.log('onClick', extParams)\n}",
         },
         {
           name: 'onChange',
           description: '当前激活的标签改变时触发',
+          template:
+            "onChange(extParams) {\n  // 当前激活的标签改变时触发\n  console.log('onChange', extParams)\n}",
         },
         {
           name: 'onDisabled',
           description: '点击被禁用的标签时触发',
+          template:
+            "onDisabled(extParams) {\n  // 点击被禁用的标签时触发\n  console.log('onDisabled', extParams)\n}",
         },
         {
           name: 'onRendered',
-          description: '标签内容首次渲染时触发',
+          description: '标签内容首次渲染时触发（仅在开启延迟渲染后触发）',
+          template:
+            "onRendered(extParams) {\n  // 标签内容首次渲染时触发（仅在开启延迟渲染后触发）\n  console.log('onRendered', extParams)\n}",
         },
         {
           name: 'onScroll',
-          description: '滚动时触发',
+          description: '滚动时触发，仅在 sticky 模式下生效',
+          template:
+            "onScroll(extParams) {\n  // 滚动时触发，仅在 sticky 模式下生效\n  console.log('onScroll', extParams)\n}",
         },
       ],
       loop: true,
       condition: true,
-      style: true,
     },
-    component: {
-      isContainer: true,
-    },
+    component: {},
   },
   snippets: [
     {
-      screenshot:
-        'https://img.alicdn.com/imgextra/i4/O1CN01mh9LPG268B90t8DaA_!!6000000007616-55-tps-56-56.svg',
-      title: '标签页组件',
+      title: '标签页',
+      screenshot: './screenshots/tabs.webp',
       schema: {
         componentName: 'VanTabs',
-        children: [...new Array(2).keys()].map((item, index) => ({
-          componentName: 'VanTab',
-          props: {
-            primaryKey: String(Math.floor(Math.random() * 10000) + item),
-            title: '标签项' + index,
+        children: [
+          {
+            componentName: 'VanTab',
+            props: {
+              title: '标签一',
+            },
+            children: [
+              {
+                componentName: 'div',
+                props: {},
+                children: '内容一',
+              },
+            ],
           },
-        })),
+          {
+            componentName: 'VanTab',
+            props: {
+              title: '标签二',
+            },
+            children: [
+              {
+                componentName: 'div',
+                props: {},
+                children: '内容二',
+              },
+            ],
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

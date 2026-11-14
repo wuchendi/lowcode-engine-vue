@@ -1,112 +1,196 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (rate); see https://1x.antdv.com/components/rate-cn/
+const meta = {
   componentName: 'ARate',
   title: '评分',
-  category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'ARate',
-  },
-  props: [
-    {
-      name: 'value',
-      title: { label: '默认值', tip: '默认值' },
-      propType: 'number',
-      setter: 'NumberSetter',
-      defaultValue: 1,
-    },
-    {
-      name: 'allowClear',
-      title: { label: '点击清除', tip: '是否允许再次点击后清除' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'allowHalf',
-      title: { label: '允许半选', tip: '是否允许半选' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'autoFocus',
-      title: { label: '自动聚焦', tip: '自动获得焦点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'character',
-      title: { label: '自定义字符', tip: '自定义字符' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'count',
-      title: { label: 'star总数', tip: 'star 总数' },
-      propType: 'number',
-      setter: 'NumberSetter',
-      defaultValue: 5,
-    },
-    {
-      name: 'disabled',
-      title: { label: '禁用', tip: '是否禁用' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'tooltips',
-      title: { label: '提示信息', tip: '自定义每项的提示信息' },
-      propType: {
-        type: 'arrayOf',
-        value: 'string',
-      },
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/rate-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'allowClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否允许再次点击后清除',
+            'en-US': 'allowClear',
+          },
+          tip: '是否允许再次点击后清除',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'allowHalf',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否允许半选',
+            'en-US': 'allowHalf',
+          },
+          tip: '是否允许半选',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获取焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'character',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义字符',
+            'en-US': 'character',
+          },
+          tip: '自定义字符',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'count',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'star 总数',
+            'en-US': 'count',
+          },
+          tip: 'star 总数',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 5,
+      },
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认值',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认值',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '只读',
+            'en-US': 'disabled',
+          },
+          tip: '只读，无法进行交互',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'tooltips',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义每项的提示信息',
+            'en-US': 'tooltips',
+          },
+          tip: '自定义每项的提示信息',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '当前数',
+            'en-US': 'v-model',
+          },
+          tip: '当前数，受控值',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'onChange ',
+          name: 'onBlur',
+          description: '失去焦点时的回调',
           template:
-            "onChange (value,${extParams}){\n// 选择时的回调\nconsole.log('onChange ',value);}",
+            "onBlur(extParams) {\n  // 失去焦点时的回调\n  console.log('onBlur', extParams)\n}",
         },
         {
-          name: 'onHoverChange',
+          name: 'onChange',
+          description: '选择时的回调',
           template:
-            "onHoverChange(value,${extParams}){\n// 鼠标经过时数值变化的回调\nconsole.log('onHoverChange',value);}",
-        },
-        {
-          name: 'onKeyDown',
-          template:
-            "onKeyDown(event,${extParams}){\n// 按键回调\nconsole.log('onKeyDown',event);}",
+            "onChange(extParams) {\n  // 选择时的回调\n  console.log('onChange', extParams)\n}",
         },
         {
           name: 'onFocus',
+          description: '获取焦点时的回调',
           template:
-            "onFocus(${extParams}){\n// 获得焦点时触发\nconsole.log('onFocus');}",
+            "onFocus(extParams) {\n  // 获取焦点时的回调\n  console.log('onFocus', extParams)\n}",
         },
         {
-          name: 'onBlur',
+          name: 'onHoverChange',
+          description: '鼠标经过时数值变化的回调',
           template:
-            "onBlur(${extParams}){\n// 失去焦点时触发\nconsole.log('onBlur');}",
+            "onHoverChange(extParams) {\n  // 鼠标经过时数值变化的回调\n  console.log('onHoverChange', extParams)\n}",
+        },
+        {
+          name: 'onKeydown',
+          description: '按键回调',
+          template:
+            "onKeydown(extParams) {\n  // 按键回调\n  console.log('onKeydown', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '评分',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/rate-1.png',
+      screenshot: './screenshots/rate.webp',
       schema: {
         componentName: 'ARate',
-        props: {
-          value: 3,
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

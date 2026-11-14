@@ -1,177 +1,126 @@
 import 'ant-design-vue/dist/antd.css'
 import {
-  Anchor,
+  Breadcrumb,
+  Card,
   Checkbox,
   Collapse,
   DatePicker,
   Descriptions,
+  Dropdown,
   Form,
   Input,
+  Layout,
   List,
+  Mentions,
   Menu,
   Radio,
   Select,
+  Statistic,
   Steps,
+  Table,
   Tabs,
+  Timeline,
+  Tree,
+  TreeSelect,
 } from 'ant-design-vue'
 import packagesInfo from '../package.json'
 
-const { Link: AnchorLink } = Anchor
-const { Group: CheckboxGroup } = Checkbox
-const { Panel: CollapsePanel } = Collapse
-const { Item: DescriptionsItem } = Descriptions
-const { RangePicker, MonthPicker, WeekPicker } = DatePicker
-const { Option: SelectOption, OptGroup: SelectOptGroup } = Select
-const { Step } = Steps
-const { Item: FormItem } = Form
-const {
-  Group: InputGroup,
-  Search: InputSearch,
-  TextArea,
-  Password: InputPassword,
-} = Input
-const { Item: ListItem } = List
-const { Meta: ListItemMeta } = ListItem
-const { Item: MenuItem, SubMenu, ItemGroup: MenuItemGroup, Divider } = Menu
-const { Group: RadioGroup, Button } = Radio
-const { TabPane } = Tabs
-
-// 通用
 export {
   Affix as AAffix,
   Alert as AAlert,
   Anchor as AAnchor,
+  AutoComplete as AAutoComplete,
+  Avatar as AAvatar,
+  BackTop as ABackTop,
+  Badge as ABadge,
+  Breadcrumb as ABreadcrumb,
   Button as AButton,
+  Calendar as ACalendar,
+  Card as ACard,
+  Carousel as ACarousel,
+  Cascader as ACascader,
+  Checkbox as ACheckbox,
+  Collapse as ACollapse,
+  Comment as AComment,
+  ConfigProvider as AConfigProvider,
+  DatePicker as ADatePicker,
+  Descriptions as ADescriptions,
+  Divider as ADivider,
+  Drawer as ADrawer,
+  Dropdown as ADropdown,
+  Empty as AEmpty,
+  Form as AForm,
+  FormModel as AFormModel,
+  Icon as AIcon,
+  Input as AInput,
+  InputNumber as AInputNumber,
+  Layout as ALayout,
+  List as AList,
+  LocaleProvider as ALocaleProvider,
+  Mentions as AMentions,
+  Menu as AMenu,
+  Modal as AModal,
+  PageHeader as APageHeader,
+  Pagination as APagination,
+  Popconfirm as APopconfirm,
+  Popover as APopover,
+  Progress as AProgress,
+  Radio as ARadio,
+  Rate as ARate,
+  Result as AResult,
+  Select as ASelect,
+  Skeleton as ASkeleton,
+  Slider as ASlider,
+  Space as ASpace,
+  Spin as ASpin,
+  Statistic as AStatistic,
+  Steps as ASteps,
+  Switch as ASwitch,
+  Table as ATable,
+  Tabs as ATabs,
+  Tag as ATag,
+  Timeline as ATimeline,
+  TimePicker as ATimePicker,
+  Tooltip as ATooltip,
+  Transfer as ATransfer,
+  Tree as ATree,
+  TreeSelect as ATreeSelect,
+  Upload as AUpload,
 } from 'ant-design-vue'
-export { AnchorLink as AAnchorLink }
-
-// export * from './lowcode/button';
-// export * from './lowcode/affix';
-// export * from './lowcode/alert';
-// export * from './lowcode/anchor';
-
-// 表单
-export { AutoComplete as AAutoComplete } from 'ant-design-vue'
-// export * from './lowcode/auto-complete';
-
-// 数据展示
-export { Avatar as AAvatar, Badge as ABadge } from 'ant-design-vue'
-// export * from './lowcode/avatar';
-// export * from './lowcode/badge';
-
-// 其他
-export { BackTop as ABackTop } from 'ant-design-vue'
-// export * from './lowcode/back-top';
-
-// export * from './lowcode/icon';
-
-export * from './lowcode/breadcrumb'
-export * from './lowcode/calendar'
-export * from './lowcode/card'
-export * from './lowcode/carousel'
-export * from './lowcode/cascader'
-export * from './lowcode/checkbox'
-// export * from './lowcode/checkbox-group';
-export * from './lowcode/collapse'
-// export * from './lowcode/collapse-pane';
-export * from './lowcode/comment'
-export * from './lowcode/date-picker'
-export * from './lowcode/descriptions'
-// export * from './lowcode/descriptions-item';
-export * from './lowcode/divider'
-export * from './lowcode/drawer'
-export * from './lowcode/dropdown'
-export * from './lowcode/empty'
-// export * from './lowcode/range-picker';
-export * from './lowcode/rate'
-export * from './lowcode/result'
-export {
-  CheckboxGroup as ACheckboxGroup,
-  CollapsePanel as ACollapsePanel,
-  DescriptionsItem as ADescriptionsItem,
-  RangePicker as ARangePicker,
-}
-
-// export * from './lowcode/select';
-
-export * from './lowcode/cascader'
-export * from './lowcode/form'
-// export * from './lowcode/form-item';
-export * from './lowcode/form-list'
-export * from './lowcode/grid-col'
-export * from './lowcode/grid-row'
-// export * from './lowcode/image';
-export * from './lowcode/input'
-export * from './lowcode/input-number'
-// export * from './lowcode/select-option';
-// export * from './lowcode/select-opt-group';
-export * from './lowcode/sketelon'
-export * from './lowcode/slider'
-export * from './lowcode/space'
-export * from './lowcode/spin'
-export * from './lowcode/statistic'
-export * from './lowcode/steps'
-// export * from './lowcode/steps-step';
-export * from './lowcode/switch'
-export {
-  FormItem as AFormItem,
-  InputGroup as AInputGroup,
-  InputPassword as AInputPassword,
-  InputSearch as AInputSearch,
-  SelectOptGroup as ASelectOptGroup,
-  SelectOption as ASelectOption,
-  Step as AStepsStep,
-  TextArea as AInputTextArea,
-}
-
-// export * from './lowcode/input-group';
-// export * from './lowcode/input-password';
-// export * from './lowcode/input-search';
-// export * from './lowcode/input-textarea';
-
-// export * from 'ant-design-vue/es/message/style';
-// export * from 'ant-design-vue/es/notification/style';
-export { message, notification } from 'ant-design-vue'
-// export * from './lowcode/list-item-meta';
-// export * from './lowcode/list-item';
-export * from './lowcode/list'
-export * from './lowcode/mentions'
-export * from './lowcode/menu'
-// export * from './lowcode/menu-item';
-// export * from './lowcode/menu-item-group';
-// export * from './lowcode/menu-subMenu';
-export * from './lowcode/modal'
-export * from './lowcode/page-header'
-export * from './lowcode/pagination'
-export * from './lowcode/popconfirm'
-export * from './lowcode/popover'
-export * from './lowcode/progress'
-export * from './lowcode/radio'
-export * from './lowcode/table'
-// export * from './lowcode/tab-pane';
-export * from './lowcode/table'
-export * from './lowcode/tabs'
-export * from './lowcode/tag'
-export * from './lowcode/time-picker'
-export * from './lowcode/timeline'
-export * from './lowcode/transfer'
-export * from './lowcode/tree'
-export * from './lowcode/tree-select'
-// export * from './lowcode/typography-link';
-// export * from './lowcode/typography-title';
-// export * from './lowcode/typography-paragraph';
-// export * from './lowcode/slot/view';
-export * from './lowcode/upload'
-// const { Item: MenuItem, SubMenu, ItemGroup: MenuItemGroup, Divider } = Menu;
-export {
-  ListItem as AListItem,
-  ListItemMeta as AListItemMeta,
-  MenuItem as AMenuItem,
-  MenuItemGroup as AMenuItemGroup,
-  RadioGroup as ARadioGroup,
-  SubMenu as ASubMenu,
-  TabPane as ATabPane,
-}
+export const ABreadcrumbItem = Breadcrumb.Item
+export const ABreadcrumbSeparator = Breadcrumb.Separator
+export const ACardMeta = Card.Meta
+export const ACheckboxGroup = Checkbox.Group
+export const ACollapsePanel = Collapse.Panel
+export const ADatePickerMonthPicker = DatePicker.MonthPicker
+export const ADatePickerRangePicker = DatePicker.RangePicker
+export const ADatePickerWeekPicker = DatePicker.WeekPicker
+export const ADescriptionsItem = Descriptions.Item
+export const ADropdownButton = Dropdown.Button
+export const AFormItem = Form.Item
+export const AInputGroup = Input.Group
+export const AInputPassword = Input.Password
+export const AInputSearch = Input.Search
+export const AInputTextArea = Input.TextArea
+export const ALayoutSider = Layout.Sider
+export const AListItem = List.Item
+export const AListItemMeta = List.Item.Meta
+export const AMentionsOption = Mentions.Option
+export const AMenuItem = Menu.Item
+export const AMenuItemGroup = Menu.ItemGroup
+export const AMenuSubMenu = Menu.SubMenu
+export const ARadioGroup = Radio.Group
+export const ASelectOptGroup = Select.OptGroup
+export const ASelectOption = Select.Option
+export const AStatisticCountdown = Statistic.Countdown
+export const AStepsStep = Steps.Step
+export const ATableColumn = Table.Column
+export const ATableColumnGroup = Table.ColumnGroup
+export const ATabsTabPane = Tabs.TabPane
+export const ATimelineItem = Timeline.Item
+export const ATreeDirectoryTree = Tree.DirectoryTree
+export const ATreeSelectTreeNode = TreeSelect.TreeNode
+export const ATreeTreeNode = Tree.TreeNode
 
 console.log(
   `%c ${packagesInfo.name} %c v`.concat(packagesInfo.version, ' '),

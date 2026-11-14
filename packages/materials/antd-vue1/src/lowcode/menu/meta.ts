@@ -1,262 +1,289 @@
-import { uuid } from '../../utils/index'
-import { itemsExtraProps } from './util'
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-export default {
-  group: 'Antd 组件',
+// Generated from the ant-design-vue docs (menu); see https://1x.antdv.com/components/menu-cn/
+const meta = {
   componentName: 'AMenu',
-  title: '菜单',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'AMenu',
-  },
-  props: [
-    {
-      name: 'items',
-      title: '菜单项',
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'ObjectSetter',
-            props: {
-              config: {
-                items: [
-                  {
-                    name: 'key',
-                    title: 'key',
-                    setter: 'StringSetter',
-                    initialValue: (val: any) => val || uuid(),
-                  },
-                  {
-                    name: 'children',
-                    title: '菜单名称',
-                    setter: 'StringSetter',
-                  },
-                  {
-                    name: 'category',
-                    title: {
-                      label: '类型',
-                      tip: '菜单项类型',
-                    },
-                    propType: {
-                      type: 'oneOf',
-                      value: ['Menu.Item', 'Menu.SubMenu', 'Menu.ItemGroup'],
-                    },
-                    setter: [
-                      {
-                        componentName: 'RadioGroupSetter',
-                        props: {
-                          options: [
-                            {
-                              title: 'Item',
-                              value: 'Menu.Item',
-                            },
-                            {
-                              title: 'SubMenu',
-                              value: 'Menu.SubMenu',
-                            },
-                            {
-                              title: 'ItemGroup',
-                              value: 'Menu.ItemGroup',
-                            },
-                          ],
-                        },
-                      },
-                      'VariableSetter',
-                    ],
-                  },
-                ],
-              },
-            },
-            initialValue: () => {
-              return {
-                key: 'item-' + uuid(),
-                category: 'Menu.Item',
-                children: '菜单名',
-              }
-            },
-          },
-        },
-      },
-      extraProps: itemsExtraProps,
-    },
-    {
-      name: 'defaultOpenKeys',
-      title: {
-        label: '初始展开菜单项',
-        tip: '初始展开的 SubMenu 菜单项 key 数组',
-      },
-      propType: { type: 'arrayOf', value: 'string' },
-    },
-    {
-      name: 'defaultSelectedKeys',
-      title: { label: '初始选中的菜单项', tip: '初始选中的菜单项 key 数组' },
-      propType: { type: 'arrayOf', value: 'string' },
-    },
-    {
-      name: 'forceSubMenuRender',
-      title: {
-        label: '子菜单预渲染',
-        tip: '在子菜单展示之前就渲染进 DOM',
-      },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'inlineCollapsed',
-      title: { label: '是否收起', tip: 'inline 时菜单是否收起状态' },
-      propType: 'bool',
-    },
-    {
-      name: 'inlineIndent',
-      title: { label: '缩进宽度', tip: 'inline 模式的菜单缩进宽度' },
-      propType: 'number',
-    },
-    {
-      name: 'mode',
-      title: {
-        label: '菜单类型',
-        tip: '菜单类型，现在支持垂直、水平、和内嵌模式三种',
-      },
-      propType: { type: 'oneOf', value: ['vertical', 'horizontal', 'inline'] },
-    },
-    {
-      name: 'multiple',
-      title: { label: '是否允许多选', tip: '是否允许多选' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'openKeys',
-      title: {
-        label: '当前展开的菜单项',
-        tip: '当前展开的 SubMenu 菜单项 key 数组',
-      },
-      propType: { type: 'arrayOf', value: 'string' },
-    },
-    {
-      name: 'selectable',
-      title: { label: '是否允许选中', tip: '是否允许选中' },
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'selectedKeys',
-      title: { label: '当前选中项', tip: '当前选中的菜单项 key 数组' },
-      propType: { type: 'arrayOf', value: 'string' },
-    },
-    {
-      name: 'style',
-      title: { label: '根节点样式', tip: '根节点样式' },
-      propType: 'object',
-    },
-    {
-      name: 'subMenuCloseDelay',
-      title: {
-        label: '关闭延时',
-        tip: '用户鼠标离开子菜单后关闭延时，单位：秒',
-      },
-      propType: 'number',
-    },
-    {
-      name: 'subMenuOpenDelay',
-      title: {
-        label: '开启延时',
-        tip: '用户鼠标进入子菜单后开启延时，单位：秒',
-      },
-      propType: 'number',
-    },
-    {
-      name: 'theme',
-      title: { label: '主题颜色', tip: '主题颜色' },
-      propType: { type: 'oneOf', value: ['light', 'dark'] },
-    },
-    {
-      name: 'click',
-      title: { label: '点击 MenuItem 调用函数', tip: '点击 MenuItem 调用函数' },
-      propType: 'func',
-    },
-    {
-      name: 'deselect',
-      title: {
-        label: '取消选中时调用函数',
-        tip: '取消选中时调用，仅在 multiple 生效',
-      },
-      propType: 'func',
-    },
-    {
-      name: 'triggerSubMenuAction',
-      title: {
-        label: '触发方式',
-        tip: '展开/关闭的触发行为',
-      },
-      propType: { type: 'oneOf', value: ['hover', 'click'] },
-    },
-    {
-      name: 'openChange',
-      title: { label: 'SubMenu 展开/关闭的回调', tip: '展开/关闭的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'select',
-      title: { label: '被选中时调用函数', tip: '被选中时调用函数' },
-      propType: 'func',
-    },
-    {
-      name: 'overflowedIndicator',
-      title: { label: '折叠图标', tip: '自定义 Menu 折叠时的图标' },
-      propType: 'node',
-    },
-  ],
+  title: '导航菜单',
+  group: 'Ant Design 组件',
+  category: '导航',
+  docUrl: 'https://1x.antdv.com/components/menu-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'defaultOpenKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'defaultOpenKeys',
+            'en-US': 'defaultOpenKeys',
+          },
+          tip: '初始展开的 SubMenu 菜单项 key 数组',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'defaultSelectedKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'defaultSelectedKeys',
+            'en-US': 'defaultSelectedKeys',
+          },
+          tip: '初始选中的菜单项 key 数组',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'forceSubMenuRender',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'forceSubMenuRender',
+            'en-US': 'forceSubMenuRender',
+          },
+          tip: '在子菜单展示之前就渲染进 DOM',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'inlineCollapsed',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'inlineCollapsed',
+            'en-US': 'inlineCollapsed',
+          },
+          tip: 'inline 时菜单是否收起状态',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'inlineIndent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'inlineIndent',
+            'en-US': 'inlineIndent',
+          },
+          tip: 'inline 模式的菜单缩进宽度',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 24,
+      },
+      {
+        name: 'mode',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单类型',
+            'en-US': 'mode',
+          },
+          tip: '菜单类型，现在支持垂直、水平、和内嵌模式三种',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'vertical',
+      },
+      {
+        name: 'multiple',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否允许多选',
+            'en-US': 'multiple',
+          },
+          tip: '是否允许多选',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'openKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'openKeys',
+            'en-US': 'openKeys',
+          },
+          tip: '当前展开的 SubMenu 菜单项 key 数组',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'selectable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否允许选中',
+            'en-US': 'selectable',
+          },
+          tip: '是否允许选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'v-model',
+            'en-US': 'v-model',
+          },
+          tip: '当前选中的菜单项 key 数组',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'subMenuCloseDelay',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '用户鼠标离开子菜单后关闭延时',
+            'en-US': 'subMenuCloseDelay',
+          },
+          tip: '用户鼠标离开子菜单后关闭延时，单位：秒',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0.1,
+      },
+      {
+        name: 'subMenuOpenDelay',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '用户鼠标进入子菜单后开启延时',
+            'en-US': 'subMenuOpenDelay',
+          },
+          tip: '用户鼠标进入子菜单后开启延时，单位：秒',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0,
+      },
+      {
+        name: 'theme',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '主题颜色',
+            'en-US': 'theme',
+          },
+          tip: '主题颜色',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'light',
+      },
+      {
+        name: 'overflowedIndicator',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'overflowedIndicator',
+            'en-US': 'overflowedIndicator',
+          },
+          tip: '自定义 Menu 折叠时的图标',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'click',
+          name: 'onClick',
+          description: '点击 MenuItem 调用此函数',
           template:
-            "click({item,key,keyPath,domEvent},${extParams}){\n// 点击 MenuItem 调用此函数\nconsole.log('click',item,key,keyPath,domEvent);}",
+            "onClick(extParams) {\n  // 点击 MenuItem 调用此函数\n  console.log('onClick', extParams)\n}",
         },
         {
-          name: 'deselect',
+          name: 'onDeselect',
+          description: '取消选中时调用，仅在 multiple 生效',
           template:
-            "deselect({item,key,keyPath,selectedKeys,domEvent},${extParams}){\n// 取消选中时调用，仅在 multiple 生效\nconsole.log('deselect',item,key,keyPath,selectedKeys,domEvent);}",
+            "onDeselect(extParams) {\n  // 取消选中时调用，仅在 multiple 生效\n  console.log('onDeselect', extParams)\n}",
         },
         {
-          name: 'openChange',
+          name: 'onOpenChange',
+          description: 'SubMenu 展开/关闭的回调',
           template:
-            "openChange(openKeys,${extParams}){\n// SubMenu 展开/关闭的回调\nconsole.log('openChange',openKeys);}",
+            "onOpenChange(extParams) {\n  // SubMenu 展开/关闭的回调\n  console.log('onOpenChange', extParams)\n}",
         },
         {
-          name: 'select',
+          name: 'onSelect',
+          description: '被选中时调用',
           template:
-            "select({item,key,keyPath,selectedKeys,domEvent},${extParams}){\n// 被选中时调用\nconsole.log('select',item,key,keyPath,selectedKeys,domEvent);}",
+            "onSelect(extParams) {\n  // 被选中时调用\n  console.log('onSelect', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '菜单',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/menu-1.jpg',
+      title: '导航菜单',
+      screenshot: './screenshots/menu.webp',
       schema: {
         componentName: 'AMenu',
         props: {
-          mode: 'inline',
-          defaultSelectedKeys: ['1'],
-          defaultOpenKeys: ['sub1'],
-          theme: 'dark',
-          items: [
-            {
-              key: 'item-i5wd',
-              category: 'AMenuItem',
-              children: '菜单名',
-            },
-          ],
+          mode: 'horizontal',
         },
+        children: [
+          {
+            componentName: 'AMenuItem',
+            props: {
+              key: '1',
+            },
+            children: '菜单一',
+          },
+          {
+            componentName: 'AMenuItem',
+            props: {
+              key: '2',
+            },
+            children: '菜单二',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

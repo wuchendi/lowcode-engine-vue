@@ -1,69 +1,91 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (radio); see https://1x.antdv.com/components/radio-cn/
+const meta = {
   componentName: 'ARadio',
   title: '单选框',
-  category: '表单',
-  npm: {
-    destructuring: true,
-    componentName: 'ARadio',
-  },
-  props: [
-    {
-      name: 'children',
-      title: { label: '内容', tip: '内容' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'autoFocus',
-      title: { label: '自动聚焦', tip: '自动获取焦点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'defaultChecked',
-      title: { label: '默认选中', tip: '初始是否选中' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'checked',
-      title: { label: '是否选中', tip: '指定当前是否选中' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/radio-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获取焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'checked',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定当前是否选中',
+            'en-US': 'checked',
+          },
+          tip: '指定当前是否选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'defaultChecked',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '初始是否选中',
+            'en-US': 'defaultChecked',
+          },
+          tip: '初始是否选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'value',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '根据 value 进行比较',
+            'en-US': 'value',
+          },
+          tip: '根据 value 进行比较，判断是否选中',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '单选框',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/radio-1.png',
+      screenshot: './screenshots/radio.webp',
       schema: {
         componentName: 'ARadio',
-        props: {
-          children: 'Radio',
-        },
+        props: {},
+        children: '单选框',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

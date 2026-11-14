@@ -1,93 +1,167 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the vant docs (switch); see https://vant-ui.github.io/vant/v2/#/zh-CN/switch
+const meta = {
+  componentName: 'VanSwitch',
   title: '开关',
   group: 'Vant 组件',
   category: '表单组件',
-  priority: 1003,
-  docUrl: 'https://vant-contrib.gitee.io/vant/v2/#/zh-CN/switch',
-  componentName: 'VanSwitch',
-
-  // npm: {
-  //   destructuring: true,
-  //   componentName: 'VanSwitch',
-  // },
-  props: [
-    {
-      name: 'v-model',
-      description: '开关选中状态',
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'loading',
-      description: '是否为加载状态',
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'disabled',
-      description: '是否禁用状态',
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'size',
-      description: '开关尺寸，默认单位为px',
-      propType: {
-        type: 'oneOfType',
-        value: ['string', 'number'],
-      },
-      defaultValue: '30px',
-    },
-    {
-      name: 'active-color',
-      description: '打开时的背景色',
-      propType: 'string',
-      defaultValue: '#1989fa',
-    },
-    {
-      name: 'inactive-color',
-      description: '关闭时的背景色',
-      propType: 'string',
-      defaultValue: 'white',
-    },
-    {
-      name: 'active-value',
-      description: '打开时对应的值',
-      propType: 'any',
-      defaultValue: true,
-    },
-    {
-      name: 'inactive-value',
-      description: '关闭时对应的值',
-      propType: 'any',
-      defaultValue: false,
-    },
-  ],
+  docUrl: 'https://vant-ui.github.io/vant/v2/#/zh-CN/switch',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '开关选中状态',
+            'en-US': 'v-model',
+          },
+          tip: '开关选中状态',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'false',
+      },
+      {
+        name: 'loading',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为加载状态',
+            'en-US': 'loading',
+          },
+          tip: '是否为加载状态',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为禁用状态',
+            'en-US': 'disabled',
+          },
+          tip: '是否为禁用状态',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '开关尺寸',
+            'en-US': 'size',
+          },
+          tip: '开关尺寸，默认单位为px',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: '30px',
+      },
+      {
+        name: 'activeColor',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '打开时的背景色',
+            'en-US': 'activeColor',
+          },
+          tip: '打开时的背景色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+        defaultValue: '#1989fa',
+      },
+      {
+        name: 'inactiveColor',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '关闭时的背景色',
+            'en-US': 'inactiveColor',
+          },
+          tip: '关闭时的背景色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+        defaultValue: 'white',
+      },
+      {
+        name: 'activeValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '打开时对应的值',
+            'en-US': 'activeValue',
+          },
+          tip: '打开时对应的值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'true',
+      },
+      {
+        name: 'inactiveValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '关闭时对应的值',
+            'en-US': 'inactiveValue',
+          },
+          tip: '关闭时对应的值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'false',
+      },
+    ],
     supports: {
       style: true,
-      loop: true,
       className: true,
       events: [
         {
+          name: 'onChange',
+          description: '开关状态切换时触发',
+          template:
+            "onChange(extParams) {\n  // 开关状态切换时触发\n  console.log('onChange', extParams)\n}",
+        },
+        {
           name: 'onClick',
-          description: '点击按钮时触发',
+          description: '点击时触发',
+          template:
+            "onClick(extParams) {\n  // 点击时触发\n  console.log('onClick', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '开关组件',
-      screenshot:
-        'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_switch.png',
+      title: '开关',
+      screenshot: './screenshots/switch.webp',
       schema: {
         componentName: 'VanSwitch',
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

@@ -1,157 +1,238 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (mentions); see https://1x.antdv.com/components/mentions-cn/
+const meta = {
   componentName: 'AMentions',
   title: '提及',
-  category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'AMentions',
-  },
-  props: [
-    {
-      name: 'defaultValue',
-      title: { label: '默认值', tip: '默认值' },
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'autoFocus',
-      title: { label: '自动聚焦', tip: '自动获得焦点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'filterOption',
-      title: { label: '自定义过滤逻辑', tip: '自定义过滤逻辑' },
-      propType: { type: 'oneOfType', value: ['bool', 'func'] },
-    },
-    {
-      name: 'notFoundContent',
-      title: {
-        label: '空值展示',
-        tip: '当下拉列表为空时显示的内容',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/mentions-cn/',
+  devMode: 'proCode',
+  configure: {
+    props: [
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获得焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获得焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
-      propType: 'node',
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认值',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'filterOption',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义过滤逻辑',
+            'en-US': 'filterOption',
+          },
+          tip: '自定义过滤逻辑',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'notFoundContent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '当下拉列表为空时显示的内容',
+            'en-US': 'notFoundContent',
+          },
+          tip: '当下拉列表为空时显示的内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'Not Found',
+      },
+      {
+        name: 'placement',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '弹出层展示位置',
+            'en-US': 'placement',
+          },
+          tip: '弹出层展示位置',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'bottom',
+      },
+      {
+        name: 'prefix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置触发关键字',
+            'en-US': 'prefix',
+          },
+          tip: '设置触发关键字',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'split',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置选中项前后分隔符',
+            'en-US': 'split',
+          },
+          tip: '设置选中项前后分隔符',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: ' ',
+      },
+      {
+        name: 'validateSearch',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义触发验证逻辑',
+            'en-US': 'validateSearch',
+          },
+          tip: '自定义触发验证逻辑',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置值',
+            'en-US': 'v-model',
+          },
+          tip: '设置值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'getPopupContainer',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '指定建议框挂载的 HTML 节点',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+    ],
+    supports: {
+      style: true,
+      className: true,
+      events: [
+        {
+          name: 'onBlur',
+          description: '失去焦点的时回调',
+          template:
+            "onBlur(extParams) {\n  // 失去焦点的时回调\n  console.log('onBlur', extParams)\n}",
+        },
+        {
+          name: 'onChange',
+          description: '值改变时触发',
+          template:
+            "onChange(extParams) {\n  // 值改变时触发\n  console.log('onChange', extParams)\n}",
+        },
+        {
+          name: 'onFocus',
+          description: '获得焦点时回调',
+          template:
+            "onFocus(extParams) {\n  // 获得焦点时回调\n  console.log('onFocus', extParams)\n}",
+        },
+        {
+          name: 'onSearch',
+          description: '文本框值变化时回调',
+          template:
+            "onSearch(extParams) {\n  // 文本框值变化时回调\n  console.log('onSearch', extParams)\n}",
+        },
+        {
+          name: 'onSelect',
+          description: '选择选项时触发',
+          template:
+            "onSelect(extParams) {\n  // 选择选项时触发\n  console.log('onSelect', extParams)\n}",
+        },
+      ],
+      loop: true,
+      condition: true,
     },
+    component: {},
+  },
+  snippets: [
     {
-      name: 'placement',
-      title: { label: '弹出层展示位置', tip: '弹出层展示位置' },
-      propType: { type: 'oneOf', value: ['top', 'bottom'] },
-      setter: {
-        componentName: 'RadioGroupSetter',
+      title: '提及',
+      screenshot: './screenshots/mentions.webp',
+      schema: {
+        componentName: 'AMentions',
         props: {
+          style: {
+            width: '200px',
+          },
           options: [
             {
-              title: '上',
-              value: 'top',
+              value: 'a',
+              label: '选项一',
             },
             {
-              title: '下',
-              value: 'bottom',
+              value: 'b',
+              label: '选项二',
             },
           ],
         },
       },
     },
-    {
-      name: 'prefix',
-      title: { label: '设置触发关键字', tip: '设置触发关键字' },
-      propType: {
-        type: 'oneOfType',
-        value: ['string', { type: 'arrayOf', value: 'string' }],
-      },
-    },
-    {
-      name: 'split',
-      title: { label: '设置选中项前后分隔符', tip: '设置选中项前后分隔符' },
-      propType: 'string',
-    },
-    {
-      name: 'validateSearch',
-      title: { label: '自定义触发验证逻辑', tip: '自定义触发验证逻辑' },
-      propType: 'func',
-    },
-    {
-      name: 'value',
-      title: { label: '设置值', tip: '设置值' },
-      propType: 'string',
-    },
-    {
-      name: 'onChange ',
-      title: { label: '值改变时触发', tip: '值改变时触发' },
-      propType: 'func',
-    },
-    {
-      name: 'onSelect',
-      title: { label: '选择选项时触发', tip: '选择选项时触发' },
-      propType: 'func',
-    },
-    {
-      name: 'onSearch',
-      title: { label: '搜索时触发', tip: '搜索时触发' },
-      propType: 'func',
-    },
-    {
-      name: 'onFocus',
-      title: { label: '获得焦点时触发', tip: '获得焦点时触发' },
-      propType: 'func',
-    },
-    {
-      name: 'onBlur',
-      title: { label: '失去焦点时触发', tip: '失去焦点时触发' },
-      propType: 'func',
-    },
-    {
-      name: 'getPopupContainer',
-      title: {
-        label: '指定建议框挂载的 HTML 节点',
-        tip: '指定建议框挂载的 HTML 节点',
-      },
-      propType: 'func',
-    },
   ],
-  configure: {
-    supports: {
-      style: true,
-    },
-    events: [
-      {
-        name: 'onChange ',
-        template:
-          "onChange (text,${extParams}){\n// 值改变时触发\nconsole.log('onChange ',text);}",
-      },
-      {
-        name: 'onSelect',
-        template:
-          "onSelect(option,prefix,${extParams}){\n// 选择选项时触发\nconsole.log('onSelect',option,prefix);}",
-      },
-      {
-        name: 'onSearch',
-        template:
-          "onSearch(text,prefix,${extParams}){\n// 搜索时触发\nconsole.log('onSearch',text,prefix);}",
-      },
-      {
-        name: 'onFocus',
-        template:
-          "onFocus(${extParams}){\n// 获得焦点时触发\nconsole.log('onFocus');}",
-      },
-      {
-        name: 'onBlur',
-        template:
-          "onBlur(${extParams}){\n// 失去焦点时触发\nconsole.log('onBlur');}",
-      },
-    ],
-  },
-  snippets: [
-    {
-      title: '提及',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/mentions-1.png',
-      schema: {
-        componentName: 'AMentions',
-        props: {},
-      },
-    },
-  ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

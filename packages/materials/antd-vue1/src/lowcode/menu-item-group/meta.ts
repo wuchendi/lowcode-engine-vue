@@ -1,105 +1,59 @@
-import { uuid } from '../../utils/index'
-import { itemsExtraProps } from '../menu/util'
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-export default {
-  group: 'Antd 组件',
+// Generated from the ant-design-vue docs (menu); see https://1x.antdv.com/components/menu-cn/
+const meta = {
   componentName: 'AMenuItemGroup',
-  title: '菜单组',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'AMenuItemGroup',
-  },
-  props: [
-    {
-      name: 'items',
-      title: '菜单组项',
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'ObjectSetter',
-            props: {
-              config: {
-                items: [
-                  {
-                    name: 'key',
-                    title: 'key',
-                    setter: 'StringSetter',
-                    initialValue: (val: any) => val || uuid(),
-                  },
-                  {
-                    name: 'children',
-                    tite: '菜单名',
-                    setter: 'StringSetter',
-                  },
-                  {
-                    name: 'category',
-                    title: {
-                      label: '类型',
-                      tip: '菜单项类型',
-                    },
-                    propType: {
-                      type: 'oneOf',
-                      value: ['Menu.Item', 'Menu.SubMenu', 'Menu.ItemGroup'],
-                    },
-                    setter: [
-                      {
-                        componentName: 'RadioGroupSetter',
-                        props: {
-                          options: [
-                            {
-                              title: 'Item',
-                              value: 'Menu.Item',
-                            },
-                            {
-                              title: 'SubMenu',
-                              value: 'Menu.SubMenu',
-                            },
-                            {
-                              title: 'ItemGroup',
-                              value: 'Menu.ItemGroup',
-                            },
-                          ],
-                        },
-                      },
-                      'VariableSetter',
-                    ],
-                  },
-                ],
-              },
-            },
-            initialValue: () => {
-              return {
-                key: `item-${uuid()}`,
-                category: 'Menu.Item',
-                children: '子菜单名',
-              }
-            },
-          },
-        },
-      },
-      extraProps: itemsExtraProps,
-    },
-    {
-      name: 'children',
-      title: { label: '分组的菜单项', tip: '分组的菜单项' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'title',
-      title: { label: '分组标题', tip: '分组标题' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-  ],
+  title: '导航菜单 ItemGroup',
+  group: 'Ant Design 组件',
+  category: '导航',
+  docUrl: 'https://1x.antdv.com/components/menu-cn/',
+  devMode: 'proCode',
   configure: {
-    component: {
-      isContainer: true,
-      nestingRule: { parentWhitelist: ['AMenu', 'ASubMenu'] },
-    },
+    props: [
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '分组标题',
+            'en-US': 'title',
+          },
+          tip: '分组标题',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
+    },
+    component: {
+      nestingRule: {
+        parentWhitelist: ['AMenu', 'AMenuSubMenu'],
+      },
     },
   },
-  snippets: [],
-}
+  snippets: [
+    {
+      title: '导航菜单 ItemGroup',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'AMenuItemGroup',
+        props: {},
+      },
+    },
+  ],
+} as IPublicTypeComponentMetadata
+
+export default meta

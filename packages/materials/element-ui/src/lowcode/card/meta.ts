@@ -1,98 +1,102 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the element-ui docs (card); see https://element.eleme.cn/#/zh-CN/component/card
+const meta = {
+  componentName: 'ElCard',
   title: '卡片',
   group: 'Element 组件',
-  category: 'Others',
-  priority: 1002,
-  componentName: 'ElCard',
-
+  category: '其他',
+  docUrl: 'https://element.eleme.cn/#/zh-CN/component/card',
+  devMode: 'proCode',
   configure: {
     props: [
       {
         name: 'header',
         title: {
-          label: '标题',
-          tip: '可以直接设置字符串，也可以通过插槽自定义',
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置 header',
+            'en-US': 'header',
+          },
+          tip: '设置 header，也可以通过 slot#header 传入 DOM',
         },
-        setter: [
-          {
-            componentName: 'StringSetter',
-            initialValue: '标题',
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'bodyStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置 body 的样式',
+            'en-US': 'bodyStyle',
           },
-          {
-            componentName: 'SlotSetter',
-            initialValue: {
-              type: 'JSSlot',
-              title: '卡片标题插槽',
-              params: ['slotProps'],
-              value: [],
-            },
-          },
-        ],
+          tip: '设置 body 的样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
       },
       {
         name: 'shadow',
-        title: '卡片阴影',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置阴影显示时机',
+            'en-US': 'shadow',
+          },
+          tip: '设置阴影显示时机',
+        },
         setter: {
-          componentName: 'SelectSetter',
+          componentName: 'RadioGroupSetter',
           props: {
             options: [
               {
-                title: '总是显示',
+                title: 'always',
                 value: 'always',
               },
               {
-                title: '鼠标悬浮时显示',
+                title: 'hover',
                 value: 'hover',
               },
               {
-                title: '从不显示',
+                title: 'never',
                 value: 'never',
               },
             ],
           },
-          initialValue: 'always',
         },
-      },
-      {
-        name: 'body-style',
-        title: 'body 样式',
-        setter: {
-          componentName: 'JsonSetter',
-          initialValue: { padding: '20px' },
-        },
+        supportVariable: true,
+        defaultValue: 'always',
       },
     ],
     supports: {
+      style: true,
+      className: true,
+      events: [],
       loop: true,
       condition: true,
-      style: true,
     },
-    component: {
-      isContainer: true,
-    },
+    component: {},
   },
   snippets: [
     {
       title: '卡片',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/card-1.png',
+      screenshot: './screenshots/card.webp',
       schema: {
         componentName: 'ElCard',
-        children: [],
         props: {
-          header: '标题',
-          default: {
-            type: 'JSSlot',
-            params: ['slotProps'],
-            title: '卡片内容插槽',
-          },
-          shadow: 'always',
+          title: '卡片标题',
         },
+        children: [
+          {
+            componentName: 'div',
+            props: {},
+            children: '卡片内容',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

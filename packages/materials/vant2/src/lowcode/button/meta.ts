@@ -1,29 +1,61 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the vant docs (button); see https://vant-ui.github.io/vant/v2/#/zh-CN/button
+const meta = {
+  componentName: 'VanButton',
   title: '按钮',
   group: 'Vant 组件',
   category: '基础组件',
-  priority: 1001,
-  docUrl: 'https://vant-contrib.gitee.io/vant/v2/#/zh-CN/button',
-  componentName: 'VanButton',
-
-  // npm: {
-  //   destructuring: true,
-  //   componentName: 'VanButton',
-  // },
+  docUrl: 'https://vant-ui.github.io/vant/v2/#/zh-CN/button',
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'children',
-        title: '文本内容',
-        setter: {
-          componentName: 'StringSetter',
+        name: 'type',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '类型',
+            'en-US': 'type',
+          },
+          tip: '类型，可选值为 primary info warning danger',
         },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'primary',
+                value: 'primary',
+              },
+              {
+                title: 'info',
+                value: 'info',
+              },
+              {
+                title: 'warning',
+                value: 'warning',
+              },
+              {
+                title: 'danger',
+                value: 'danger',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'default',
       },
       {
         name: 'size',
-        title: '尺寸',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '尺寸',
+            'en-US': 'size',
+          },
+          tip: '尺寸，可选值为 large small mini',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -31,10 +63,6 @@ const meta: IPublicTypeComponentMetadata = {
               {
                 title: 'large',
                 value: 'large',
-              },
-              {
-                title: 'normal',
-                value: 'normal',
               },
               {
                 title: 'small',
@@ -47,162 +75,360 @@ const meta: IPublicTypeComponentMetadata = {
             ],
           },
         },
+        supportVariable: true,
+        defaultValue: 'normal',
       },
       {
-        name: 'type',
-        title: '类型',
-        setter: {
-          componentName: 'SelectSetter',
-          props: {
-            options: [
-              {
-                title: '默认按钮',
-                value: 'default',
-              },
-              {
-                title: '主要按钮',
-                value: 'primary',
-              },
-              {
-                title: '警告按钮',
-                value: 'warning',
-              },
-              {
-                title: '危险按钮',
-                value: 'danger',
-              },
-              {
-                title: '信息按钮',
-                value: 'info',
-              },
-            ],
+        name: 'text',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '按钮文字',
+            'en-US': 'text',
           },
-          initialValue: 'default',
+          tip: '按钮文字',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'color',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '按钮颜色',
+            'en-US': 'color',
+          },
+          tip: '按钮颜色，支持传入 linear-gradient 渐变色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
       },
       {
         name: 'icon',
-        title: '左侧图标名称或图片链接',
-        setter: {
-          componentName: 'StringSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '左侧图标名称或图片链接',
+            'en-US': 'icon',
+          },
+          tip: '左侧图标名称或图片链接',
         },
+        setter: 'CIconSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'iconPrefix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '图标类名前缀',
+            'en-US': 'iconPrefix',
+          },
+          tip: '图标类名前缀，同 Icon 组件的 class-prefix 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'van-icon',
+      },
+      {
+        name: 'iconPosition',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '图标展示位置',
+            'en-US': 'iconPosition',
+          },
+          tip: '图标展示位置，可选值为 right',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'left',
+      },
+      {
+        name: 'tag',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '按钮根节点的 HTML 标签',
+            'en-US': 'tag',
+          },
+          tip: '按钮根节点的 HTML 标签',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'button',
+      },
+      {
+        name: 'nativeType',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'nativeType',
+            'en-US': 'nativeType',
+          },
+          tip: '原生 button 标签的 type 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'block',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为块级元素',
+            'en-US': 'block',
+          },
+          tip: '是否为块级元素',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'plain',
-        title: '朴素按钮',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为朴素按钮',
+            'en-US': 'plain',
+          },
+          tip: '是否为朴素按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: '是否为圆形按钮',
-        title: '是否为圆形按钮',
-        setter: {
-          componentName: 'BoolSetter',
+        name: 'square',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为方形按钮',
+            'en-US': 'square',
+          },
+          tip: '是否为方形按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'round',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否为圆形按钮',
+            'en-US': 'round',
+          },
+          tip: '是否为圆形按钮',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'disabled',
-        title: '禁用',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用按钮',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'hairline',
-        title: '细边框',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否使用 0.5px 边框',
+            'en-US': 'hairline',
+          },
+          tip: '是否使用 0.5px 边框',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'loading',
-        title: '是否显示为加载状态',
-        setter: {
-          componentName: 'BoolSetter',
-        },
-      },
-      {
-        name: 'loading-text',
-        title: '加载状态提示文字',
-        setter: {
-          componentName: 'StringSetter',
-        },
-      },
-      {
-        name: 'loading-type',
-        title: '加载图标类型',
-        setter: {
-          componentName: 'SelectSetter',
-          props: {
-            options: [
-              {
-                title: 'circular',
-                value: 'circular',
-              },
-              {
-                title: 'spinner',
-                value: 'spinner',
-              },
-            ],
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示为加载状态',
+            'en-US': 'loading',
           },
-          initialValue: 'circular',
+          tip: '是否显示为加载状态',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'loading-size',
-        title: '加载图标大小',
-        setter: {
-          componentName: 'StringSetter',
+        name: 'loadingText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '加载状态提示文字',
+            'en-US': 'loadingText',
+          },
+          tip: '加载状态提示文字',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'loadingType',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '加载图标类型',
+            'en-US': 'loadingType',
+          },
+          tip: '加载图标类型，可选值为 spinner',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'circular',
+      },
+      {
+        name: 'loadingSize',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '加载图标大小',
+            'en-US': 'loadingSize',
+          },
+          tip: '加载图标大小',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: '20px',
       },
       {
         name: 'url',
-        title: '点击后跳转的链接地址',
-        setter: {
-          componentName: 'StringSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '点击后跳转的链接地址',
+            'en-US': 'url',
+          },
+          tip: '点击后跳转的链接地址',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'to',
-        title: '点击后跳转的目标路由对象，同 vue-router 的 to 属性',
-        setter: {
-          componentName: 'StringSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '点击后跳转的目标路由对象',
+            'en-US': 'to',
+          },
+          tip: '点击后跳转的目标路由对象，同 vue-router 的 to 属性',
         },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
         name: 'replace',
-        title: '是否在跳转时替换当前页面历史',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否在跳转时替换当前页面历史',
+            'en-US': 'replace',
+          },
+          tip: '是否在跳转时替换当前页面历史',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'iconv',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义图标',
+            'en-US': 'iconv',
+          },
+          tip: '自定义图标',
+        },
         setter: {
-          componentName: 'BoolSetter',
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'loadingv',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义加载图标',
+            'en-US': 'loadingv',
+          },
+          tip: '自定义加载图标',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
         },
       },
     ],
     supports: {
       style: true,
-      loop: true,
       className: true,
       events: [
         {
           name: 'onClick',
-          description: '点击按钮时触发',
+          description: '点击按钮，且按钮状态不为加载或禁用时触发',
+          template:
+            "onClick(extParams) {\n  // 点击按钮，且按钮状态不为加载或禁用时触发\n  console.log('onClick', extParams)\n}",
+        },
+        {
+          name: 'onTouchstart',
+          description: '开始触摸按钮时触发',
+          template:
+            "onTouchstart(extParams) {\n  // 开始触摸按钮时触发\n  console.log('onTouchstart', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '按钮',
-      screenshot:
-        'https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/button.png',
+      screenshot: './screenshots/button.webp',
       schema: {
         componentName: 'VanButton',
         props: {
-          children: '按钮',
+          text: '按钮',
         },
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

@@ -1,147 +1,147 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (checkbox); see https://1x.antdv.com/components/checkbox-cn/
+const meta = {
   componentName: 'ACheckboxGroup',
-  title: '多选框组',
-  category: '表单',
-  npm: {
-    destructuring: true,
-    componentName: 'ACheckboxGroup',
-  },
-  props: [
-    {
-      name: 'value',
-      title: { label: '当前值', tip: '当前选中的选项' },
-      propType: { type: 'arrayOf', value: 'string' },
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
+  title: '多选框 Group',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/checkbox-cn/',
+  devMode: 'proCode',
+  configure: {
+    props: [
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认选中的选项',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认选中的选项',
+        },
+        setter: [
+          {
             componentName: 'StringSetter',
           },
-        },
-      },
-      supportVariable: true,
-    },
-    {
-      name: 'options',
-      title: { label: '指定可选项', tip: '指定可选项' },
-      propType: {
-        type: 'arrayOf',
-        value: {
-          type: 'shape',
-          value: [
-            {
-              name: 'label',
-              description: '选项名',
-              propType: 'string',
-              defaultValue: '选项名',
-            },
-            {
-              name: 'value',
-              description: '选项值',
-              propType: 'string',
-              defaultValue: '选项值',
-            },
-            {
-              name: 'disabled',
-              description: '是否禁用',
-              propType: 'bool',
-              defaultValue: false,
-            },
-          ],
-        },
-      },
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'ObjectSetter',
-            props: {
-              config: {
-                items: [
-                  {
-                    name: 'label',
-                    title: '选项名',
-                    setter: 'StringSetter',
-                    isRequired: true,
-                  },
-                  {
-                    name: 'value',
-                    title: '选项值',
-                    setter: 'StringSetter',
-                    isRequired: true,
-                  },
-                  {
-                    name: 'disabled',
-                    title: '是否禁用',
-                    setter: 'BoolSetter',
-                  },
-                ],
-              },
-            },
-            initialValue: () => {
-              return {
-                label: '选项名',
-                value: '多选框',
-                disabled: false,
-              }
-            },
+          {
+            componentName: 'JsonSetter',
           },
-        },
+        ],
+        supportVariable: true,
       },
-      supportVariable: true,
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'name',
-      title: { label: 'name属性', tip: 'name属性' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'onChange',
-      title: { label: '变化时回调函数', tip: '变化时回调函数' },
-      propType: 'func',
-    },
-  ],
-  configure: {
-    component: {
-      isContainer: true,
-    },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '整组失效',
+            'en-US': 'disabled',
+          },
+          tip: '整组失效',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'name',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'name',
+            'en-US': 'name',
+          },
+          tip: 'CheckboxGroup 下所有 input[type="checkbox"] 的 name 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'options',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定可选项',
+            'en-US': 'options',
+          },
+          tip: '指定可选项，可以通过 slot="label" slot-scope="option" 定制label',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'value',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定选中的选项',
+            'en-US': 'value',
+          },
+          tip: '指定选中的选项',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
+          description: '变化时回调函数',
           template:
-            "onChange(checkedValue,${extParams}){\n// 变化时回调函数\nconsole.log('onChange', checkedValue);}",
+            "onChange(extParams) {\n  // 变化时回调函数\n  console.log('onChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '多选框组',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/checkbox-group-1.png',
+      title: '多选框 Group',
+      screenshot: './screenshots/checkbox-group.webp',
       schema: {
         componentName: 'ACheckboxGroup',
         props: {
-          options: [
-            { label: '选项一', value: '1' },
-            { label: '选项二', value: '2' },
-            { label: '选修三', value: '3' },
-          ],
+          value: [],
         },
+        children: [
+          {
+            componentName: 'ACheckbox',
+            props: {
+              value: 'a',
+            },
+            children: '选项一',
+          },
+          {
+            componentName: 'ACheckbox',
+            props: {
+              value: 'b',
+            },
+            children: '选项二',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

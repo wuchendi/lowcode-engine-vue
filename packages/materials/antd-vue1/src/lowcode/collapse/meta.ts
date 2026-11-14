@@ -1,254 +1,161 @@
-import { uuid } from '../../utils/index'
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-export default {
-  group: 'Antd 组件',
+// Generated from the ant-design-vue docs (collapse); see https://1x.antdv.com/components/collapse-cn/
+const meta = {
   componentName: 'ACollapse',
   title: '折叠面板',
+  group: 'Ant Design 组件',
   category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'ACollapse',
-  },
-  props: [
-    {
-      name: 'bordered',
-      title: { label: '显示边框', tip: '带边框风格的折叠面板' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'accordion',
-      title: { label: '手风琴模式', tip: '手风琴模式' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'collapsible',
-      title: '可折叠触发区域',
-      propType: {
-        type: 'oneOf',
-        value: ['-', 'header', 'disabled'],
-      },
-    },
-    {
-      name: 'expandIconPosition',
-      title: { label: '图标位置', tip: '设置图标位置' },
-      propType: { type: 'oneOf', value: ['left', 'right'] },
-    },
-    {
-      name: 'destroyInactivePanel',
-      title: { label: '隐藏时销毁', tip: '销毁折叠隐藏的面板' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'ghost',
-      title: { label: '透明无边框', tip: '使折叠面板透明且无边框' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'collapses',
-      title: '折叠项',
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'ObjectSetter',
-            props: {
-              config: {
-                items: [
-                  {
-                    name: 'key',
-                    title: 'key',
-                    setter: 'StringSetter',
-                    initialValue: (val: any) => val || uuid(),
-                  },
-                  {
-                    name: 'header',
-                    title: '面板头内容',
-                    setter: 'StringSetter',
-                    initialValue: '折叠项',
-                  },
-                ],
-              },
-            },
-            initialValue: () => {
-              return {
-                key: uuid(),
-                header: '折叠项',
-                showArrow: true,
-                collapsible: undefined,
-                forceRender: false,
-              }
-            },
-          },
-        },
-      },
-      extraProps: {
-        getValue(target: { node: { children: any[] } }) {
-          console.log('getValue', target.node.children.length)
-          const map = target.node.children.map((child) => {
-            const key = child.getPropValue('key')
-              ? String(child.getPropValue('key'))
-              : child.id
-            return {
-              key,
-              header: child.getPropValue('header'),
-              showArrow: child.getPropValue('showArrow'),
-              collapsible: child.getPropValue('collapsible'),
-              forceRender: child.getPropValue('forceRender'),
-            }
-          })
-          return map
-        },
-        setValue(target: { node: any }, value: { key: string | number }[]) {
-          const { node } = target
-          const map = {}
-
-          // console.log('setValue',value);
-
-          if (!Array.isArray(value)) {
-            value = []
-          }
-          value.forEach((item: { key: string | number }) => {
-            const tabItem = Object.assign({}, item)
-            // @ts-expect-error
-            map[item.key] = tabItem
-          })
-
-          node.children.mergeChildren(
-            (child: {
-              getPropValue: (arg0: string) => any
-              setPropValue: (arg0: string, arg1: any) => void
-            }) => {
-              const key = String(child.getPropValue('key'))
-              if (Object.hasOwnProperty.call(map, key)) {
-                // @ts-expect-error
-                child.setPropValue('header', map[key].header)
-                // @ts-expect-error
-                child.setPropValue('showArrow', map[key].showArrow)
-                // @ts-expect-error
-                child.setPropValue('collapsible', map[key].collapsible)
-                // @ts-expect-error
-                child.setPropValue('forceRender', map[key].forceRender)
-                // @ts-expect-error
-                delete map[key]
-                return false
-              }
-              return true
-            },
-            () => {
-              const items = []
-              for (const key in map) {
-                if (Object.hasOwnProperty.call(map, key)) {
-                  items.push({
-                    componentName: 'ACollapsePanel',
-                    // @ts-expect-error
-                    props: map[key],
-                  })
-                }
-              }
-              return items
-            },
-            (
-              child1: { getPropValue: (arg0: string) => any },
-              child2: { getPropValue: (arg0: string) => any },
-            ) => {
-              const a = value.findIndex(
-                (item: { key: any }) =>
-                  String(item.key) === String(child1.getPropValue('key')),
-              )
-              const b = value.findIndex(
-                (item) =>
-                  String(item.key) === String(child2.getPropValue('key')),
-              )
-              return a - b
-            },
-          )
-        },
-      },
-    },
-    {
-      name: 'defaultActiveKey',
-      title: { label: '初始化选中面板的 key', tip: '初始化选中面板的 key' },
-      propType: {
-        type: 'oneOfType',
-        value: [
-          'string',
-          { type: 'arrayOf', value: 'string' },
-          'number',
-          { type: 'arrayOf', value: 'number' },
-        ],
-      },
-    },
-    {
-      name: 'activeKey',
-      title: {
-        label: '当前激活 tab 面板的 key',
-        tip: '当前激活 tab 面板的 key',
-      },
-      propType: {
-        type: 'oneOfType',
-        value: [
-          'string',
-          { type: 'arrayOf', value: 'string' },
-          'number',
-          { type: 'arrayOf', value: 'number' },
-        ],
-      },
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/collapse-cn/',
+  devMode: 'proCode',
   configure: {
-    component: {
-      isContainer: true,
-    },
-    supports: {
-      style: true,
-    },
-    events: [
+    props: [
       {
-        name: 'onChange ',
-        template:
-          "onChange (key,${extParams}){\n// 切换面板的回调\nconsole.log('onChange ',key);}",
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'v-model',
+            'en-US': 'v-model',
+          },
+          tip: '当前激活 tab 面板的 key',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'defaultActiveKey',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '初始化选中面板的 key',
+            'en-US': 'defaultActiveKey',
+          },
+          tip: '初始化选中面板的 key',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'bordered',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '带边框风格的折叠面板',
+            'en-US': 'bordered',
+          },
+          tip: '带边框风格的折叠面板',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'accordion',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '手风琴模式',
+            'en-US': 'accordion',
+          },
+          tip: '手风琴模式',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'expandIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义切换图标',
+            'en-US': 'expandIcon',
+          },
+          tip: '自定义切换图标',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'expandIconPosition',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置图标位置',
+            'en-US': 'expandIconPosition',
+          },
+          tip: '设置图标位置： left, right',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'destroyInactivePanel',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '销毁折叠隐藏的面板',
+            'en-US': 'destroyInactivePanel',
+          },
+          tip: '销毁折叠隐藏的面板',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
     ],
+    supports: {
+      style: true,
+      className: true,
+      events: [
+        {
+          name: 'onChange',
+          description: '切换面板的回调',
+          template:
+            "onChange(extParams) {\n  // 切换面板的回调\n  console.log('onChange', extParams)\n}",
+        },
+      ],
+      loop: true,
+      condition: true,
+    },
+    component: {},
   },
   snippets: [
     {
       title: '折叠面板',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/collapse-1.png',
+      screenshot: './screenshots/collapse.webp',
       schema: {
         componentName: 'ACollapse',
-        props: {
-          defaultActiveKey: ['collapse-item-1'],
-        },
+        props: {},
         children: [
           {
             componentName: 'ACollapsePanel',
             props: {
-              header: '折叠项1',
-              key: 'collapse-item-1',
+              header: '面板一',
+              key: '1',
             },
+            children: '内容一',
           },
           {
             componentName: 'ACollapsePanel',
             props: {
-              header: '折叠项2',
-              key: 'collapse-item-2',
+              header: '面板二',
+              key: '2',
             },
+            children: '内容二',
           },
         ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

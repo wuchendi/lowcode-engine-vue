@@ -1,145 +1,141 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (dropdown); see https://1x.antdv.com/components/dropdown-cn/
+const meta = {
   componentName: 'ADropdown',
   title: '下拉菜单',
-  // category: '基础组件',
+  group: 'Ant Design 组件',
   category: '导航',
-  npm: {
-    destructuring: true,
-    componentName: 'ADropdown',
-  },
-  props: [
-    {
-      name: 'visible',
-      title: { label: '菜单是否显示', tip: '菜单是否显示' },
-      propType: { type: 'oneOf', value: [true, false, '-'] },
-      defaultValue: '-',
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            {
-              title: '默认非受控',
-              value: '-',
-            },
-            {
-              title: '显示',
-              value: true,
-            },
-            {
-              title: '不显示',
-              value: false,
-            },
-          ],
-        },
-      },
-      extraProps: {
-        getValue(target: { node: any }) {
-          const { node } = target
-          let value = node.getPropValue('visible')
-          if (value === undefined) {
-            value = '-'
-          }
-          return value
-        },
-        setValue(target: { node: any }, value: string) {
-          const { node } = target
-          if (value === '-') {
-            setTimeout(() => {
-              node.clearPropValue('visible')
-            })
-          }
-        },
-      },
-    },
-    {
-      name: 'arrow',
-      title: { label: '显示下拉箭头', tip: '是否显示下拉箭头' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-    },
-    {
-      name: 'overlay',
-      title: { label: '菜单', tip: '菜单' },
-      propType: { type: 'oneOfType', value: ['node', 'func'] },
-    },
-    {
-      name: 'size',
-      title: { label: '尺寸', tip: '按钮大小' },
-      propType: { type: 'oneOf', value: ['default', 'small', 'large'] },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            { label: 'default', value: 'default' },
-            { label: 'large', value: 'large' },
-            { label: 'small', value: 'small' },
-          ],
-        },
-      },
-      defaultValue: 'default',
-    },
-    {
-      name: 'placement',
-      title: {
-        label: '弹出位置',
-        tip: '菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight`',
-      },
-      propType: {
-        type: 'oneOf',
-        value: [
-          'bottomLeft',
-          'bottomCenter',
-          'bottomRight',
-          'topLeft',
-          'topCenter',
-          'topRight',
-        ],
-      },
-    },
-    {
-      name: 'trigger',
-      title: {
-        label: '触发下拉的行为',
-        tip: '触发下拉的行为, 移动端不支持 hover',
-      },
-      propType: {
-        type: 'arrayOf',
-        value: { type: 'oneOf', value: ['click', 'hover', 'contextMenu'] },
-      },
-    },
-    {
-      name: 'visibleChange',
-      title: {
-        label: '显示状态回调',
-        tip: '菜单显示状态改变时调用，参数为 `visible`',
-      },
-      propType: 'func',
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/dropdown-cn/',
+  devMode: 'proCode',
   configure: {
-    component: { isContainer: true },
+    props: [
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单是否禁用',
+            'en-US': 'disabled',
+          },
+          tip: '菜单是否禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单渲染父节点',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'overlay',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单',
+            'en-US': 'overlay',
+          },
+          tip: '菜单',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'overlayClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '下拉根元素的类名称',
+            'en-US': 'overlayClassName',
+          },
+          tip: '下拉根元素的类名称',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'overlayStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '下拉根元素的样式',
+            'en-US': 'overlayStyle',
+          },
+          tip: '下拉根元素的样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'placement',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单弹出位置',
+            'en-US': 'placement',
+          },
+          tip: '菜单弹出位置：bottomLeft bottomCenter bottomRight topLeft topCenter topRight',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'bottomLeft',
+      },
+      {
+        name: 'trigger',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '触发下拉的行为',
+            'en-US': 'trigger',
+          },
+          tip: '触发下拉的行为, 移动端不支持 hover',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '菜单是否显示',
+            'en-US': 'v-model',
+          },
+          tip: '菜单是否显示',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'visibleChange',
+          name: 'onVisibleChange',
+          description: '菜单显示状态改变时调用，参数为 visible',
           template:
-            "visibleChange(open,${extParams}){\n// 菜单显示状态改变时调用\nconsole.log('visibleChange',open);}",
+            "onVisibleChange(extParams) {\n  // 菜单显示状态改变时调用，参数为 visible\n  console.log('onVisibleChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '下拉菜单',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/dropdown-1.png',
+      screenshot: './screenshots/dropdown.webp',
       schema: {
         componentName: 'ADropdown',
         props: {
@@ -148,25 +144,21 @@ export default {
             value: [
               {
                 componentName: 'AMenu',
-                props: {
-                  items: [
-                    {
-                      key: 'timeLinei5wd',
-                      category: 'Item',
-                      title: '菜单名',
-                    },
-                  ],
-                },
+                props: {},
                 children: [
                   {
                     componentName: 'AMenuItem',
-                    id: 'node_ocky01yzdq3',
                     props: {
-                      key: 'timeLinei5wd',
-                      category: 'Item',
-                      title: '菜单名',
-                      children: '菜单名',
+                      key: '1',
                     },
+                    children: '菜单一',
+                  },
+                  {
+                    componentName: 'AMenuItem',
+                    props: {
+                      key: '2',
+                    },
+                    children: '菜单二',
                   },
                 ],
               },
@@ -176,26 +168,13 @@ export default {
         children: [
           {
             componentName: 'AButton',
-            props: {
-              type: 'link',
-              children: {
-                type: 'JSSlot',
-                value: [
-                  {
-                    componentName: 'ATypographyText',
-                    props: {
-                      children: 'Hover me',
-                      style: {
-                        color: 'inherit',
-                      },
-                    },
-                  },
-                ],
-              },
-            },
+            props: {},
+            children: '下拉菜单',
           },
         ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

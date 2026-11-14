@@ -1,111 +1,172 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (switch); see https://1x.antdv.com/components/switch-cn/
+const meta = {
   componentName: 'ASwitch',
   title: '开关',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'ASwitch',
-  },
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/switch-cn/',
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'defaultChecked',
-        title: { label: '默认选中', tip: '默认是否选中' },
-        propType: 'bool',
-        defaultValue: false,
-        setter: 'BoolSetter',
-      },
-      {
-        name: 'checked',
-        title: { label: '是否选中', tip: '当前是否选中' },
-        propType: 'bool',
-        defaultValue: false,
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '组件自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '组件自动获取焦点',
+        },
         setter: 'BoolSetter',
         supportVariable: true,
+        defaultValue: false,
       },
       {
-        name: 'autoFocus',
-        title: { label: '自动聚焦', tip: '组件自动获取焦点' },
-        propType: 'bool',
-        defaultValue: false,
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定当前是否选中',
+            'en-US': 'v-model',
+          },
+          tip: '指定当前是否选中',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'checkedChildren',
-        title: { label: '选中时内容', tip: '选中时的内容' },
-        propType: 'string',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '选中时的内容',
+            'en-US': 'checkedChildren',
+          },
+          tip: '选中时的内容',
+        },
         setter: 'StringSetter',
+        supportVariable: true,
       },
       {
-        name: 'unCheckedChildren',
-        title: { label: '非选中时内容', tip: '非选中时的内容' },
-        propType: 'string',
-        setter: 'StringSetter',
+        name: 'defaultChecked',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '初始是否选中',
+            'en-US': 'defaultChecked',
+          },
+          tip: '初始是否选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'disabled',
-        title: { label: '是否禁用', tip: '是否为禁用状态' },
-        propType: 'bool',
-        defaultValue: false,
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'loading',
-        title: { label: '加载中', tip: '加载中' },
-        propType: 'bool',
-        defaultValue: false,
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '加载中的开关',
+            'en-US': 'loading',
+          },
+          tip: '加载中的开关',
+        },
         setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'size',
-        title: { label: '尺寸', tip: '开关大小' },
-        propType: { type: 'oneOf', value: ['default', 'small'] },
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '开关大小',
+            'en-US': 'size',
+          },
+          tip: '开关大小，可选值：default small',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
             options: [
               {
-                title: '默认',
+                title: 'default',
                 value: 'default',
               },
               {
-                title: '小',
+                title: 'small',
                 value: 'small',
               },
             ],
           },
         },
+        supportVariable: true,
         defaultValue: 'default',
+      },
+      {
+        name: 'unCheckedChildren',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '非选中时的内容',
+            'en-US': 'unCheckedChildren',
+          },
+          tip: '非选中时的内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
     ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
+          description: '变化时回调函数',
           template:
-            "onChange(checked,event,${extParams}){\n// 变化时回调函数\nconsole.log('onChange',checked,event);}",
+            "onChange(extParams) {\n  // 变化时回调函数\n  console.log('onChange', extParams)\n}",
         },
         {
           name: 'onClick',
+          description: '点击时回调函数',
           template:
-            "onClick(checked,event,${extParams}){\n// 点击时回调函数\nconsole.log('onClick',checked,event);}",
+            "onClick(extParams) {\n  // 点击时回调函数\n  console.log('onClick', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '开关',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/switch-1.png',
+      screenshot: './screenshots/switch.webp',
       schema: {
         componentName: 'ASwitch',
-        props: {
-          defaultChecked: true,
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

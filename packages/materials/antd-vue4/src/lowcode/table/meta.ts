@@ -1,0 +1,775 @@
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (table); see https://antdv.com/components/table-cn
+const meta = {
+  componentName: 'ATable',
+  title: '表格',
+  group: 'Ant Design 组件',
+  category: '数据展示',
+  docUrl: 'https://antdv.com/components/table-cn',
+  devMode: 'proCode',
+  configure: {
+    props: [
+      {
+        name: 'bodyCell',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '个性化单元格',
+            'en-US': 'bodyCell',
+          },
+          tip: '个性化单元格',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'bordered',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否展示外边框和列边框',
+            'en-US': 'bordered',
+          },
+          tip: '是否展示外边框和列边框',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'childrenColumnName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定树形结构的列名',
+            'en-US': 'childrenColumnName',
+          },
+          tip: '指定树形结构的列名',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'children',
+      },
+      {
+        name: 'columns',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格列的配置描述',
+            'en-US': 'columns',
+          },
+          tip: '表格列的配置描述，具体项见下表',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'components',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '覆盖默认的 table 元素',
+            'en-US': 'components',
+          },
+          tip: '覆盖默认的 table 元素',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'customFilterDropdown',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义筛选菜单',
+            'en-US': 'customFilterDropdown',
+          },
+          tip: '自定义筛选菜单，需要配合 column.customFilterDropdown 使用',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'customFilterIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义筛选图标',
+            'en-US': 'customFilterIcon',
+          },
+          tip: '自定义筛选图标',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'customHeaderRow',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置头部行属性',
+            'en-US': 'customHeaderRow',
+          },
+          tip: '设置头部行属性',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'customRow',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置行属性',
+            'en-US': 'customRow',
+          },
+          tip: '设置行属性',
+        },
+        setter: [
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'dataSource',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '数据数组',
+            'en-US': 'dataSource',
+          },
+          tip: '数据数组',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'defaultExpandAllRows',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '初始时',
+            'en-US': 'defaultExpandAllRows',
+          },
+          tip: '初始时，是否展开所有行',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'defaultExpandedRowKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认展开的行',
+            'en-US': 'defaultExpandedRowKeys',
+          },
+          tip: '默认展开的行',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'emptyText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义空数据时的显示内容',
+            'en-US': 'emptyText',
+          },
+          tip: '自定义空数据时的显示内容',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'v-model:expandedRowKeys',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '展开的行',
+            'en-US': 'v-model:expandedRowKeys',
+          },
+          tip: '展开的行，控制属性',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'expandedRowRender',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '额外的展开行',
+            'en-US': 'expandedRowRender',
+          },
+          tip: '额外的展开行',
+        },
+        setter: [
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'expandFixed',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '控制展开图标是否固定',
+            'en-US': 'expandFixed',
+          },
+          tip: '控制展开图标是否固定，可选 true left right',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'false',
+      },
+      {
+        name: 'expandColumnTitle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义展开列表头',
+            'en-US': 'expandColumnTitle',
+          },
+          tip: '自定义展开列表头',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'expandIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义展开图标',
+            'en-US': 'expandIcon',
+          },
+          tip: '自定义展开图标',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'expandRowByClick',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '通过点击行来展开子行',
+            'en-US': 'expandRowByClick',
+          },
+          tip: '通过点击行来展开子行',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'footer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格尾部',
+            'en-US': 'footer',
+          },
+          tip: '表格尾部',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置表格内各类浮层的渲染节点',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '设置表格内各类浮层的渲染节点，如筛选菜单',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'headerCell',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '个性化头部单元格',
+            'en-US': 'headerCell',
+          },
+          tip: '个性化头部单元格',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'indentSize',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '展示树形数据时',
+            'en-US': 'indentSize',
+          },
+          tip: '展示树形数据时，每层缩进的宽度，以 px 为单位',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 15,
+      },
+      {
+        name: 'loading',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '页面是否加载中',
+            'en-US': 'loading',
+          },
+          tip: '页面是否加载中',
+        },
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'locale',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认文案设置',
+            'en-US': 'locale',
+          },
+          tip: '默认文案设置，目前包括排序、过滤、空数据文案',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'pagination',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '分页器',
+            'en-US': 'pagination',
+          },
+          tip: '分页器，参考配置项或 pagination文档，设为 false 时不展示和进行分页',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'rowClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格行的类名',
+            'en-US': 'rowClassName',
+          },
+          tip: '表格行的类名',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'rowExpandable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置是否允许行展开',
+            'en-US': 'rowExpandable',
+          },
+          tip: '设置是否允许行展开',
+        },
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'rowKey',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格行 key 的取值',
+            'en-US': 'rowKey',
+          },
+          tip: '表格行 key 的取值，可以是字符串或一个函数',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'key',
+      },
+      {
+        name: 'rowSelection',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '列表项是否可选择',
+            'en-US': 'rowSelection',
+          },
+          tip: '列表项是否可选择，配置项',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'scroll',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格是否可滚动',
+            'en-US': 'scroll',
+          },
+          tip: '表格是否可滚动，也可以指定滚动区域的宽、高，配置项',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'showExpandColumn',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置是否展示行展开列',
+            'en-US': 'showExpandColumn',
+          },
+          tip: '设置是否展示行展开列',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'showHeader',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示表头',
+            'en-US': 'showHeader',
+          },
+          tip: '是否显示表头',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'showSorterTooltip',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'showSorterTooltip',
+            'en-US': 'showSorterTooltip',
+          },
+          tip: '表头是否显示下一次排序的 tooltip 提示。当参数类型为对象时，将被设置为 Tooltip 的属性',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格大小',
+            'en-US': 'size',
+          },
+          tip: '表格大小',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'large',
+      },
+      {
+        name: 'sortDirections',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '支持的排序方式',
+            'en-US': 'sortDirections',
+          },
+          tip: '支持的排序方式，取值为 ascend descend',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'sticky',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置粘性头部和滚动条',
+            'en-US': 'sticky',
+          },
+          tip: '设置粘性头部和滚动条',
+        },
+        setter: [
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'summary',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '总结栏',
+            'en-US': 'summary',
+          },
+          tip: '总结栏',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+      },
+      {
+        name: 'tableLayout',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tableLayout',
+            'en-US': 'tableLayout',
+          },
+          tip: '表格元素的 table-layout 属性，设为 fixed 表示内容不会影响列的布局',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'auto',
+                value: 'auto',
+              },
+              {
+                title: 'fixed',
+                value: 'fixed',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '表格标题',
+            'en-US': 'title',
+          },
+          tip: '表格标题',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'transformCellText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '数据渲染前可以再次改变',
+            'en-US': 'transformCellText',
+          },
+          tip: '数据渲染前可以再次改变，一般用于空数据的默认配置，可以通过 ConfigProvider 全局统一配置',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'NumberSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+    ],
+    supports: {
+      style: true,
+      className: true,
+      events: [
+        {
+          name: 'onChange',
+          description: '分页、排序、筛选变化时触发',
+          template:
+            "onChange(extParams) {\n  // 分页、排序、筛选变化时触发\n  console.log('onChange', extParams)\n}",
+        },
+        {
+          name: 'onExpand',
+          description: '点击展开图标时触发',
+          template:
+            "onExpand(extParams) {\n  // 点击展开图标时触发\n  console.log('onExpand', extParams)\n}",
+        },
+        {
+          name: 'onExpandedRowsChange',
+          description: '展开的行变化时触发',
+          template:
+            "onExpandedRowsChange(extParams) {\n  // 展开的行变化时触发\n  console.log('onExpandedRowsChange', extParams)\n}",
+        },
+        {
+          name: 'onResizeColumn',
+          description: '拖动列时触发',
+          template:
+            "onResizeColumn(extParams) {\n  // 拖动列时触发\n  console.log('onResizeColumn', extParams)\n}",
+        },
+      ],
+      loop: true,
+      condition: true,
+    },
+    component: {},
+  },
+  snippets: [
+    {
+      title: '表格',
+      screenshot: './screenshots/table.webp',
+      schema: {
+        componentName: 'ATable',
+        props: {
+          columns: [
+            {
+              title: '姓名',
+              dataIndex: 'name',
+            },
+            {
+              title: '年龄',
+              dataIndex: 'age',
+            },
+          ],
+          dataSource: [
+            {
+              key: '1',
+              name: '张三',
+              age: 18,
+            },
+            {
+              key: '2',
+              name: '李四',
+              age: 20,
+            },
+          ],
+        },
+      },
+    },
+  ],
+} as IPublicTypeComponentMetadata
+
+export default meta

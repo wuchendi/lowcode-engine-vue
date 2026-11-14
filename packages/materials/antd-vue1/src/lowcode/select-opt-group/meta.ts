@@ -1,26 +1,50 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (select); see https://1x.antdv.com/components/select-cn/
+const meta = {
   componentName: 'ASelectOptGroup',
-  title: '选择器-分组',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'ASelectOptGroup',
-  },
-  props: [
-    {
-      title: 'key',
-      name: 'key',
-      propType: 'string',
-      setter: 'StringSetter',
+  title: '选择器 OptGroup',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/select-cn/',
+  devMode: 'proCode',
+  configure: {
+    props: [
+      {
+        name: 'label',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '组名',
+            'en-US': 'label',
+          },
+          tip: '组名',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+    ],
+    supports: {
+      style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
-    {
-      title: { label: 'title', tip: '组名' },
-      name: 'title',
-      propType: {
-        type: 'oneOfType',
-        value: ['string', 'node', 'func'],
+    component: {
+      nestingRule: {
+        parentWhitelist: ['ASelect'],
       },
     },
-  ],
-}
+  },
+  snippets: [],
+} as IPublicTypeComponentMetadata
+
+export default meta

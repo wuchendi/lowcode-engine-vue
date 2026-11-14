@@ -1,149 +1,150 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (popconfirm); see https://1x.antdv.com/components/popconfirm-cn/
+const meta = {
   componentName: 'APopconfirm',
   title: '气泡确认框',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'APopconfirm',
-  },
-  props: [
-    {
-      name: 'title',
-      title: { label: '确认框内容', tip: '确认框内容' },
-      propType: { type: 'oneOfType', value: ['string', 'node', 'func'] },
-    },
-    {
-      name: 'visible',
-      title: { label: '是否可见', tip: '确认框是否可见' },
-      propType: 'bool',
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'okText',
-      title: { label: '确认按钮文字', tip: '确认按钮文字' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'showCancel',
-      title: { label: '是否展示取消', tip: '是否显示取消按钮' },
-      propType: 'bool',
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'cancelText',
-      title: { label: '取消按钮文字', tip: '取消按钮文字' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'onConfirm',
-      title: { label: '点击确认回调', tip: '点击确认回调' },
-      propType: 'func',
-    },
-    {
-      name: 'okType',
-      title: { label: '确认按钮类型', tip: '确认按钮类型' },
-      propType: {
-        type: 'oneOf',
-        value: ['primary', 'ghost', 'dashed', 'danger', 'link', 'text'],
-      },
-      setter: {
-        componentName: 'SelectSetter',
-        props: {
-          options: [
-            {
-              title: '主按钮',
-              value: 'primary',
-            },
-            {
-              title: '虚线框按钮',
-              value: 'dashed',
-            },
-            {
-              title: '危险按钮',
-              value: 'danger',
-            },
-            {
-              title: '链接按钮',
-              value: 'link',
-            },
-            {
-              title: '类文本按钮',
-              value: 'text',
-            },
-          ],
-        },
-      },
-    },
-    {
-      name: 'okButtonProps',
-      title: { label: 'ok按钮props', tip: 'ok按钮props' },
-      propType: 'object',
-    },
-    {
-      name: 'cancelButtonProps',
-      title: { label: 'cancel按钮props', tip: 'cancel按钮props' },
-      propType: 'object',
-    },
-    {
-      name: 'icon',
-      title: { label: '自定义Icon图标', tip: '自定义弹出气泡Icon图标' },
-      propType: 'node',
-    },
-    {
-      name: 'disabled',
-      title: {
-        label: '是否禁用',
-        tip: '是否为禁用状态',
-      },
-      propType: 'bool',
-      defaultValue: false,
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '反馈',
+  docUrl: 'https://1x.antdv.com/components/popconfirm-cn/',
+  devMode: 'proCode',
   configure: {
-    component: { isContainer: true },
+    props: [
+      {
+        name: 'cancelText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '取消按钮文字',
+            'en-US': 'cancelText',
+          },
+          tip: '取消按钮文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'okText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '确认按钮文字',
+            'en-US': 'okText',
+          },
+          tip: '确认按钮文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'okType',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '确认按钮类型',
+            'en-US': 'okType',
+          },
+          tip: '确认按钮类型',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'primary',
+      },
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '确认框的描述',
+            'en-US': 'title',
+          },
+          tip: '确认框的描述',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'icon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'icon',
+            'en-US': 'icon',
+          },
+          tip: '自定义弹出气泡 Icon 图标',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'disabled',
+            'en-US': 'disabled',
+          },
+          tip: '点击 Popconfirm 子元素是否弹出气泡确认框',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'onConfirm',
+          name: 'onCancel',
+          description: '点击取消的回调',
           template:
-            "onConfirm(${extParams}){\n// 点击确认的回调\nwindow.LowcodeMaterialAntVue.message.success('点击确定');}",
+            "onCancel(extParams) {\n  // 点击取消的回调\n  console.log('onCancel', extParams)\n}",
         },
         {
-          name: 'onCancel',
+          name: 'onConfirm',
+          description: '点击确认的回调',
           template:
-            "onCancel(${extParams}){\n // 点击取消的回调\n window.LowcodeMaterialAntVue.message.error('点击取消');}",
+            "onConfirm(extParams) {\n  // 点击确认的回调\n  console.log('onConfirm', extParams)\n}",
+        },
+        {
+          name: 'onVisibleChange',
+          description: '显示隐藏的回调',
+          template:
+            "onVisibleChange(extParams) {\n  // 显示隐藏的回调\n  console.log('onVisibleChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '气泡确认框',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/popconfirm-1.jpg',
+      screenshot: './screenshots/popconfirm.webp',
       schema: {
         componentName: 'APopconfirm',
         props: {
-          title: '确认删除？',
-          okType: 'primary',
-          okText: '确定',
-          cancelText: '取消',
+          title: '标题',
+          content: '内容',
         },
-        children: {
-          componentName: 'AButton',
-          props: {
-            children: '删除',
+        children: [
+          {
+            componentName: 'AButton',
+            props: {},
+            children: '气泡确认框',
           },
-        },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

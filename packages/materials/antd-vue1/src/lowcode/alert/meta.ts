@@ -1,162 +1,169 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the ant-design-vue docs (alert); see https://1x.antdv.com/components/alert-cn/
+const meta = {
+  componentName: 'AAlert',
   title: '警告提示',
-  group: 'Antd 组件',
+  group: 'Ant Design 组件',
   category: '反馈',
   docUrl: 'https://1x.antdv.com/components/alert-cn/',
-  componentName: 'AAlert',
-  // npm: {
-  //   destructuring: true,
-  //   componentName: 'AAlert',
-  // },
-  props: [
-    {
-      name: 'afterClose',
-      // @ts-expect-error
-      title: {
-        label: '关闭动画结束后触发的回调函数',
-        tip: '关闭动画结束后触发的回调函数',
-      },
-      propType: 'func',
-    },
-    {
-      name: 'banner',
-      // @ts-expect-error
-      title: { label: '顶部公告', tip: '是否用作顶部公告' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'closable',
-      // @ts-expect-error
-      title: { label: '可关闭', tip: '默认不显示关闭按钮' },
-      propType: 'bool',
-    },
-    {
-      name: 'closeText',
-      // @ts-expect-error
-      title: { label: '自定义关闭按钮', tip: '自定义关闭按钮' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'description',
-      // @ts-expect-error
-      title: {
-        label: '描述信息',
-        tip: '警告提示的辅助性文字介绍',
-      },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'icon',
-      // @ts-expect-error
-      title: {
-        label: '图标',
-        tip: '自定义图标，`showIcon` 为 true 时有效',
-      },
-      propType: 'node',
-    },
-    {
-      name: 'message',
-      // @ts-expect-error
-      title: { label: '警告提示内容', tip: '警告提示内容' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'showIcon',
-      // @ts-expect-error
-      title: { label: '显示图标', tip: '是否显示辅助图标' },
-      propType: 'bool',
-    },
-    {
-      name: 'type',
-      // @ts-expect-error
-      title: { label: '类型', tip: '类型' },
-      propType: {
-        type: 'oneOf',
-        value: ['success', 'info', 'warning', 'error'],
-      },
-    },
-    {
-      name: 'onClose',
-      // @ts-expect-error
-      title: { label: '关闭时触发的回调函数', tip: '关闭时触发的回调函数' },
-      propType: 'func',
-    },
-  ],
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'afterClose',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '关闭动画结束后触发的回调函数',
+            'en-US': 'afterClose',
+          },
+          tip: '关闭动画结束后触发的回调函数',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'banner',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否用作顶部公告',
+            'en-US': 'banner',
+          },
+          tip: '是否用作顶部公告',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'closable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认不显示关闭按钮',
+            'en-US': 'closable',
+          },
+          tip: '默认不显示关闭按钮',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'closeText',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义关闭按钮',
+            'en-US': 'closeText',
+          },
+          tip: '自定义关闭按钮',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'description',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '警告提示的辅助性文字介绍',
+            'en-US': 'description',
+          },
+          tip: '警告提示的辅助性文字介绍',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'icon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义图标',
+            'en-US': 'icon',
+          },
+          tip: '自定义图标，showIcon 为 true 时有效',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'message',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '警告提示内容',
+            'en-US': 'message',
+          },
+          tip: '警告提示内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'showIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示辅助图标',
+            'en-US': 'showIcon',
+          },
+          tip: '是否显示辅助图标',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'type',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定警告提示的样式',
+            'en-US': 'type',
+          },
+          tip: '指定警告提示的样式，有四种选择 success、info、warning、error',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'close',
+          name: 'onClose',
+          description: '关闭时触发的回调函数',
           template:
-            "close(event,${extParams}){\n// 关闭时触发的回调函数\nconsole.log('close',event);}",
+            "onClose(extParams) {\n  // 关闭时触发的回调函数\n  console.log('onClose', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '成功提示',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/alert-1.png',
-      schema: {
-        componentName: 'AAlert',
-        props: {
-          message: 'Success Tips',
-          description:
-            'Detailed description and advice about successful copywriting.',
-          type: 'success',
-          showIcon: true,
-        },
-      },
-    },
-    {
-      title: '信息提示',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/alert-2.png',
-      schema: {
-        componentName: 'AAlert',
-        props: {
-          message: 'Informational Notes',
-          description:
-            'Additional description and information about copywriting.',
-          type: 'info',
-          showIcon: true,
-        },
-      },
-    },
-    {
       title: '警告提示',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/alert-3.png',
+      screenshot: './screenshots/alert.webp',
       schema: {
         componentName: 'AAlert',
         props: {
-          message: 'Warning',
-          description: 'This is a warning notice about copywriting.',
-          type: 'warning',
-          showIcon: true,
-        },
-      },
-    },
-    {
-      title: '错误提示',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/alert-4.png',
-      schema: {
-        componentName: 'AAlert',
-        props: {
-          message: 'Error',
-          description: 'This is an error message about copywriting.',
-          type: 'error',
-          showIcon: true,
+          message: '提示信息',
+          type: 'info',
         },
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

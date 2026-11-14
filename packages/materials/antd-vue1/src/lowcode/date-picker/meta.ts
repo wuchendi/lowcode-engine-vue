@@ -1,299 +1,441 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (date-picker); see https://1x.antdv.com/components/date-picker-cn/
+const meta = {
   componentName: 'ADatePicker',
   title: '日期选择框',
-  category: '表单',
-  npm: {
-    destructuring: true,
-    componentName: 'ADatePicker',
-  },
-  props: [
-    {
-      title: '值设置',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'defaultValue',
-          title: {
-            label: '默认值',
-            tip: 'defaultValue | 默认值',
-          },
-          propType: 'date',
-          setter: 'DateSetter',
-        },
-        {
-          name: 'value',
-          title: {
-            label: '当前值',
-            tip: 'value | 当前值',
-          },
-          propType: 'date',
-          setter: 'DateSetter',
-        },
-      ],
-    },
-    {
-      title: '功能选项',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'size',
-          title: {
-            label: '尺寸',
-            tip: 'size | 输入框大小',
-          },
-          propType: {
-            type: 'oneOf',
-            value: ['large', 'middle', 'small'],
-          },
-          setter: {
-            componentName: 'RadioGroupSetter',
-            props: {
-              options: [
-                {
-                  title: '大',
-                  value: 'large',
-                },
-                {
-                  title: '中',
-                  value: 'middle',
-                },
-                {
-                  title: '小',
-                  value: 'small',
-                },
-              ],
-            },
-          },
-          defaultValue: 'middle',
-        },
-        {
-          name: 'picker',
-          title: {
-            label: '日期类型',
-            tip: 'picker | 选择器日期类型',
-          },
-          setter: {
-            componentName: 'SelectSetter',
-            props: {
-              options: [
-                {
-                  title: '日期',
-                  value: 'date',
-                },
-                {
-                  title: '周',
-                  value: 'week',
-                },
-                {
-                  title: '月份',
-                  value: 'month',
-                },
-                {
-                  title: '季度',
-                  value: 'quarter',
-                },
-                {
-                  title: '年份',
-                  value: 'year',
-                },
-              ],
-            },
-          },
-          propType: {
-            type: 'oneOf',
-            value: ['date', 'week', 'month', 'quarter', 'year'],
-          },
-        },
-        {
-          name: 'format',
-          title: {
-            label: '日期格式',
-            tip: 'format | 设置日期格式',
-          },
-          propType: 'string',
-          defaultValue: 'YYYY-MM-DD',
-          setter: 'StringSetter',
-        },
-        {
-          name: 'placeholder',
-          title: {
-            label: '提示文字',
-            tip: 'placeholder | 输入框提示文字',
-          },
-          propType: 'string',
-          setter: 'StringSetter',
-        },
-        {
-          name: 'allowClear',
-          title: {
-            label: '支持清除',
-            tip: 'allowClear | 是否允许清除',
-          },
-          propType: 'bool',
-          defaultValue: true,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'bordered',
-          title: {
-            label: '显示边框',
-            tip: 'bordered | 是否有边框',
-          },
-          propType: 'bool',
-          defaultValue: true,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'showToday',
-          title: {
-            label: '展示今天按钮',
-            tip: 'showToday | 是否展示今天按钮',
-          },
-          propType: 'bool',
-          defaultValue: true,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'autoFocus',
-          title: {
-            label: '自动聚焦',
-            tip: 'autoFocus | 自动获取焦点',
-          },
-          propType: 'bool',
-          defaultValue: false,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'disabled',
-          title: {
-            label: '是否禁用',
-            tip: 'disabled | 是否为禁用状态',
-          },
-          propType: 'bool',
-          defaultValue: false,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'inputReadOnly',
-          title: {
-            label: '是否只读',
-            tip: 'inputReadOnly | 避免在移动设备上打开虚拟键盘',
-          },
-          propType: 'bool',
-          defaultValue: false,
-          setter: 'BoolSetter',
-        },
-        {
-          name: 'showTime',
-          title: {
-            label: '时间选择',
-            tip: 'showTime | 是否能选择时间',
-          },
-          propType: 'bool',
-          defaultValue: false,
-          setter: 'BoolSetter',
-        },
-      ],
-    },
-    {
-      title: '高级',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'disabledDate',
-          title: {
-            label: '不可选日期',
-            tip: 'disabledDate | 不可选择的日期',
-          },
-          propType: 'func',
-          setter: [
-            {
-              componentName: 'FunctionSetter',
-              props: {
-                template:
-                  'disabledDate(currentDate,${extParams}){\n// 设置不可选择的日期\nreturn true\n}',
-              },
-            },
-            'VariableSetter',
-          ],
-        },
-      ],
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/date-picker-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'allowClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示清除按钮',
+            'en-US': 'allowClear',
+          },
+          tip: '是否显示清除按钮',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获取焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'dateRender',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '作用域插槽',
+            'en-US': 'dateRender',
+          },
+          tip: '作用域插槽，自定义日期单元格的内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '禁用',
+            'en-US': 'disabled',
+          },
+          tip: '禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'disabledDate',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '不可选择的日期',
+            'en-US': 'disabledDate',
+          },
+          tip: '不可选择的日期',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'getCalendarContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '定义浮层的容器',
+            'en-US': 'getCalendarContainer',
+          },
+          tip: '定义浮层的容器，默认为 body 上新建 div',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'locale',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '国际化配置',
+            'en-US': 'locale',
+          },
+          tip: '国际化配置',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'mode',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '日期面板的状态',
+            'en-US': 'mode',
+          },
+          tip: '日期面板的状态（设置后无法选择年份/月份？）',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'date',
+      },
+      {
+        name: 'open',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '控制弹层是否展开',
+            'en-US': 'open',
+          },
+          tip: '控制弹层是否展开',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'placeholder',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框提示文字',
+            'en-US': 'placeholder',
+          },
+          tip: '输入框提示文字',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'popupStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '额外的弹出日历样式',
+            'en-US': 'popupStyle',
+          },
+          tip: '额外的弹出日历样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'dropdownClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'dropdownClassName',
+            'en-US': 'dropdownClassName',
+          },
+          tip: '额外的弹出日历 className',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框大小',
+            'en-US': 'size',
+          },
+          tip: '输入框大小，large 高度为 40px，small 为 24px，默认是 32px',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'suffixIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义的选择框后缀图标',
+            'en-US': 'suffixIcon',
+          },
+          tip: '自定义的选择框后缀图标',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'inputReadOnly',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置输入框为只读',
+            'en-US': 'inputReadOnly',
+          },
+          tip: '设置输入框为只读（避免在移动设备上打开虚拟键盘）',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'align',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'align',
+            'en-US': 'align',
+          },
+          tip: '该值将合并到 placement 的配置中，设置参考 dom-align',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'valueFormat',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '可选',
+            'en-US': 'valueFormat',
+          },
+          tip: '可选，绑定值的格式，对 value、defaultValue、defaultPickerValue 起作用。不指定则绑定值为 moment 对象',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认日期',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认日期',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'defaultPickerValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认面板日期',
+            'en-US': 'defaultPickerValue',
+          },
+          tip: '默认面板日期',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'disabledTime',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '不可选择的时间',
+            'en-US': 'disabledTime',
+          },
+          tip: '不可选择的时间',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'format',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置日期格式',
+            'en-US': 'format',
+          },
+          tip: '设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 moment.js',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'YYYY-MM-DD',
+      },
+      {
+        name: 'renderExtraFooter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '在面板中添加额外的页脚',
+            'en-US': 'renderExtraFooter',
+          },
+          tip: '在面板中添加额外的页脚',
+        },
+        setter: {
+          componentName: 'SlotSetter',
+          initialValue: {
+            type: 'JSSlot',
+            value: [],
+          },
+        },
+        supportVariable: true,
+      },
+      {
+        name: 'showTime',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '增加时间选择功能',
+            'en-US': 'showTime',
+          },
+          tip: '增加时间选择功能',
+        },
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'showToday',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否展示“今天”按钮',
+            'en-US': 'showToday',
+          },
+          tip: '是否展示“今天”按钮',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '日期',
+            'en-US': 'v-model',
+          },
+          tip: '日期',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'openChange',
+          name: 'onOpenChange',
+          description: '弹出日历和关闭日历的回调',
           template:
-            "openChange(status,${extParams}){\n//弹出日历和关闭日历的回调\nconsole.log('openChange',status);}",
+            "onOpenChange(extParams) {\n  // 弹出日历和关闭日历的回调\n  console.log('onOpenChange', extParams)\n}",
         },
         {
-          name: 'panelChange',
+          name: 'onPanelChange',
+          description: '日期面板变化时的回调',
           template:
-            "panelChange(value,mode){\n//日期面板变化时的回调\nconsole.log('panelChange',value,mode);}",
+            "onPanelChange(extParams) {\n  // 日期面板变化时的回调\n  console.log('onPanelChange', extParams)\n}",
+        },
+        {
+          name: 'onChange',
+          description: '时间发生变化的回调',
+          template:
+            "onChange(extParams) {\n  // 时间发生变化的回调\n  console.log('onChange', extParams)\n}",
+        },
+        {
+          name: 'onOk',
+          description: '点击确定按钮的回调',
+          template:
+            "onOk(extParams) {\n  // 点击确定按钮的回调\n  console.log('onOk', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '选择日期',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/date-picker-1.png',
+      title: '日期选择框',
+      screenshot: './screenshots/date-picker.webp',
       schema: {
         componentName: 'ADatePicker',
         props: {},
       },
     },
-    {
-      title: '选择周',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/date-picker-2.png',
-      schema: {
-        componentName: 'ADatePicker',
-        props: {
-          picker: 'week',
-        },
-      },
-    },
-    {
-      title: '选择月份',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/date-picker-3.png',
-      schema: {
-        componentName: 'ADatePicker',
-        props: {
-          picker: 'month',
-        },
-      },
-    },
-    {
-      title: '选择季度',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/date-picker-4.png',
-      schema: {
-        componentName: 'ADatePicker',
-        props: {
-          picker: 'quarter',
-        },
-      },
-    },
-    {
-      title: '选择年份',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/date-picker-5.png',
-      schema: {
-        componentName: 'ADatePicker',
-        props: {
-          picker: 'year',
-        },
-      },
-    },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

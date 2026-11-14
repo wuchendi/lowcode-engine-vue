@@ -1,102 +1,121 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
-  group: 'Element-plus',
+// Generated from the element-plus docs (card); see https://element-plus.org/zh-CN/component/card.html
+const meta = {
   componentName: 'ElCard',
   title: '卡片',
-  category: 'Others',
+  group: 'Element 组件',
+  category: '数据展示',
   docUrl: 'https://element-plus.org/zh-CN/component/card.html',
-
-  priority: 1002,
-
+  devMode: 'proCode',
   configure: {
     props: [
       {
         name: 'header',
         title: {
-          label: '标题',
-          tip: '可以直接设置字符串，也可以通过插槽自定义',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'header',
+            'en-US': 'header',
+          },
+          tip: '卡片的标题你既可以通过设置 header 来修改标题，也可以通过 slot#header 传入 DOM 节点',
         },
-        setter: [
-          {
-            componentName: 'StringSetter',
-            initialValue: '标题',
-          },
-          {
-            componentName: 'SlotSetter',
-            initialValue: {
-              type: 'JSSlot',
-              title: '卡片标题插槽',
-              params: ['slotProps'],
-              value: [],
-            },
-          },
-        ],
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'footer',
         title: {
-          label: '页脚',
-          tip: '可以直接设置字符串，也可以通过插槽自定义',
+          label: {
+            type: 'i18n',
+            'zh-CN': 'footer',
+            'en-US': 'footer',
+          },
+          tip: 'footer of the card. Also accepts a DOM passed by slot#footer',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'bodyStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'body 的 CSS 样式',
+            'en-US': 'bodyStyle',
+          },
+          tip: 'body 的 CSS 样式',
         },
         setter: [
           {
             componentName: 'StringSetter',
-            initialValue: '标题',
           },
           {
-            componentName: 'SlotSetter',
-            initialValue: {
-              type: 'JSSlot',
-              title: '卡片标题插槽',
-              params: ['slotProps'],
-              value: [],
-            },
+            componentName: 'JsonSetter',
           },
         ],
+        supportVariable: true,
       },
       {
-        name: 'body-style',
-        title: 'body 样式',
-        setter: {
-          componentName: 'JsonSetter',
-          initialValue: { padding: '20px' },
+        name: 'headerClass',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'headerClass',
+            'en-US': 'headerClass',
+          },
+          tip: 'custom class name of card header',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
-        name: 'body-class',
-        title: 'body 的自定义类名',
+        name: 'bodyClass',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'bodyClass',
+            'en-US': 'bodyClass',
+          },
+          tip: 'custom class name of card body',
+        },
         setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'footerClass',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'footerClass',
+            'en-US': 'footerClass',
+          },
+          tip: 'custom class name of card footer',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
       },
       {
         name: 'shadow',
-        title: '卡片阴影',
-        setter: {
-          componentName: 'SelectSetter',
-          props: {
-            options: [
-              {
-                title: '总是显示',
-                value: 'always',
-              },
-              {
-                title: '鼠标悬浮时显示',
-                value: 'hover',
-              },
-              {
-                title: '从不显示',
-                value: 'never',
-              },
-            ],
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '卡片阴影显示时机',
+            'en-US': 'shadow',
           },
-          initialValue: 'always',
+          tip: '卡片阴影显示时机',
         },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'always',
       },
     ],
     supports: {
+      style: true,
+      className: true,
+      events: [],
       loop: true,
       condition: true,
-      style: true,
     },
     component: {
       isContainer: true,
@@ -105,23 +124,22 @@ const meta: IPublicTypeComponentMetadata = {
   snippets: [
     {
       title: '卡片',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/card-1.png',
+      screenshot: './screenshots/card.webp',
       schema: {
         componentName: 'ElCard',
-        children: [],
         props: {
-          header: '标题',
-          default: {
-            type: 'JSSlot',
-            params: ['slotProps'],
-            title: '卡片内容插槽',
-          },
-          shadow: 'always',
+          title: '卡片标题',
         },
+        children: [
+          {
+            componentName: 'div',
+            props: {},
+            children: '卡片内容',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

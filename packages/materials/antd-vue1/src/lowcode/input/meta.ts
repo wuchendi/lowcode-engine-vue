@@ -1,232 +1,207 @@
-export default {
-  group: 'Antd 组件',
-  componentName: 'AInput', // 组件名
-  title: '输入框', // 组件对应标题
-  category: '表单', // 分类
-  npm: {
-    destructuring: true, // 是否解构
-    componentName: 'AInput', // 导出组件名
-  },
-  // props 支持配置的属性
-  props: [
-    {
-      name: 'defaultValue', // 属性名
-      title: { label: '默认值', tip: '默认内容' }, // 属性标题
-      propType: 'string', // 类型检查
-      setter: 'StringSetter', // 设置器定义
-    },
-    {
-      name: 'value',
-      title: { label: '当前值', tip: '当前值' },
-      propType: 'string',
-      setter: 'StringSetter',
-    },
-    {
-      name: 'label',
-      propType: 'string',
-      title: '标签文案',
-      description: 'label',
-    },
-    {
-      name: 'allowClear',
-      title: { label: '支持清除', tip: '是否允许清除' },
-      propType: 'bool',
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'bordered',
-      title: { label: '显示边框', tip: '是否有边框' },
-      propType: 'bool',
-      defaultValue: true,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-    },
-    {
-      name: 'placeholder',
-      title: { label: '占位提示', tip: '占位提示' },
-      propType: 'string',
-      defaultValue: '请输入',
-      setter: 'StringSetter',
-    },
-    { name: 'id', propType: 'string', description: 'ID' },
-    { name: 'name', propType: 'string' },
-    {
-      name: 'type',
-      propType: {
-        type: 'oneOf',
-        value: [
-          'text',
-          'number',
-          'password',
-          'radio',
-          'range',
-          'reset',
-          'search',
-          'submit',
-          'tel',
-          'time',
-          'url',
-          'week',
-          'button',
-          'checkbox',
-          'color',
-          'date',
-          'textarea',
-        ],
-      },
-    },
-    {
-      name: 'maxLength',
-      title: { label: '最大长度', tip: '最大长度' },
-      propType: 'number',
-      setter: 'NumberSetter',
-    },
-    {
-      name: 'size',
-      title: { label: '控件大小', tip: '控件大小' },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            {
-              title: '大',
-              value: 'large',
-            },
-            {
-              title: '中',
-              value: 'middle',
-            },
-            {
-              title: '小',
-              value: 'small',
-            },
-          ],
-        },
-      },
-      propType: { type: 'oneOf', value: ['large', 'middle', 'small'] },
-      defaultValue: 'middle',
-    },
-    {
-      name: 'addonAfter',
-      title: { label: '后置标签', tip: '后置标签' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'addonBefore',
-      title: { label: '前置标签', tip: '前置标签' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'prefix',
-      title: { label: '前缀', tip: '前缀' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'suffix',
-      title: { label: '后缀', tip: '后缀' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'onChange',
-      title: { label: '输入框内容变化时的回调', tip: '输入框内容变化时的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onPressEnter',
-      title: { label: '按下回车的回调', tip: '按下回车的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onFocus',
-      title: { label: '获取焦点回调', tip: '获取焦点回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onKeyDown',
-      title: { label: '按键按下时的回调', tip: '按键按下时的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onKeyPress',
-      title: { label: '按键按下后的回调', tip: '按键按下之后释放之前的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onKeyUp',
-      title: { label: '按键释放回调', tip: '按键释放之后的回调' },
-      propType: 'func',
-    },
-    {
-      name: 'onBlur',
-      title: { label: '失去焦点回调', tip: '失去焦点回调' },
-      propType: 'func',
-    },
-  ],
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (input); see https://1x.antdv.com/components/input-cn/
+const meta = {
+  componentName: 'AInput',
+  title: '输入框',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/input-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'addonAfter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '带标签的 input',
+            'en-US': 'addonAfter',
+          },
+          tip: '带标签的 input，设置后置标签',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'addonBefore',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '带标签的 input',
+            'en-US': 'addonBefore',
+          },
+          tip: '带标签的 input，设置前置标签',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框默认内容',
+            'en-US': 'defaultValue',
+          },
+          tip: '输入框默认内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用状态',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用状态，默认为 false',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'id',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框的 id',
+            'en-US': 'id',
+          },
+          tip: '输入框的 id',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'maxLength',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '最大长度',
+            'en-US': 'maxLength',
+          },
+          tip: '最大长度',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'prefix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '带有前缀图标的 input',
+            'en-US': 'prefix',
+          },
+          tip: '带有前缀图标的 input',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '控件大小',
+            'en-US': 'size',
+          },
+          tip: '控件大小。注：标准表单内的输入框大小限制为 large。可选 large default small',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'default',
+      },
+      {
+        name: 'suffix',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '带有后缀图标的 input',
+            'en-US': 'suffix',
+          },
+          tip: '带有后缀图标的 input',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'type',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '声明 input 类型',
+            'en-US': 'type',
+          },
+          tip: '声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 Input.TextArea 代替 type="textarea")。',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'text',
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '输入框内容',
+            'en-US': 'v-model',
+          },
+          tip: '输入框内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'allowClear',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '可以点击清除图标删除内容',
+            'en-US': 'allowClear',
+          },
+          tip: '可以点击清除图标删除内容',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
-      style: true, // 是否支持css样式
+      style: true,
+      className: true,
       events: [
         {
-          name: 'onChange', // 事件名
-          // 事件对应回调
+          name: 'onChange',
+          description: '输入框内容变化时的回调',
           template:
-            "onChange(event,${extParams}){\n// 输入框内容变化时的回调\nconsole.log('onChange',event);}",
+            "onChange(extParams) {\n  // 输入框内容变化时的回调\n  console.log('onChange', extParams)\n}",
         },
         {
           name: 'onPressEnter',
+          description: '按下回车的回调',
           template:
-            "onPressEnter(event,${extParams}){\n// 按下回车的回调\nconsole.log('onPressEnter',event);}",
-        },
-        {
-          name: 'onFocus',
-          template:
-            "onFocus(event,${extParams}){\n// 获取焦点回调\nconsole.log('onFocus',event);}",
-        },
-        {
-          name: 'onKeyDown',
-          template:
-            "onKeyDown(event,${extParams}){\n// 按键按下时的回调\nconsole.log('onKeyDown',event);}",
-        },
-        {
-          name: 'onKeyPress',
-          template:
-            "onKeyPress(event,${extParams}){\n// 按键按下后的回调\nconsole.log('onKeyPress',event);}",
-        },
-        {
-          name: 'onKeyUp',
-          template:
-            "onKeyUp(event,${extParams}){\n// 按键释放回调\nconsole.log('onKeyUp',event);}",
-        },
-        {
-          name: 'onBlur',
-          template:
-            "onBlur(event,${extParams}){\n// 按键释放回调\nconsole.log('onBlur',event);}",
+            "onPressEnter(extParams) {\n  // 按下回车的回调\n  console.log('onPressEnter', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
-  // snippets组件库展示字段
   snippets: [
     {
-      title: '输入框', //标题
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/input-1.png', // 图片
+      title: '输入框',
+      screenshot: './screenshots/input.webp',
       schema: {
-        componentName: 'AInput', // 组件名
-        // props定义了默认属性
-        props: {
-          type: 'text',
-          size: 'default',
-          placeholder: '请输入',
-          autocomplete: 'off',
-        },
+        componentName: 'AInput',
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

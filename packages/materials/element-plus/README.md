@@ -2,7 +2,7 @@
 
 <a href="https://element-plus.org/en-US/"><img alt="element" src="https://element-plus.org/images/element-plus-logo-small.svg" width="150"/></a>
 
-## Element Plus(2.6.3) Materials
+## Element Plus(2.14.8) Materials
 
 <br />
 
@@ -22,6 +22,17 @@
 - [x] Input
 - [ ] Option
 - [x] Tag
+
+## Components
+
+Every component documented by `element-plus` 2.14.8 (Vue 3) has a meta:
+107 components, with the props, events and slots of [its docs](https://element-plus.org/zh-CN/component/overview.html)
+and a `docUrl` to its page. The material pins `element-plus` to 2.14.8;
+`tests/meta.test.ts` checks the metas against the components of that version
+(declared props, handler names, doc links, code generation exports,
+screenshots). `screenshots/` holds a thumbnail of every component rendered
+from its snippet in the designer canvas; components with nothing to show
+(modals, sub-components) use `screenshots/fallback.svg`.
 
 ## Usage Example
 

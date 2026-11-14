@@ -1,156 +1,160 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (page-header); see https://1x.antdv.com/components/page-header-cn/
+const meta = {
   componentName: 'APageHeader',
   title: '页头',
-  // category: '基础组件',
+  group: 'Ant Design 组件',
   category: '导航',
-  npm: {
-    destructuring: true,
-    componentName: 'APageHeader',
-  },
-  props: [
-    {
-      name: 'title',
-      title: { label: '标题', tip: '自定义标题文字' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'subTitle',
-      title: { label: '二级标题', tip: '自定义的二级标题文字' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'ghost',
-      title: { label: 'ghost风格', tip: 'ghost风格' },
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'tags',
-      title: { label: 'tag 列表', tip: 'title 旁的 tag 列表' },
-      propType: 'node',
-    },
-    {
-      name: 'extra',
-      title: { label: '操作区', tip: '操作区，位于 title 行的行尾' },
-      propType: 'node',
-    },
-    {
-      name: 'footer',
-      title: { label: '页脚', tip: 'PageHeader 的页脚，一般用于渲染 TabBar' },
-      propType: 'node',
-    },
-    {
-      name: 'avatar',
-      title: { label: '头像', tip: '标题栏旁的头像' },
-      propType: 'object',
-      supportVariable: false,
-      setter: [
-        {
-          componentName: 'ObjectSetter',
-          props: {
-            config: {
-              items: [
-                {
-                  name: 'src',
-                  title: { label: '地址', tip: '头像地址' },
-                  setter: {
-                    componentName: 'StringSetter',
-                  },
-                },
-              ],
-            },
-          },
-        },
-        'JsonSetter',
-      ],
-    },
-    {
-      name: 'breadcrumb',
-      title: { label: '面包屑的配置', tip: '面包屑的配置' },
-      propType: 'object',
-      supportVariable: false,
-      setter: [
-        {
-          componentName: 'ObjectSetter',
-          props: {
-            config: {
-              items: [
-                {
-                  name: 'routes',
-                  title: { label: '路由栈信息', tip: '路由栈信息' },
-                  setter: {
-                    componentName: 'ArraySetter',
-                    props: {
-                      itemSetter: {
-                        componentName: 'ObjectSetter',
-                        initialValue: {
-                          path: 'path',
-                          breadcrumbName: 'pathName',
-                        },
-                        isRequired: true,
-                        props: {
-                          config: {
-                            items: [
-                              {
-                                name: 'path',
-                                defaultValue: 'path',
-                                title: { label: '路径', tip: 'path | 路径' },
-                                setter: 'StringSetter',
-                              },
-                              {
-                                name: 'breadcrumbName',
-                                defaultValue: 'pathName',
-                                title: {
-                                  label: '名称',
-                                  tip: 'breadcrumbName | 名称',
-                                },
-                                setter: 'StringSetter',
-                              },
-                            ],
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        },
-        'JsonSetter',
-      ],
-    },
-    {
-      name: 'back',
-      title: { label: '返回按钮的点击事件', tip: '返回按钮的点击事件' },
-      propType: 'func',
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/page-header-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义标题文字',
+            'en-US': 'title',
+          },
+          tip: '自定义标题文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'subTitle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义的二级标题文字',
+            'en-US': 'subTitle',
+          },
+          tip: '自定义的二级标题文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'ghost',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'pageHeader 的类型',
+            'en-US': 'ghost',
+          },
+          tip: 'pageHeader 的类型，将会改变背景颜色',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'avatar',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题栏旁的头像',
+            'en-US': 'avatar',
+          },
+          tip: '标题栏旁的头像',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'backIcon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义 back icon',
+            'en-US': 'backIcon',
+          },
+          tip: '自定义 back icon ，如果为 false 不渲染 back icon',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'tags',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tags',
+            'en-US': 'tags',
+          },
+          tip: 'title 旁的 tag 列表',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'extra',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '操作区',
+            'en-US': 'extra',
+          },
+          tip: '操作区，位于 title 行的行尾',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'breadcrumb',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '面包屑的配置',
+            'en-US': 'breadcrumb',
+          },
+          tip: '面包屑的配置',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'footer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'PageHeader 的页脚',
+            'en-US': 'footer',
+          },
+          tip: 'PageHeader 的页脚，一般用于渲染 TabBar',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'back',
+          name: 'onBack',
+          description: '返回按钮的点击事件',
           template:
-            "back(${extParams}){\n// 返回按钮的点击事件\nconsole.log('back');}",
+            "onBack(extParams) {\n  // 返回按钮的点击事件\n  console.log('onBack', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '页头',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/page-header-1.jpg',
+      screenshot: './screenshots/fallback.svg',
       schema: {
         componentName: 'APageHeader',
-        props: {
-          title: 'Title',
-          subTitle: 'lyl test for page-header',
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

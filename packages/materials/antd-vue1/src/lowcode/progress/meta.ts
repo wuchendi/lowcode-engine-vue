@@ -1,187 +1,162 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (progress); see https://1x.antdv.com/components/progress-cn/
+const meta = {
   componentName: 'AProgress',
   title: '进度条',
+  group: 'Ant Design 组件',
   category: '反馈',
-  npm: {
-    destructuring: true,
-    componentName: 'AProgress',
-  },
-  props: [
-    {
-      name: 'type',
-      title: { label: '类型', tip: '类型' },
-      propType: { type: 'oneOf', value: ['line', 'circle', 'dashboard'] },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            { title: '线型', value: 'line' },
-            { title: '圆型', value: 'circle' },
-            { title: '仪表盘', value: 'dashboard' },
-          ],
-        },
-      },
-      defaultValue: 'line',
-    },
-    {
-      name: 'format',
-      title: { label: '内容格式', tip: '内容格式' },
-      propType: 'func',
-    },
-    {
-      name: 'percent',
-      title: { label: '百分比', tip: '百分比' },
-      propType: 'number',
-    },
-    {
-      name: 'showInfo',
-      title: { label: '显示数值或图标', tip: '显示数值或图标' },
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'status',
-      title: { label: '状态', tip: '状态' },
-      propType: {
-        type: 'oneOf',
-        value: ['success', 'exception', 'normal', 'active'],
-      },
-    },
-    {
-      name: 'steps',
-      title: { label: '总步数', tip: '进度条总共步数' },
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        // 仅线型有效
-        return target.getProps().getPropValue('type') === 'line'
-      },
-      propType: 'number',
-    },
-    {
-      name: 'strokeLinecap',
-      title: { label: '进度条的样式', tip: '进度条的样式' },
-      propType: {
-        type: 'oneOf',
-        value: ['round', 'square'],
-      },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            { title: '圆角', value: 'round' },
-            { title: '方角', value: 'square' },
-          ],
-        },
-      },
-      defaultValue: 'round',
-    },
-    {
-      name: 'strokeWidth',
-      title: { label: '线宽度', tip: '线宽度' },
-      propType: 'number',
-    },
-    {
-      name: 'strokeColor',
-      title: { label: '进度条的颜色', tip: '进度条的颜色' },
-      propType: 'string',
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        // 仪表盘样式无效
-        return target.getProps().getPropValue('type') !== 'dashboard'
-      },
-      setter: 'ColorSetter',
-    },
-    {
-      name: 'trailColor',
-      title: {
-        label: '未完成的分段的颜色',
-        tip: '未完成的分段的颜色',
-      },
-      propType: 'string',
-      setter: 'ColorSetter',
-    },
-    {
-      name: 'gapDegree',
-      title: {
-        label: '缺口角度',
-        tip: '仪表盘进度条缺口角度，可取值 0 ~ 295',
-      },
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        // 仅仪表盘样式有效
-        return target.getProps().getPropValue('type') === 'dashboard'
-      },
-      propType: 'number',
-      defaultValue: 75,
-    },
-    {
-      name: 'gapPosition',
-      title: {
-        label: '缺口位置',
-        tip: '仪表盘进度条缺口位置',
-      },
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        // 仅仪表盘样式有效
-        return target.getProps().getPropValue('type') === 'dashboard'
-      },
-      propType: {
-        type: 'oneOf',
-        value: ['top', 'bottom', 'left', 'right'],
-      },
-      defaultValue: 'bottom',
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/progress-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'type',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '类型',
+            'en-US': 'type',
+          },
+          tip: '类型，可选 line circle dashboard',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'line',
+      },
+      {
+        name: 'format',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '内容的模板函数',
+            'en-US': 'format',
+          },
+          tip: '内容的模板函数',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'percent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '百分比',
+            'en-US': 'percent',
+          },
+          tip: '百分比',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0,
+      },
+      {
+        name: 'showInfo',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示进度数值或状态图标',
+            'en-US': 'showInfo',
+          },
+          tip: '是否显示进度数值或状态图标',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'status',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '状态',
+            'en-US': 'status',
+          },
+          tip: '状态，可选：success exception normal active(仅限 line)',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'strokeLinecap',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'strokeLinecap',
+            'en-US': 'strokeLinecap',
+          },
+        },
+        setter: [
+          {
+            componentName: 'RadioGroupSetter',
+            props: {
+              options: [
+                {
+                  title: 'round',
+                  value: 'round',
+                },
+                {
+                  title: 'square',
+                  value: 'square',
+                },
+              ],
+            },
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+        defaultValue: 'round',
+      },
+      {
+        name: 'strokeColor',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '进度条的色彩',
+            'en-US': 'strokeColor',
+          },
+          tip: '进度条的色彩',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'successPercent',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '已完成的分段百分比',
+            'en-US': 'successPercent',
+          },
+          tip: '已完成的分段百分比',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '进度条',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/progress-1.png',
+      screenshot: './screenshots/progress.webp',
       schema: {
         componentName: 'AProgress',
-        props: {
-          percent: 20,
-          status: 'active',
-        },
-      },
-    },
-    {
-      title: '进度圈',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/progress-2.png',
-      schema: {
-        componentName: 'AProgress',
-        props: {
-          percent: 20,
-          status: 'circle',
-        },
+        props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

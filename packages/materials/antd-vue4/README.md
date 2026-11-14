@@ -2,7 +2,7 @@
 
 <a href="https://www.antdv.com/"><img alt="element" src="https://avatars.githubusercontent.com/u/32120805" width="150"/></a>
 
-## Ant Design Vue(4.1.0) Materials
+## Ant Design Vue(4.2.6) Materials
 
 <br />
 
@@ -14,6 +14,22 @@
 ## Component material complete list
 
 - [x] Button
+
+## Components
+
+Every component documented by `ant-design-vue` 4.2.6 (Vue 3) has a meta:
+101 components, with the props, events and slots of [its docs](https://antdv.com/docs/vue/introduce-cn)
+and a `docUrl` to its page. The material pins `ant-design-vue` to 4.2.6;
+`tests/meta.test.ts` checks the metas against the components of that version
+(declared props, handler names, doc links, code generation exports,
+screenshots). `screenshots/` holds a thumbnail of every component rendered
+from its snippet in the designer canvas; components with nothing to show
+(modals, sub-components) use `screenshots/fallback.svg`.
+
+Ant Design reads some sub-components from the vnodes of its children
+(`Select.Option`, `Table.Column`, `Mentions.Option`...); rendered by the
+low-code renderer they are wrapped, so the main components take them as data
+(`options`, `columns`) and their metas stay out of the components pane.
 
 ## Usage Example
 

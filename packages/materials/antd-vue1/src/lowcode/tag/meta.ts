@@ -1,70 +1,109 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (tag); see https://1x.antdv.com/components/tag-cn/
+const meta = {
   componentName: 'ATag',
-  title: '标签',
-  category: '反馈',
-  npm: {
-    destructuring: true,
-    componentName: 'ATag',
-  },
-  props: [
-    {
-      name: 'children',
-      title: { label: '内容', tip: '内容' },
-      propType: 'string',
-    },
-    {
-      name: 'closable',
-      title: { label: '可关闭', tip: '标签是否可以关闭' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'color',
-      title: { label: '标签色', tip: '标签色' },
-      propType: 'string',
-    },
-    {
-      name: 'closeIcon',
-      title: { label: '自定义关闭按钮', tip: '自定义关闭按钮' },
-      propType: 'node',
-    },
-    {
-      name: 'visible',
-      title: { label: '是否显示标签', tip: '是否显示标签' },
-      propType: 'bool',
-      defaultValue: true,
-    },
-    {
-      name: 'icon',
-      title: { label: '设置图标', tip: '设置图标' },
-      propType: 'node',
-    },
-  ],
+  title: '标签 Tag',
+  group: 'Ant Design 组件',
+  category: '数据展示',
+  docUrl: 'https://1x.antdv.com/components/tag-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'afterClose',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '关闭动画完成后的回调',
+            'en-US': 'afterClose',
+          },
+          tip: '关闭动画完成后的回调，请使用 close 事件, 我们将在下个版本删除此项',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'closable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标签是否可以关闭',
+            'en-US': 'closable',
+          },
+          tip: '标签是否可以关闭',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'color',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标签色',
+            'en-US': 'color',
+          },
+          tip: '标签色',
+        },
+        setter: 'ColorSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否显示标签',
+            'en-US': 'v-model',
+          },
+          tip: '是否显示标签',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'onClose',
+          name: 'onClick',
+          description: '点击时触发',
           template:
-            "onClose(event,${extParams}){\n// 关闭时的回调\nconsole.log('onClose',event);}",
+            "onClick(event, extParams) {\n  console.log('onClick', event)\n}",
+        },
+        {
+          name: 'onClose',
+          description: '关闭时的回调',
+          template:
+            "onClose(extParams) {\n  // 关闭时的回调\n  console.log('onClose', extParams)\n}",
+        },
+        {
+          name: 'onChange',
+          description: '点击标签时触发的回调',
+          template:
+            "onChange(extParams) {\n  // 点击标签时触发的回调\n  console.log('onChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '标签',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/tag-1.png',
+      title: '标签 Tag',
+      screenshot: './screenshots/tag.webp',
       schema: {
         componentName: 'ATag',
-        props: {
-          color: 'magenta',
-          children: '标签',
-        },
+        props: {},
+        children: '标签',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

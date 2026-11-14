@@ -11,6 +11,22 @@
 
 </div>
 
+## Components
+
+Every component documented by `ant-design-vue` 1.7.8 (Vue 2.7, the last 1.x release, the last one supporting Vue 2) has a meta:
+94 components, with the props, events and slots of [its docs](https://1x.antdv.com/docs/vue/introduce-cn/)
+and a `docUrl` to its page. The material pins `ant-design-vue` to 1.7.8;
+`tests/meta.test.ts` checks the metas against the components of that version
+(declared props, handler names, doc links, code generation exports,
+screenshots). `screenshots/` holds a thumbnail of every component rendered
+from its snippet in the designer canvas; components with nothing to show
+(modals, sub-components) use `screenshots/fallback.svg`.
+
+Ant Design reads some sub-components from the vnodes of its children
+(`Select.Option`, `Table.Column`, `Mentions.Option`...); rendered by the
+low-code renderer they are wrapped, so the main components take them as data
+(`options`, `columns`) and their metas stay out of the components pane. `Card.Grid` has no documented props in 1.x and no meta.
+
 ## Usage Example
 
 ### pnpm

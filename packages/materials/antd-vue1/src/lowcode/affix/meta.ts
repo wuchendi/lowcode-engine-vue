@@ -1,71 +1,47 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
-  title: '固钉',
-  group: 'Antd 组件',
-  category: '导航',
-  docUrl: 'https://1x.antdv.com/components/affix-cn/',
+// Generated from the ant-design-vue docs (affix); see https://1x.antdv.com/components/affix-cn/
+const meta = {
   componentName: 'AAffix',
-  // npm: {
-  //   destructuring: true,
-  //   componentName: 'AAffix',
-  // },
-  props: [
-    {
-      name: 'offsetBottom',
-      // @ts-expect-error
-      title: { label: '底部触发距离', tip: '距离窗口底部达到指定偏移量后触发' },
-      propType: 'number',
-    },
-    {
-      name: 'offsetTop',
-      // @ts-expect-error
-      title: { label: '顶部触发距离', tip: '距离窗口顶部达到指定偏移量后触发' },
-      propType: 'number',
-    },
-    {
-      name: 'target',
-      // @ts-expect-error
-      title: {
-        label: '获取触发元素',
-        tip: '设置 `Affix` 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数',
-      },
-      propType: 'func',
-    },
-  ],
+  title: '固钉',
+  group: 'Ant Design 组件',
+  category: '其他',
+  docUrl: 'https://1x.antdv.com/components/affix-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [],
     supports: {
       style: true,
+      className: true,
       events: [
         {
-          name: 'onChange ',
+          name: 'onChange',
+          description: '固定状态改变时触发的回调函数',
           template:
-            "onChange (affixed,${extParams}){\n// 固定状态变更回调函数\nconsole.log('onChange ', affixed);}",
+            "onChange(extParams) {\n  // 固定状态改变时触发的回调函数\n  console.log('onChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '固钉',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/affix-1.jpg',
+      screenshot: './screenshots/affix.webp',
       schema: {
         componentName: 'AAffix',
-        props: {
-          offsetTop: 100,
-        },
         children: [
           {
             componentName: 'AButton',
-            props: {
-              children: 'Affix Top',
-            },
+            props: {},
+            children: '固钉',
           },
         ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

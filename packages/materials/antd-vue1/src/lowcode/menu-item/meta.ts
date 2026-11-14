@@ -1,58 +1,67 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (menu); see https://1x.antdv.com/components/menu-cn/
+const meta = {
   componentName: 'AMenuItem',
-  title: '菜单项',
-  category: '基础组件',
-  npm: {
-    destructuring: true,
-    componentName: 'AMenuItem',
-  },
-  props: [
-    {
-      name: 'children',
-      title: { label: '内容', tip: '内容' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'danger',
-      title: { label: '错误状态', tip: '展示错误状态样式' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-    },
-    {
-      name: 'icon',
-      title: { label: '菜单图标', tip: '菜单图标' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-      defaultValue: false,
-    },
-    {
-      name: 'key',
-      title: { label: '唯一标志', tip: 'item 的唯一标志' },
-      propType: 'string',
-    },
-    {
-      name: 'title',
-      title: {
-        label: '悬浮标题',
-        tip: '设置收缩时展示的悬浮标题',
-      },
-      propType: 'string',
-    },
-  ],
+  title: '导航菜单 Item',
+  group: 'Ant Design 组件',
+  category: '导航',
+  docUrl: 'https://1x.antdv.com/components/menu-cn/',
+  devMode: 'proCode',
   configure: {
-    component: {
-      isContainer: true,
-      nestingRule: { parentWhitelist: ['AMenu'] },
-    },
+    props: [
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置收缩时展示的悬浮标题',
+            'en-US': 'title',
+          },
+          tip: '设置收缩时展示的悬浮标题',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
+    },
+    component: {
+      nestingRule: {
+        parentWhitelist: ['AMenu', 'AMenuSubMenu', 'AMenuItemGroup'],
+      },
     },
   },
-  snippets: [],
-}
+  snippets: [
+    {
+      title: '导航菜单 Item',
+      screenshot: './screenshots/menu-item.webp',
+      schema: {
+        componentName: 'AMenuItem',
+        props: {},
+        children: '导航菜单',
+      },
+    },
+  ],
+} as IPublicTypeComponentMetadata
+
+export default meta

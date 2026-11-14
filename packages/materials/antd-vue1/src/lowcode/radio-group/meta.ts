@@ -1,213 +1,161 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (radio); see https://1x.antdv.com/components/radio-cn/
+const meta = {
   componentName: 'ARadioGroup',
-  title: '单选框组',
-  category: '表单',
-  npm: {
-    destructuring: true,
-    componentName: 'ARadioGroup',
-  },
-  props: [
-    {
-      name: 'value',
-      title: { label: '当前值', tip: '指定选中的选项' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'options',
-      propType: {
-        type: 'arrayOf',
-        value: {
-          type: 'shape',
-          value: [
-            {
-              name: 'label',
-              propType: 'string',
-              description: '选项名',
-              defaultValue: '选项名',
-            },
-            {
-              name: 'value',
-              propType: 'string',
-              description: '选项值',
-              defaultValue: '选项值',
-            },
-            {
-              name: 'disabled',
-              propType: 'bool',
-              description: '是否禁用',
-              defaultValue: false,
-            },
-          ],
-        },
-      },
-      setter: {
-        componentName: 'ArraySetter',
-        props: {
-          itemSetter: {
-            componentName: 'ObjectSetter',
-            props: {
-              config: {
-                items: [
-                  {
-                    name: 'label',
-                    title: '选项名',
-                    setter: 'StringSetter',
-                    isRequired: true,
-                  },
-                  {
-                    name: 'value',
-                    title: '选项值',
-                    setter: 'StringSetter',
-                    isRequired: true,
-                  },
-                  {
-                    name: 'disabled',
-                    title: '是否禁用',
-                    setter: 'BoolSetter',
-                  },
-                ],
-              },
-            },
-            initialValue: () => {
-              return {
-                label: '选项名',
-                value: '随机',
-                disabled: false,
-              }
-            },
-          },
-        },
-      },
-    },
-    {
-      name: 'buttonStyle',
-      title: { label: 'buttonStyle', tip: 'RadioButton 的风格样式' },
-      propType: { type: 'oneOf', value: ['outline', 'solid'] },
-      defaultValue: 'outline',
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        return target.getProps().getPropValue('optionType') === 'button'
-      },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            { label: 'outline', value: 'outline' },
-            { label: 'solid', value: 'solid' },
-          ],
-        },
-      },
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '禁选所有子单选器' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'optionType',
-      title: { label: '类型', tip: '类型' },
-      propType: { type: 'oneOf', value: ['default', 'button'] },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            {
-              title: '默认类型',
-              value: 'default',
-            },
-            {
-              title: '按钮类型',
-              value: 'button',
-            },
-          ],
-        },
-      },
-      defaultValue: 'default',
-    },
-    {
-      name: 'size',
-      title: { label: '尺寸', tip: '大小，只对按钮样式生效' },
-      condition(target: {
-        getProps: () => {
-          (): any
-          new (): any
-          getPropValue: { (arg0: string): string; new (): any }
-        }
-      }) {
-        return target.getProps().getPropValue('optionType') === 'button'
-      },
-      propType: { type: 'oneOf', value: ['large', 'middle', 'small'] },
-      setter: {
-        componentName: 'RadioGroupSetter',
-        props: {
-          options: [
-            {
-              title: '大',
-              value: 'large',
-            },
-            {
-              title: '中',
-              value: 'middle',
-            },
-            {
-              title: '小',
-              value: 'small',
-            },
-          ],
-        },
-      },
-      defaultValue: 'middle',
-    },
-    {
-      name: 'onChange ',
-      title: { label: '变化时回调函数', tip: '变化时回调函数' },
-      propType: 'func',
-    },
-  ],
+  title: '单选框 Group',
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/radio-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'defaultValue',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认选中的值',
+            'en-US': 'defaultValue',
+          },
+          tip: '默认选中的值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '禁选所有子单选器',
+            'en-US': 'disabled',
+          },
+          tip: '禁选所有子单选器',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'name',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'name',
+            'en-US': 'name',
+          },
+          tip: 'RadioGroup 下所有 input[type="radio"] 的 name 属性',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'options',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '以配置形式设置子元素',
+            'en-US': 'options',
+          },
+          tip: '以配置形式设置子元素',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'size',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '大小',
+            'en-US': 'size',
+          },
+          tip: '大小，只对按钮样式生效',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'default',
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '用于设置当前选中的值',
+            'en-US': 'v-model',
+          },
+          tip: '用于设置当前选中的值',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'buttonStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'buttonStyle',
+            'en-US': 'buttonStyle',
+          },
+          tip: 'RadioButton 的风格样式，目前有描边和填色两种风格',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'outline',
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
+          description: '选项变化时的回调函数',
           template:
-            "onChange(event,${extParams}){\n//选项变化回调函数\nconsole.log('onChange',event);}",
+            "onChange(extParams) {\n  // 选项变化时的回调函数\n  console.log('onChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
-      title: '单选框组',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/radio-group-1.png',
-      props: {
-        options: [
+      title: '单选框 Group',
+      screenshot: './screenshots/radio-group.webp',
+      schema: {
+        componentName: 'ARadioGroup',
+        props: {
+          value: 'a',
+        },
+        children: [
           {
-            label: 'A',
-            value: 'A',
+            componentName: 'ARadio',
+            props: {
+              value: 'a',
+            },
+            children: '选项一',
           },
           {
-            label: 'B',
-            value: 'B',
-          },
-          {
-            label: 'C',
-            value: 'C',
+            componentName: 'ARadio',
+            props: {
+              value: 'b',
+            },
+            children: '选项二',
           },
         ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

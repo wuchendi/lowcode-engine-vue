@@ -1,41 +1,75 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (empty); see https://1x.antdv.com/components/empty-cn/
+const meta = {
   componentName: 'AEmpty',
   title: '空状态',
+  group: 'Ant Design 组件',
   category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'AEmpty',
-  },
-  props: [
-    {
-      name: 'description',
-      title: { label: '内容描述', tip: '自定义描述内容' },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-    {
-      name: 'image',
-      title: {
-        label: '图片地址',
-        tip: '设置显示图片，为string时表示自定义图片地址。',
-      },
-      propType: { type: 'oneOfType', value: ['string', 'node'] },
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/empty-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'description',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义描述内容',
+            'en-US': 'description',
+          },
+          tip: '自定义描述内容',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'imageStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '图片样式',
+            'en-US': 'imageStyle',
+          },
+          tip: '图片样式',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'image',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置显示图片',
+            'en-US': 'image',
+          },
+          tip: '设置显示图片，为 string 时表示自定义图片地址',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'false',
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '空状态',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/empty-1.png',
+      screenshot: './screenshots/empty.webp',
       schema: {
         componentName: 'AEmpty',
         props: {},
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

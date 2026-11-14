@@ -1,310 +1,243 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (tooltip); see https://1x.antdv.com/components/tooltip-cn/
+const meta = {
   componentName: 'ATooltip',
   title: '文字提示',
+  group: 'Ant Design 组件',
   category: '数据展示',
-  npm: {
-    destructuring: true,
-    componentName: 'ATooltip',
-  },
-  props: [
-    {
-      title: '内容',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'title',
-          title: {
-            label: '提示文字',
-            tip: 'title | 提示文字',
-          },
-          propType: { type: 'oneOfType', value: ['string', 'node'] },
-          setter: ['StringSetter', 'SlotSetter', 'VariableSetter'],
-        },
-      ],
-    },
-    {
-      title: '控制',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'defaultVisible',
-          title: {
-            label: '默认显隐',
-            tip: 'defaultVisible | 默认是否显隐',
-          },
-          propType: 'bool',
-          setter: 'BoolSetter',
-          defaultValue: false,
-        },
-        {
-          name: 'visible',
-          title: {
-            label: '当前显隐',
-            tip: 'visible | 当前是否显隐',
-          },
-          propType: 'bool',
-          setter: 'BoolSetter',
-        },
-      ],
-    },
-    {
-      title: '外观',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'placement',
-          title: { label: '气泡位置', tip: 'placement | 气泡位置' },
-          propType: {
-            type: 'oneOf',
-            value: [
-              'top',
-              'left',
-              'right',
-              'bottom',
-              'topLeft',
-              'topRight',
-              'bottomLeft',
-              'bottomRight',
-              'leftTop',
-              'leftBottom',
-              'rightTop',
-              'rightBottom',
-            ],
-          },
-          defaultValue: 'top',
-          setter: {
-            componentName: 'SelectSetter',
-            props: {
-              options: [
-                {
-                  title: '上',
-                  value: 'top',
-                },
-                {
-                  title: '左',
-                  value: 'left',
-                },
-                {
-                  title: '右',
-                  value: 'right',
-                },
-                {
-                  title: '下',
-                  value: 'bottom',
-                },
-                {
-                  title: '上左',
-                  value: 'topLeft',
-                },
-                {
-                  title: '上右',
-                  value: 'topRight',
-                },
-                {
-                  title: '下左',
-                  value: 'bottomLeft',
-                },
-                {
-                  title: '下右',
-                  value: 'bottomRight',
-                },
-                {
-                  title: '左上',
-                  value: 'leftTop',
-                },
-                {
-                  title: '左下',
-                  value: 'leftBottom',
-                },
-                {
-                  title: '右上',
-                  value: 'rightTop',
-                },
-                {
-                  title: '右下',
-                  value: 'rightBottom',
-                },
-              ],
-            },
-          },
-        },
-        {
-          name: 'autoAdjustOverflow',
-          title: {
-            label: '自动调整',
-            tip: 'autoAdjustOverflow | 气泡被遮挡时自动调整位置',
-          },
-          propType: 'bool',
-          setter: 'BoolSetter',
-          defaultValue: true,
-        },
-        {
-          name: 'arrowPointAtCenter',
-          title: {
-            label: '指向中心',
-            tip: 'arrowPointAtCenter | 箭头是否指向目标元素中心',
-          },
-          propType: 'bool',
-          setter: 'BoolSetter',
-          defaultValue: false,
-        },
-        {
-          name: 'color',
-          title: {
-            label: '背景颜色',
-            tip: 'color | 背景颜色',
-          },
-          propType: 'string',
-          setter: 'ColorSetter',
-        },
-        {
-          name: 'zIndex',
-          title: {
-            label: 'zIndex',
-            tip: 'zIndex | 设置 Tooltip 的 z-index值',
-          },
-          propType: 'number',
-          setter: 'NumberSetter',
-        },
-      ],
-    },
-    {
-      name: 'overlayStyle',
-      title: '卡片样式',
-      type: 'group',
-      extraProps: {
-        display: 'entry',
-      },
-      items: [
-        {
-          name: 'overlayStyle',
-          title: { label: '样式设置', tip: 'overlayStyle | 卡片样式' },
-          setter: 'StyleSetter',
-          extraProps: {
-            display: 'block',
-          },
-        },
-      ],
-    },
-    {
-      name: 'overlayInnerStyle',
-      title: '卡片内容样式',
-      type: 'group',
-      extraProps: {
-        display: 'entry',
-      },
-      items: [
-        {
-          name: 'overlayInnerStyle',
-          title: {
-            label: '样式设置',
-            tip: 'overlayStyle | 卡片内容区域的样式',
-          },
-          setter: 'StyleSetter',
-          extraProps: {
-            display: 'block',
-          },
-        },
-      ],
-    },
-    {
-      title: '行为',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'trigger',
-          title: { label: '触发行为', tip: 'trigger | 触发行为' },
-          propType: {
-            type: 'oneOf',
-            value: ['hover', 'onFocus', 'click', 'contextMenu'],
-          },
-          defaultValue: 'hover',
-          setter: {
-            componentName: 'SelectSetter',
-            props: {
-              options: [
-                {
-                  title: '鼠标悬停',
-                  value: 'hover',
-                },
-                {
-                  title: '获得焦点',
-                  value: 'onFocus',
-                },
-                {
-                  title: '鼠标点击',
-                  value: 'click',
-                },
-                {
-                  title: '右键菜单',
-                  value: 'contextMenu',
-                },
-              ],
-            },
-          },
-        },
-        {
-          name: 'mouseEnterDelay',
-          title: {
-            label: '展示延时',
-            tip: 'mouseEnterDelay | 鼠标移入后延时多少才显示 Tooltip，单位：秒',
-          },
-          propType: 'number',
-          defaultValue: 0.1,
-          setter: {
-            componentName: 'NumberSetter',
-            props: {
-              step: 0.1,
-            },
-          },
-        },
-        {
-          name: 'mouseLeaveDelay',
-          title: {
-            label: '隐藏延时',
-            tip: 'mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒',
-          },
-          propType: 'number',
-          defaultValue: 0.1,
-          setter: {
-            componentName: 'NumberSetter',
-            props: {
-              step: 0.1,
-            },
-          },
-        },
-      ],
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/tooltip-cn/',
+  devMode: 'proCode',
   configure: {
-    component: { isContainer: true },
-    supports: {
-      style: true,
-    },
-    events: [
+    props: [
       {
-        name: 'onVisibleChange',
-        template:
-          "onVisibleChange(visible,${extParams}){\n// 显示隐藏的回调\nconsole.log('onVisibleChange',visible);}",
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '提示文字',
+            'en-US': 'title',
+          },
+          tip: '提示文字',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'arrowPointAtCenter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '箭头是否指向目标元素中心',
+            'en-US': 'arrowPointAtCenter',
+          },
+          tip: '箭头是否指向目标元素中心',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'autoAdjustOverflow',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '气泡被遮挡时自动调整位置',
+            'en-US': 'autoAdjustOverflow',
+          },
+          tip: '气泡被遮挡时自动调整位置',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'defaultVisible',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '默认是否显隐',
+            'en-US': 'defaultVisible',
+          },
+          tip: '默认是否显隐',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'getPopupContainer',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '浮层渲染父节点',
+            'en-US': 'getPopupContainer',
+          },
+          tip: '浮层渲染父节点，默认渲染到 body 上',
+        },
+        setter: 'FunctionSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'mouseEnterDelay',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'mouseEnterDelay',
+            'en-US': 'mouseEnterDelay',
+          },
+          tip: '鼠标移入后延时多少才显示 Tooltip，单位：秒',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0,
+      },
+      {
+        name: 'mouseLeaveDelay',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'mouseLeaveDelay',
+            'en-US': 'mouseLeaveDelay',
+          },
+          tip: '鼠标移出后延时多少才隐藏 Tooltip，单位：秒',
+        },
+        setter: 'NumberSetter',
+        supportVariable: true,
+        defaultValue: 0.1,
+      },
+      {
+        name: 'overlayClassName',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '卡片类名',
+            'en-US': 'overlayClassName',
+          },
+          tip: '卡片类名',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'overlayStyle',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '卡片样式',
+            'en-US': 'overlayStyle',
+          },
+          tip: '卡片样式',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'placement',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '气泡框位置',
+            'en-US': 'placement',
+          },
+          tip: '气泡框位置，可选 top left right bottom topLeft topRight bottomLeft bottomRight leftTop leftBottom rightTop rightBottom',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'top',
+      },
+      {
+        name: 'trigger',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '触发行为',
+            'en-US': 'trigger',
+          },
+          tip: '触发行为，可选 hover/focus/click/contextmenu',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+        defaultValue: 'hover',
+      },
+      {
+        name: 'v-model',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '用于手动控制浮层显隐',
+            'en-US': 'v-model',
+          },
+          tip: '用于手动控制浮层显隐',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'destroyTooltipOnHide',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'destroyTooltipOnHide',
+            'en-US': 'destroyTooltipOnHide',
+          },
+          tip: '隐藏后是否销毁 tooltip',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'align',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'align',
+            'en-US': 'align',
+          },
+          tip: '该值将合并到 placement 的配置中，设置参考 dom-align',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
       },
     ],
+    supports: {
+      style: true,
+      className: true,
+      events: [
+        {
+          name: 'onVisibleChange',
+          description: '显示隐藏的回调',
+          template:
+            "onVisibleChange(extParams) {\n  // 显示隐藏的回调\n  console.log('onVisibleChange', extParams)\n}",
+        },
+      ],
+      loop: true,
+      condition: true,
+    },
+    component: {},
   },
   snippets: [
     {
       title: '文字提示',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/tooltip-1.jpg',
+      screenshot: './screenshots/tooltip.webp',
       schema: {
         componentName: 'ATooltip',
         props: {
-          title: '提示内容',
+          title: '标题',
+          content: '内容',
         },
+        children: [
+          {
+            componentName: 'AButton',
+            props: {},
+            children: '文字提示',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

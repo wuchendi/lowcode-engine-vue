@@ -1,175 +1,105 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (breadcrumb); see https://1x.antdv.com/components/breadcrumb-cn/
+const meta = {
   componentName: 'ABreadcrumb',
   title: '面包屑',
-  // category: '基础组件',
+  group: 'Ant Design 组件',
   category: '导航',
-  npm: {
-    destructuring: true,
-    componentName: 'ABreadcrumb',
-  },
-  props: [
-    {
-      title: '基础',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'routes',
-          title: { label: '路由栈信息', tip: 'router 的路由栈信息' },
-          propType: {
-            type: 'arrayOf',
-            value: {
-              type: 'shape',
-              value: [
-                { name: 'path', propType: 'string' },
-                { name: 'breadcrumbName', propType: 'string' },
-              ],
-            },
-          },
-          setter: {
-            componentName: 'ArraySetter',
-            props: {
-              itemSetter: {
-                componentName: 'ObjectSetter',
-                props: {
-                  config: {
-                    items: [
-                      {
-                        name: 'path',
-                        title: { label: '路由路径', tip: 'path | 路由路径' },
-                        propType: 'string',
-                        setter: 'StringSetter',
-                        isRequired: true,
-                      },
-                      {
-                        name: 'breadcrumbName',
-                        title: {
-                          label: '路由名称',
-                          tip: 'breadcrumbName | 路由名称',
-                        },
-                        propType: 'string',
-                        setter: 'StringSetter',
-                        isRequired: true,
-                      },
-                    ],
-                  },
-                },
-                initialValue: {
-                  path: 'path',
-                  breadcrumbName: 'breadcrumbName',
-                },
-              },
-            },
-          },
-        },
-        {
-          name: 'params',
-          title: { label: '路由的参数', tip: '路由的参数' },
-          propType: 'object',
-          setter: 'JsonSetter',
-        },
-        {
-          name: 'separator',
-          title: { label: '分隔符自定义', tip: '分隔符自定义' },
-          propType: { type: 'oneOfType', value: ['string', 'node'] },
-          setter: [
-            'StringSetter',
-            {
-              componentName: 'SlotSetter',
-              initialValue: {
-                type: 'JSSlot',
-                value: [],
-              },
-            },
-            'VariableSetter',
-          ],
-        },
-      ],
-    },
-    {
-      title: '扩展',
-      display: 'block',
-      type: 'group',
-      items: [
-        {
-          name: 'itemRender',
-          title: {
-            label: '自定义渲染',
-            tip: 'itemRender | 自定义渲染',
-          },
-          propType: { type: 'oneOfType', value: ['func', 'node'] },
-          setter: [
-            {
-              componentName: 'SlotSetter',
-              title: '自定义渲染插槽',
-              initialValue: {
-                type: 'JSSlot',
-                params: ['route', 'params', 'routes', 'paths'],
-                value: [],
-              },
-            },
-            {
-              componentName: 'FunctionSetter',
-              props: {
-                template:
-                  'itemRender(route, params, routes, paths,${extParams}){\n// 自定义渲染\nreturn `${route.breadcrumbName}`}',
-              },
-            },
-            'VariableSetter',
-          ],
-        },
-      ],
-    },
-  ],
+  docUrl: 'https://1x.antdv.com/components/breadcrumb-cn/',
+  devMode: 'proCode',
   configure: {
+    props: [
+      {
+        name: 'itemRender',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自定义链接函数',
+            'en-US': 'itemRender',
+          },
+          tip: '自定义链接函数，和 vue-router 配置使用， 也可使用 slot="itemRender" 和 slot-scope="props"',
+        },
+        setter: [
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
+        name: 'params',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '路由的参数',
+            'en-US': 'params',
+          },
+          tip: '路由的参数',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'routes',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'router 的路由栈信息',
+            'en-US': 'routes',
+          },
+          tip: 'router 的路由栈信息',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'separator',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '分隔符自定义',
+            'en-US': 'separator',
+          },
+          tip: '分隔符自定义',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
+      events: [],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '面包屑',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/breadcrumb-1.jpg',
+      screenshot: './screenshots/breadcrumb.webp',
       schema: {
         componentName: 'ABreadcrumb',
-        props: {
-          routes: [
-            {
-              path: 'home',
-              breadcrumbName: 'Home',
-            },
-            {
-              path: 'order',
-              breadcrumbName: 'Order',
-            },
-            {
-              path: 'app',
-              breadcrumbName: 'An application',
-            },
-          ],
-          itemRender: {
-            type: 'JSSlot',
-            params: ['route', 'params', 'routes', 'paths'],
-            value: [
-              {
-                componentName: 'ATypographyLink',
-                props: {
-                  href: {
-                    type: 'JSExpression',
-                    value: 'this.route.path',
-                  },
-                  children: {
-                    type: 'JSExpression',
-                    value: 'this.route.breadcrumbName',
-                  },
-                },
-              },
-            ],
+        children: [
+          {
+            componentName: 'ABreadcrumbItem',
+            props: {},
+            children: '首页',
           },
-        },
+          {
+            componentName: 'ABreadcrumbItem',
+            props: {},
+            children: '当前页',
+          },
+        ],
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

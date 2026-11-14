@@ -1,92 +1,113 @@
-export default {
-  group: 'Antd 组件',
+import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
+
+// Generated from the ant-design-vue docs (checkbox); see https://1x.antdv.com/components/checkbox-cn/
+const meta = {
   componentName: 'ACheckbox',
   title: '多选框',
-  category: '表单',
-  npm: {
-    destructuring: true,
-    componentName: 'ACheckbox',
-  },
-  props: [
-    {
-      name: 'children',
-      title: { label: '内容', tip: '内容' },
-      propType: 'string',
-      setter: 'StringSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'autoFocus',
-      title: { label: '自动聚焦', tip: '自动获取焦点' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'checked',
-      title: { label: '当前值', tip: '指定当前是否选中' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'defaultChecked',
-      title: { label: '默认值', tip: '初始是否选中' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'disabled',
-      title: { label: '是否禁用', tip: '是否为禁用状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'indeterminate',
-      title: { label: '不确定状态', tip: 'indeterminate状态' },
-      propType: 'bool',
-      defaultValue: false,
-      setter: 'BoolSetter',
-      supportVariable: true,
-    },
-    {
-      name: 'onChange',
-      title: { label: '变化时回调函数', tip: '变化时回调函数' },
-      propType: 'func',
-    },
-  ],
+  group: 'Ant Design 组件',
+  category: '数据录入',
+  docUrl: 'https://1x.antdv.com/components/checkbox-cn/',
+  devMode: 'proCode',
   configure: {
-    component: {
-      isContainer: true,
-    },
+    props: [
+      {
+        name: 'autoFocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '自动获取焦点',
+            'en-US': 'autoFocus',
+          },
+          tip: '自动获取焦点',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'checked',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '指定当前是否选中',
+            'en-US': 'checked',
+          },
+          tip: '指定当前是否选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'defaultChecked',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '初始是否选中',
+            'en-US': 'defaultChecked',
+          },
+          tip: '初始是否选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'disabled',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '失效状态',
+            'en-US': 'disabled',
+          },
+          tip: '失效状态',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'indeterminate',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'indeterminate',
+            'en-US': 'indeterminate',
+          },
+          tip: '设置 indeterminate 状态，只负责样式控制',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+    ],
     supports: {
       style: true,
+      className: true,
       events: [
         {
           name: 'onChange',
+          description: '变化时回调函数',
           template:
-            "onChange(event,${extParams}){\n// 变化时回调函数\nconsole.log('onChange', event);}",
+            "onChange(extParams) {\n  // 变化时回调函数\n  console.log('onChange', extParams)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '多选框',
-      screenshot:
-        'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/checkbox-1.png',
+      screenshot: './screenshots/checkbox.webp',
       schema: {
         componentName: 'ACheckbox',
-        props: {
-          children: 'checkbox',
-        },
+        props: {},
+        children: '多选框',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
+
+export default meta

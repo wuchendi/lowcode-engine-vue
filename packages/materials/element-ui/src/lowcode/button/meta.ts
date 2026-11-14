@@ -1,24 +1,25 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-const meta: IPublicTypeComponentMetadata = {
+// Generated from the element-ui docs (button); see https://element.eleme.cn/#/zh-CN/component/button
+const meta = {
+  componentName: 'ElButton',
   title: '按钮',
   group: 'Element 组件',
-  category: 'Basic',
+  category: '基础组件',
   docUrl: 'https://element.eleme.cn/#/zh-CN/component/button',
-  componentName: 'ElButton',
-
+  devMode: 'proCode',
   configure: {
     props: [
       {
-        name: 'children',
-        title: '文本内容',
-        setter: {
-          componentName: 'StringSetter',
-        },
-      },
-      {
         name: 'size',
-        title: '尺寸',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '尺寸',
+            'en-US': 'size',
+          },
+          tip: '尺寸',
+        },
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -38,117 +39,208 @@ const meta: IPublicTypeComponentMetadata = {
             ],
           },
         },
+        supportVariable: true,
       },
       {
         name: 'type',
-        title: '类型',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '类型',
+            'en-US': 'type',
+          },
+          tip: '类型',
+        },
         setter: {
           componentName: 'SelectSetter',
           props: {
             options: [
               {
-                title: '默认按钮',
-                value: 'default',
-              },
-              {
-                title: '主要按钮',
+                title: 'primary',
                 value: 'primary',
               },
               {
-                title: '成功按钮',
+                title: 'success',
                 value: 'success',
               },
               {
-                title: '警告按钮',
+                title: 'warning',
                 value: 'warning',
               },
               {
-                title: '危险按钮',
+                title: 'danger',
                 value: 'danger',
               },
               {
-                title: '信息按钮',
+                title: 'info',
                 value: 'info',
               },
               {
-                title: '文字按钮',
+                title: 'text',
                 value: 'text',
               },
             ],
           },
-          initialValue: 'default',
         },
-      },
-      {
-        name: 'icon',
-        title: '图标类名',
-        setter: {
-          componentName: 'CIconSetter',
-        },
+        supportVariable: true,
       },
       {
         name: 'plain',
-        title: '朴素按钮',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否朴素按钮',
+            'en-US': 'plain',
+          },
+          tip: '是否朴素按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'round',
-        title: '圆角按钮',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否圆角按钮',
+            'en-US': 'round',
+          },
+          tip: '是否圆角按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'circle',
-        title: '圆形按钮',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否圆形按钮',
+            'en-US': 'circle',
+          },
+          tip: '是否圆形按钮',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'loading',
-        title: '加载中',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否加载中状态',
+            'en-US': 'loading',
+          },
+          tip: '是否加载中状态',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
       },
       {
         name: 'disabled',
-        title: '禁用',
-        setter: {
-          componentName: 'BoolSetter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否禁用状态',
+            'en-US': 'disabled',
+          },
+          tip: '是否禁用状态',
         },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'icon',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '图标类名',
+            'en-US': 'icon',
+          },
+          tip: '图标类名',
+        },
+        setter: 'CIconSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'autofocus',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '是否默认聚焦',
+            'en-US': 'autofocus',
+          },
+          tip: '是否默认聚焦',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: false,
+      },
+      {
+        name: 'nativeType',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '原生 type 属性',
+            'en-US': 'nativeType',
+          },
+          tip: '原生 type 属性',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'button',
+                value: 'button',
+              },
+              {
+                title: 'submit',
+                value: 'submit',
+              },
+              {
+                title: 'reset',
+                value: 'reset',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'button',
       },
     ],
     supports: {
       style: true,
-      loop: true,
       className: true,
       events: [
         {
           name: 'onClick',
-          description: '点击按钮时的回调',
+          description: '点击时触发',
           template:
-            'onClick(event, ${extParams}){\n  // 点击事件\n  console.log("onClick", event);\n}\n',
+            "onClick(event, extParams) {\n  console.log('onClick', event)\n}",
         },
       ],
+      loop: true,
+      condition: true,
     },
+    component: {},
   },
   snippets: [
     {
       title: '按钮',
-      screenshot:
-        'https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/button.png',
+      screenshot: './screenshots/button.webp',
       schema: {
         componentName: 'ElButton',
-        props: {
-          children: '按钮',
-        },
+        props: {},
+        children: '按钮',
       },
     },
   ],
-}
+} as IPublicTypeComponentMetadata
 
 export default meta

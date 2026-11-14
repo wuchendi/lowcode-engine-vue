@@ -2,7 +2,7 @@
 
 <a href="https://vant-ui.github.io/vant/en-US/"><img alt="vant" src="https://img01.yzcdn.cn/vant/logo.png" width="150"/></a>
 
-## Vant(4.8.10) Materials
+## Vant(4.10.2) Materials
 
 <br />
 
@@ -17,6 +17,17 @@
 - [x] Image
 - [x] Switch
 - [x] Tab/Tabs
+
+## Components
+
+Every component documented by `vant` 4.10.2 (Vue 3) has a meta:
+99 components, with the props, events and slots of [its docs](https://vant-ui.github.io/vant/#/zh-CN/)
+and a `docUrl` to its page. The material pins `vant` to 4.10.2;
+`tests/meta.test.ts` checks the metas against the components of that version
+(declared props, handler names, doc links, code generation exports,
+screenshots). `screenshots/` holds a thumbnail of every component rendered
+from its snippet in the designer canvas; components with nothing to show
+(modals, sub-components) use `screenshots/fallback.svg`.
 
 ## Usage Example
 
