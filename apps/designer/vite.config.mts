@@ -2,7 +2,7 @@ import { createReadStream, existsSync, statSync, watch } from 'node:fs'
 import { cp, mkdir, writeFile } from 'node:fs/promises'
 import type { ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
-import { basename, dirname, join, resolve } from 'node:path'
+import { basename, dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { Connect, Plugin } from 'vite'
 import { defineConfig } from 'vite'
@@ -112,6 +112,15 @@ function globals(map: Record<string, string>): Plugin {
   }
 }
 
+/** Content types of the runtime files that are not scripts. */
+const CONTENT_TYPES: Record<string, string> = {
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.png': 'image/png',
+}
+
 const RELOAD_PATH = '/__designer_reload'
 /** Written by a development build once its files are written. */
 const BUILD_STAMP = resolve(here, 'dist/.build-stamp')
@@ -159,7 +168,7 @@ function serveRuntime(dev: boolean): Plugin {
     if (!file || !existsSync(file)) return next()
     res.setHeader(
       'Content-Type',
-      file.endsWith('.css') ? 'text/css' : 'text/javascript',
+      CONTENT_TYPES[extname(file)] ?? 'text/javascript',
     )
     createReadStream(file).pipe(res)
   }
