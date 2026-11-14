@@ -80,3 +80,9 @@ modelled on the projects monorepo's `@cdlab/tsconfig`: `base`, `vue`,
 `react` and `node` presets. Every workspace tsconfig extends a preset instead
 of the root file by relative path; effective compiler options and checked
 files are unchanged.
+
+## 2026-11-14 03:54 [progress]
+
+20261114-0346-vue-version-switch: the designer top bar has a Vue 2.7 / Vue 3
+switch (segmented buttons next to the logo); it saves the current schema and
+reloads with the other `?vue=`.

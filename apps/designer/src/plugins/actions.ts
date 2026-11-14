@@ -1,6 +1,7 @@
 import { Button, Message } from '@alifd/next'
 import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
 import { createElement as h } from 'react'
+import { VueVersionSwitch } from '@/components/vue-version-switch'
 import Logger from '@/utils/Logger'
 import { saveSchema } from '@/utils/store'
 import { vueVersion } from '@/version'
@@ -20,6 +21,14 @@ const savePlugin = (ctx: IPublicModelPluginContext) => {
     name: 'saveSample',
     init() {
       const { skeleton, hotkey } = ctx
+
+      skeleton.add({
+        name: 'vueVersionSwitch',
+        area: 'topArea',
+        type: 'Widget',
+        props: { align: 'left' },
+        content: h(VueVersionSwitch),
+      })
 
       skeleton.add({
         name: 'saveSample',
