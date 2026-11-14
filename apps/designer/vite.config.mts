@@ -1,5 +1,12 @@
-import { createReadStream, existsSync, statSync, watch } from 'node:fs'
-import { cp, mkdir, writeFile } from 'node:fs/promises'
+import {
+  createReadStream,
+  existsSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  watch,
+} from 'node:fs'
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import type { ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
 import { basename, dirname, extname, join, resolve } from 'node:path'
@@ -10,6 +17,12 @@ import { defineConfig } from 'vite'
 const here = dirname(fileURLToPath(import.meta.url))
 const packages = resolve(here, '../../packages')
 
+/** A file of a dependency of the designer. */
+function appFile(name: string, file: string) {
+  const require = createRequire(import.meta.url)
+  return join(dirname(require.resolve(`${name}/package.json`)), file)
+}
+
 /** Directory of a dependency of one of the renderer packages. */
 function packageDir(owner: string, name: string) {
   const require = createRequire(join(packages, owner, 'package.json'))
@@ -17,7 +30,8 @@ function packageDir(owner: string, name: string) {
 }
 
 /**
- * Files served at runtime: Vue, the renderer/simulator bundles of each Vue
+ * Files served at runtime: the engine and its globals (React, Fusion,
+ * lodash, moment), Vue, Monaco, the renderer/simulator bundles of each Vue
  * version and the workspace materials. Served from the workspace in dev and
  * copied into the output on build.
  */
@@ -32,6 +46,22 @@ function runtimeFiles(dev: boolean): Record<string, string> {
       'dist/vue.runtime.global.js',
     ),
   }
+  const vendor: Record<string, [string, string]> = {
+    'react.js': ['react', 'umd/react.production.min.js'],
+    'react-dom.js': ['react-dom', 'umd/react-dom.production.min.js'],
+    'prop-types.js': ['prop-types', 'prop-types.min.js'],
+    'lodash.js': ['lodash', 'lodash.min.js'],
+    'moment.js': ['moment', 'min/moment.min.js'],
+    'next.js': ['@alifd/next', 'dist/next.min.js'],
+    'theme-variables.css': ['@alifd/theme-lowcode-light', 'variables.css'],
+    'theme.css': ['@alifd/theme-lowcode-light', 'dist/next.var.min.css'],
+    'engine-core.js': ['@alilc/lowcode-engine', 'dist/js/engine-core.js'],
+    'engine-core.css': ['@alilc/lowcode-engine', 'dist/css/engine-core.css'],
+  }
+  for (const [name, [pkg, file]] of Object.entries(vendor)) {
+    files[`runtime/vendor/${name}`] = appFile(pkg, file)
+  }
+  files['runtime/monaco/vs'] = appFile('monaco-editor', 'min/vs')
   const ext = join(packages, 'plugins', 'engine-ext-vue', 'dist')
   files['runtime/engine-ext/engine-ext.js'] = join(ext, 'engine-ext.js')
   files['runtime/engine-ext/engine-ext.css'] = join(ext, 'engine-ext.css')
@@ -61,7 +91,7 @@ function runtimeFiles(dev: boolean): Record<string, string> {
   return files
 }
 
-/** Modules provided as globals by the CDN scripts in index.html. */
+/** Modules provided as globals by the vendor scripts in index.html. */
 const GLOBALS: Record<string, string> = {
   react: 'React',
   'react-dom': 'ReactDOM',
@@ -79,7 +109,7 @@ const GLOBALS: Record<string, string> = {
 const GLOBAL_PREFIX = '\0designer-global:'
 
 /**
- * Resolves the CDN-provided modules to `module.exports = window.X`, both in
+ * Resolves the page-provided modules to `module.exports = window.X`, both in
  * the app and in pre-bundled dependencies, so default and named imports
  * read the page globals and the engine stays a single instance.
  */
@@ -119,6 +149,37 @@ const CONTENT_TYPES: Record<string, string> = {
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
   '.png': 'image/png',
+}
+
+/**
+ * The fonts, images and icon scripts the engine, its plugins and the setters
+ * load from alicdn are kept in `public/vendor`: their URLs point there.
+ */
+const vendored = new Set(readdirSync(resolve(here, 'public/vendor')))
+function localize(code: string) {
+  return code.replace(
+    /(?:https?:)?\/\/[\w.-]*alicdn\.com\/[^\s"'`()]*?\/([^/\s"'`()?#]+)(?=[\s"'`()?#])/g,
+    (url, name: string) => (vendored.has(name) ? `/vendor/${name}` : url),
+  )
+}
+/** Runtime files with alicdn URLs: the engine, its globals and engine-ext. */
+const isLocalized = (route: string) =>
+  /^runtime\/(vendor|engine-ext)\/.+\.(js|css)$/.test(route)
+
+/** Localizes the bundled modules (also the pre-bundled dependencies). */
+function localizeModules(): Plugin {
+  const plugin = {
+    name: 'designer:localize',
+    transform(code: string) {
+      return code.includes('alicdn.com') ? localize(code) : null
+    },
+  }
+  return {
+    ...plugin,
+    config: () => ({
+      optimizeDeps: { rolldownOptions: { plugins: [plugin] } },
+    }),
+  }
 }
 
 const RELOAD_PATH = '/__designer_reload'
@@ -170,7 +231,12 @@ function serveRuntime(dev: boolean): Plugin {
       'Content-Type',
       CONTENT_TYPES[extname(file)] ?? 'text/javascript',
     )
-    createReadStream(file).pipe(res)
+    const route = Object.keys(files).find((key) => files[key] === file)
+    if (route && isLocalized(route)) {
+      res.end(localize(readFileSync(file, 'utf8')))
+    } else {
+      createReadStream(file).pipe(res)
+    }
   }
   return {
     name: 'designer:runtime',
@@ -213,7 +279,11 @@ function serveRuntime(dev: boolean): Plugin {
       for (const [route, source] of Object.entries(files)) {
         const target = join(outDir, route)
         await mkdir(dirname(target), { recursive: true })
-        await cp(source, target, { recursive: true })
+        if (isLocalized(route)) {
+          await writeFile(target, localize(await readFile(source, 'utf8')))
+        } else {
+          await cp(source, target, { recursive: true })
+        }
       }
     },
   }
@@ -252,7 +322,11 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  plugins: [globals(GLOBALS), serveRuntime(mode === 'development')],
+  plugins: [
+    globals(GLOBALS),
+    localizeModules(),
+    serveRuntime(mode === 'development'),
+  ],
   build: {
     // `pnpm dev` builds in development mode
     minify: mode !== 'development',

@@ -9,6 +9,7 @@ packages:
 catalogs:
   dev:
     "@biomejs/biome": ^2.6.7
+    "@playwright/test": 1.65.0
     "@types/node": ^26.6.6
     "@vitejs/plugin-react": ^6.3.0
     jsdom: ^31.0.1
@@ -28,6 +29,7 @@ catalogs:
     "@types/react": ^16.14.70
     intl-messageformat: ^10.7.18
     react: ^16.14.0
+    react-dom: ^16.14.0
   materials:
     "@types/lodash": ^4.17.27
     lodash: ^4.17.21

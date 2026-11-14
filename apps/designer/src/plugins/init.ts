@@ -9,7 +9,7 @@ import assetsVue2 from '@/assets/assets-vue2.json'
 import assetsVue3 from '@/assets/assets-vue3.json'
 import schemaVue2 from '@/assets/schema-vue2.json'
 import schemaVue3 from '@/assets/schema-vue3.json'
-import { getProjectSchemaToLocalStorage } from '@/utils/store'
+import { projectStorage } from '@/utils/store'
 import { vueVersion } from '@/version'
 
 const assets = vueVersion === 2 ? assetsVue2 : assetsVue3
@@ -24,7 +24,7 @@ const editorInit = (ctx: IPublicModelPluginContext) => {
       const loadedAssets = (await injectAssets(assets)) as IPublicTypeAssetsJson
       material.setAssets(loadedAssets)
 
-      const projectSchema = getProjectSchemaToLocalStorage()
+      const projectSchema = (await projectStorage.load())?.schema
       const roots = (
         projectSchema?.componentsTree.length
           ? projectSchema.componentsTree

@@ -24,5 +24,10 @@
   "DeleteComponentConfirm": "Delete the component {name}? Pages using it can no longer render it",
   "ComponentNameInvalid": "A component name starts with a capital letter and contains letters and digits only, e.g. UserCard",
   "ComponentNameTaken": "Another page or component has this name",
-  "LowCodeComponents": "Low-code components"
+  "LowCodeComponents": "Low-code components",
+  "ExportProject": "Export",
+  "ImportProject": "Import",
+  "ImportProjectConfirm": "The imported project replaces the current one. Import it?",
+  "InvalidProjectFile": "Not a valid project file",
+  "ProjectForOtherVue": "This is a Vue {version} project: switch to Vue {version} to import it"
 }

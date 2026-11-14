@@ -24,5 +24,10 @@
   "DeleteComponentConfirm": "确定删除组件 {name} 吗？使用它的页面将无法渲染它",
   "ComponentNameInvalid": "组件名以大写字母开头，只能包含字母和数字，例如 UserCard",
   "ComponentNameTaken": "已有页面或组件使用这个名称",
-  "LowCodeComponents": "低代码组件"
+  "LowCodeComponents": "低代码组件",
+  "ExportProject": "导出",
+  "ImportProject": "导入",
+  "ImportProjectConfirm": "导入的项目会替换当前项目，确定导入吗？",
+  "InvalidProjectFile": "不是有效的项目文件",
+  "ProjectForOtherVue": "这是 Vue {version} 的项目，请切换到 Vue {version} 后导入"
 }

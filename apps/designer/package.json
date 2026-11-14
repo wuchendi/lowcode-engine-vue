@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@alifd/next": "catalog:plugins",
+    "@alifd/theme-lowcode-light": "0.2.1",
     "@alilc/lowcode-engine": "catalog:shared",
     "@cdlab996/lowcode-engine-ext-vue": "workspace:*",
     "@cdlab996/lowcode-materials-antd-vue1": "workspace:*",
@@ -47,7 +48,12 @@
     "@types/react": "catalog:shared",
     "events": "^3.3.0",
     "less": "catalog:dev",
+    "lodash": "catalog:materials",
+    "moment": "^2.31.0",
+    "monaco-editor": "0.52.2",
+    "prop-types": "^15.8.1",
     "react": "catalog:shared",
+    "react-dom": "catalog:shared",
     "sass": "catalog:dev",
     "vite": "catalog:dev"
   }

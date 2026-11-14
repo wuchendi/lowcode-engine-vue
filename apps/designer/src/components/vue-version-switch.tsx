@@ -2,7 +2,7 @@ import { Button } from '@alifd/next'
 import React from 'react'
 import { intl } from '@/locale'
 import Logger from '@/utils/Logger'
-import { saveSchema } from '@/utils/store'
+import { saveProject } from '@/utils/store'
 import type { VueVersion } from '@/version'
 import { vueVersion } from '@/version'
 
@@ -11,10 +11,10 @@ const versions: { label: string; value: VueVersion }[] = [
   { label: 'Vue 3', value: 3 },
 ]
 
-/** Saves the current schema, then reloads the designer with `?vue=<version>`. */
+/** Saves the current project, then reloads the designer with `?vue=<version>`. */
 async function switchTo(version: VueVersion) {
   if (version === vueVersion) return
-  await saveSchema()
+  await saveProject()
   const url = new URL(window.location.href)
   url.searchParams.set('vue', String(version))
   window.location.assign(url)

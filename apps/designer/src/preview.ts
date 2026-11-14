@@ -1,10 +1,7 @@
-import type {
-  IPublicTypePackage,
-  IPublicTypeProjectSchema,
-} from '@alilc/lowcode-types'
 import type * as LowcodeVue from '@cdlab996/lowcode-vue3'
 import { findPage } from './utils/pages'
-import { runtime, storageKey } from './version'
+import { createLocalProjectStorage } from './utils/project-storage'
+import { runtime, vueVersion } from './version'
 
 function loadScript(src: string) {
   return new Promise<void>((resolve, reject) => {
@@ -14,11 +11,6 @@ function loadScript(src: string) {
     script.onerror = () => reject(new Error(`failed to load ${src}`))
     document.head.appendChild(script)
   })
-}
-
-function readJson<T>(key: string, fallback: T): T {
-  const raw = window.localStorage.getItem(storageKey(key))
-  return raw ? (JSON.parse(raw) as T) : fallback
 }
 
 /** Links to the other pages, above the preview. */
@@ -54,12 +46,12 @@ void (async () => {
     Renderer,
   } = (window as unknown as { LCVueRenderer: typeof LowcodeVue }).LCVueRenderer
 
-  const packages = readJson<IPublicTypePackage[]>('packages', [])
-  const projectSchema = readJson<Partial<IPublicTypeProjectSchema>>(
-    'projectSchema',
-    {},
-  )
-  const { componentsMap = [], componentsTree = [] } = projectSchema
+  const saved = await createLocalProjectStorage(
+    window.localStorage,
+    vueVersion,
+  ).load()
+  const packages = saved?.packages ?? []
+  const { componentsMap = [], componentsTree = [] } = saved?.schema ?? {}
   const params = new URLSearchParams(window.location.search)
   const pages = componentsTree.filter(
     (root) => root.componentName !== 'Component',

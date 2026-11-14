@@ -1,43 +1,24 @@
 import { material, project } from '@alilc/lowcode-engine'
 import { filterPackages } from '@alilc/lowcode-plugin-inject'
-import type {
-  IPublicTypePackage,
-  IPublicTypeProjectSchema,
-} from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
-import { storageKey } from '@/version'
+import type { ProjectRecord, ProjectStorage } from '@/utils/project-storage'
+import { createLocalProjectStorage } from '@/utils/project-storage'
+import { vueVersion } from '@/version'
 
-export const setPackgesToLocalStorage = async () => {
-  const packages = await filterPackages(material.getAssets()?.packages)
-  window.localStorage.setItem(storageKey('packages'), JSON.stringify(packages))
-}
+/** The project storage of the designer: replace it to save to a backend. */
+export const projectStorage: ProjectStorage = createLocalProjectStorage(
+  window.localStorage,
+  vueVersion,
+)
 
-export const getPackgesToLocalStorage = (): IPublicTypePackage[] => {
-  const packagesString = window.localStorage.getItem(storageKey('packages'))
-  if (packagesString) {
-    return JSON.parse(packagesString) as IPublicTypePackage[]
+/** The project being designed and the packages of its materials. */
+export async function currentProject(): Promise<ProjectRecord> {
+  return {
+    schema: project.exportSchema(IPublicEnumTransformStage.Save),
+    packages: await filterPackages(material.getAssets()?.packages),
   }
-  return []
 }
 
-export const setProjectSchemaToLocalStorage = () => {
-  window.localStorage.setItem(
-    storageKey('projectSchema'),
-    JSON.stringify(project.exportSchema(IPublicEnumTransformStage.Save)),
-  )
-}
-
-export const getProjectSchemaToLocalStorage = ():
-  | IPublicTypeProjectSchema
-  | undefined => {
-  const schemaString = window.localStorage.getItem(storageKey('projectSchema'))
-  if (schemaString) {
-    return JSON.parse(schemaString) as IPublicTypeProjectSchema
-  }
-  return undefined
-}
-
-export const saveSchema = async () => {
-  setProjectSchemaToLocalStorage()
-  await setPackgesToLocalStorage()
+export async function saveProject() {
+  await projectStorage.save(await currentProject())
 }

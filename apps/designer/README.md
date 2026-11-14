@@ -16,8 +16,13 @@ pnpm dev        # from the repository root (needs nsl)
 pnpm -C apps/designer dev:bare   # plain Vite on port 5577
 ```
 
-The engine, React, Fusion and the Vue setters come from CDN scripts in
-`index.html`; `vite.config.mts` maps their imports to those globals. The
+The designer loads nothing from a CDN. The engine, React, Fusion (with the
+lowcode theme), lodash and moment are served from their npm packages under
+`/runtime/vendor/`, Monaco under `/runtime/monaco/` and the Vue setters
+under `/runtime/engine-ext/`; `index.html` loads them as scripts and
+`vite.config.mts` maps their imports to those globals. The fonts, images and
+icon scripts these packages and the plugins reference on alicdn are kept in
+`public/vendor`, and their URLs are rewritten there (by file name). The
 renderer bundles of `packages/renderer/vue{2,3}/dist` and the material builds
 are served under `/runtime/` and `/materials/` (copied into the output on
 build), so rebuild a package and reload to see a change.
@@ -47,7 +52,12 @@ of this repository take their texts from `locale/{zh-CN,en-US}.json` through
 the engine's `createIntl`; texts are ICU messages, so no HTML in them. The
 titles of the material components stay as the metas give them.
 
-Saving stores the schema (every page) in `localStorage` per Vue version;
+Saving stores the project (the schema of every page and component, and the
+material packages) through a `ProjectStorage` (`src/utils/project-storage.ts`,
+`load` / `save`): `src/utils/store.ts` uses the `localStorage` one, per Vue
+version; replace it there to save to a backend. **导出** downloads the
+project as a JSON file (`lowcode-project-vue<2|3>.json`); **导入** replaces
+the project with such a file of the same Vue version and reloads.
 **Preview** opens `preview.html` with the same version and the current page
 (`?page=/about`), which renders the saved schema with `dist/renderer.umd.js`
 and links the other pages.
