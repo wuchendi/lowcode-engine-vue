@@ -25,12 +25,18 @@ const editorInit = (ctx: IPublicModelPluginContext) => {
       material.setAssets(loadedAssets)
 
       const projectSchema = getProjectSchemaToLocalStorage()
-      const schema = projectSchema
-        ? projectSchema.componentsTree.pop()
-        : originSchema
+      const roots = (
+        projectSchema?.componentsTree.length
+          ? projectSchema.componentsTree
+          : [originSchema]
+      ) as IPublicTypeRootSchema[]
 
       project.onSimulatorRendererReady(() => {
-        project.openDocument(schema as IPublicTypeRootSchema)
+        // Every page and component is open; the first page is the current one
+        const docs = roots.map((root) => project.openDocument(root))
+        const first =
+          docs[roots.findIndex((root) => root.componentName !== 'Component')]
+        if (first) project.openDocument(first.id)
       })
     },
   }

@@ -21,6 +21,7 @@
     "@alilc/lowcode-plugin-set-ref-prop": "^1.0.1",
     "@alilc/lowcode-plugin-simulator-select": "^1.0.3",
     "@alilc/lowcode-plugin-undo-redo": "^1.0.0",
+    "@alilc/lowcode-plugin-zh-en": "^1.0.0",
     "@alilc/lowcode-types": "catalog:shared",
     "@alilc/lowcode-utils": "catalog:shared",
     "@cdlab996/lowcode-plugin-code-generator": "workspace:*",

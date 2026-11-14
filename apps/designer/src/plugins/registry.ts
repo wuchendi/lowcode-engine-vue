@@ -8,23 +8,28 @@ import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
  */
 
 import ComponentsPane from '@alilc/lowcode-plugin-components-pane'
-import DataSourcePanePlugin from '@alilc/lowcode-plugin-datasource-pane'
 import Inject from '@alilc/lowcode-plugin-inject'
-import SchemaPlugin from '@alilc/lowcode-plugin-schema'
 import SetRefPropPlugin from '@alilc/lowcode-plugin-set-ref-prop'
 import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select'
 import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo'
+import ZhEnPlugin from '@alilc/lowcode-plugin-zh-en'
 import CodeGenerator from '@cdlab996/lowcode-plugin-code-generator'
 import DirectiveLoading from '@cdlab996/lowcode-plugin-directive-loading'
 import ManualPlugin from '@cdlab996/lowcode-plugin-manual'
 import PluginSetDocUrlProp from '@cdlab996/lowcode-plugin-set-doc-url'
 import CodeEditor from '@cdlab996/lowcode-plugin-vue-code-editor'
+import { i18nTitle } from '@/locale'
 import { vueVersion } from '@/version'
 import { Logo } from '../components/logo/logo'
 // setters
 import SetterPlugin from '../setters/index'
 import Actions from './actions'
+import BlocksPlugin from './blocks'
+import DataSourcePanePlugin from './datasource'
 import ResourceInit from './init'
+import LowCodeComponentsPlugin from './lowcode-components'
+import PagesPlugin from './pages'
+import SchemaPlugin from './schema'
 
 export default async function registerPlugins() {
   // Inject：支持调试功能
@@ -70,7 +75,7 @@ export default async function registerPlugins() {
           props: {
             align: 'top',
             icon: 'zujianku',
-            description: '组件库',
+            description: i18nTitle('组件库', 'Components'),
           },
         })
         componentsPane?.disable?.()
@@ -82,6 +87,15 @@ export default async function registerPlugins() {
   }
   builtinPluginRegistry.pluginName = 'builtinPluginRegistry'
   await plugins.register(builtinPluginRegistry)
+
+  // 页面管理：新建、切换、删除页面
+  await plugins.register(PagesPlugin)
+
+  // 组件文档注册为低代码组件
+  await plugins.register(LowCodeComponentsPlugin)
+
+  // 区块：保存节点树，再从面板插入
+  await plugins.register(BlocksPlugin)
 
   // 注册数据源面板
   await plugins.register(DataSourcePanePlugin)
@@ -105,6 +119,9 @@ export default async function registerPlugins() {
 
   // 出码：生成 Vue 项目
   await plugins.register(CodeGenerator, { vue: vueVersion })
+
+  // 中英文切换
+  await plugins.register(ZhEnPlugin)
 
   // 注册操作按钮（保存、预览）
   await plugins.register(Actions)

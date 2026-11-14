@@ -1,5 +1,6 @@
 import { Balloon, Icon, Input } from '@alifd/next'
 import React, { PureComponent } from 'react'
+import { intl } from '@/locale'
 
 import { elementIcons } from './element/icon'
 import { vantIcons } from './vant/icon'
@@ -47,7 +48,7 @@ export default class IconSetter extends PureComponent<
     defaultValue: '',
     hasClear: true,
     icons,
-    placeholder: '请点击选择 Icon',
+    placeholder: intl('SelectIcon'),
     onChange: () => undefined,
   }
 

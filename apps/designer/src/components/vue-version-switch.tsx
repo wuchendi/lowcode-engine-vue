@@ -1,5 +1,6 @@
 import { Button } from '@alifd/next'
 import React from 'react'
+import { intl } from '@/locale'
 import Logger from '@/utils/Logger'
 import { saveSchema } from '@/utils/store'
 import type { VueVersion } from '@/version'
@@ -23,7 +24,7 @@ async function switchTo(version: VueVersion) {
 export function VueVersionSwitch() {
   return (
     <div
-      title="切换 Vue 版本"
+      title={intl('SwitchVueVersion')}
       style={{ display: 'flex', alignItems: 'center', marginLeft: 12 }}
     >
       <Button.Group>

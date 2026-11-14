@@ -291,6 +291,9 @@ importers:
       '@alilc/lowcode-plugin-undo-redo':
         specifier: ^1.0.0
         version: 1.0.1(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)
+      '@alilc/lowcode-plugin-zh-en':
+        specifier: ^1.0.0
+        version: 1.0.0(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)
       '@alilc/lowcode-types':
         specifier: catalog:shared
         version: 1.3.4
@@ -620,9 +623,6 @@ importers:
       events:
         specifier: ^3.3.0
         version: 3.3.0
-      intl-messageformat:
-        specifier: catalog:shared
-        version: 10.7.18
       js-beautify:
         specifier: ^1.15.4
         version: 1.15.4
@@ -993,6 +993,9 @@ packages:
 
   '@alilc/lowcode-plugin-undo-redo@1.0.1':
     resolution: {integrity: sha512-JOPmOcMGm/DocioEiwxUv/Lm7A0zkXvPsfDOYy1NKyu/oAo8W6zzXXM2xuwNSXY90ZK09Uh9rmSS8E10hyPGfA==}
+
+  '@alilc/lowcode-plugin-zh-en@1.0.0':
+    resolution: {integrity: sha512-x1T9TQtHcTlP6Gbfalzob5EPqLg3gKdKYSij/au+lbevKfRYgexahTg68hOz1pDf7wtIiHns/ngdL+32XP/N+A==}
 
   '@alilc/lowcode-shell@1.3.4':
     resolution: {integrity: sha512-SSPMPBkMOnnD1ohaetLHnGRTbz+EgXNSDSmIWXMnk0RzkkFlSdHnWRMZcrLZFsurXMZuxx2P2aT/WDFiaJNkqw==}
@@ -5626,6 +5629,17 @@ snapshots:
       - react-dom
 
   '@alilc/lowcode-plugin-undo-redo@1.0.1(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)':
+    dependencies:
+      '@alilc/lowcode-types': 1.3.4
+      '@alilc/lowcode-utils': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
+      react: 16.14.0
+      react-dom: 16.14.0(react@16.14.0)
+    transitivePeerDependencies:
+      - '@alifd/meet-react'
+      - '@types/react'
+      - moment
+
+  '@alilc/lowcode-plugin-zh-en@1.0.0(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)':
     dependencies:
       '@alilc/lowcode-types': 1.3.4
       '@alilc/lowcode-utils': 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))
