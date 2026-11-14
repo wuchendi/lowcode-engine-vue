@@ -14,6 +14,7 @@ import SchemaPlugin from '@alilc/lowcode-plugin-schema'
 import SetRefPropPlugin from '@alilc/lowcode-plugin-set-ref-prop'
 import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select'
 import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo'
+import CodeGenerator from '@cdlab996/lowcode-plugin-code-generator'
 import DirectiveLoading from '@cdlab996/lowcode-plugin-directive-loading'
 import ManualPlugin from '@cdlab996/lowcode-plugin-manual'
 import PluginSetDocUrlProp from '@cdlab996/lowcode-plugin-set-doc-url'
@@ -101,6 +102,9 @@ export default async function registerPlugins() {
 
   // 注册回退/前进
   await plugins.register(UndoRedoPlugin)
+
+  // 出码：生成 Vue 项目
+  await plugins.register(CodeGenerator, { vue: vueVersion })
 
   // 注册操作按钮（保存、预览）
   await plugins.register(Actions)

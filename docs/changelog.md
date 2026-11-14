@@ -96,3 +96,41 @@ listed by the variable and event binding dialogs and the expression setter,
 event handlers created from the designer go into `setup()` and its returned
 object, and the sample schemas use `setup()`. Options API pages keep
 working. Fixed the `emits` fall-through into `methods` in the parser.
+
+## 2026-11-14 05:30 [progress]
+
+20261114-0435-vue-code-generator (plan 20261114-0437-vue-code-generator):
+Vue code generation. `@cdlab996/lowcode-code-generator`
+(`packages/tools/code-generator`) turns a project schema into a Vite + Vue
+2.7 / Vue 3 project: a file per page and block, router for several pages,
+the source panel's code as the script, and a small runtime for data sources,
+`utils`, `constants` and i18n. The material builder writes a `codegen`
+manifest (component exports, styles, versions) into `assets.json`. The
+designer's 出码 button (`@cdlab996/lowcode-plugin-code-generator`) previews
+the files and the warnings and downloads a zip. Verified: unit tests; E2E in
+the designer for both versions; the downloaded projects and a multi-page
+fixture (data source, i18n, utils, Options API page) install, build and
+render like the canvas in both versions.
+
+## 2026-11-14 05:30 [pitfall]
+
+Generated projects: pnpm 11 rejects ranges only a release from the last day
+satisfies (`minimumReleaseAge`, e.g. `vue-router@^5.5.1` the day after its
+release) and fails on unapproved dependency build scripts (core-js); the
+generator writes range floors and `strictDepBuilds: false`. Vue 3's template
+compiler rejects multi-line `function () {}` handlers; they become arrow
+functions.
+
+## 2026-11-14 06:00 [progress]
+
+20261114-0435-vue-code-generator follow-up: code generation warns about data
+sources with URLs relative to the designer (the sample's `/mock/info.json`),
+and registers `v-loading` in the generated app from Element UI (Vue 2.7) or
+Element Plus (Vue 3). Verified in the browser for both versions (build and
+dev).
+
+## 2026-11-14 06:00 [pitfall]
+
+Generated projects are `"type": "module"`, so Vite follows Node's interop: a
+default import of a CommonJS module (`element-ui/lib/loading`) is its
+`module.exports`, with the ES exports on `.default`.

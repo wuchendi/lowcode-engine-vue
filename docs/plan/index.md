@@ -37,3 +37,4 @@ Each plan is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0320-type-check-coverage Type-check tests and build configs**](20261114-0320-type-check-coverage.md) `2026-11-14`
 - [x] [**20261114-0334-tsconfig-package Shared tsconfig package**](20261114-0334-tsconfig-package.md) `2026-11-14`
 - [x] [**20261114-0403-composition-api-source Composition API in the source panel**](20261114-0403-composition-api-source.md) `2026-11-14`
+- [x] [**20261114-0437-vue-code-generator Vue code generation (phases 1-3)**](20261114-0437-vue-code-generator.md) `2026-11-14`

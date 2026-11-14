@@ -20,6 +20,7 @@ packages/
     vue2/                 @cdlab996/lowcode-vue2  (Vue 2.7 adapter + core)
     vue3/                 @cdlab996/lowcode-vue3  (Vue 3 adapter + core)
   plugins/                designer plugins (React), Vue-version independent
+    code-generator/       @cdlab996/lowcode-plugin-code-generator (出码 button)
     directive-loading/    @cdlab996/lowcode-plugin-directive-loading
     engine-ext-vue/       @cdlab996/lowcode-engine-ext-vue (setters and binding dialogs)
     manual/               @cdlab996/lowcode-plugin-manual
@@ -33,6 +34,7 @@ packages/
     element-plus/         @cdlab996/lowcode-materials-element-plus (Vue 3)
     vant4/                @cdlab996/lowcode-materials-vant4       (Vue 3)
   tools/
+    code-generator/       @cdlab996/lowcode-code-generator (schema -> Vite + Vue project)
     material-builder/     @cdlab996/lowcode-material-builder (lowcode-material CLI)
     create-lowcode/       @cdlab996/create-lowcode (material project scaffold)
   tsconfig/               @cdlab996/lowcode-tsconfig (shared tsconfig presets, private)

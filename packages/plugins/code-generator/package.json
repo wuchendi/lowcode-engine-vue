@@ -1,0 +1,68 @@
+{
+  "name": "@cdlab996/lowcode-plugin-code-generator",
+  "version": "1.1.0",
+  "type": "module",
+  "description": "Code generation for the LowCode Engine designer: Vue 2.7 / Vue 3 projects from the current schema.",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/code-generator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/plugins/code-generator"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "lowcode",
+    "lowcode-engine",
+    "lowcode-plugin"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "peerDependencies": {
+    "@alifd/next": "*",
+    "@alilc/lowcode-types": "^1.0.0",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@alifd/next": "catalog:plugins",
+    "@alilc/lowcode-types": "catalog:shared",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
+    "@types/react": "catalog:shared",
+    "react": "catalog:shared",
+    "tsdown": "catalog:dev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@alilc/lowcode-plugin-base-monaco-editor": "^1.1.2",
+    "@cdlab996/lowcode-code-generator": "workspace:*"
+  }
+}

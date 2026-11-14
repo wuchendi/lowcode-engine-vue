@@ -23,6 +23,7 @@
     "@alilc/lowcode-plugin-undo-redo": "^1.0.0",
     "@alilc/lowcode-types": "catalog:shared",
     "@alilc/lowcode-utils": "catalog:shared",
+    "@cdlab996/lowcode-plugin-code-generator": "workspace:*",
     "@cdlab996/lowcode-plugin-directive-loading": "workspace:*",
     "@cdlab996/lowcode-plugin-manual": "workspace:*",
     "@cdlab996/lowcode-plugin-set-doc-url": "workspace:*",
