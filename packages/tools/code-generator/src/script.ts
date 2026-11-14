@@ -11,7 +11,7 @@ export interface RootSchema {
   state?: Record<string, unknown>
   methods?: Record<string, unknown>
   lifeCycles?: Record<string, unknown>
-  dataSource?: { list?: unknown[] }
+  dataSource?: { list?: unknown[]; dataHandler?: unknown }
   meta?: { originCode?: unknown }
 }
 
@@ -164,7 +164,11 @@ export function pageScript(input: ScriptInput): ScriptResult {
   const s = new MagicString(source)
   const options = findOptions(program)
 
-  const dataSource = root.dataSource?.list ?? []
+  // The global data handler applies to the items without their own
+  const globalHandler = root.dataSource?.dataHandler
+  const dataSource = (root.dataSource?.list ?? []).map((item) =>
+    globalHandler ? { dataHandler: globalHandler, ...(item as object) } : item,
+  )
   for (const item of dataSource as {
     id?: string
     options?: { uri?: unknown }

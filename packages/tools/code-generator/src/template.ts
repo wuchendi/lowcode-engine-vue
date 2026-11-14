@@ -50,6 +50,18 @@ function escapeText(text: string) {
 }
 
 const lowerFirst = (value: string) => value[0].toLowerCase() + value.slice(1)
+const camelize = (value: string) =>
+  value.replace(/-(\w)/g, (_, char: string) => char.toUpperCase())
+
+/** Node children: text, nodes and expressions (as the renderer reads them). */
+function isNodeData(value: unknown): boolean {
+  if (Array.isArray(value)) return value.every(isNodeData)
+  return (
+    typeof value === 'string' ||
+    isJSExpression(value) ||
+    (isPlainObject(value) && typeof value.componentName === 'string')
+  )
+}
 
 export class TemplateBuilder {
   private readonly components = new Map<string, ResolvedComponent>()
@@ -99,10 +111,21 @@ export class TemplateBuilder {
     const attrs: string[] = []
     const slots: string[] = []
     for (const [key, value] of Object.entries(props)) {
-      if (key === 'children' || key.startsWith('__')) continue
-      const name = key === 'className' ? 'class' : key
+      if (key.startsWith('__')) continue
+      if (key === 'children' && (isNodeData(value) || isJSSlot(value))) continue
+      let name = key === 'className' ? 'class' : key
+      // A v-model of a literal value is a plain prop, as in the renderer
+      if (name.startsWith('v-model') && !isJSExpression(value)) {
+        const arg = name.match(/^v-model:([\w-]+)$/)?.[1]
+        name = arg
+          ? lowerFirst(camelize(arg))
+          : this.vue === 3
+            ? 'modelValue'
+            : 'value'
+      }
       if (isJSSlot(value)) {
-        slots.push(this.slot(name, value, depth))
+        // A slot without content is not passed (the renderer skips it)
+        if (value.value) slots.push(this.slot(name, value, depth))
       } else if (name.startsWith('v-')) {
         const directive = name.split(':')[0].split('.')[0]
         if (directive in APP_DIRECTIVES) {
@@ -114,9 +137,12 @@ export class TemplateBuilder {
         }
         attrs.push(`${name}="${escapeAttr(this.value(value))}"`)
       } else if (/^on[A-Z]/.test(name) && isJSFunction(value)) {
-        attrs.push(
-          `@${lowerFirst(name.slice(2))}="${escapeAttr(this.handler(value.value))}"`,
-        )
+        // onUpdateXxx / onUpdate:xxx listen to update:xxx
+        const update = name.match(/^onUpdate:?([\w-]+)$/)?.[1]
+        const event = update
+          ? `update:${lowerFirst(camelize(update))}`
+          : lowerFirst(name.slice(2))
+        attrs.push(`@${event}="${escapeAttr(this.handler(value.value))}"`)
       } else if (typeof value === 'string' && name !== 'ref') {
         attrs.push(`${name}="${escapeAttr(value)}"`)
       } else if (name === 'ref' && typeof value === 'string') {
@@ -172,7 +198,10 @@ export class TemplateBuilder {
     if (schema.condition === false) return ''
 
     const props = schema.props ?? {}
-    const children = schema.children ?? props.children
+    // A children prop overrides the node children, as in the renderer
+    const children = isNodeData(props.children)
+      ? props.children
+      : schema.children
     if (schema.componentName === 'Leaf')
       return this.children(children, depth).join('\n')
 
