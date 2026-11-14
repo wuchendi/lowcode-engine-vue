@@ -330,3 +330,19 @@ children. The antd child components are back in the components pane.
 A component vnode carrying slots (even `{}`) or new hook functions is
 updated on every parent render; inject does not see a provide of the same
 component (the renderer passes its context to `useLeaf`).
+
+## 2026-11-15 00:30 [progress]
+
+Designer size: the deploy output went from 43 MB / 635 files to 32 MB / 522
+files (only the Monaco languages the editors use and the material files the
+designer loads are copied), and the first load from 3.5-3.9 MB to 2.6-3.0 MB
+gzipped: Monaco loads when an editor first opens (the editors' CDN path is
+rewritten to the self-hosted copy) instead of before `init()`. Fixed on the
+way: `dist/simulator.css` of the renderer packages was a directory (the
+production canvas had no styles); the components pane loaded a card
+screenshot from a third-party host.
+
+## 2026-11-15 00:30 [pitfall]
+
+tsdown `copy` takes `to` as a directory. The designer's development preview
+served the core's `simulator.css`, so only production builds lacked it.

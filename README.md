@@ -40,8 +40,12 @@ packages/
   tsconfig/               @cdlab996/lowcode-tsconfig (shared tsconfig presets, private)
 apps/
   designer/               designer app; `?vue=2` / `?vue=3` selects the version
+e2e/                      Playwright checks of the designer build
+scripts/
+  materials/              material meta generator, docs fetcher, screenshots
 docs/
   design/                 architecture
+  task/, plan/            task and plan tracking (see AGENTS.md)
 ```
 
 ## Renderer packages
@@ -179,6 +183,26 @@ existing ones.
   `tools` on npm).
 - `.github/dependabot.yml` keeps the major versions of Vue, vue-router and the
   component libraries: the Vue 2 packages stay on the last Vue 2 releases.
+
+## Deploy
+
+The designer build (`pnpm build:designer`, `apps/designer/dist`) is a static
+site with no third-party requests. Serve it at the root of a domain (it uses
+root paths such as `/runtime/...`).
+
+`.github/workflows/deploy.yml` deploys it to Cloudflare Pages after CI passes
+on `main`, or when run by hand. It needs the repository secrets
+`CLOUDFLARE_API_TOKEN` (permission _Account / Cloudflare Pages / Edit_) and
+`CLOUDFLARE_ACCOUNT_ID`; the optional variable `CLOUDFLARE_PAGES_PROJECT`
+names the project (`lowcode-vue` by default, created on the first deploy).
+Without the secrets the workflow skips the deploy.
+
+By hand:
+
+```bash
+pnpm build:designer
+npx wrangler pages deploy apps/designer/dist --project-name lowcode-vue
+```
 
 ## License
 
