@@ -1,0 +1,7 @@
+{
+  "Generate": "Export code",
+  "GenerateFailed": "Code generation failed: {message}",
+  "DialogTitle": "Export code (Vue {version})",
+  "DownloadZip": "Download zip",
+  "Warnings": "Not exported, or to be handled by hand"
+}

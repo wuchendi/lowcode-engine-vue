@@ -11,6 +11,7 @@ import { TemplateBuilder } from './template'
 import type { GeneratedProject, GenerateOptions } from './types'
 import { pascalCase } from './value'
 
+export { type AssetPackage, materialPackages } from './materials'
 export type {
   CodegenManifest,
   GeneratedProject,

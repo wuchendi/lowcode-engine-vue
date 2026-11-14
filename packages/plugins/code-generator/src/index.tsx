@@ -2,6 +2,7 @@ import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
 import type { VueVersion } from '@cdlab996/lowcode-code-generator'
 import { createElement } from 'react'
 import { GeneratorButton } from './generator-dialog'
+import { createIntl } from './locale'
 
 export interface Options {
   /** Vue version of the generated project (default 3). */
@@ -25,6 +26,7 @@ const PluginCodeGenerator = (
           ctx,
           vue: options.vue ?? 3,
           name: options.name ?? 'lowcode-app',
+          intl: createIntl(ctx),
         }),
       })
     },

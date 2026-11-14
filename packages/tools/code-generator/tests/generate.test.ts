@@ -272,3 +272,62 @@ describe('directives the designer canvas provides', () => {
     )
   })
 })
+
+describe('without componentsMap', () => {
+  it('finds the components in the material manifests', async () => {
+    const schema = {
+      version: '1.0.0',
+      componentsMap: [],
+      componentsTree: [
+        {
+          componentName: 'Page',
+          fileName: '/',
+          children: [
+            { componentName: 'VanButton', props: { type: 'primary' } },
+          ],
+        },
+      ],
+    } as unknown as typeof project
+    const { files, warnings } = await generateProject(schema, {
+      vue: 3,
+      packages,
+    })
+    expect(warnings).toEqual([])
+    expect(files['src/pages/index.vue']).toContain(
+      "import { Button as VanButton } from 'vant'",
+    )
+  })
+})
+
+describe('componentsMap entries without a package', () => {
+  it('keeps native tags and imports the low-code components', async () => {
+    const schema = {
+      version: '1.0.0',
+      componentsMap: [
+        { devMode: 'lowCode', componentName: 'span' },
+        { devMode: 'lowCode', componentName: 'UserCard' },
+      ],
+      componentsTree: [
+        {
+          componentName: 'Page',
+          fileName: '/',
+          children: [{ componentName: 'UserCard', props: { name: 'vue' } }],
+        },
+        {
+          componentName: 'Component',
+          fileName: 'UserCard',
+          children: [{ componentName: 'span', children: 'card' }],
+        },
+      ],
+    } as unknown as typeof project
+    const { files, warnings } = await generateProject(schema, {
+      vue: 3,
+      packages,
+    })
+    expect(warnings).toEqual([])
+    expect(files['src/components/UserCard.vue']).toContain('<span>card</span>')
+    expect(files['src/pages/index.vue']).toContain(
+      "import UserCard from '../components/UserCard.vue'",
+    )
+  })
+})

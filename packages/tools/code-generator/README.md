@@ -26,6 +26,26 @@ const zip = toZip(files) // Uint8Array
 manifests, directives to register, data source URLs relative to the
 designer, ...).
 
+## CLI
+
+```bash
+lowcode-codegen schema.json --vue 3 --assets assets.json --base https://cdn.example.com/ --out my-app
+lowcode-codegen page.json --vue 2 --assets https://cdn.example.com/assets.json --zip my-app.zip
+```
+
+The schema is a project schema (`componentsTree`) or a single root schema.
+`--assets` is the engine assets JSON of the materials; packages without a
+`codegen` manifest get it from the `assets.json` next to their script, whose
+relative URLs resolve against `--base` (default: the assets URL). Warnings go
+to stderr; the output directory must be empty. `--name` sets the package
+name, `--no-format` skips prettier.
+
+Components missing from the schema's `componentsMap` are looked up by name
+in the manifests.
+
+`materialPackages(packages, fetch?, base?)` is the manifest lookup the CLI
+and the designer plugin use.
+
 ## Output
 
 - `src/pages/<fileName>.vue` per `Page` root and `src/components/<fileName>.vue`

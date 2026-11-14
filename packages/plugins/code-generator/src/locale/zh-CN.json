@@ -1,0 +1,7 @@
+{
+  "Generate": "出码",
+  "GenerateFailed": "出码失败：{message}",
+  "DialogTitle": "出码（Vue {version}）",
+  "DownloadZip": "下载 zip",
+  "Warnings": "以下内容未导出或需要手动处理"
+}

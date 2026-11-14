@@ -41,6 +41,21 @@ export class ComponentResolver {
     return this.manifests.get(pkg)
   }
 
+  /** A componentsMap entry from the manifest exporting the component. */
+  private fromManifests(componentName: string): ComponentsMapItem | undefined {
+    const [exportName, ...sub] = componentName.split('.')
+    for (const [pkg, manifest] of this.manifests) {
+      if (manifest.exports[exportName]) {
+        return {
+          componentName,
+          package: pkg,
+          exportName,
+          subName: sub.length ? sub.join('.') : undefined,
+        }
+      }
+    }
+  }
+
   /** `null` when the component cannot be imported. */
   resolve(componentName: string): ResolvedComponent | null {
     const local = this.localComponents.get(componentName)
@@ -51,9 +66,13 @@ export class ComponentResolver {
         importFrom: { source: local, imported: 'default', local: tag },
       }
     }
-    const item = this.componentsMap.find(
+    const mapped = this.componentsMap.find(
       (c) => c.componentName === componentName,
     )
+    // Exported schemas list components without a package (native tags too)
+    const item =
+      (mapped?.package ? mapped : undefined) ??
+      this.fromManifests(componentName)
     if (!item) {
       return NATIVE_TAG.test(componentName) ? { tag: componentName } : null
     }

@@ -4,13 +4,17 @@ import '@alilc/lowcode-plugin-base-monaco-editor/lib/style'
 import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
 import type {
+  AssetPackage,
   GeneratedProject,
   VueVersion,
 } from '@cdlab996/lowcode-code-generator'
-import { generateProject, toZip } from '@cdlab996/lowcode-code-generator'
+import {
+  generateProject,
+  materialPackages,
+  toZip,
+} from '@cdlab996/lowcode-code-generator'
 import React, { useState } from 'react'
-import type { AssetPackage } from './materials'
-import { materialPackages } from './materials'
+import type { Intl } from './locale'
 
 const LANGUAGES: Record<string, string> = {
   vue: 'html',
@@ -59,10 +63,16 @@ export interface GeneratorButtonProps {
   ctx: IPublicModelPluginContext
   vue: VueVersion
   name: string
+  intl: Intl
 }
 
 /** 出码: generates the project of the current schema, previews it and downloads it. */
-export function GeneratorButton({ ctx, vue, name }: GeneratorButtonProps) {
+export function GeneratorButton({
+  ctx,
+  vue,
+  name,
+  intl,
+}: GeneratorButtonProps) {
   const [loading, setLoading] = useState(false)
   const [project, setProject] = useState<GeneratedProject | null>(null)
   const [current, setCurrent] = useState('')
@@ -83,7 +93,9 @@ export function GeneratorButton({ ctx, vue, name }: GeneratorButtonProps) {
       setProject(result)
     } catch (error) {
       Message.error(
-        `出码失败：${error instanceof Error ? error.message : error}`,
+        intl('GenerateFailed', {
+          message: error instanceof Error ? error.message : String(error),
+        }),
       )
     } finally {
       setLoading(false)
@@ -94,11 +106,11 @@ export function GeneratorButton({ ctx, vue, name }: GeneratorButtonProps) {
   return (
     <>
       <Button loading={loading} onClick={() => void generate()}>
-        出码
+        {intl('Generate')}
       </Button>
       <Dialog
         v2
-        title={`出码（Vue ${vue === 2 ? '2.7' : '3'}）`}
+        title={intl('DialogTitle', { version: vue === 2 ? '2.7' : '3' })}
         visible={!!project}
         width="90vw"
         onClose={() => setProject(null)}
@@ -107,14 +119,14 @@ export function GeneratorButton({ ctx, vue, name }: GeneratorButtonProps) {
             type="primary"
             onClick={() => project && download(project.files, name)}
           >
-            下载 zip
+            {intl('DownloadZip')}
           </Button>
         }
       >
         {project && (
           <div className="lowcode-code-generator" style={styles.root}>
             {project.warnings.length > 0 && (
-              <Message type="warning" title="以下内容未导出或需要手动处理">
+              <Message type="warning" title={intl('Warnings')}>
                 <ul style={styles.warnings}>
                   {project.warnings.map((warning) => (
                     <li key={warning}>{warning}</li>

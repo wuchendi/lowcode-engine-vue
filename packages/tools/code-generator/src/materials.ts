@@ -1,4 +1,4 @@
-import type { MaterialPackage } from '@cdlab996/lowcode-code-generator'
+import type { MaterialPackage } from './types'
 
 export interface AssetPackage {
   package?: string
