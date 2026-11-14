@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /packages/tools/create-lowcode/template/vue2
+      - /packages/tools/create-lowcode/template/vue3
+    schedule:
+      interval: weekly
+    ignore:
+      # Major versions are chosen per target: the Vue 2 packages stay on the
+      # last releases supporting Vue 2 (vue 2.7, vue-router 3, element-ui,
+      # vant 2, ant-design-vue 1). Majors are upgraded by hand.
+      - dependency-name: vue
+        update-types: [version-update:semver-major]
+      - dependency-name: vue-router
+        update-types: [version-update:semver-major]
+      - dependency-name: vant
+        update-types: [version-update:semver-major]
+      - dependency-name: ant-design-vue
+        update-types: [version-update:semver-major]
+      - dependency-name: element-ui
+        update-types: [version-update:semver-major]
+      - dependency-name: element-plus
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

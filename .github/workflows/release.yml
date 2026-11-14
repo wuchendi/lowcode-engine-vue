@@ -46,6 +46,10 @@ jobs:
             fi
           done
 
+      # A package depending on another group needs that group released first
+      - name: Check dependencies on other groups
+        run: node scripts/check-release-deps.mjs "$GROUP"
+
       - name: Lint
         run: pnpm lint
 
