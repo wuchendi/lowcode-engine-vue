@@ -87,6 +87,31 @@ function findPageRecord(matched: RouteRecord[], vm: Vue | null) {
   }
 }
 
+/**
+ * Components rendered by a Leaf see their parent component, not the Leaf, in
+ * `$parent` and `$children` (Element UI's Steps, Carousel and Tabs use them).
+ * The provide chain is unchanged: `_provided` is inherited before
+ * `beforeCreate`.
+ */
+Vue.mixin({
+  beforeCreate(this: Vue) {
+    const leaf = this.$parent
+    if (leaf?.$options.name !== 'Leaf' || this.$options.name === 'Leaf') return
+    let child: Vue = leaf
+    let parent = leaf.$parent
+    while (parent?.$options.name === 'Leaf') {
+      child = parent
+      parent = parent.$parent
+    }
+    if (!parent) return
+    ;(this as { $parent: Vue }).$parent = parent
+    // the component takes the place of its Leaf among the parent's children
+    const index = parent.$children.indexOf(child)
+    if (index >= 0) parent.$children.splice(index, 1, this)
+    else parent.$children.push(this)
+  },
+})
+
 export const vue2Adapter: VueAdapter = {
   version: 2,
   h,

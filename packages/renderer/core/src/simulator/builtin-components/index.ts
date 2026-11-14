@@ -48,7 +48,8 @@ export const Page = withMetadata(
 
 export const Slot = withMetadata(
   defineComponent({
-    name: 'Slot',
+    // `Slot` is a reserved tag name for Vue 2
+    name: 'LcSlot',
     setup(_props, { slots }) {
       return () => getAdapter().h('div', { class: 'lc-container' }, slots)
     },
