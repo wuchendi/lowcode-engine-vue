@@ -34,6 +34,7 @@ packages/
     vant4/                @cdlab996/lowcode-materials-vant4       (Vue 3)
   tools/
     material-builder/     @cdlab996/lowcode-material-builder (lowcode-material CLI)
+    create-lowcode/       @cdlab996/create-lowcode (material project scaffold)
 apps/
   designer/               designer app; `?vue=2` / `?vue=3` selects the version
 docs/
@@ -66,6 +67,17 @@ Schemas support Page, Block and Component roots, `state`, `methods`,
 route guards, and the option hooks written by the Vue source panel:
 `initModule`, `initProps`, `initEmits`, `initData`, `initComputed`,
 `initWatch`, `initProvide`, `initInject` and `setup`.
+
+## Material projects
+
+`@cdlab996/create-lowcode` creates a material project (an example SFC
+component and its meta, built by the material builder) for Vue 2.7 or Vue 3:
+
+```bash
+pnpm create @cdlab996/lowcode my-materials --vue 3
+```
+
+See [packages/tools/create-lowcode](./packages/tools/create-lowcode).
 
 ## Dependency catalogs
 

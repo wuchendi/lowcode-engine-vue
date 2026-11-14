@@ -1,0 +1,41 @@
+{
+  "name": "@cdlab996/create-lowcode",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Create a LowCode Engine material project for Vue 2.7 or Vue 3.",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/tools/create-lowcode",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/tools/create-lowcode"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "bin": {
+    "create-lowcode": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist",
+    "template",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:dev",
+    "tsdown": "catalog:dev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

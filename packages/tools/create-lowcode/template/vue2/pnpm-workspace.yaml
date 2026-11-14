@@ -1,0 +1,8 @@
+# @vitejs/plugin-vue2 compiles `lang="ts"` with esbuild
+allowBuilds:
+  esbuild: true
+
+peerDependencyRules:
+  allowedVersions:
+    # @vitejs/plugin-vue2 declares Vite up to 7; it builds with Vite 8
+    "@vitejs/plugin-vue2>vite": "8"
