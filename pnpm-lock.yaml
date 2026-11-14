@@ -750,6 +750,15 @@ importers:
         specifier: catalog:vue3
         version: 4.6.4(vue@3.5.45(typescript@7.0.2))
 
+  packages/tools/create-lowcode:
+    devDependencies:
+      '@types/node':
+        specifier: catalog:dev
+        version: 26.6.6
+      tsdown:
+        specifier: catalog:dev
+        version: 0.23.7(typescript@7.0.2)
+
   packages/tools/material-builder:
     devDependencies:
       '@types/node':
@@ -761,6 +770,9 @@ importers:
       vite:
         specifier: catalog:dev
         version: 8.3.8(@types/node@26.6.6)(jiti@2.7.0)(less@4.9.1(supports-color@6.1.0))(sass@1.108.2)(stylus@0.54.8(supports-color@6.1.0))(terser@5.51.2)
+      vue:
+        specifier: catalog:vue2-7
+        version: 2.7.16
 
 packages:
 

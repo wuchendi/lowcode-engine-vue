@@ -50,7 +50,8 @@
   "devDependencies": {
     "@types/node": "catalog:dev",
     "tsdown": "catalog:dev",
-    "vite": "catalog:dev"
+    "vite": "catalog:dev",
+    "vue": "catalog:vue2-7"
   },
   "publishConfig": {
     "access": "public",

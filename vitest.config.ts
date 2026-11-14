@@ -40,8 +40,17 @@ const project = (version: 'vue2' | 'vue3') => ({
   },
 })
 
+/** Node tooling: the material builder and the project scaffold. */
+const tools = {
+  test: {
+    name: 'tools',
+    environment: 'node',
+    include: ['packages/tools/*/tests/**/*.test.ts'],
+  },
+}
+
 export default defineConfig({
   test: {
-    projects: [project('vue2'), project('vue3')],
+    projects: [project('vue2'), project('vue3'), tools],
   },
 })

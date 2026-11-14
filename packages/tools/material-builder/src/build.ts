@@ -16,6 +16,8 @@ import { PLUGIN_NAME } from './options'
 /** Globals of the canvas and preview pages: Vue, the renderer API and React. */
 const DEFAULT_EXTERNALS: Record<string, string> = {
   vue: 'Vue',
+  // @vitejs/plugin-vue2 aliases `vue` to the runtime build
+  'vue/dist/vue.runtime.esm.js': 'Vue',
   react: 'React',
   'react-dom': 'ReactDOM',
   '@cdlab996/lowcode-vue2': 'LCVueRenderer',
