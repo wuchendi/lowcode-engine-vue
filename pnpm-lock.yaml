@@ -232,17 +232,17 @@ catalogs:
       version: 16.14.0
   vue2-7:
     vue:
-      specifier: ^2.7.16
+      specifier: 2.7.16
       version: 2.7.16
     vue-router:
-      specifier: ^3.6.5
+      specifier: 3.6.5
       version: 3.6.5
   vue3:
     vue:
-      specifier: ^3.5.0
+      specifier: 3.5.45
       version: 3.5.45
     vue-router:
-      specifier: ^4.2.4
+      specifier: 4.6.4
       version: 4.6.4
 
 importers:
@@ -377,7 +377,7 @@ importers:
   packages/materials/antd-vue1:
     dependencies:
       ant-design-vue:
-        specifier: ^1.7.8
+        specifier: 1.7.8
         version: 1.7.8(vue-template-compiler@2.7.16)(vue@2.7.16)
     devDependencies:
       '@alilc/lowcode-types':
@@ -399,7 +399,7 @@ importers:
   packages/materials/antd-vue4:
     dependencies:
       ant-design-vue:
-        specifier: ^4.1.2
+        specifier: 4.2.6
         version: 4.2.6(vue@3.5.45(typescript@7.0.2))
     devDependencies:
       '@alilc/lowcode-types':
@@ -421,7 +421,7 @@ importers:
   packages/materials/element-plus:
     dependencies:
       element-plus:
-        specifier: ^2.6.3
+        specifier: 2.14.8
         version: 2.14.8(vue@3.5.45(typescript@7.0.2))
     devDependencies:
       '@alilc/lowcode-types':
@@ -443,7 +443,7 @@ importers:
   packages/materials/element-ui:
     dependencies:
       element-ui:
-        specifier: ^2.15.13
+        specifier: 2.15.14
         version: 2.15.14(vue@2.7.16)
     devDependencies:
       '@alilc/lowcode-types':
@@ -477,7 +477,7 @@ importers:
   packages/materials/vant2:
     dependencies:
       vant:
-        specifier: ^2.12.54
+        specifier: 2.13.9
         version: 2.13.9(vue@2.7.16)
     devDependencies:
       '@alilc/lowcode-types':
@@ -508,7 +508,7 @@ importers:
   packages/materials/vant4:
     dependencies:
       vant:
-        specifier: ^4.8.10
+        specifier: 4.10.2
         version: 4.10.2(vue@3.5.45(typescript@7.0.2))
     devDependencies:
       '@alilc/lowcode-types':

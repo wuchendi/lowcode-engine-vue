@@ -31,7 +31,7 @@ describe('createProject', () => {
     const pkg = await readJson('my-materials', 'package.json')
     expect(pkg.name).toBe('my-materials')
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue')
-    expect(pkg.devDependencies.vue).toMatch(/^\^3\./)
+    expect(pkg.devDependencies.vue).toBe('3.5.45')
     expect(await read('my-materials', 'vite.config.ts')).toContain(
       "from '@vitejs/plugin-vue'",
     )
@@ -63,7 +63,7 @@ describe('createProject', () => {
     expect(pkg.name).toBe('@acme/legacy')
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue2')
     expect(pkg.devDependencies).toHaveProperty('esbuild')
-    expect(pkg.devDependencies.vue).toMatch(/^\^2\.7\./)
+    expect(pkg.devDependencies.vue).toBe('2.7.16')
     expect(await read('legacy', 'vite.config.ts')).toContain(
       "from '@vitejs/plugin-vue2'",
     )

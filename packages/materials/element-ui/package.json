@@ -27,7 +27,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "element-ui": "^2.15.13"
+    "element-ui": "2.15.14"
   },
   "devDependencies": {
     "@alilc/lowcode-types": "catalog:shared",

@@ -27,7 +27,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "vant": "^4.8.10"
+    "vant": "4.10.2"
   },
   "devDependencies": {
     "@alilc/lowcode-types": "catalog:shared",

@@ -34,14 +34,14 @@ catalogs:
   plugins:
     "@alifd/next": ^1.27.34
   vue2-7:
-    vue: ^2.7.16
-    vue-router: ^3.6.5
+    vue: 2.7.16
+    vue-router: 3.6.5
   vue3:
     "@vue/test-utils": ^2.4.6
     lodash: ^4.17.21
     uuid: ^9.0.1
-    vue: ^3.5.0
-    vue-router: ^4.2.4
+    vue: 3.5.45
+    vue-router: 4.6.4
 
 peerDependencyRules:
   allowedVersions:

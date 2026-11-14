@@ -27,7 +27,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "ant-design-vue": "^4.1.2"
+    "ant-design-vue": "4.2.6"
   },
   "devDependencies": {
     "@alilc/lowcode-types": "catalog:shared",
