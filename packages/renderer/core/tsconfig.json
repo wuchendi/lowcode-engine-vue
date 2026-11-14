@@ -1,4 +1,4 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "@cdlab996/lowcode-tsconfig/vue.json",
   "include": ["./src"]
 }

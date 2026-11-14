@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "@cdlab996/lowcode-tsconfig/vue.json",
   "compilerOptions": {
     // The module mapping of the vue3 test project (vitest.config.ts): the core
     // is checked against this version's typings

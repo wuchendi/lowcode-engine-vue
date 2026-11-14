@@ -5,5 +5,7 @@
 - Packages: `packages/renderer` (core + Vue 2.7 / Vue 3 distributions),
   `packages/plugins` (designer plugins and the engine-ext setters, React),
   `packages/materials` (component materials), `packages/tools` (material
-  builder, `create-lowcode` scaffold for material projects).
+  builder, `create-lowcode` scaffold for material projects), `packages/tsconfig`
+  (`@cdlab996/lowcode-tsconfig`: `base` / `vue` / `react` / `node` presets
+  every tsconfig extends).
 - Apps: `apps/designer`, one designer for both Vue versions (`?vue=2|3`).

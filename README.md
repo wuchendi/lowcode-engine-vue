@@ -35,6 +35,7 @@ packages/
   tools/
     material-builder/     @cdlab996/lowcode-material-builder (lowcode-material CLI)
     create-lowcode/       @cdlab996/create-lowcode (material project scaffold)
+  tsconfig/               @cdlab996/lowcode-tsconfig (shared tsconfig presets, private)
 apps/
   designer/               designer app; `?vue=2` / `?vue=3` selects the version
 docs/

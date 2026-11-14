@@ -1,7 +1,6 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "@cdlab996/lowcode-tsconfig/vue.json",
   "compilerOptions": {
-    "jsx": "preserve",
     "noImplicitAny": true
   },
   "include": ["./src", "./typings", "./vite.config.ts"]

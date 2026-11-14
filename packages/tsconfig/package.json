@@ -1,0 +1,14 @@
+{
+  "name": "@cdlab996/lowcode-tsconfig",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared TypeScript configuration of the lowcode-engine-vue workspace.",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/tsconfig",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/tsconfig"
+  }
+}

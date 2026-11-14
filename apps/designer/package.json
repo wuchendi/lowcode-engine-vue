@@ -38,6 +38,7 @@
     "@cdlab996/lowcode-materials-element-ui": "workspace:*",
     "@cdlab996/lowcode-materials-vant2": "workspace:*",
     "@cdlab996/lowcode-materials-vant4": "workspace:*",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@cdlab996/lowcode-vue2": "workspace:*",
     "@cdlab996/lowcode-vue3": "workspace:*",
     "@types/prop-types": "^15.7.15",

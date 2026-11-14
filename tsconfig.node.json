@@ -1,8 +1,7 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "@cdlab996/lowcode-tsconfig/node.json",
   "compilerOptions": {
-    "noEmit": true,
-    "types": ["node"]
+    "noEmit": true
   },
   "include": ["./vitest.config.ts"]
 }

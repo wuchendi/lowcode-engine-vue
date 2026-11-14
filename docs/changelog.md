@@ -71,3 +71,12 @@ element-ui / vant2 and `meta copy.ts` of antd-vue1 are deleted.
 The core was type-checked against Vue 3 only: it resolves `vue` to its own
 Vue 3 dev dependency, also through the Vue 2 distribution. The renderer
 tsconfigs now map `vue` per version.
+
+## 2026-11-14 03:39 [progress]
+
+20261114-0334-tsconfig-package (plan 20261114-0334-tsconfig-package): added
+`packages/tsconfig` (`@cdlab996/lowcode-tsconfig`, private, config only),
+modelled on the projects monorepo's `@cdlab/tsconfig`: `base`, `vue`,
+`react` and `node` presets. Every workspace tsconfig extends a preset instead
+of the root file by relative path; effective compiler options and checked
+files are unchanged.

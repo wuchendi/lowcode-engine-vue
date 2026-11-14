@@ -3,6 +3,7 @@ packages:
   - packages/plugins/*
   - packages/tools/*
   - packages/materials/*
+  - packages/tsconfig
   - apps/*
 
 catalogs:

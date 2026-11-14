@@ -1,7 +1,4 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "types": ["node"]
-  },
+  "extends": "@cdlab996/lowcode-tsconfig/node.json",
   "include": ["./src", "./tests", "./tsdown.config.ts"]
 }

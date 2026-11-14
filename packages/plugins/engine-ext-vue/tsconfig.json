@@ -1,7 +1,6 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "@cdlab996/lowcode-tsconfig/react.json",
   "compilerOptions": {
-    "jsx": "react",
     "experimentalDecorators": true,
     "types": ["vite/client"]
   },

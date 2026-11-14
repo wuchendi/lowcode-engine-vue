@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@alilc/lowcode-designer": "catalog:shared",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@cdlab996/lowcode-vue-core": "workspace:*",
     "tsdown": "catalog:dev",
     "vue": "catalog:vue2-7",

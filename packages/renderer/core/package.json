@@ -23,6 +23,7 @@
   "devDependencies": {
     "@alilc/lowcode-designer": "catalog:shared",
     "@alilc/lowcode-types": "catalog:shared",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "vue": "catalog:vue3"
   }
 }

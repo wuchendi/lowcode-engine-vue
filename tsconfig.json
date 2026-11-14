@@ -1,20 +1,4 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "useDefineForClassFields": true,
-    "jsx": "preserve",
-    "noImplicitThis": true,
-    "noImplicitAny": false,
-    "strict": true,
-    "isolatedModules": true,
-    "target": "ESNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
-  },
+  "extends": "@cdlab996/lowcode-tsconfig/base.json",
   "exclude": ["**/test", "**/lib", "**/es", "**/dist", "node_modules"]
 }

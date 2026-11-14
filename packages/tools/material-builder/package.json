@@ -48,6 +48,7 @@
     "vite": "^8.0.0"
   },
   "devDependencies": {
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@types/node": "catalog:dev",
     "tsdown": "catalog:dev",
     "vite": "catalog:dev",

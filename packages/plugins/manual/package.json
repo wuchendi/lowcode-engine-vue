@@ -51,6 +51,7 @@
   "devDependencies": {
     "@alifd/next": "catalog:plugins",
     "@alilc/lowcode-types": "catalog:shared",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@types/react": "catalog:shared",
     "react": "catalog:shared",
     "tsdown": "catalog:dev"

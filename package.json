@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:dev",
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@types/node": "catalog:dev",
     "jsdom": "catalog:dev",
     "typescript": "catalog:dev",
