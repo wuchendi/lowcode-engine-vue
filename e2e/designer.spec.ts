@@ -7,6 +7,10 @@ for (const vue of [2, 3] as const) {
       const errors = collectErrors(page)
       const frame = await openDesigner(page, vue)
       await expect(frame.locator('.lc-page')).not.toBeEmpty()
+      // The canvas styles (a file, not the directory a misconfigured copy makes)
+      const css = await page.request.get(`/runtime/vue${vue}/simulator.css`)
+      expect(css.status()).toBe(200)
+      expect(await css.text()).toContain('.lc-container-placeholder')
       const runtime = await frame.evaluate(() => window.Vue?.version)
       expect(runtime).toMatch(new RegExp(`^${vue}\\.`))
       expect(errors).toEqual([])
@@ -25,10 +29,14 @@ for (const vue of [2, 3] as const) {
         }
       })
       await openDesigner(page, vue)
-      await page.evaluate(() =>
-        window.AliLowCodeEngine.skeleton.showPanel('codeEditor'),
-      )
-      await page.waitForTimeout(2000)
+      // The panels with their own assets: component screenshots, the editor
+      for (const panel of ['componentsPane', 'codeEditor']) {
+        await page.evaluate(
+          (name) => window.AliLowCodeEngine.skeleton.showPanel(name),
+          panel,
+        )
+        await page.waitForTimeout(2000)
+      }
       expect([...external]).toEqual([])
     })
 

@@ -9,7 +9,15 @@ import {
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import type { ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
-import { basename, dirname, extname, join, resolve } from 'node:path'
+import {
+  basename,
+  dirname,
+  extname,
+  join,
+  relative,
+  resolve,
+  sep,
+} from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { Connect, Plugin } from 'vite'
 import { defineConfig } from 'vite'
@@ -152,15 +160,61 @@ const CONTENT_TYPES: Record<string, string> = {
 }
 
 /**
+ * Monaco languages the editors use: javascript / typescript / json / css in
+ * the setters and the source panel; html (`.vue`), markdown and yaml in the
+ * code generator preview.
+ */
+const MONACO_LANGUAGES = ['typescript', 'json', 'css', 'html']
+const MONACO_TOKENIZERS = [
+  'javascript',
+  'typescript',
+  'css',
+  'html',
+  'markdown',
+  'yaml',
+]
+
+/**
+ * Whether a file of a runtime directory is served and copied. Monaco loads
+ * languages and translations on demand: only the used ones ship. The
+ * designer loads `index.js`, `index.css`, `meta.js` and the screenshots of
+ * a material (not its `.min` copies or `assets.json`).
+ */
+function isPublished(route: string, file: string) {
+  if (route === 'runtime/monaco/vs') {
+    const [dir, name] = file.split('/')
+    if (/^nls\.messages\./.test(file)) return false
+    if (dir === 'language' && name) return MONACO_LANGUAGES.includes(name)
+    if (dir === 'basic-languages' && name && !name.includes('.')) {
+      return MONACO_TOKENIZERS.includes(name)
+    }
+    return true
+  }
+  if (route.startsWith('materials/')) {
+    return /^(index\.(js|css)|meta\.js|screenshots(\/.*)?)$/.test(file)
+  }
+  return true
+}
+
+/**
  * The fonts, images and icon scripts the engine, its plugins and the setters
  * load from alicdn are kept in `public/vendor`: their URLs point there.
  */
 const vendored = new Set(readdirSync(resolve(here, 'public/vendor')))
+/**
+ * The CDN Monaco of the code editors (`@monaco-editor/loader` configured by
+ * `@alilc/lowcode-plugin-base-monaco-editor`): the self-hosted one instead,
+ * loaded when an editor first opens. Absolute: the workers resolve it too.
+ */
+const CDN_MONACO =
+  /(["'`])https:\/\/g\.alicdn\.com\/code\/lib\/monaco-editor\/[\d.]+\/min\/vs\1/g
 function localize(code: string) {
-  return code.replace(
-    /(?:https?:)?\/\/[\w.-]*alicdn\.com\/[^\s"'`()]*?\/([^/\s"'`()?#]+)(?=[\s"'`()?#])/g,
-    (url, name: string) => (vendored.has(name) ? `/vendor/${name}` : url),
-  )
+  return code
+    .replace(CDN_MONACO, '(location.origin + "/runtime/monaco/vs")')
+    .replace(
+      /(?:https?:)?\/\/[\w.-]*alicdn\.com\/[^\s"'`()]*?\/([^/\s"'`()?#]+)(?=[\s"'`()?#])/g,
+      (url, name: string) => (vendored.has(name) ? `/vendor/${name}` : url),
+    )
 }
 /** Runtime files with alicdn URLs: the engine, its globals and engine-ext. */
 const isLocalized = (route: string) =>
@@ -220,7 +274,8 @@ function serveRuntime(dev: boolean): Plugin {
     for (const [route, source] of Object.entries(files)) {
       if (path === route) return source
       if (path.startsWith(`${route}/`)) {
-        return join(source, path.slice(route.length + 1))
+        const file = path.slice(route.length + 1)
+        return isPublished(route, file) ? join(source, file) : undefined
       }
     }
   }
@@ -282,7 +337,12 @@ function serveRuntime(dev: boolean): Plugin {
         if (isLocalized(route)) {
           await writeFile(target, localize(await readFile(source, 'utf8')))
         } else {
-          await cp(source, target, { recursive: true })
+          await cp(source, target, {
+            recursive: true,
+            filter: (path) =>
+              path === source ||
+              isPublished(route, relative(source, path).split(sep).join('/')),
+          })
         }
       }
     },

@@ -27,6 +27,13 @@ renderer bundles of `packages/renderer/vue{2,3}/dist` and the material builds
 are served under `/runtime/` and `/materials/` (copied into the output on
 build), so rebuild a package and reload to see a change.
 
+Monaco loads when a code editor first opens: the CDN path the editors'
+loader is configured with is rewritten to `/runtime/monaco/vs`. Only the
+Monaco languages the editors use and the material files the designer loads
+(`index.js`, `index.css`, `meta.js`, screenshots) are served and copied
+(`isPublished` in `vite.config.mts`): add a language there when an editor
+starts using it (a missing one is a 404, also in development).
+
 The **页面** panel adds, switches and deletes pages; each page has a route
 path (`/`, `/about`) used by the canvas, the preview and code generation. The
 data source and schema panels are the official ones, scoped to the current

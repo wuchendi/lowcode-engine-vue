@@ -42,7 +42,7 @@
       },
       "snippets": [
         {
-          "screenshot": "https://helios-allpublic-1257616148.cos.ap-shanghai.myqcloud.com/img/card.png",
+          "screenshot": "/vendor/card.png",
           "title": "区块",
           "schema": {
             "componentName": "div",

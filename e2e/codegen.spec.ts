@@ -12,6 +12,11 @@ for (const vue of [2, 3] as const) {
       'src/main.js',
       'src/pages/index.vue',
     ])
+    // Every file in the preview: its Monaco language must be served
+    for (const file of await files.all()) {
+      await file.click()
+      await page.waitForTimeout(300)
+    }
     const [download] = await Promise.all([
       page.waitForEvent('download'),
       page
