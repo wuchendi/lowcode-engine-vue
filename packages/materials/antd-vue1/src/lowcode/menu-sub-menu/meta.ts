@@ -71,7 +71,16 @@ const meta = {
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '导航菜单 SubMenu',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'AMenuSubMenu',
+        props: {},
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

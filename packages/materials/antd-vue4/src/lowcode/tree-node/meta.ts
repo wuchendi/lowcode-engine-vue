@@ -1,12 +1,12 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-// Generated from the ant-design-vue docs (tree-select); see https://antdv.com/components/tree-select-cn
+// Generated from the ant-design-vue docs (tree); see https://antdv.com/components/tree-cn
 const meta = {
   componentName: 'ATreeNode',
-  title: '树选择 TreeNode',
+  title: '树形控件 TreeNode',
   group: 'Ant Design 组件',
-  category: '数据录入',
-  docUrl: 'https://antdv.com/components/tree-select-cn',
+  category: '数据展示',
+  docUrl: 'https://antdv.com/components/tree-cn',
   devMode: 'proCode',
   configure: {
     props: [
@@ -42,55 +42,14 @@ const meta = {
         title: {
           label: {
             type: 'i18n',
-            'zh-CN': '是否禁用',
+            'zh-CN': '禁掉响应',
             'en-US': 'disabled',
           },
-          tip: '是否禁用',
+          tip: '禁掉响应',
         },
         setter: 'BoolSetter',
         supportVariable: true,
         defaultValue: false,
-      },
-      {
-        name: 'isLeaf',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': '是否是叶子节点',
-            'en-US': 'isLeaf',
-          },
-          tip: '是否是叶子节点',
-        },
-        setter: 'BoolSetter',
-        supportVariable: true,
-        defaultValue: false,
-      },
-      {
-        name: 'selectable',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': '是否可选',
-            'en-US': 'selectable',
-          },
-          tip: '是否可选',
-        },
-        setter: 'BoolSetter',
-        supportVariable: true,
-        defaultValue: true,
-      },
-      {
-        name: 'title',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': '树节点显示的内容',
-            'en-US': 'title',
-          },
-          tip: '树节点显示的内容',
-        },
-        setter: 'StringSetter',
-        supportVariable: true,
       },
       {
         name: 'icon',
@@ -111,6 +70,46 @@ const meta = {
         },
         supportVariable: true,
       },
+      {
+        name: 'isLeaf',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置为叶子节点',
+            'en-US': 'isLeaf',
+          },
+          tip: '设置为叶子节点(设置了loadData时有效)',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+      },
+      {
+        name: 'selectable',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '设置节点是否可被选中',
+            'en-US': 'selectable',
+          },
+          tip: '设置节点是否可被选中',
+        },
+        setter: 'BoolSetter',
+        supportVariable: true,
+        defaultValue: true,
+      },
+      {
+        name: 'title',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': '标题',
+            'en-US': 'title',
+          },
+          tip: '标题',
+        },
+        setter: 'StringSetter',
+        supportVariable: true,
+      },
     ],
     supports: {
       style: true,
@@ -121,11 +120,20 @@ const meta = {
     },
     component: {
       nestingRule: {
-        parentWhitelist: ['ATreeSelect'],
+        parentWhitelist: ['ATree'],
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '树形控件 TreeNode',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'ATreeNode',
+        props: {},
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

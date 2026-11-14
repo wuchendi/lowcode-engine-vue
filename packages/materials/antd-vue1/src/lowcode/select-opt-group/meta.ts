@@ -44,7 +44,16 @@ const meta = {
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '选择器 OptGroup',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'ASelectOptGroup',
+        props: {},
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

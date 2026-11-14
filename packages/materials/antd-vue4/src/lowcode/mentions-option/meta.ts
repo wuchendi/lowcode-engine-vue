@@ -77,7 +77,19 @@ const meta = {
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '提及 MentionsOption',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'AMentionsOption',
+        props: {
+          value: 'option',
+        },
+        children: '选项',
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

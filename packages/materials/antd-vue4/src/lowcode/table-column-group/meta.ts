@@ -36,9 +36,22 @@ const meta = {
       loop: true,
       condition: true,
     },
-    component: {},
+    component: {
+      nestingRule: {
+        parentWhitelist: ['ATable'],
+      },
+    },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '表格 TableColumnGroup',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'ATableColumnGroup',
+        props: {},
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

@@ -71,7 +71,19 @@ const meta = {
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '选择器 Option',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'ASelectOption',
+        props: {
+          value: 'option',
+        },
+        children: '选项',
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

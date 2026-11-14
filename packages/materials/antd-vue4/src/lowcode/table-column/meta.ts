@@ -60,7 +60,16 @@ const meta = {
       },
     },
   },
-  snippets: [],
+  snippets: [
+    {
+      title: '表格 TableColumn',
+      screenshot: './screenshots/fallback.svg',
+      schema: {
+        componentName: 'ATableColumn',
+        props: {},
+      },
+    },
+  ],
 } as IPublicTypeComponentMetadata
 
 export default meta

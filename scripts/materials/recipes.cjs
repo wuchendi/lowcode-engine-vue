@@ -10,13 +10,6 @@ const PREFIX = {
 const TEXTUAL =
   /^(Alert|Avatar|Button|Link|Tag|Text|Radio|Checkbox|RadioButton|CheckboxButton|BreadcrumbItem|DropdownItem|MenuItem|Divider|TimelineItem|TypographyText|TypographyTitle|TypographyParagraph|TypographyLink|Title|Paragraph|Badge)$/
 
-/** Components left out of the components pane (see the meta comment). */
-exports.hidden = (lib, spec) =>
-  lib.startsWith('antd') &&
-  /^A(SelectOption|SelectOptGroup|TableColumn|TableColumnGroup|MenuSubMenu|MentionsOption|AutoCompleteOption|TreeNode|TreeSelectNode|CascaderPanel)$/.test(
-    spec.componentName,
-  )
-
 /** Components showing a string prop (`text`) or a text slot: never a container. */
 exports.textual = (spec) => {
   const base = spec.componentName.replace(/^(El|Van|A)(?=[A-Z])/, '')

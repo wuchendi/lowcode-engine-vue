@@ -113,12 +113,14 @@ console.log = origLog
 
 // ---------- runtime components ----------
 const isComponent = (v) =>
-  v &&
-  typeof v === 'object' &&
-  (typeof v.render === 'function' ||
-    typeof v.setup === 'function' ||
-    v.template ||
-    ((v.mixins || v.props) && v.name))
+  (v &&
+    typeof v === 'object' &&
+    (typeof v.render === 'function' ||
+      typeof v.setup === 'function' ||
+      v.template ||
+      ((v.mixins || v.props) && v.name))) ||
+  // Functional components (Ant Design 4's TreeSelectNode)
+  (typeof v === 'function' && /^[A-Z]/.test(v.displayName || ''))
 const norm = (s) => s.replace(/[^a-z0-9]/gi, '').toLowerCase()
 const camel = (s) => s.replace(/-(\w)/g, (_, c) => c.toUpperCase())
 const pascal = (s) => camel(s).replace(/^\w/, (c) => c.toUpperCase())
@@ -369,6 +371,9 @@ const ALIASES = {
   formitem: 'FormItem',
   tablecolumn: 'TableColumn',
 }
+/** Aliases on one docs page: the TreeNode of tree-select is TreeSelect's. */
+const PAGE_ALIASES =
+  lib === 'antd4' ? { 'tree-select': { treenode: 'TreeSelectNode' } } : {}
 const specs = new Map() // material componentName -> spec
 const skipped = []
 const keyOf = (heading) =>
@@ -438,7 +443,7 @@ for (const page of docs) {
       continue
     }
     let key = keyOf(s.heading)
-    key = ALIASES[norm(key)] || key
+    key = PAGE_ALIASES[page.page]?.[norm(key)] || ALIASES[norm(key)] || key
     // `Tree props` on the tree-select page documents TreeSelect
     if (
       key &&
@@ -676,6 +681,10 @@ for (const spec of specs.values()) {
     spec.parents = [spec.componentName.replace(/Item$/, 'Menu')]
   // the Element dropdown menu goes into the `dropdown` slot of its dropdown
   if (/^ElDropdownMenu$/.test(spec.componentName)) spec.parents = ['Slot']
+  // Column groups only exist inside their table (Ant Design reads them as data)
+  if (/TableColumnGroup$/.test(spec.componentName)) {
+    spec.parents = [spec.componentName.replace(/ColumnGroup$/, '')]
+  }
   spec.isModal =
     /(Dialog|Drawer|Modal|Popup|ActionSheet|ShareSheet|ImagePreview|Overlay|Tour|Sku)$/.test(
       spec.componentName,
@@ -749,17 +758,13 @@ function metaOf(spec) {
       },
       component,
     },
-    // Children the library reads from vnodes: rendered through Leaf they do
-    // not work, the main component takes them as data instead
-    snippets: recipes.hidden(lib, spec)
-      ? []
-      : [
-          {
-            title: spec.title,
-            screenshot: spec.screenshot,
-            schema: { componentName: spec.componentName, ...recipe },
-          },
-        ],
+    snippets: [
+      {
+        title: spec.title,
+        screenshot: spec.screenshot,
+        schema: { componentName: spec.componentName, ...recipe },
+      },
+    ],
   }
   return meta
 }
