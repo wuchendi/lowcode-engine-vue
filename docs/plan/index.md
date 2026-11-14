@@ -43,3 +43,5 @@ Each plan is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0633-designer-locale Designer Chinese / English switch**](20261114-0633-designer-locale.md) `2026-11-14`
 - [x] [**20261114-0633-blocks Blocks (reusable snippets)**](20261114-0633-blocks.md) `2026-11-14`
 - [x] [**20261114-0633-lowcode-components Low-code components**](20261114-0633-lowcode-components.md) `2026-11-14`
+- [x] [**20261114-0812-material-metas-docs Align the material metas with the component docs**](20261114-0812-material-metas-docs.md) `2026-11-14`
+- [x] [**20261114-1022-material-screenshots Component screenshots for the materials**](20261114-1022-material-screenshots.md) `2026-11-14`

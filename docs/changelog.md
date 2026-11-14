@@ -207,3 +207,43 @@ code generation, build and run the generated project).
 entries into `componentsMap` for every component without a package,
 including `Component`, `Page` and native tags: a consumer must not take them
 for schemas or imports.
+
+## 2026-11-14 10:02 [progress]
+
+20261114-0812-material-metas-docs (plan 20261114-0812-material-metas-docs):
+the six materials cover every documented component of their library at a
+pinned version (element-ui 2.15.14, vant 2.13.9, ant-design-vue 1.7.8 for
+Vue 2.7; element-plus 2.14.8, vant 4.10.2, ant-design-vue 4.2.6 for Vue 3;
+559 metas), generated from the versioned docs and checked by a per-material
+test against the installed components. Vue and vue-router are pinned too
+(catalogs, scaffold templates, generated projects). The Vue 2 renderer gives
+components their real parent in `$parent` / `$children`; the material
+builder and code generator handle sub-component exports.
+
+## 2026-11-14 10:02 [pitfall]
+
+The old metas had prop names in Chinese (name and title swapped), Vue 3
+events written in kebab-case (`onExpand-change` never fires for
+`expandChange`), Vant 2 events on Vant 4, dead Gitee Pages doc links, and
+ant-design-vue 1.x metas written for the React / 3.x API. In the designer,
+libraries that walk `$parent` (Element UI) or read child vnodes (Ant Design
+Vue) see the renderer's Leaf wrapper between parent and child.
+
+## 2026-11-14 12:20 [progress]
+
+20261114-1022-material-screenshots (plan 20261114-1022-material-screenshots):
+every material component shows a thumbnail in the components pane: rendered
+from its snippet in the canvas and shipped under `screenshots/` (393 WebP,
+fallback SVG for modals and sub-components). The material builder copies
+`screenshots/` into the output and resolves `./` snippet screenshots against
+the meta script URL. Titles no longer carry the notes in parentheses of the
+doc navigation. Snippets of text components no longer show the container
+placeholder.
+
+## 2026-11-14 12:20 [pitfall]
+
+The designer development server served runtime files other than CSS as
+`text/javascript`: browsers sniff WebP and PNG but not SVG. Libraries that
+read or clone the vnodes of their children (Element UI Tabs, Ant Design Vue
+Tabs / Steps / Collapse) see the renderer's Leaf wrapper and render wrong in
+the canvas.

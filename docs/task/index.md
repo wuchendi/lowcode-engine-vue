@@ -47,3 +47,5 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0632-designer-locale Designer Chinese / English switch**](20261114-0632-designer-locale.md) `P2`
 - [x] [**20261114-0632-blocks Blocks (reusable snippets)**](20261114-0632-blocks.md) `P2`
 - [x] [**20261114-0632-lowcode-components Low-code components**](20261114-0632-lowcode-components.md) `P2`
+- [x] [**20261114-0812-material-metas-docs Align the material metas with the component docs**](20261114-0812-material-metas-docs.md) `P1`
+- [x] [**20261114-1022-material-screenshots Component screenshots for the materials**](20261114-1022-material-screenshots.md) `P1`
