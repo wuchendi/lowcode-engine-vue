@@ -57,6 +57,7 @@
     "moment": "^2.30.1",
     "react": "catalog:shared",
     "react-color": "^2.19.3",
+    "react-dom": "catalog:shared",
     "sass": "catalog:dev",
     "vite": "catalog:dev"
   },

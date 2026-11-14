@@ -62,7 +62,6 @@
   "ComponentEventsTab": "Component events",
   "NewEvent": "New event",
   "EventName": "Event name",
-  "EventNameTip": "To bind a prop, use props.xxx",
   "ExtParams": "Extra parameters",
   "ExtParamsTip": "Extra parameters are passed as one JSON argument after the event arguments",
   "ExtParamsExample": "e.g. onClick(event, extParams)",

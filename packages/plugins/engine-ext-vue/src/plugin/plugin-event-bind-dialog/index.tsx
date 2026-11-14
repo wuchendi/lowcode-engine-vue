@@ -389,14 +389,7 @@ export default class EventBindDialog extends Component<PluginProps> {
           </div>
 
           <div className="dialog-right-container">
-            <div className="dialog-small-title">
-              {intl('EventName')}
-              {(window as any).lowcodeSetterSwitch?.enablePropsEvents && (
-                <HelpTip iconStyle={{ marginLeft: 4 }}>
-                  {intl('EventNameTip')}
-                </HelpTip>
-              )}
-            </div>
+            <div className="dialog-small-title">{intl('EventName')}</div>
             <div className="event-input-container">
               <Input
                 style={{ width: '100%' }}

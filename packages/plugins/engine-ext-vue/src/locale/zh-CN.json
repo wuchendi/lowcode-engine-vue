@@ -62,7 +62,6 @@
   "ComponentEventsTab": "组件事件",
   "NewEvent": "新建事件",
   "EventName": "事件名称",
-  "EventNameTip": "如需绑定 props 属性，可通过 props.xxx 进行绑定",
   "ExtParams": "扩展参数设置",
   "ExtParamsTip": "扩展参数做为单独的一个json格式入参追加在原有透传参数之后",
   "ExtParamsExample": "如:onClick (event,extParams)",
