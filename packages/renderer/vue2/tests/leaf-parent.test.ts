@@ -84,3 +84,28 @@ describe('Leaf in the parent chain (Vue 2)', () => {
     },
   )
 })
+
+describe('host components named Leaf (Vue 2)', () => {
+  it('keep their children', () => {
+    let child: Vue | undefined
+    const Inner = Vue.extend({
+      name: 'Inner',
+      created(this: Vue) {
+        child = this
+      },
+      render: (h: CreateElement) => h('i'),
+    })
+    // An application component that happens to be called Leaf
+    const HostLeaf = Vue.extend({
+      name: 'Leaf',
+      render(this: Vue, h: CreateElement) {
+        return h('div', [h(Inner)])
+      },
+    })
+    const vm = new Vue({
+      render: (h: CreateElement) => h('section', [h(HostLeaf)]),
+    }).$mount()
+    expect(child?.$parent?.$options.name).toBe('Leaf')
+    vm.$destroy()
+  })
+})

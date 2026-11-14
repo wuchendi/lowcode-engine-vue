@@ -21,7 +21,7 @@ export type {
   RequestHandler,
   RequestHandlersMap,
 } from './data-source'
-export { Leaf } from './leaf'
+export { LEAF_MARKER, Leaf } from './leaf'
 export { lowCodeComponent } from './lowcode-component'
 export { Renderer, type RendererProps } from './renderer'
 export {

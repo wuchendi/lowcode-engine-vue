@@ -309,3 +309,7 @@ export const Leaf = defineComponent({
     }
   },
 })
+
+/** Option marking the Leaf component (Vue 2 reads it through `$options`). */
+export const LEAF_MARKER = '__lowcodeLeaf'
+;(Leaf as Record<string, unknown>)[LEAF_MARKER] = true

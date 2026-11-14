@@ -5,6 +5,7 @@ import type {
   VueAdapter,
   VueComponent,
 } from '@cdlab996/lowcode-vue-core'
+import { LEAF_MARKER } from '@cdlab996/lowcode-vue-core'
 import Vue, {
   h as createElement,
   defineComponent,
@@ -95,11 +96,13 @@ function findPageRecord(matched: RouteRecord[], vm: Vue | null) {
  */
 Vue.mixin({
   beforeCreate(this: Vue) {
+    const isLeaf = (vm: Vue | null | undefined) =>
+      !!(vm?.$options as Record<string, unknown> | undefined)?.[LEAF_MARKER]
     const leaf = this.$parent
-    if (leaf?.$options.name !== 'Leaf' || this.$options.name === 'Leaf') return
+    if (!leaf || !isLeaf(leaf) || isLeaf(this)) return
     let child: Vue = leaf
-    let parent = leaf.$parent
-    while (parent?.$options.name === 'Leaf') {
+    let parent: Vue | null = leaf.$parent
+    while (parent && isLeaf(parent)) {
       child = parent
       parent = parent.$parent
     }
