@@ -48,14 +48,14 @@ docs/
 
 `@cdlab996/lowcode-vue2` and `@cdlab996/lowcode-vue3` expose the same API:
 
-| Entry                   | Content                                                                                                                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `.`                     | `Renderer`, `rendererConfig`, `useRendererContext`, `useCurrentNode`, `buildComponents`, `AssetLoader`, `createSimulatorRenderer`, types |
-| `./runtime`             | the same without the designer simulator (no vue-router)                                                                                  |
-| `./designer`            | `setupDesignerEnvironment(project, { vue })` for the designer page (no Vue import)                                                       |
-| `dist/renderer.umd.js`  | browser bundle for preview pages: the `./runtime` API as `window.LCVueRenderer`                                                          |
-| `dist/simulator.umd.js` | designer canvas bundle: `window.LCVueRenderer` plus `window.SimulatorRenderer`                                                           |
-| `dist/simulator.css`    | canvas styles                                                                                                                            |
+| Entry                   | Content                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `.`                     | `Renderer`, `rendererConfig`, `useRendererContext`, `buildComponents`, `AssetLoader`, `createSimulatorRenderer`, types |
+| `./runtime`             | the same without the designer simulator (no vue-router)                                                                |
+| `./designer`            | `setupDesignerEnvironment(project, { vue })` for the designer page (no Vue import)                                     |
+| `dist/renderer.umd.js`  | browser bundle for preview pages: the `./runtime` API as `window.LCVueRenderer`                                        |
+| `dist/simulator.umd.js` | designer canvas bundle: `window.LCVueRenderer` plus `window.SimulatorRenderer`                                         |
+| `dist/simulator.css`    | canvas styles                                                                                                          |
 
 `vue` and `vue-router` (3.6 for Vue 2.7, 4 for Vue 3) are peer dependencies;
 the UMD bundles read Vue from `window.Vue`; only the simulator bundle includes

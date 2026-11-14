@@ -1,8 +1,8 @@
 # 20261114-1419-renderer-without-leaf Render nodes without the Leaf wrapper
 
-- **status**: draft
+- **status**: completed
 - **createdAt**: 2026-11-14 14:19
-- **approvedAt**: (none)
+- **approvedAt**: 2026-11-14
 - **relatedTask**: 20261114-1419-renderer-without-leaf
 
 ## Context
@@ -93,4 +93,25 @@ context), `packages/renderer/vue2` (adapter mixin), tests,
 
 ## Annotations
 
-(none)
+- Implementation notes: the renderer passes its context and scope version
+  to `useLeaf` (inject does not see the same component's provide); the
+  instance props (`ref` and the adapter's `unmountedHook`: Vue 3
+  `onVnodeUnmounted`, Vue 2 `hook:destroyed`) are cached per vnode key, and
+  nodes without slots get none, so unchanged siblings are not re-rendered
+  (Vue updates a component whose vnode carries non-stable slots).
+- Vue 2: default slot content without slot props is passed as children
+  (as Vue 2 templates do; slots with params are marked `markScopedSlot`
+  and stay scoped slots). As a scoped slot, every read of `$slots.default`
+  created new vnodes without instances: Element UI's Tabs re-rendered
+  forever once it could see its panes.
+- Un-hiding the antd components exposed generator errors, fixed in
+  `scripts/materials`: Ant Design 4's TreeNode of tree-select is
+  `TreeSelectNode` (a functional component: functional components with a
+  `displayName` now count), so `ATreeSelect` no longer recurses forever on
+  Tree's `TreeNode`; `TableColumnGroup` only nests in its table. New antd 4
+  components: `ASelectOption`, `ASelectOptGroup`, `ATreeSelectNode`, the
+  Typography parts.
+- Verified: renderer tests on both Vue versions (new: children vnodes seen
+  by their parent, unchanged siblings not re-rendered, Element UI style
+  Tabs settling), full unit suite, E2E 15/15 (every snippet renders,
+  including the un-hidden components).

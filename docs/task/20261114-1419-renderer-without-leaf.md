@@ -1,6 +1,6 @@
 # 20261114-1419-renderer-without-leaf Render nodes without the Leaf wrapper
 
-- **status**: in_progress
+- **status**: completed
 - **priority**: P1
 - **owner**: claude/session-gn15nk27
 - **createdAt**: 2026-11-14 14:19
@@ -21,3 +21,5 @@ Render nodes without the Leaf wrapper
 ## Notes
 
 From the repository audit of 2026-11-14 (commit d422dd4). Plan: 20261114-1419-renderer-without-leaf
+
+- complete: E2E 15/15

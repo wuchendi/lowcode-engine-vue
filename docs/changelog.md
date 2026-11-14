@@ -317,3 +317,16 @@ suite (both Vue versions) compares the rendered and the generated output
 and data sources. Fixed on the way: inline text children in generated
 templates, Vue 2 `v-model:arg` (`.sync`), default GET for renderer data
 sources, 204 / error bodies in the generated runtime.
+
+## 2026-11-14 19:40 [progress]
+
+20261114-1419-renderer-without-leaf: nodes render as their component
+vnodes (no Leaf wrapper); `Leaf`, `LEAF_MARKER`, `useCurrentNode` and the
+Vue 2 `$parent` mixin are removed. Vue 2 passes default slot content as
+children. The antd child components are back in the components pane.
+
+## 2026-11-14 19:40 [pitfall]
+
+A component vnode carrying slots (even `{}`) or new hook functions is
+updated on every parent render; inject does not see a provide of the same
+component (the renderer passes its context to `useLeaf`).
