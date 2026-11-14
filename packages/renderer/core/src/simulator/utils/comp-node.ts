@@ -45,11 +45,13 @@ export function getCompRootData(el: CompRootHTMLElement): CompRootData {
   }
 }
 
+/** Marks `el` as the root element of a component instance. */
 export function setCompRootData(
-  el: CompRootHTMLElement,
+  el: HTMLElement,
   data: CompRootData,
-): void {
-  el[SYMBOL_VDID] = data.docId
-  el[SYMBOL_VNID] = data.nodeId
-  el[SYMBOL_VInstance] = data.instance
+): asserts el is CompRootHTMLElement {
+  const root = el as CompRootHTMLElement
+  root[SYMBOL_VDID] = data.docId
+  root[SYMBOL_VNID] = data.nodeId
+  root[SYMBOL_VInstance] = data.instance
 }

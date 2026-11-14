@@ -5,6 +5,13 @@ import type { RendererComponent, RendererProps } from '../base'
 import { rendererProps } from '../base'
 import { useRenderer } from '../use'
 
+declare module 'vue' {
+  interface ComponentCustomOptions {
+    /** Tags a container renderer (see renderer.ts). */
+    __renderer__?: boolean
+  }
+}
+
 const renderFns = new WeakMap<object, () => VNode | null>()
 
 export interface RendererDefinition {
@@ -54,11 +61,13 @@ export function defineRenderer(def: RendererDefinition): RendererComponent {
       })
       return bindings
     },
-    render() {
+    // Returns the adapter's opaque VNode; `never` fits the render type of
+    // either Vue version
+    render(): never {
       // `this` may be a dev-mode proxy of the instance (Vue 2): look the
       // instance up instead
       const instance = getCurrentInstance()?.proxy as unknown as object
-      return renderFns.get(instance)?.() ?? null
+      return (renderFns.get(instance)?.() ?? null) as never
     },
   }) as unknown as RendererComponent
 }

@@ -4,13 +4,7 @@ import ColorInput from '../../components/color-input'
 import Icon from '../../components/icon'
 import NumberInput from '../../components/number'
 import Row from '../../components/row'
-import {
-  addUnit,
-  isCssVarBind,
-  isEmptyValue,
-  parseValue,
-  unifyStyle,
-} from '../../utils'
+import { addUnit, isCssVarBind, isEmptyValue, unifyStyle } from '../../utils'
 import type { onStyleChange, StyleChange, StyleData } from '../../utils/types'
 import { intlLocal } from './locale'
 import './index.less'

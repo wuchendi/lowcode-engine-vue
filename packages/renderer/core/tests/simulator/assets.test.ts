@@ -1,3 +1,4 @@
+import { AssetType } from '@alilc/lowcode-types'
 import { afterEach, describe, expect, it } from 'vitest'
 import { defineComponent } from 'vue'
 import { createSimulatorRenderer } from '../../src/simulator/simulator'
@@ -18,7 +19,10 @@ describe('simulator assets', () => {
     disposers.push(() => simulator.dispose())
 
     // jsdom does not run inline scripts; a style asset shows the loading
-    await simulator.load({ type: 'cssText', content: '.loaded-lib{color:red}' })
+    await simulator.load({
+      type: AssetType.CSSText,
+      content: '.loaded-lib{color:red}',
+    })
 
     const styles = [...document.head.querySelectorAll('style')]
     expect(styles.some((el) => el.textContent?.includes('.loaded-lib'))).toBe(

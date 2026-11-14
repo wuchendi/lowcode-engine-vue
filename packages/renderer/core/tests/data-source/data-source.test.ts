@@ -1,9 +1,15 @@
-import type { InterpretDataSourceConfig } from '@alilc/lowcode-types'
+import type {
+  InterpretDataSourceConfig,
+  IPublicTypeJSFunction,
+} from '@alilc/lowcode-types'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createDataSourceManager } from '../../src/renderer/data-source'
 import { DataSourceStatus } from '../../src/renderer/data-source/interface'
 
-const fn = (value: string) => ({ type: 'JSFunction', value })
+const fn = (value: string): IPublicTypeJSFunction => ({
+  type: 'JSFunction',
+  value,
+})
 
 const setup = (
   config: Partial<InterpretDataSourceConfig>,
@@ -42,7 +48,9 @@ describe('data source manager', () => {
   })
 
   it('calls the custom handler registered for the item type with parsed options', async () => {
-    const handler = vi.fn(() => Promise.resolve({ data: 'custom' }))
+    const handler = vi.fn((_options: unknown) =>
+      Promise.resolve({ data: 'custom' }),
+    )
     const { item, scope } = setup({ type: 'mtop' }, { mtop: handler })
 
     await expect(item.load()).resolves.toBe('custom')

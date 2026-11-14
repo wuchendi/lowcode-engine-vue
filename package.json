@@ -24,12 +24,13 @@
     "dev": "node scripts/dev.mjs",
     "build:designer": "pnpm -C apps/designer build",
     "lint": "biome check",
-    "lint:type": "pnpm build && pnpm -r lint:type",
+    "lint:type": "pnpm build && pnpm -r lint:type && tsc -p ./tsconfig.node.json",
     "format": "biome format --write",
     "test": "vitest --run"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:dev",
+    "@types/node": "catalog:dev",
     "jsdom": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:dev"

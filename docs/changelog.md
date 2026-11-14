@@ -56,3 +56,18 @@ Pages reload after each written build.
 The designer's Vite dev server does not work with the CDN globals
 (`optimizeDeps.exclude` drops subpaths; no CJS interop for the global
 modules outside pre-bundling). Development uses the designer build instead.
+
+## 2026-11-14 03:31 [progress]
+
+20261114-0320-type-check-coverage (plan 20261114-0320-type-check-coverage):
+`lint:type` now checks tests and build configs (renderer per Vue version
+with the test module mapping, plugins, tools, root `tsconfig.node.json`);
+the errors it found are fixed by typing (no `any` / `@ts-expect-error`),
+Biome warnings are cleared, and the leftover `backup` directories of
+element-ui / vant2 and `meta copy.ts` of antd-vue1 are deleted.
+
+## 2026-11-14 03:31 [pitfall]
+
+The core was type-checked against Vue 3 only: it resolves `vue` to its own
+Vue 3 dev dependency, also through the Vue 2 distribution. The renderer
+tsconfigs now map `vue` per version.

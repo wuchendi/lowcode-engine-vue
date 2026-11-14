@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { CreateElement } from 'vue'
+import type { CreateElement, VNode } from 'vue'
 import Vue from 'vue'
 import type { MountedRenderer } from '../../core/tests/helpers/mount-renderer'
 import { mountRenderer } from '../../core/tests/helpers/mount-renderer'
@@ -124,11 +124,11 @@ describe('toVNodeData', () => {
   })
 
   it('puts every slot, including default, into proxied scopedSlots', () => {
-    const def = (scope: unknown) => [scope]
-    const named = () => []
+    const def = (_scope: unknown): VNode[] => []
+    const named = (): VNode[] => []
     const data = toVNodeData('div', {}, { default: def, cell: named })
-    expect(data.scopedSlots?.default).toBe(def)
-    expect(data.scopedSlots?.cell).toBe(named)
+    expect<unknown>(data.scopedSlots?.default).toBe(def)
+    expect<unknown>(data.scopedSlots?.cell).toBe(named)
     expect((def as any).proxy).toBe(true)
   })
 })

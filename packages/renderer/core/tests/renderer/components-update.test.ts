@@ -1,5 +1,5 @@
 import type { VueComponent } from '@cdlab996/lowcode-vue-core'
-import { Renderer } from '@cdlab996/lowcode-vue-core'
+import { getAdapter, Renderer } from '@cdlab996/lowcode-vue-core'
 import { afterEach, describe, expect, it } from 'vitest'
 import { nextTick, shallowReactive } from 'vue'
 import {
@@ -8,6 +8,8 @@ import {
   mountRender,
   testComponent,
 } from '../helpers/mount-renderer'
+
+const textNode = (value: string) => getAdapter().text(value)
 
 const schema = {
   componentName: 'Page',
@@ -35,7 +37,7 @@ describe('components update', () => {
     const XButton = testComponent({
       name: 'XButton',
       render: () =>
-        h('button', { class: 'x-button' }, { default: () => ['ok'] }),
+        h('button', { class: 'x-button' }, { default: () => [textNode('ok')] }),
     })
     state.components = { ...state.components, XButton }
     await nextTick()

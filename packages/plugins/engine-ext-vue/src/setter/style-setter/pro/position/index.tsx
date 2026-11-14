@@ -2,7 +2,7 @@ import { Collapse, NumberPicker, Select } from '@alifd/next'
 import * as React from 'react'
 import Row from '../../components/row'
 import { isCssVarBind } from '../../utils'
-import type { onStyleChange, StyleChange, StyleData } from '../../utils/types'
+import type { onStyleChange, StyleData } from '../../utils/types'
 import PositionBox from '../position/positionBox'
 import { intlLocal } from './locale'
 

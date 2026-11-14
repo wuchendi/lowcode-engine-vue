@@ -6,7 +6,7 @@ import {
   isCssVarBind,
   removeUnit as originRemoveUnit,
 } from '../../utils'
-import type { onStyleChange, StyleChange, StyleData } from '../../utils/types'
+import type { onStyleChange, StyleData } from '../../utils/types'
 import LayoutInput from './LayoutInput'
 
 const KEY_ARROW_DOWN = 'ArrowDown'

@@ -233,7 +233,7 @@ export default class EventBindDialog extends Component<PluginProps> {
     eventName: string,
     useParams: boolean,
   ) => {
-    let formatTemp
+    let formatTemp: string | undefined
     if (template) {
       const functionName = this.pickupFunctionName(template)
 
@@ -245,7 +245,7 @@ export default class EventBindDialog extends Component<PluginProps> {
         const rightIndex = formatTemp.indexOf(')')
         // 提取括号中的参数列表
         const paramList = formatTemp
-          .substr(leftIndex + 1, rightIndex - (leftIndex + 1))
+          .substring(leftIndex + 1, rightIndex)
           .split(',')
 
         paramList.map((item, index) => {
@@ -257,9 +257,9 @@ export default class EventBindDialog extends Component<PluginProps> {
 
         // 重新join进去
 
-        formatTemp = `${formatTemp.substr(0, leftIndex)}(${paramList.join(
+        formatTemp = `${formatTemp.substring(0, leftIndex)}(${paramList.join(
           ',',
-        )})${formatTemp.substr(rightIndex + 1, formatTemp.length)}`
+        )})${formatTemp.substring(rightIndex + 1)}`
       }
     }
 

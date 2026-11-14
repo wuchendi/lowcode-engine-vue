@@ -36,7 +36,7 @@ describe('useRootDataSource request handlers', () => {
   it('dispatches a custom type to the requestHandlersMap prop', async () => {
     const fetchStub = vi.fn()
     vi.stubGlobal('fetch', fetchStub)
-    const custom = vi.fn(async () => ({ data: 42 }))
+    const custom = vi.fn(async (_options: unknown) => ({ data: 42 }))
 
     mounted = await mountRenderer({
       schema: pageSchema({ type: 'custom', options: { uri: 'custom://x' } }),
@@ -63,7 +63,7 @@ describe('useRootDataSource request handlers', () => {
         }),
     )
     vi.stubGlobal('fetch', fetchStub)
-    const custom = vi.fn(async () => ({ data: 42 }))
+    const custom = vi.fn(async (_options: unknown) => ({ data: 42 }))
 
     mounted = await mountRenderer({
       schema: pageSchema({

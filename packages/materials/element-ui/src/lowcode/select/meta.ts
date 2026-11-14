@@ -1,6 +1,6 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 import { isEqual, throttle } from 'lodash'
-import React, { Component, useEffect, useState } from 'react'
+import React from 'react'
 
 const meta: IPublicTypeComponentMetadata = {
   title: '选择器',

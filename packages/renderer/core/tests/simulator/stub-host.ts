@@ -1,4 +1,8 @@
-import type { BuiltinSimulatorHost } from '@alilc/lowcode-designer'
+import type {
+  BuiltinSimulatorHost,
+  DocumentModel,
+} from '@alilc/lowcode-designer'
+import type { Mock } from 'vitest'
 import { vi } from 'vitest'
 
 export interface StubDocumentOptions {
@@ -7,20 +11,27 @@ export interface StubDocumentOptions {
   schema?: unknown
 }
 
+export interface StubDocument {
+  id: string
+  fileName: string
+  export: Mock<() => unknown>
+  getNode: Mock<(id: string) => unknown>
+}
+
+/** A document with the members the simulator reads. */
 export function createStubDocument({
   id,
   fileName,
   schema,
-}: StubDocumentOptions) {
-  return {
+}: StubDocumentOptions): StubDocument & DocumentModel {
+  const doc: StubDocument = {
     id,
     fileName,
     export: vi.fn(() => schema ?? { componentName: 'Page', id: 'page' }),
-    getNode: vi.fn(),
+    getNode: vi.fn<(id: string) => unknown>(),
   }
+  return doc as StubDocument & DocumentModel
 }
-
-export type StubDocument = ReturnType<typeof createStubDocument>
 
 export interface StubHostOptions {
   documents?: StubDocument[]
@@ -42,9 +53,9 @@ export function createStubHost(options: StubHostOptions = {}) {
       documents: options.documents ?? [],
       currentDocument: options.currentDocument ?? null,
       get: (key: string) => (key === 'config' ? { layout: {} } : undefined),
-      setRendererReady: vi.fn(),
+      setRendererReady: vi.fn<(renderer: unknown) => void>(),
     },
-    setInstance: vi.fn(),
+    setInstance: vi.fn<(...args: unknown[]) => void>(),
     connect: vi.fn((_simulator: unknown, fn: () => void) => {
       fn()
       return () => {}
@@ -60,8 +71,12 @@ export function createStubHost(options: StubHostOptions = {}) {
     runAutorun: () => {
       for (const fn of [...autoruns]) fn()
     },
-    componentsConsumer: { consume: vi.fn() },
-    injectionConsumer: { consume: vi.fn() },
+    componentsConsumer: {
+      consume: vi.fn<(fn: (data: never) => void) => void>(),
+    },
+    injectionConsumer: {
+      consume: vi.fn<(fn: (data: never) => void) => void>(),
+    },
   }
   return host as typeof host & BuiltinSimulatorHost
 }

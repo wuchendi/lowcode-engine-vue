@@ -87,10 +87,10 @@ describe('design mode prop unset and then set again', () => {
 
     emit('v-probe', false, true)
     await nextTick()
-    expect(calls.at(-1)).toBe('update:true->false')
+    expect(calls[calls.length - 1]).toBe('update:true->false')
 
     emit('v-probe', true, false)
     await nextTick()
-    expect(calls.at(-1)).toBe('update:false->true')
+    expect(calls[calls.length - 1]).toBe('update:false->true')
   })
 })

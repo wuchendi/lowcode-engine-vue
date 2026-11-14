@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import type { CreateElement } from 'vue'
+import type { CreateElement, VNode } from 'vue'
 import Vue from 'vue'
 import { vue2Adapter } from '../src/adapter'
 
-const { h } = vue2Adapter
+// The adapter's VNode type is opaque; Vue 2 render functions expect a VNode
+const h = (...args: Parameters<typeof vue2Adapter.h>) =>
+  vue2Adapter.h(...args) as VNode
 
 describe('vue2Adapter.h', () => {
   it('renders the default slot as children of a native tag', () => {

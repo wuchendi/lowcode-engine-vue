@@ -226,7 +226,7 @@ export default class FunctionSetter extends PureComponent<FunctionSetterProps> {
       functionName = this.parseFunctionName(value.value)
     }
 
-    let renderFunction
+    let renderFunction: () => React.ReactNode
     if (value) {
       if (functionName) {
         renderFunction = this.renderBindFunction

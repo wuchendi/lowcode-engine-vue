@@ -93,7 +93,7 @@ describe('getClosestNodeInstance', () => {
 
   it('returns null for an element detached from the document', () => {
     const el = document.createElement('div')
-    setCompRootData(el as CompRootHTMLElement, {
+    setCompRootData(el, {
       docId: 'd1',
       nodeId: 'n1',
       instance: {} as never,

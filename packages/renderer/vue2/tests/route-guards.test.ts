@@ -117,7 +117,8 @@ describe('route guards (vue-router 3)', () => {
   it('does not mutate the route component constructor options', async () => {
     const { router, RouteComp } = await setup()
     await router.push('/item/2')
-    const opts = RouteComp.options as Record<string, unknown>
+    const opts = (RouteComp as typeof RouteComp & { options: object })
+      .options as Record<string, unknown>
     expect(opts.beforeRouteLeave).toBeUndefined()
     expect(opts.beforeRouteUpdate).toBeUndefined()
   })

@@ -4,7 +4,7 @@ import ColorInput from '../../components/color-input'
 import NumberInput from '../../components/number'
 import Row from '../../components/row'
 import { addUnit, isEmptyValue } from '../../utils'
-import type { onStyleChange, StyleChange, StyleData } from '../../utils/types'
+import type { onStyleChange, StyleData } from '../../utils/types'
 import { intlLocal } from './locale'
 import './index.less'
 

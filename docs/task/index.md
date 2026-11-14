@@ -37,3 +37,4 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0009-simulator-incremental-assets Support incremental assets in the simulator renderer**](20261114-0009-simulator-incremental-assets.md) `P2`
 - [ ] [**20261114-0117-dependency-security-alerts Resolve the open Dependabot security alerts**](20261114-0117-dependency-security-alerts.md) `P2`
 - [x] [**20261114-0208-dev-watch Rebuild workspace packages during designer development**](20261114-0208-dev-watch.md) `P1`
+- [x] [**20261114-0320-type-check-coverage Type-check tests and build configs; clear editor errors and lint warnings**](20261114-0320-type-check-coverage.md) `P1`
