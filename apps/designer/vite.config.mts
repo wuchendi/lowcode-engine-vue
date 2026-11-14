@@ -1,9 +1,10 @@
-import { createReadStream, existsSync } from 'node:fs'
-import { cp, mkdir } from 'node:fs/promises'
+import { createReadStream, existsSync, statSync, watch } from 'node:fs'
+import { cp, mkdir, writeFile } from 'node:fs/promises'
+import type { ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
-import { dirname, join, resolve } from 'node:path'
+import { basename, dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Plugin } from 'vite'
+import type { Connect, Plugin } from 'vite'
 import { defineConfig } from 'vite'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -20,7 +21,7 @@ function packageDir(owner: string, name: string) {
  * version and the workspace materials. Served from the workspace in dev and
  * copied into the output on build.
  */
-function runtimeFiles(): Record<string, string> {
+function runtimeFiles(dev: boolean): Record<string, string> {
   const files: Record<string, string> = {
     'runtime/vue2/vue.js': join(
       packageDir('renderer/vue2', 'vue'),
@@ -38,7 +39,9 @@ function runtimeFiles(): Record<string, string> {
     const dist = join(packages, 'renderer', version, 'dist')
     files[`runtime/${version}/renderer.js`] = join(dist, 'renderer.umd.js')
     files[`runtime/${version}/simulator.js`] = join(dist, 'simulator.umd.js')
-    files[`runtime/${version}/simulator.css`] = join(dist, 'simulator.css')
+    files[`runtime/${version}/simulator.css`] = dev
+      ? join(packages, 'renderer/core/src/simulator/simulator.css')
+      : join(dist, 'simulator.css')
   }
   for (const material of [
     'antd-vue1',
@@ -109,8 +112,39 @@ function globals(map: Record<string, string>): Plugin {
   }
 }
 
-function serveRuntime(): Plugin {
-  const files = runtimeFiles()
+const RELOAD_PATH = '/__designer_reload'
+/** Written by a development build once its files are written. */
+const BUILD_STAMP = resolve(here, 'dist/.build-stamp')
+
+/**
+ * Development mode (`pnpm dev`): reloads the open pages through server-sent
+ * events when the designer build or a served package build changes.
+ */
+function watchForReload(paths: string[], send: () => void) {
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const changed = () => {
+    clearTimeout(timer)
+    timer = setTimeout(send, 300)
+  }
+  for (const path of paths) {
+    if (existsSync(path) && statSync(path).isDirectory()) {
+      watch(path, { recursive: true }, changed)
+    } else if (existsSync(dirname(path))) {
+      // Ignore the removal when a build empties its output
+      watch(dirname(path), (_event, name) => {
+        if (name === basename(path) && existsSync(path)) changed()
+      })
+    }
+  }
+}
+
+/**
+ * Serves the runtime files: by the dev server and, in development mode, by
+ * the preview server (straight from the packages, with page reloads); copied
+ * into the output by production builds.
+ */
+function serveRuntime(dev: boolean): Plugin {
+  const files = runtimeFiles(dev)
   const lookup = (url: string) => {
     const path = decodeURIComponent(url.split('?')[0]).replace(/^\//, '')
     for (const [route, source] of Object.entries(files)) {
@@ -120,20 +154,52 @@ function serveRuntime(): Plugin {
       }
     }
   }
+  const serveFiles: Connect.NextHandleFunction = (req, res, next) => {
+    const file = req.url && lookup(req.url)
+    if (!file || !existsSync(file)) return next()
+    res.setHeader(
+      'Content-Type',
+      file.endsWith('.css') ? 'text/css' : 'text/javascript',
+    )
+    createReadStream(file).pipe(res)
+  }
   return {
     name: 'designer:runtime',
     configureServer(server) {
-      server.middlewares.use((req, res, next) => {
-        const file = req.url && lookup(req.url)
-        if (!file || !existsSync(file)) return next()
-        res.setHeader(
-          'Content-Type',
-          file.endsWith('.css') ? 'text/css' : 'text/javascript',
-        )
-        createReadStream(file).pipe(res)
+      server.middlewares.use(serveFiles)
+    },
+    configurePreviewServer(server) {
+      if (!dev) return
+      const clients = new Set<ServerResponse>()
+      server.middlewares.use(RELOAD_PATH, (req, res) => {
+        res.writeHead(200, {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+        })
+        clients.add(res)
+        req.on('close', () => clients.delete(res))
       })
+      server.middlewares.use(serveFiles)
+      watchForReload(
+        [
+          BUILD_STAMP,
+          ...Object.values(files).filter((file) => file.startsWith(packages)),
+        ],
+        () => {
+          for (const client of clients) client.write('data: reload\n\n')
+        },
+      )
+    },
+    transformIndexHtml(html) {
+      if (!dev) return html
+      return html.replace(
+        '</body>',
+        `<script>new EventSource('${RELOAD_PATH}').onmessage = () => location.reload()</script></body>`,
+      )
     },
     async writeBundle(options) {
+      // The development preview serves them from the packages
+      if (dev) return writeFile(BUILD_STAMP, String(Date.now()))
       const outDir = options.dir ?? resolve(here, 'dist')
       for (const [route, source] of Object.entries(files)) {
         const target = join(outDir, route)
@@ -144,7 +210,7 @@ function serveRuntime(): Plugin {
   }
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   resolve: {
     alias: [
       { find: '@', replacement: resolve(here, 'src') },
@@ -161,9 +227,26 @@ export default defineConfig({
   define: { global: 'window' },
   // The plugins and setters are React components rendered by the engine's React
   oxc: { jsx: { runtime: 'classic' } },
-  css: { preprocessorOptions: { less: { javascriptEnabled: true } } },
-  plugins: [globals(GLOBALS), serveRuntime()],
+  css: {
+    preprocessorOptions: {
+      less: { javascriptEnabled: true },
+      // Only dependencies (Fusion) use Sass; their deprecation warnings
+      // flood every build
+      scss: {
+        quietDeps: true,
+        silenceDeprecations: [
+          'import',
+          'global-builtin',
+          'if-function',
+          'slash-div',
+        ],
+      },
+    },
+  },
+  plugins: [globals(GLOBALS), serveRuntime(mode === 'development')],
   build: {
+    // `pnpm dev` builds in development mode
+    minify: mode !== 'development',
     rolldownOptions: {
       input: {
         index: resolve(here, 'index.html'),
@@ -171,4 +254,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

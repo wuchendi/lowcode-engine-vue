@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint:type": "tsc -p ./tsconfig.json --noEmit",
     "prepack": "pnpm build"
   },

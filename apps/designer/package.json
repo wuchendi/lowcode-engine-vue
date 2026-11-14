@@ -6,8 +6,9 @@
   "author": "wudi",
   "license": "MIT",
   "scripts": {
-    "dev": "nsl run -n lowcode-vue -c -- vite --port NSL_PORT --strictPort",
-    "dev:bare": "vite --port 5577",
+    "dev": "nsl run -n lowcode-vue -c -- vite preview --mode development --port NSL_PORT --strictPort",
+    "dev:bare": "vite preview --mode development --port 5577",
+    "dev:build": "vite build --watch --mode development",
     "build": "vite build",
     "preview": "vite preview --port 5577",
     "lint:type": "tsc -p ./tsconfig.json --noEmit"

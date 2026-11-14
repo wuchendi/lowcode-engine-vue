@@ -42,3 +42,17 @@ material.
 Added 20261114-0117-dependency-security-alerts: Dependabot security updates
 fail (transitive dependencies pinned by parents; Vue 2 alerts have no patched
 release).
+
+## 2026-11-14 03:01 [progress]
+
+20261114-0208-dev-watch (plan 20261114-0209-dev-watch): `pnpm dev`
+(`scripts/dev.mjs`) runs the designer as a development build in watch mode
+served by `vite preview` through nsl, plus watch builds of the renderer UMD
+bundles; `--watch <names>` adds materials, engine-ext-vue or vue-code-editor.
+Pages reload after each written build.
+
+## 2026-11-14 03:01 [pitfall]
+
+The designer's Vite dev server does not work with the CDN globals
+(`optimizeDeps.exclude` drops subpaths; no CJS interop for the global
+modules outside pre-bundling). Development uses the designer build instead.

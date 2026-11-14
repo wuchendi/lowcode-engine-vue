@@ -94,7 +94,8 @@ Versions are managed through catalogs in `pnpm-workspace.yaml`:
 
 - Node.js `>= 24.15`
 - pnpm `12` (version pinned by `packageManager`)
-- `nsl` for `pnpm dev` (or `pnpm -C apps/designer dev:bare` without it)
+- `nsl` for `pnpm dev` (the designer is served at
+  `http://lowcode-vue.localhost:<nsl port>`)
 
 ## Getting started
 
@@ -103,21 +104,31 @@ pnpm install   # also builds every package via "prepare"
 pnpm dev       # designer; open it with ?vue=2 or ?vue=3
 ```
 
-The designer serves the renderer bundles and the workspace materials from
-their `dist` directories: after changing a package, rebuild it (`pnpm build`)
-and reload the page.
+`pnpm dev` builds the designer in development mode on every change, serves
+it through nsl and rebuilds the renderer bundles (Vue 2.7 and Vue 3) on
+change; open pages reload once a build is written. Other packages are
+rebuilt on request:
+
+```bash
+pnpm dev --watch vant4,engine-ext-vue   # material directory names, engine-ext-vue, vue-code-editor
+```
+
+The remaining packages (the other designer plugins, the material builder)
+need `pnpm build` (or `pnpm -C <package> build`) after a change. Without
+nsl, run `pnpm -C apps/designer dev:build` and `pnpm -C apps/designer
+dev:bare` (port 5577).
 
 ## Scripts
 
-| Command               | Description                                            |
-| --------------------- | ------------------------------------------------------ |
-| `pnpm build`          | Build all packages.                                    |
-| `pnpm dev`            | Start the designer.                                    |
-| `pnpm build:designer` | Build the designer app.                                |
-| `pnpm lint`           | Biome lint and format check.                           |
-| `pnpm lint:type`      | Build, then type-check every package and the designer. |
-| `pnpm test`           | Run the test suites on Vue 2.7 and on Vue 3.           |
-| `pnpm format`         | Format with Biome.                                     |
+| Command               | Description                                              |
+| --------------------- | -------------------------------------------------------- |
+| `pnpm build`          | Build all packages.                                      |
+| `pnpm dev`            | Designer and renderer in watch mode (`--watch <names>`). |
+| `pnpm build:designer` | Build the designer app.                                  |
+| `pnpm lint`           | Biome lint and format check.                             |
+| `pnpm lint:type`      | Build, then type-check every package and the designer.   |
+| `pnpm test`           | Run the test suites on Vue 2.7 and on Vue 3.             |
+| `pnpm format`         | Format with Biome.                                       |
 
 ## Tests
 
