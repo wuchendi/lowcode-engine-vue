@@ -60,9 +60,9 @@ describe('lowcode-codegen', () => {
     )
     expect(code).toBe(0)
     const files = unzipSync(readFileSync(join(dir, 'app.zip')))
-    expect(
-      JSON.parse(strFromU8(files['package.json'])).dependencies.vue,
-    ).toMatch(/^\^2\./)
+    expect(JSON.parse(strFromU8(files['package.json'])).dependencies.vue).toBe(
+      '2.7.16',
+    )
   })
 
   it('accepts a single root schema', async () => {

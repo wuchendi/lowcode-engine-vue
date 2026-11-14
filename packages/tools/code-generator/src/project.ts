@@ -2,15 +2,17 @@ import type { VueVersion } from './types'
 import { toCode } from './value'
 
 /**
- * Version ranges written into generated projects. Floors, not the latest
- * patches: pnpm's minimumReleaseAge rejects releases from the last day, so a
- * range only a fresh release satisfies fails to install.
+ * Versions written into generated projects. Vue and its router are the exact
+ * versions the materials target (Vue 2: the last Vue 2 releases); the build
+ * tools are floors, not the latest patches: pnpm's minimumReleaseAge rejects
+ * releases from the last day, so a range only a fresh release satisfies fails
+ * to install.
  */
 export const VERSIONS = {
-  vue3: '^3.5.0',
-  vue2: '^2.7.16',
-  router3: '^3.6.5',
-  router4: '^5.0.0',
+  vue3: '3.5.45',
+  vue2: '2.7.16',
+  router3: '3.6.5',
+  router4: '4.6.4',
   vite: '^8.0.0',
   pluginVue: '^6.0.0',
   pluginVue2: '^2.3.4',

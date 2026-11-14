@@ -51,11 +51,12 @@ describe('generateProject (Vue 3)', async () => {
       ].sort(),
     )
     const pkg = JSON.parse(files['package.json'])
+    // Vue and the router at the versions the materials target
     expect(pkg.dependencies).toMatchObject({
       vant: '^4.8.10',
-      'vue-router': expect.any(String),
+      vue: '3.5.45',
+      'vue-router': '4.6.4',
     })
-    expect(pkg.dependencies.vue).toMatch(/^\^3\./)
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue')
     expect(files['src/main.js']).toContain("import 'vant/lib/index.css'")
     expect(files['src/App.vue']).toContain('<router-view')
@@ -153,8 +154,8 @@ describe('generateProject (Vue 2.7)', async () => {
 
   it('writes a Vue 2.7 project', () => {
     const pkg = JSON.parse(files['package.json'])
-    expect(pkg.dependencies.vue).toMatch(/^\^2\.7\./)
-    expect(pkg.dependencies['vue-router']).toMatch(/^\^3\./)
+    expect(pkg.dependencies.vue).toBe('2.7.16')
+    expect(pkg.dependencies['vue-router']).toBe('3.6.5')
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue2')
     expect(pkg.devDependencies).toHaveProperty('esbuild')
     expect(files['pnpm-workspace.yaml']).toContain('esbuild: true')
@@ -329,5 +330,52 @@ describe('componentsMap entries without a package', () => {
     expect(files['src/pages/index.vue']).toContain(
       "import UserCard from '../components/UserCard.vue'",
     )
+  })
+})
+
+describe('sub-components in the manifests', () => {
+  it('imports the library component and reads the sub-component', async () => {
+    const schema = {
+      version: '1.0.0',
+      componentsMap: [],
+      componentsTree: [
+        {
+          componentName: 'Page',
+          fileName: '/',
+          children: [
+            {
+              componentName: 'ASelect',
+              children: [{ componentName: 'ASelectOption', children: 'a' }],
+            },
+          ],
+        },
+      ],
+    } as unknown as typeof project
+    const antd = [
+      {
+        package: '@cdlab996/lowcode-materials-antd-vue1',
+        codegen: {
+          exports: {
+            ASelect: { package: 'ant-design-vue', exportName: 'Select' },
+            ASelectOption: {
+              package: 'ant-design-vue',
+              exportName: 'Select',
+              subName: 'Option',
+            },
+          },
+          styles: [],
+          dependencies: { 'ant-design-vue': '1.7.8' },
+        },
+      },
+    ]
+    const { files, warnings } = await generateProject(schema, {
+      vue: 2,
+      packages: antd,
+    })
+    expect(warnings).toEqual([])
+    const page = files['src/pages/index.vue']
+    expect(page).toContain("import { Select as ASelect } from 'ant-design-vue'")
+    expect(page).toContain('const ASelectOption = ASelect.Option')
+    expect(page).toMatch(/components: \{[^}]*ASelectOption/)
   })
 })

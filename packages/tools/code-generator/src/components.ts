@@ -84,6 +84,27 @@ export class ComponentResolver {
     const library = source.package.startsWith('@')
       ? source.package.split('/').slice(0, 2).join('/')
       : source.package.split('/')[0]
+    // A sub-component of the manifest (`Select.Option`) reads its library
+    // component, imported under the material name of that component
+    if (source.subName) {
+      const parent = Object.entries(manifest?.exports ?? {}).find(
+        ([, s]) =>
+          s.package === source.package &&
+          s.exportName === source.exportName &&
+          !s.subName,
+      )?.[0]
+      const localName = parent ?? pascalCase(source.exportName)
+      return {
+        tag,
+        importFrom: {
+          source: source.package,
+          imported: source.exportName,
+          local: localName,
+        },
+        sub: `${localName}.${source.subName}`,
+        library,
+      }
+    }
     const sub = item.subName
     const localName = sub ? pascalCase(exportName) : tag
     return {

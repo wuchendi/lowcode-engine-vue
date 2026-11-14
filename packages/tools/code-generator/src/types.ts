@@ -2,7 +2,10 @@ export type VueVersion = 2 | 3
 
 /** How generated code imports the components of a material (see the material builder). */
 export interface CodegenManifest {
-  exports: Record<string, { package: string; exportName: string }>
+  exports: Record<
+    string,
+    { package: string; exportName: string; subName?: string }
+  >
   styles: string[]
   dependencies: Record<string, string>
 }
