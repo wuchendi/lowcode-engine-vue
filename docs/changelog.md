@@ -26,3 +26,19 @@ esbuild's install script and the peer range in `pnpm-workspace.yaml`.
 
 `material.loadIncrementalAssets()` fails: the Vue simulator renderer has
 no `load`. Tracked as 20261114-0009-simulator-incremental-assets.
+
+## 2026-11-14 01:26 [progress]
+
+20261114-0009-simulator-incremental-assets (plan
+20261114-0118-simulator-incremental-assets): the Vue simulator implements
+`load` and `loadAsyncLibrary`, so `material.loadIncrementalAssets()` works;
+nodes read the renderer's component map at render time, so a node rendered
+before its component was available updates once the map changes. Verified by
+tests on both Vue versions and in the designer with a create-lowcode
+material.
+
+## 2026-11-14 01:26 [progress]
+
+Added 20261114-0117-dependency-security-alerts: Dependabot security updates
+fail (transitive dependencies pinned by parents; Vue 2 alerts have no patched
+release).

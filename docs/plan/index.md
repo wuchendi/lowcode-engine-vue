@@ -32,3 +32,4 @@ Each plan is a single line linking to its detail file. All detailed information 
 ## Plans
 
 - [x] [**20261114-0001-create-lowcode-scaffold Re-introduce the create-lowcode scaffold**](20261114-0001-create-lowcode-scaffold.md) `2026-11-14`
+- [x] [**20261114-0118-simulator-incremental-assets Support incremental assets in the simulator renderer**](20261114-0118-simulator-incremental-assets.md) `2026-11-14`

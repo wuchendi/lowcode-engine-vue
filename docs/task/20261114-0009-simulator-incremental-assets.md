@@ -1,8 +1,8 @@
 # 20261114-0009-simulator-incremental-assets Support incremental assets in the simulator renderer
 
-- **status**: pending
+- **status**: completed
 - **priority**: P2
-- **owner**: (unassigned)
+- **owner**: claude/session-gn15nk27
 - **createdAt**: 2026-11-14 00:09
 
 ## Description
@@ -28,3 +28,6 @@ Supporting incremental assets in the simulator renderer
 ## Notes
 
 Found while verifying 20261113-2358-create-lowcode-scaffold.
+Plan: 20261114-0118-simulator-incremental-assets
+
+- complete: Tests on both Vue versions and designer incremental-assets E2E passed.
