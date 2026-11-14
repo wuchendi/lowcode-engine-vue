@@ -10,6 +10,7 @@ import type {
   PluginProps,
 } from '@alilc/lowcode-types'
 import React, { Component } from 'react'
+import { rootMethods, rootState } from '../../utils'
 import './index.less'
 
 const HelpText = `你可以通过点击左侧区域绑定变量或处理函数，当然你也可以在上方输入复杂的表达式。
@@ -179,19 +180,10 @@ export default class VariableBindDialog extends Component<
    */
   getMethods(): VariableTreeNode[] {
     const schema = this.exportSchema()
-    const methodsMap = schema.componentsTree[0]?.methods
-    const methods: VariableTreeNode[] = []
-    for (const key in methodsMap) {
-      if (Object.prototype.hasOwnProperty.call(methodsMap, key) && key) {
-        // methods.push(`${key}()`);
-        methods.push({
-          label: `${key}`,
-          key,
-        })
-      }
-    }
-
-    return methods
+    return rootMethods(schema.componentsTree[0]).map((key) => ({
+      label: key,
+      key,
+    }))
   }
 
   /**
@@ -202,7 +194,7 @@ export default class VariableBindDialog extends Component<
   getVarableList(): VariableTreeNode[] {
     const schema = this.exportSchema()
 
-    const stateMap = schema.componentsTree[0]?.state
+    const stateMap = rootState(schema.componentsTree[0])
     const dataSourceMap: Record<string, unknown> = {}
 
     for (const key in stateMap) {
@@ -218,8 +210,9 @@ export default class VariableBindDialog extends Component<
           value = valueString
         }
 
-        // 属性为false 或者 为"" 也显示到dialog中
-        if (value || value === false || value === '') {
+        // Every variable is listed, also the ones without a literal value
+        // (e.g. computed refs returned by setup())
+        if (value !== undefined) {
           dataSourceMap[key] = value
         }
       }

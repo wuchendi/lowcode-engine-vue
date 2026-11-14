@@ -4,37 +4,41 @@
   "props": {},
   "docId": "doclupc274w",
   "fileName": "/",
-  "state": {
-    "text": "outer",
-    "isShowDialog": false,
-    "info": { "info": "", "user": { "username": "", "password": "" } }
+  "dataSource": {
+    "list": []
   },
-  "dataSource": { "list": [] },
   "css": "body {\n  font-size: 12px;\n}\n\n.button {\n  width: 100px;\n  color: #ff00ff\n}",
   "lifeCycles": {
-    "mounted": {
-      "type": "JSFunction",
-      "value": "function () {\n    console.log('did mount');\n  }"
+    "initModule": {
+      "type": "JSExpression",
+      "value": "(() => {const $id = \"node_dockcviv8fo1\"; return ($cached, $scope = window) => {\n  if ($id in $cached) return $cached[$id];\n  const exports = $cached[$id] = {};\n  const {defineComponent,onBeforeMount,onMounted,reactive,ref} = $scope[\"Vue\"];\n  exports.defineComponent = defineComponent;\n  exports.onBeforeMount = onBeforeMount;\n  exports.onMounted = onMounted;\n  exports.reactive = reactive;\n  exports.ref = ref;\n  return exports;\n}})()"
     },
-    "beforeMount": {
+    "setup": {
       "type": "JSFunction",
-      "value": "function () {\n    console.log('will unmount');\n  }"
+      "value": "function () {\n    const text = ref('outer');\n    const isShowDialog = ref(false);\n    const info = reactive({\n      info: '',\n      user: {\n        username: '',\n        password: '',\n      },\n    });\n\n    function testFunc() {\n      console.log('test func');\n    }\n\n    onBeforeMount(() => {\n      console.log('will mount');\n    });\n\n    onMounted(() => {\n      console.log('did mount');\n    });\n\n    return { text, isShowDialog, info, testFunc };\n  }"
     }
   },
-  "methods": {
-    "testFunc": {
-      "type": "JSFunction",
-      "value": "function () {\n      console.log('test func');\n    }"
-    }
-  },
-  "originCode": "class LowcodeComponent extends Component {\n  state = {\n    \"text\": \"outer\",\n    \"isShowDialog\": false,\n    \"info\": {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    }\n  }\n  componentDidMount() {\n    console.log('did mount');\n  }\n  componentWillUnmount() {\n    console.log('will unmount');\n  }\n  testFunc() {\n    console.log('test func');\n  }\n  onClick() {\n    this.setState({\n      isShowDialog: true\n    })\n  }\n  closeDialog() {\n    this.setState({\n      isShowDialog: false\n    })\n  }\n\n\tonClick_new(){\n    this.$message.success('hhhhhh')\n\t}\n\n\tonSubmit(ev){\n    ev.preventDefault();\n    this.dataSourceMap.submit.load()\n\t}\n}",
   "hidden": false,
   "title": "",
   "isLocked": false,
   "condition": true,
   "conditionGroup": "",
   "meta": {
-    "originCode": "import { defineComponent } from 'vue';\n\nexport default defineComponent({\n  data: () => ({\n    text: \"outer\",\n    isShowDialog: false,\n    info: {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    },\n  }),\n  methods: {\n    testFunc() {\n      console.log('test func');\n    },\n  },\n  mounted() {\n    console.log('did mount');\n  },\n  beforeMount() {\n    console.log('will unmount');\n  },\n})\n"
+    "originCode": "import { defineComponent, onBeforeMount, onMounted, reactive, ref } from 'vue';\n\nexport default defineComponent({\n  setup() {\n    const text = ref('outer');\n    const isShowDialog = ref(false);\n    const info = reactive({\n      info: '',\n      user: {\n        username: '',\n        password: '',\n      },\n    });\n\n    function testFunc() {\n      console.log('test func');\n    }\n\n    onBeforeMount(() => {\n      console.log('will mount');\n    });\n\n    onMounted(() => {\n      console.log('did mount');\n    });\n\n    return { text, isShowDialog, info, testFunc };\n  },\n});\n",
+    "setupBindings": {
+      "state": {
+        "text": "outer",
+        "isShowDialog": false,
+        "info": {
+          "info": "",
+          "user": {
+            "username": "",
+            "password": ""
+          }
+        }
+      },
+      "methods": ["testFunc"]
+    }
   },
   "children": [
     {
@@ -42,8 +46,14 @@
       "id": "node_ocluqshvky1",
       "props": {
         "items": [
-          { "primaryKey": "2438", "title": "标签项0" },
-          { "primaryKey": "8925", "title": "标签项1" }
+          {
+            "primaryKey": "2438",
+            "title": "标签项0"
+          },
+          {
+            "primaryKey": "8925",
+            "title": "标签项1"
+          }
         ],
         "color": "#ee0a24",
         "background": "#fff",
@@ -69,7 +79,10 @@
         {
           "componentName": "VanTab",
           "id": "node_ocluqshvky2",
-          "props": { "primaryKey": "2438", "title": "标签项0" },
+          "props": {
+            "primaryKey": "2438",
+            "title": "标签项0"
+          },
           "hidden": false,
           "title": "",
           "isLocked": false,
@@ -121,7 +134,10 @@
         {
           "componentName": "VanTab",
           "id": "node_ocluqshvky3",
-          "props": { "primaryKey": "8925", "title": "标签项1" },
+          "props": {
+            "primaryKey": "8925",
+            "title": "标签项1"
+          },
           "hidden": false,
           "title": "",
           "isLocked": false,

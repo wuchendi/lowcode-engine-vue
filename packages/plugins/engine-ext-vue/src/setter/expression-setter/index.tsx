@@ -5,6 +5,7 @@ import type { IPublicTypeJSExpression } from '@alilc/lowcode-types'
 import { isJSExpression } from '@alilc/lowcode-utils'
 import React, { PureComponent } from 'react'
 
+import { rootState } from '../../utils'
 import { generateI18n } from './locale/utils'
 import zhCN from './locale/zh-CN'
 
@@ -115,19 +116,19 @@ export default class ExpressionView extends PureComponent<
    */
   getDataSource(): string[] {
     const schema = project.exportSchema()
-    const stateMap = schema.componentsTree[0].state
+    const stateMap = rootState(schema.componentsTree[0])
     const dataSource: string[] = []
 
     const datasourceMap = schema.componentsTree[0]?.dataSource
     const list = datasourceMap?.list || []
 
     for (const key in stateMap) {
-      dataSource.push(`this.state.${key}`)
+      dataSource.push(`this.${key}`)
     }
 
     for (const item of list) {
       if (item && item.id) {
-        dataSource.push(`this.state.${item.id}`)
+        dataSource.push(`this.${item.id}`)
       }
     }
 

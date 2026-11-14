@@ -20,6 +20,106 @@ interface NormalStatement {
 
 type UsageStatement = ImportStatement | NormalStatement
 
+/** Bindings returned by `setup()`, as far as they can be read statically. */
+export interface SetupBindings {
+  /** Returned values, with their initial value when it is a literal. */
+  state: Record<string, unknown>
+  /** Returned functions. */
+  methods: string[]
+}
+
+const REF_FACTORIES = [
+  'ref',
+  'shallowRef',
+  'reactive',
+  'shallowReactive',
+  'readonly',
+]
+
+/** The value of a literal expression; `null` for anything else. */
+function staticValue(node: any): unknown {
+  if (!node) return null
+  switch (node.type) {
+    case 'Literal':
+      return node.regex ? null : node.value
+    case 'TemplateLiteral':
+      return node.expressions.length === 0 ? node.quasis[0].value.cooked : null
+    case 'UnaryExpression':
+      return (node.operator === '-' || node.operator === '+') &&
+        typeof node.argument.value === 'number'
+        ? Number(`${node.operator}${node.argument.value}`)
+        : null
+    case 'ArrayExpression':
+      return node.elements.map(staticValue)
+    case 'ObjectExpression': {
+      const result: Record<string, unknown> = {}
+      for (const prop of node.properties) {
+        if (prop.type === 'Property' && !prop.computed) {
+          result[getPropName(prop.key)] = staticValue(prop.value)
+        }
+      }
+      return result
+    }
+    default:
+      return null
+  }
+}
+
+function isFunctionNode(node: any) {
+  return (
+    node?.type === 'FunctionExpression' ||
+    node?.type === 'ArrowFunctionExpression' ||
+    node?.type === 'FunctionDeclaration'
+  )
+}
+
+/**
+ * Reads the bindings of a `setup()` whose body ends with `return { ... }`:
+ * functions are methods, other values are state (initial value when it is
+ * `ref(literal)` / `reactive({...})` or a literal).
+ */
+function readSetupBindings(setupNode: any): SetupBindings {
+  const bindings: SetupBindings = { state: {}, methods: [] }
+  const body = setupNode?.body
+  if (body?.type !== 'BlockStatement') return bindings
+  const returned = [...body.body]
+    .reverse()
+    .find((node: any) => node.type === 'ReturnStatement')
+  if (returned?.argument?.type !== 'ObjectExpression') return bindings
+
+  const declared = new Map<string, any>()
+  for (const node of body.body) {
+    if (node.type === 'FunctionDeclaration' && node.id) {
+      declared.set(node.id.name, node)
+    } else if (node.type === 'VariableDeclaration') {
+      for (const d of node.declarations) {
+        if (d.id.type === 'Identifier') declared.set(d.id.name, d.init)
+      }
+    }
+  }
+
+  for (const prop of returned.argument.properties) {
+    if (prop.type !== 'Property' || prop.computed) continue
+    const name = getPropName(prop.key)
+    const value =
+      prop.value.type === 'Identifier'
+        ? declared.get(prop.value.name)
+        : prop.value
+    if (isFunctionNode(value)) {
+      bindings.methods.push(name)
+    } else if (
+      value?.type === 'CallExpression' &&
+      value.callee.type === 'Identifier' &&
+      REF_FACTORIES.includes(value.callee.name)
+    ) {
+      bindings.state[name] = staticValue(value.arguments[0])
+    } else {
+      bindings.state[name] = staticValue(value)
+    }
+  }
+  return bindings
+}
+
 function createInitModuleCode(id: string, code: string) {
   return `(() => {const $id = ${JSON.stringify(
     id,
@@ -120,6 +220,7 @@ export function parseCode(
   const state = {}
   const methods = {}
   const lifeCycles = {}
+  let setupBindings: SetupBindings = { state: {}, methods: [] }
 
   const statements: UsageStatement[] = []
   const globalVars: Record<string, string> = {}
@@ -324,6 +425,7 @@ export function parseCode(
           ) {
             lifeCycles['initEmits'] = parseExpression(s, value)
           }
+          break
         }
         case 'methods': {
           if (value.type === 'ObjectExpression') {
@@ -376,6 +478,9 @@ export function parseCode(
           break
         }
         default: {
+          if (property.key.name === 'setup') {
+            setupBindings = readSetupBindings(value)
+          }
           if (value.type === 'FunctionExpression') {
             lifeCycles[getPropName(property.key)] = parseFunction(s, value)
           } else if (value.type === 'ArrowFunctionExpression') {
@@ -386,7 +491,7 @@ export function parseCode(
     }
   }
 
-  return { state, methods, lifeCycles }
+  return { state, methods, lifeCycles, setupBindings }
 }
 
 export function findOptionNode(program: any, optionName: string) {

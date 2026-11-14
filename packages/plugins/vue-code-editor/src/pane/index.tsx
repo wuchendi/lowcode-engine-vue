@@ -15,7 +15,7 @@ import { isObject, isString } from '../utils'
 import './index.less'
 import type { JsEditorInst } from '../components/JsEditor/JsEditor'
 import type { VueVersion } from '../components/JsEditor/types'
-import { defaultCode, defaultStateCode } from '../config'
+import { defaultCode, defaultSetupCode, defaultStateCode } from '../config'
 
 interface CodeEditorPaneProps {
   project: IPublicApiProject
@@ -159,6 +159,11 @@ export const CodeEditorPane = ({
     const originCode = schema.meta?.originCode
     if (isString(originCode)) {
       return originCode
+    }
+    // A page with Options API data keeps showing it; a new page starts with
+    // the Composition API
+    if (!schema.state && !schema.methods && !schema.lifeCycles) {
+      return defaultSetupCode
     }
     return defaultCode
       .replace(

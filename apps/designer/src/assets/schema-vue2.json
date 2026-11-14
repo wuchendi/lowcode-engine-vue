@@ -4,18 +4,6 @@
   "props": {},
   "docId": "doclibjmxow",
   "fileName": "/",
-  "state": {
-    "text": "outer",
-    "vLoading": true,
-    "isShowDialog": false,
-    "info": {
-      "text": "",
-      "user": {
-        "username": "",
-        "password": ""
-      }
-    }
-  },
   "dataSource": {
     "list": [
       {
@@ -35,29 +23,37 @@
   },
   "css": "body {\n  font-size: 12px;\n}\n\n.button {\n  width: 100px;\n  color: #ff00ff\n}",
   "lifeCycles": {
-    "mounted": {
-      "type": "JSFunction",
-      "value": "function () {\n    this.dataSourceMap.info.load()\n      .then(res => {\n        console.log(res);\n        this.info = res;\n      })\n      .catch((err) => {\n        console.log(err);\n      });\n    console.log('did mount');\n  }"
+    "initModule": {
+      "type": "JSExpression",
+      "value": "(() => {const $id = \"node_dockcviv8fo1\"; return ($cached, $scope = window) => {\n  if ($id in $cached) return $cached[$id];\n  const exports = $cached[$id] = {};\n  const {defineComponent,onBeforeMount,onMounted,ref} = $scope[\"Vue\"];\n  exports.defineComponent = defineComponent;\n  exports.onBeforeMount = onBeforeMount;\n  exports.onMounted = onMounted;\n  exports.ref = ref;\n  return exports;\n}})()"
     },
-    "beforeMount": {
+    "setup": {
       "type": "JSFunction",
-      "value": "function () {\n    console.log('will unmount');\n  }"
+      "value": "function () {\n    const text = ref('outer');\n    const vLoading = ref(true);\n    const isShowDialog = ref(false);\n    const info = ref({\n      text: '',\n      user: {\n        username: '',\n        password: '',\n      },\n    });\n\n    function testFunc() {\n      console.log('test func');\n    }\n\n    onBeforeMount(() => {\n      console.log('will mount');\n    });\n\n    // `this` is the runtime scope: data sources, utils, i18n\n    onMounted(() => {\n      this.dataSourceMap.info\n        .load()\n        .then((res) => {\n          console.log(res);\n          info.value = res;\n        })\n        .catch((err) => {\n          console.log(err);\n        });\n      console.log('did mount');\n    });\n\n    return { text, vLoading, isShowDialog, info, testFunc };\n  }"
     }
   },
-  "methods": {
-    "testFunc": {
-      "type": "JSFunction",
-      "value": "function () {\n      console.log('test func');\n    }"
-    }
-  },
-  "originCode": "class LowcodeComponent extends Component {\n  state = {\n    \"text\": \"outer\",\n    \"isShowDialog\": false,\n    \"info\": {\n      \"info\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    }\n  }\n  componentDidMount() {\n    console.log('did mount');\n  }\n  componentWillUnmount() {\n    console.log('will unmount');\n  }\n  testFunc() {\n    console.log('test func');\n  }\n  onClick() {\n    this.setState({\n      isShowDialog: true\n    })\n  }\n  closeDialog() {\n    this.setState({\n      isShowDialog: false\n    })\n  }\n}",
   "hidden": false,
   "title": "",
   "isLocked": false,
   "condition": true,
   "conditionGroup": "",
   "meta": {
-    "originCode": "import { defineComponent } from 'vue';\n\nexport default defineComponent({\n  data: () => ({\n    text: \"outer\",\n    vLoading: true,\n    isShowDialog: false,\n    info: {\n      \"text\": \"\",\n      \"user\": {\n        \"username\": \"\",\n        \"password\": \"\"\n      }\n    },\n  }),\n  methods: {\n    testFunc() {\n      console.log('test func');\n    },\n  },\n  mounted() {\n    this.dataSourceMap.info.load()\n      .then(res => {\n        console.log(res);\n        this.info = res;\n      })\n      .catch((err) => {\n        console.log(err);\n      });\n    console.log('did mount');\n  },\n  beforeMount() {\n    console.log('will unmount');\n  },\n})\n"
+    "originCode": "import { defineComponent, onBeforeMount, onMounted, ref } from 'vue';\n\nexport default defineComponent({\n  setup() {\n    const text = ref('outer');\n    const vLoading = ref(true);\n    const isShowDialog = ref(false);\n    const info = ref({\n      text: '',\n      user: {\n        username: '',\n        password: '',\n      },\n    });\n\n    function testFunc() {\n      console.log('test func');\n    }\n\n    onBeforeMount(() => {\n      console.log('will mount');\n    });\n\n    // `this` is the runtime scope: data sources, utils, i18n\n    onMounted(() => {\n      this.dataSourceMap.info\n        .load()\n        .then((res) => {\n          console.log(res);\n          info.value = res;\n        })\n        .catch((err) => {\n          console.log(err);\n        });\n      console.log('did mount');\n    });\n\n    return { text, vLoading, isShowDialog, info, testFunc };\n  },\n});\n",
+    "setupBindings": {
+      "state": {
+        "text": "outer",
+        "vLoading": true,
+        "isShowDialog": false,
+        "info": {
+          "text": "",
+          "user": {
+            "username": "",
+            "password": ""
+          }
+        }
+      },
+      "methods": ["testFunc"]
+    }
   },
   "children": [
     {

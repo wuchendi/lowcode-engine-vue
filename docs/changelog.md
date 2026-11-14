@@ -86,3 +86,13 @@ files are unchanged.
 20261114-0346-vue-version-switch: the designer top bar has a Vue 2.7 / Vue 3
 switch (segmented buttons next to the logo); it saves the current schema and
 reloads with the other `?vue=`.
+
+## 2026-11-14 04:13 [progress]
+
+20261114-0402-composition-api-source (plan 20261114-0403-composition-api-source):
+the source panel defaults to the Composition API: new pages start with
+`setup()`, the bindings it returns are recorded in `meta.setupBindings` and
+listed by the variable and event binding dialogs and the expression setter,
+event handlers created from the designer go into `setup()` and its returned
+object, and the sample schemas use `setup()`. Options API pages keep
+working. Fixed the `emits` fall-through into `methods` in the parser.

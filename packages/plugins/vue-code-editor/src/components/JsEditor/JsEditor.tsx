@@ -17,18 +17,15 @@ import React, {
 import '@alilc/lowcode-plugin-base-monaco-editor/lib/style'
 
 import type { IEditorInstance } from '@alilc/lowcode-plugin-base-monaco-editor/lib/helper'
-import { parse } from 'acorn'
-import MagicString from 'magic-string'
 import { generate } from 'short-uuid'
 import { isFunction } from '../../utils'
-import { findOptionNode, parseCode } from './parse'
+import type { FunctionEventParams } from './insert'
+import { insertFunction } from './insert'
+import { parseCode } from './parse'
 import type { VueVersion } from './types'
 import { loadVueTypes } from './types'
 
-export interface FunctionEventParams {
-  functionName: string
-  template?: string
-}
+export type { FunctionEventParams } from './insert'
 
 export interface JsEditorProps {
   jsCode?: string
@@ -81,7 +78,7 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
       } = rawSchema
       const transformed: IPublicTypeRootSchema = { ...rest }
       const libraryMap = getLibraryMap(props.material)
-      const { state, methods, lifeCycles } = parseCode(
+      const { state, methods, lifeCycles, setupBindings } = parseCode(
         transformed.id || (transformed.id = generate()),
         code,
         libraryMap,
@@ -92,8 +89,17 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
       if (Object.keys(lifeCycles).length > 0)
         transformed.lifeCycles = lifeCycles
 
-      ;(transformed.meta ?? (transformed.meta = {})).originCode = code
-
+      const meta = transformed.meta ?? (transformed.meta = {})
+      meta.originCode = code
+      // Bindings of setup(), for the designer's binding dialogs
+      if (
+        setupBindings.methods.length > 0 ||
+        Object.keys(setupBindings.state).length > 0
+      ) {
+        meta.setupBindings = setupBindings
+      } else {
+        meta.setupBindings = undefined
+      }
       return transformed
     },
     focusByFunctionName(name: string) {
@@ -103,7 +109,7 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
         model &&
         'findMatches' in model &&
         model.findMatches(
-          `^\\s*(?:async)?\\s*${name}\\s*\\([\\s\\S]*\\)[\\s\\S]*\\{`,
+          `^\\s*(?:async\\s+)?(?:function\\s+)?${name}\\s*\\([\\s\\S]*\\)[\\s\\S]*\\{`,
           false,
           true,
           false,
@@ -124,79 +130,9 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
       }
     },
     addFunction(params: FunctionEventParams) {
-      const { current: monaco } = monacoRef
-      const { current: editor } = editorRef
-      const { current: code } = codeRef
-
-      if (!monaco || !editor) return
-
-      const model = editor.getModel()
+      const model = editorRef.current?.getModel()
       if (!model) return
-
-      const ast = parse(code, {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      })
-      const methodNode = findOptionNode(ast, 'methods')
-      const s = new MagicString(code)
-      const indentStr = s.getIndentString()
-      const functionCode = params.template
-        ? params.template
-        : `${params.functionName}() {\n}`
-
-      const indent = (
-        code: string,
-        indentStart: boolean,
-        count = 1,
-      ): string => {
-        let s = new MagicString(code)
-        while (count--) {
-          s = s.indent(indentStr, { indentStart })
-        }
-        return s.toString()
-      }
-
-      if (methodNode) {
-        if (methodNode.type === 'ObjectExpression') {
-          const propertyLen = methodNode.properties.length
-          if (propertyLen > 0) {
-            const lastProperty = methodNode.properties[propertyLen - 1]
-            s.appendRight(
-              lastProperty.end,
-              `,\n${indent(functionCode, true, 2)}`,
-            )
-          } else {
-            const { start, end } = methodNode
-            const content = indent(`{\n${indent(functionCode, true)}\n}`, false)
-            s.overwrite(start, end, content.toString())
-          }
-        } else {
-          console.error(
-            '[vue-code-editor]: 组件 methdos 选项不是对象字面量，无法自动注册事件处理函数',
-          )
-        }
-      } else {
-        const rootNode = findOptionNode(ast, 'root')
-        if (rootNode) {
-          const propertyLen = rootNode.properties.length
-          if (propertyLen > 0) {
-            const lastProperty = rootNode.properties[propertyLen - 1]
-            const methodsCode = `\nmethods: {\n${indent(functionCode, true)}\n}`
-            s.appendRight(lastProperty.end, `,${indent(methodsCode, true)}`)
-          } else {
-            const { start, end } = rootNode
-            const methodsCode = `methods: {\n${indent(functionCode, true, 1)}\n}`
-            s.overwrite(start, end, `{\n${indent(methodsCode, true)}\n}`)
-          }
-        } else {
-          console.error(
-            '[vue-code-editor]: 组件 Options 未找到，无法自动注册事件处理函数',
-          )
-        }
-      }
-
-      model.setValue(s.toString())
-
+      model.setValue(insertFunction(codeRef.current, params))
       params.functionName && this.focusByFunctionName(params.functionName)
     },
   }))

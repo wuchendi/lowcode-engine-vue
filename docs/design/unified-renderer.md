@@ -136,7 +136,10 @@ directives and fragments) has its own suite in each distribution.
   runtime, simulator bundle, materials and initial schema.
 - Plugins are React components and independent of the Vue version. The Vue
   source panel takes `{ vue: 2 | 3 }` and loads the matching Vue and
-  vue-router declarations into its editor.
+  vue-router declarations into its editor. It defaults to the Composition
+  API: `setup()` runs as `lifeCycles.setup`, and its returned bindings are
+  recorded in `meta.setupBindings`, which the binding dialogs and the
+  expression setter of `engine-ext-vue` read next to `state` / `methods`.
 - `engine-ext-vue` is the engine's setter and binding-dialog bundle
   (`window.AliLowCodeEngineExt`), adapted to Vue component metas. It is an
   IIFE build that reads React, Fusion, moment, lodash and the engine from the

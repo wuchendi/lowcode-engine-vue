@@ -12,6 +12,7 @@ import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor'
 import type { PluginProps } from '@alilc/lowcode-types'
 import * as React from 'react'
 import { Component } from 'react'
+import { rootMethods } from '../../utils'
 import './index.less'
 
 const defaultParams = '{\n \t "testKey":123 \n}'
@@ -146,14 +147,9 @@ export default class EventBindDialog extends Component<PluginProps> {
 
         const schema = project.exportSchema()
 
-        const pageNode = schema.componentsTree[0]
-        if (pageNode.methods) {
-          this.eventList = []
-          for (const key in pageNode.methods) {
-            this.eventList.push({
-              name: key,
-            })
-          }
+        const methods = rootMethods(schema.componentsTree[0])
+        if (methods.length > 0) {
+          this.eventList = methods.map((name) => ({ name }))
         }
 
         this.openDialog(bindEventName, relatedEventName, isEdit)

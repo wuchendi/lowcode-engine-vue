@@ -40,6 +40,15 @@ const project = (version: 'vue2' | 'vue3') => ({
   },
 })
 
+/** Pure modules of the designer plugins. */
+const plugins = {
+  test: {
+    name: 'plugins',
+    environment: 'node',
+    include: ['packages/plugins/*/tests/**/*.test.ts'],
+  },
+}
+
 /** Node tooling: the material builder and the project scaffold. */
 const tools = {
   test: {
@@ -51,6 +60,6 @@ const tools = {
 
 export default defineConfig({
   test: {
-    projects: [project('vue2'), project('vue3'), tools],
+    projects: [project('vue2'), project('vue3'), plugins, tools],
   },
 })
