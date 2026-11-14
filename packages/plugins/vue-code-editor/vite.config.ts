@@ -8,6 +8,7 @@ import {
 } from 'unocss'
 import Unocss from 'unocss/vite'
 import { defineConfig } from 'vite'
+import { vue3Types } from './build/vue3-types'
 import { dependencies, peerDependencies } from './package.json' with {
   type: 'json',
 }
@@ -31,6 +32,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    vue3Types(),
     React({ jsxRuntime: 'classic' }),
     Unocss({
       presets: [presetUno(), presetAttributify()],

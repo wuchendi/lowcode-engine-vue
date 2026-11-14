@@ -1,4 +1,4 @@
 {
   "extends": "@cdlab996/lowcode-tsconfig/react.json",
-  "include": ["./src", "./tests", "./vite.config.ts"]
+  "include": ["./src", "./tests", "./vite.config.ts", "./build"]
 }
