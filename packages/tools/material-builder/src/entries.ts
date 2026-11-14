@@ -6,7 +6,8 @@ const slash = (path: string) => path.replace(/\\/g, '/')
 
 /**
  * Writes the meta entry: imports every `meta.*` / `*.meta.*` under `metaDir`
- * (a file may export one meta or an array of metas), fills in the npm info
+ * (a file may export one meta or an array of metas), fills in the npm info,
+ * resolves relative snippet screenshots against the URL of the meta script
  * and exports `components`.
  */
 export async function writeMetaEntry(
@@ -27,6 +28,8 @@ export async function writeMetaEntry(
 
 const npmInfo = ${JSON.stringify(npmInfo)}
 const components = []
+// Relative snippet screenshots (\`./screenshots/x.webp\`) are files next to meta.js
+const base = typeof document !== 'undefined' && document.currentScript && document.currentScript.src
 
 function pushComponentMeta(item) {
   if (!item.npm) {
@@ -40,6 +43,11 @@ function pushComponentMeta(item) {
     }
   }
   item.npm = { ...npmInfo, ...item.npm }
+  for (const snippet of item.snippets || []) {
+    if (base && typeof snippet.screenshot === 'string' && snippet.screenshot.startsWith('./')) {
+      snippet.screenshot = new URL(snippet.screenshot, base).href
+    }
+  }
   components.push(item)
 }
 

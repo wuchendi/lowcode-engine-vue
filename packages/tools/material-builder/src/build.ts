@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, relative, resolve } from 'node:path'
 import type { InlineConfig, Plugin, PluginOption, Rolldown } from 'vite'
 import { build, loadConfigFromFile, preview } from 'vite'
@@ -209,6 +209,7 @@ export async function buildMaterial(args: CommonArgs & { clean?: boolean }) {
   )
   if (args.clean) await rm(ctx.outDir, { recursive: true, force: true })
   await mkdir(ctx.outDir, { recursive: true })
+  await copyScreenshots(ctx)
 
   const metaLibrary = `${ctx.library}Meta`
   for (const minify of [false, true]) {
@@ -246,6 +247,14 @@ export async function buildMaterial(args: CommonArgs & { clean?: boolean }) {
   )
 }
 
+/** Copies the material's `screenshots/` (snippet images) into the output. */
+async function copyScreenshots(ctx: Context) {
+  const source = join(ctx.root, 'screenshots')
+  if (existsSync(source)) {
+    await cp(source, join(ctx.outDir, 'screenshots'), { recursive: true })
+  }
+}
+
 function waitForFirstBuild(watcher: Rolldown.RolldownWatcher) {
   return new Promise<void>((done, fail) => {
     watcher.on('event', (event) => {
@@ -275,6 +284,7 @@ export async function devMaterial(
     ),
   ])) as Rolldown.RolldownWatcher[]
   await Promise.all(watchers.map(waitForFirstBuild))
+  await copyScreenshots(ctx)
 
   await writeFile(
     join(ctx.outDir, 'assets.json'),

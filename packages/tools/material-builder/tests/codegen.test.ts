@@ -5,6 +5,38 @@ import { buildMaterial } from '../src/build'
 import { readCodegenManifest } from '../src/codegen'
 
 describe('readCodegenManifest', () => {
+  it('reads sub-components of imported library components', () => {
+    const manifest = readCodegenManifest(
+      `import { Select, Tabs as T } from 'ant-design-vue'
+import Local from './local'
+
+export const ASelectOption = Select.Option
+export const ATabPane = T.TabPane
+export const AMenuSub = Select.Option.Group
+export const ALocal = Local.Item
+`,
+      { dependencies: { 'ant-design-vue': '1.7.8' } },
+    )
+    expect(manifest.exports).toEqual({
+      ASelectOption: {
+        package: 'ant-design-vue',
+        exportName: 'Select',
+        subName: 'Option',
+      },
+      ATabPane: {
+        package: 'ant-design-vue',
+        exportName: 'Tabs',
+        subName: 'TabPane',
+      },
+      AMenuSub: {
+        package: 'ant-design-vue',
+        exportName: 'Select',
+        subName: 'Option.Group',
+      },
+    })
+    expect(manifest.dependencies).toEqual({ 'ant-design-vue': '1.7.8' })
+  })
+
   it('reads re-exported components, style imports and library versions', () => {
     const manifest = readCodegenManifest(
       `import 'vant/lib/index.css'

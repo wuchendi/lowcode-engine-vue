@@ -56,6 +56,11 @@ When the material entry re-exports components from packages
 of each component, the bare style imports of the entry and the versions of
 those packages.
 
+Snippet screenshots can ship with the material: files under `screenshots/`
+are copied into the output, and a snippet `screenshot` starting with `./`
+(`./screenshots/button.webp`) is resolved against the URL of `meta.js` when
+the meta script runs.
+
 `dev` watches the sources, writes `assets.json` with local URLs and serves the
 output directory with CORS enabled.
 

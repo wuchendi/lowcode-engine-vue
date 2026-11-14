@@ -3,7 +3,10 @@ import { parseAst } from 'vite'
 /** How generated code imports the components of a material. */
 export interface CodegenManifest {
   /** Component export of the material -> its source in a library. */
-  exports: Record<string, { package: string; exportName: string }>
+  exports: Record<
+    string,
+    { package: string; exportName: string; subName?: string }
+  >
   /** Style imports of the entry, e.g. `vant/lib/index.css`. */
   styles: string[]
   /** Versions of the libraries used by `exports` and `styles`. */
@@ -41,9 +44,23 @@ export function readCodegenManifest(
     dependencies: {},
   }
   const used = new Set<string>()
+  const name = (id: { type: string; name?: string; value?: unknown }) =>
+    id.type === 'Identifier' ? String(id.name) : String(id.value)
+  /** Local name -> named import of a library. */
+  const imported = new Map<string, { package: string; exportName: string }>()
   for (const node of parseAst(code, { lang: 'ts' }).body) {
     if (node.type === 'ImportDeclaration') {
       const source = String(node.source.value)
+      if (isBare(source)) {
+        for (const specifier of node.specifiers) {
+          if (specifier.type === 'ImportSpecifier') {
+            imported.set(specifier.local.name, {
+              package: source,
+              exportName: name(specifier.imported),
+            })
+          }
+        }
+      }
       if (
         node.specifiers.length === 0 &&
         isBare(source) &&
@@ -56,14 +73,33 @@ export function readCodegenManifest(
       const source = String(node.source.value)
       if (!isBare(source)) continue
       for (const specifier of node.specifiers) {
-        const name = (id: { type: string; name?: string; value?: unknown }) =>
-          id.type === 'Identifier' ? String(id.name) : String(id.value)
         manifest.exports[name(specifier.exported)] = {
           package: source,
           exportName: name(specifier.local),
         }
       }
       used.add(packageName(source))
+    } else if (
+      node.type === 'ExportNamedDeclaration' &&
+      node.declaration?.type === 'VariableDeclaration'
+    ) {
+      // `export const ASelectOption = Select.Option`
+      for (const declarator of node.declaration.declarations) {
+        const path: string[] = []
+        let init = declarator.init
+        while (init?.type === 'MemberExpression' && !init.computed) {
+          path.unshift(name(init.property))
+          init = init.object
+        }
+        const base = init?.type === 'Identifier' && imported.get(init.name)
+        if (!base || !path.length || declarator.id.type !== 'Identifier')
+          continue
+        manifest.exports[declarator.id.name] = {
+          ...base,
+          subName: path.join('.'),
+        }
+        used.add(packageName(base.package))
+      }
     }
   }
   const versions = { ...pkg.peerDependencies, ...pkg.dependencies }
