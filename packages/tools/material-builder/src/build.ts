@@ -4,6 +4,8 @@ import { dirname, join, relative, resolve } from 'node:path'
 import type { InlineConfig, Plugin, PluginOption, Rolldown } from 'vite'
 import { build, loadConfigFromFile, preview } from 'vite'
 import { createAssets } from './assets'
+import type { CodegenManifest } from './codegen'
+import { readCodegenManifest } from './codegen'
 import { writeMetaEntry } from './entries'
 import type {
   LowcodeAssetsConfig,
@@ -41,6 +43,7 @@ interface Context {
   npmInfo: LowcodeNpmInfo
   globals: Record<string, string>
   assetsConfig: LowcodeAssetsConfig
+  codegen?: CodegenManifest
 }
 
 async function flattenPlugins(plugins: PluginOption[] = []) {
@@ -80,6 +83,7 @@ async function createContext(
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'))
 
   const entry = resolve(root, options.entry ?? 'src/index.ts')
+  const manifest = readCodegenManifest(await readFile(entry, 'utf8'), pkg)
   return {
     root,
     mode: resolvedMode,
@@ -103,6 +107,7 @@ async function createContext(
       builtinAssets: {},
       ...options.assetsConfig,
     },
+    codegen: Object.keys(manifest.exports).length > 0 ? manifest : undefined,
   }
 }
 
@@ -232,6 +237,7 @@ export async function buildMaterial(args: CommonArgs & { clean?: boolean }) {
         metaFile: `meta${suffix}.js`,
         relativePath: relative(ctx.root, ctx.outDir),
         minify,
+        codegen: ctx.codegen,
       }),
     )
   }
@@ -282,6 +288,7 @@ export async function devMaterial(
       relativePath: '',
       localBaseUrl: `http://${host}:${port}`,
       minify: false,
+      codegen: ctx.codegen,
     }),
   )
 

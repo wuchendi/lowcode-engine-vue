@@ -50,6 +50,12 @@ lowcode-material dev [--host 127.0.0.1] [--port 9000] [--mode <mode>]
 A meta file may export one meta or an array of metas; metas without `npm` get
 `exportName` / `subName` from `componentName` (`Select.Option`).
 
+When the material entry re-exports components from packages
+(`export { Button as VanButton } from 'vant'`), the package entry of
+`assets.json` also gets a `codegen` manifest for code generation: the export
+of each component, the bare style imports of the entry and the versions of
+those packages.
+
 `dev` watches the sources, writes `assets.json` with local URLs and serves the
 output directory with CORS enabled.
 

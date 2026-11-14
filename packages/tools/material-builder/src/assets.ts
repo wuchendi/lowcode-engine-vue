@@ -1,4 +1,5 @@
 import { join } from 'node:path'
+import type { CodegenManifest } from './codegen'
 import type { LowcodeAssetsConfig, LowcodeNpmInfo } from './options'
 
 export interface AssetsInput {
@@ -14,6 +15,8 @@ export interface AssetsInput {
   /** Overrides `baseUrl`, used by the dev server. */
   localBaseUrl?: string
   minify: boolean
+  /** Code generation manifest of the package, when it re-exports components. */
+  codegen?: CodegenManifest
 }
 
 function joinUrl(base: string, ...paths: string[]): string {
@@ -61,6 +64,7 @@ export function createAssets(input: AssetsInput): string {
         version: npmInfo.version,
         library,
         urls: input.files.map(resolveUrl),
+        ...(input.codegen ? { codegen: input.codegen } : {}),
       },
     ],
     components: [
