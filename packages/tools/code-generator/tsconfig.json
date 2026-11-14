@@ -1,0 +1,4 @@
+{
+  "extends": "@cdlab996/lowcode-tsconfig/node.json",
+  "include": ["./src", "./tests", "./tsdown.config.ts"]
+}

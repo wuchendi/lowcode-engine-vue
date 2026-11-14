@@ -1,0 +1,49 @@
+{
+  "name": "@cdlab996/lowcode-code-generator",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Generate Vue 2.7 / Vue 3 projects from LowCode Engine schemas.",
+  "author": "wudi <wuchendi96@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/tools/code-generator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/tools/code-generator"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@alilc/lowcode-types": "catalog:shared",
+    "acorn": "^8.19.0",
+    "fflate": "^0.8.3",
+    "magic-string": "^1.4.5",
+    "prettier": "^3.10.1"
+  },
+  "devDependencies": {
+    "@cdlab996/lowcode-tsconfig": "workspace:*",
+    "@types/node": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "vue": "catalog:vue3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
