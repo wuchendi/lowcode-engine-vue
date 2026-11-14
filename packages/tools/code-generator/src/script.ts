@@ -1,3 +1,4 @@
+import { withGlobalDataHandler } from '@cdlab996/lowcode-vue-core/schema'
 import MagicString from 'magic-string'
 import type { ResolvedComponent } from './components'
 import type { AstNode } from './expression'
@@ -166,8 +167,9 @@ export function pageScript(input: ScriptInput): ScriptResult {
 
   // The global data handler applies to the items without their own
   const globalHandler = root.dataSource?.dataHandler
-  const dataSource = (root.dataSource?.list ?? []).map((item) =>
-    globalHandler ? { dataHandler: globalHandler, ...(item as object) } : item,
+  const dataSource = withGlobalDataHandler(
+    (root.dataSource?.list ?? []) as object[],
+    globalHandler,
   )
   for (const item of dataSource as {
     id?: string

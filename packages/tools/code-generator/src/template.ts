@@ -1,3 +1,11 @@
+import type { SchemaSlot } from '@cdlab996/lowcode-vue-core/schema'
+import {
+  eventNameOf,
+  isEventKey,
+  loopArgsOf,
+  modelOf,
+  splitNodeSchema,
+} from '@cdlab996/lowcode-vue-core/schema'
 import type { ComponentResolver, ResolvedComponent } from './components'
 import { templateExpression } from './expression'
 import { APP_DIRECTIVES } from './project'
@@ -6,7 +14,6 @@ import {
   isI18nData,
   isJSExpression,
   isJSFunction,
-  isJSSlot,
   isPlainObject,
   toCode,
 } from './value'
@@ -49,19 +56,13 @@ function escapeText(text: string) {
     .replace(/"/g, '&quot;')
 }
 
-const lowerFirst = (value: string) => value[0].toLowerCase() + value.slice(1)
-const camelize = (value: string) =>
-  value.replace(/-(\w)/g, (_, char: string) => char.toUpperCase())
-
-/** Node children: text, nodes and expressions (as the renderer reads them). */
-function isNodeData(value: unknown): boolean {
-  if (Array.isArray(value)) return value.every(isNodeData)
-  return (
-    typeof value === 'string' ||
-    isJSExpression(value) ||
-    (isPlainObject(value) && typeof value.componentName === 'string')
-  )
-}
+/**
+ * Whether child lines include text or an interpolation: whitespace next to
+ * text renders as a space, so such children are written on one line.
+ */
+const hasText = (lines: string[]) =>
+  lines.some((line) => !line.trim().startsWith('<'))
+const inline = (lines: string[]) => lines.map((line) => line.trim()).join('')
 
 export class TemplateBuilder {
   private readonly components = new Map<string, ResolvedComponent>()
@@ -106,26 +107,21 @@ export class TemplateBuilder {
     return resolved
   }
 
-  /** Attributes and slot templates of the props. */
-  private props(props: Record<string, unknown>, depth: number) {
+  /** Attributes and slot templates of a node (see `splitNodeSchema`). */
+  private props(node: NodeSchema, depth: number) {
+    const split = splitNodeSchema(node)
     const attrs: string[] = []
-    const slots: string[] = []
-    for (const [key, value] of Object.entries(props)) {
+    for (const [key, value] of Object.entries(split.props)) {
       if (key.startsWith('__')) continue
-      if (key === 'children' && (isNodeData(value) || isJSSlot(value))) continue
-      let name = key === 'className' ? 'class' : key
-      // A v-model of a literal value is a plain prop, as in the renderer
-      if (name.startsWith('v-model') && !isJSExpression(value)) {
-        const arg = name.match(/^v-model:([\w-]+)$/)?.[1]
-        name = arg
-          ? lowerFirst(camelize(arg))
-          : this.vue === 3
-            ? 'modelValue'
-            : 'value'
-      }
-      if (isJSSlot(value)) {
-        // A slot without content is not passed (the renderer skips it)
-        if (value.value) slots.push(this.slot(name, value, depth))
+      const model = modelOf(key)
+      // A v-model of a literal value is a plain prop
+      const name =
+        model && !isJSExpression(value)
+          ? (model.arg ?? (this.vue === 3 ? 'modelValue' : 'value'))
+          : key
+      if (model?.arg && name === key && this.vue === 2) {
+        // Vue 2 has no v-model arguments: `.sync` listens to update:<arg>
+        attrs.push(`:${model.arg}.sync="${escapeAttr(this.value(value))}"`)
       } else if (name.startsWith('v-')) {
         const directive = name.split(':')[0].split('.')[0]
         if (directive in APP_DIRECTIVES) {
@@ -136,22 +132,20 @@ export class TemplateBuilder {
           )
         }
         attrs.push(`${name}="${escapeAttr(this.value(value))}"`)
-      } else if (/^on[A-Z]/.test(name) && isJSFunction(value)) {
-        // onUpdateXxx / onUpdate:xxx listen to update:xxx
-        const update = name.match(/^onUpdate:?([\w-]+)$/)?.[1]
-        const event = update
-          ? `update:${lowerFirst(camelize(update))}`
-          : lowerFirst(name.slice(2))
-        attrs.push(`@${event}="${escapeAttr(this.handler(value.value))}"`)
-      } else if (typeof value === 'string' && name !== 'ref') {
+      } else if (isEventKey(name) && isJSFunction(value)) {
+        attrs.push(
+          `@${eventNameOf(name)}="${escapeAttr(this.handler(value.value))}"`,
+        )
+      } else if (typeof value === 'string') {
         attrs.push(`${name}="${escapeAttr(value)}"`)
-      } else if (name === 'ref' && typeof value === 'string') {
-        attrs.push(`ref="${escapeAttr(value)}"`)
       } else {
         attrs.push(`:${name}="${escapeAttr(this.value(value))}"`)
       }
     }
-    return { attrs, slots }
+    const slots = Object.entries(split.slots).map(([name, slot]) =>
+      this.slot(name, slot, depth),
+    )
+    return { attrs, slots, children: split.children }
   }
 
   private handler(code: string) {
@@ -163,18 +157,13 @@ export class TemplateBuilder {
       : method
   }
 
-  private slot(
-    name: string,
-    slot: { value?: unknown; params?: string[] },
-    depth: number,
-  ) {
+  private slot(name: string, slot: SchemaSlot, depth: number) {
     const pad = INDENT.repeat(depth)
     const scope = slot.params?.[0] ? `="${slot.params[0]}"` : ''
-    const slotName = name === 'children' ? 'default' : name
-    const children = this.children(slot.value, depth + 1)
+    const children = this.children(slot.children, depth + 1)
     return children.length
-      ? `${pad}<template #${slotName}${scope}>\n${children.join('\n')}\n${pad}</template>`
-      : `${pad}<template #${slotName}${scope} />`
+      ? `${pad}<template #${name}${scope}>\n${children.join('\n')}\n${pad}</template>`
+      : `${pad}<template #${name}${scope} />`
   }
 
   /** Lines of the children at `depth`. */
@@ -197,13 +186,8 @@ export class TemplateBuilder {
     const schema = node as unknown as NodeSchema
     if (schema.condition === false) return ''
 
-    const props = schema.props ?? {}
-    // A children prop overrides the node children, as in the renderer
-    const children = isNodeData(props.children)
-      ? props.children
-      : schema.children
     if (schema.componentName === 'Leaf')
-      return this.children(children, depth).join('\n')
+      return this.children(splitNodeSchema(schema).children, depth).join('\n')
 
     const { tag } = this.resolve(schema.componentName)
     const directives: string[] = []
@@ -212,7 +196,7 @@ export class TemplateBuilder {
     const hasLoop = schema.loop !== undefined && schema.loop !== null
     const condition = hasCondition ? this.value(schema.condition) : ''
     if (hasLoop) {
-      const [item = 'item', index = 'index'] = schema.loopArgs ?? []
+      const [item, index] = loopArgsOf(schema)
       directives.push(
         `v-for="(${item}, ${index}) in ${escapeAttr(this.value(schema.loop))}"`,
       )
@@ -223,18 +207,14 @@ export class TemplateBuilder {
 
     const innerDepth = hasLoop && hasCondition ? depth + 1 : depth
     const innerPad = INDENT.repeat(innerDepth)
-    const { attrs, slots } = this.props(props, innerDepth + 1)
+    const { attrs, slots, children } = this.props(schema, innerDepth + 1)
     const open = [tag, ...directives, ...attrs].join(' ')
     const body = [...this.children(children, innerDepth + 1), ...slots]
     let element: string
     if (body.length === 0) {
       element = `${innerPad}<${open} />`
-    } else if (
-      body.length === 1 &&
-      !body[0].includes('\n') &&
-      !body[0].trim().startsWith('<')
-    ) {
-      element = `${innerPad}<${open}>${body[0].trim()}</${tag}>`
+    } else if (hasText(body)) {
+      element = `${innerPad}<${open}>${inline(body)}</${tag}>`
     } else {
       element = `${innerPad}<${open}>\n${body.join('\n')}\n${innerPad}</${tag}>`
     }
@@ -252,15 +232,23 @@ export class TemplateBuilder {
       const className = ['lc-page', root.props?.className]
         .filter((c) => typeof c === 'string' && c)
         .join(' ')
-      body = children.length
-        ? `  <div class="${className}" style="height: 100%">\n${children.join('\n')}\n  </div>`
-        : `  <div class="${className}" style="height: 100%" />`
+      const open = `<div class="${className}" style="height: 100%">`
+      body = !children.length
+        ? `  <div class="${className}" style="height: 100%" />`
+        : hasText(children)
+          ? `  ${open}${inline(children)}</div>`
+          : `  ${open}\n${children.join('\n')}\n  </div>`
     } else if (this.vue === 2 || children.length !== 1) {
       // Vue 2 needs one root element
+      const top = this.children(root.children, 1)
       body =
         this.vue === 2
-          ? `  <div>\n${children.join('\n')}\n  </div>`
-          : this.children(root.children, 1).join('\n')
+          ? hasText(children)
+            ? `  <div>${inline(children)}</div>`
+            : `  <div>\n${children.join('\n')}\n  </div>`
+          : hasText(top)
+            ? `  ${inline(top)}`
+            : top.join('\n')
     } else {
       body = this.children(root.children, 1).join('\n')
     }

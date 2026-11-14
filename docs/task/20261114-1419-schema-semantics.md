@@ -1,6 +1,6 @@
 # 20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator
 
-- **status**: in_progress
+- **status**: completed
 - **priority**: P2
 - **owner**: claude/session-gn15nk27
 - **createdAt**: 2026-11-14 14:19
@@ -21,3 +21,5 @@ Shared schema semantics for the renderer and the code generator
 ## Notes
 
 From the repository audit of 2026-11-14 (commit d422dd4). Plan: 20261114-1419-schema-semantics
+
+- complete: conformance suite

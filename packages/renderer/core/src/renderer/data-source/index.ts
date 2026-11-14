@@ -4,6 +4,7 @@ import type {
 } from '@alilc/lowcode-types'
 import { computed, reactive, ref, shallowRef } from 'vue'
 import { isFunction, isPlainObject, parseSchema } from '../../shared'
+import { withGlobalDataHandler } from '../../shared/schema'
 import type { RuntimeScope } from '../scope'
 import type {
   RequestHandler,
@@ -151,8 +152,7 @@ export function createDataSourceManager(
   const dataSource: Record<string, ExecutionFunc> = {}
   const dataSourceMap: Record<string, DataSourceItem> = {}
 
-  list.forEach((next) => {
-    const config = { dataHandler, ...next }
+  withGlobalDataHandler(list, dataHandler).forEach((config) => {
     const dataSourceItem = createDataSourceItem(
       config,
       // The designer host passes null when no handler is registered
@@ -168,8 +168,8 @@ export function createDataSourceManager(
       return dataSourceItem.load(params, mergedOptions)
     }
 
-    dataSource[next.id] = func
-    dataSourceMap[next.id] = dataSourceItem
+    dataSource[config.id] = func
+    dataSourceMap[config.id] = dataSourceItem
   })
 
   /**

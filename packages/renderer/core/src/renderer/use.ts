@@ -18,23 +18,25 @@ import {
 } from '../context'
 import type { BlockScope, MaybeArray } from '../shared'
 import {
-  camelize,
   ensureArray,
-  isDOMText,
   isFunction,
   isJSExpression,
   isJSFunction,
   isJSSlot,
   isNil,
-  isNodeSchema,
   isObject,
   isString,
-  lowerFirst,
   parseExpression,
   parseSchema,
   parseSlotScope,
   toDisplayString,
 } from '../shared'
+import {
+  isEventKey,
+  isNodeData as isSchemaNodeData,
+  modelOf,
+  normalizeEventKey,
+} from '../shared/schema'
 import type { LeafProps, RendererProps } from './base'
 import type { LeafState } from './leaf'
 import { createLeafState, Leaf, useLeafStore } from './leaf'
@@ -54,14 +56,9 @@ export type PropSchemaMap = {
   [x: string]: unknown
 }
 
-export function isNodeData(
+export const isNodeData = isSchemaNodeData as (
   val: unknown,
-): val is IPublicTypeNodeData | IPublicTypeNodeData[] {
-  if (Array.isArray(val)) {
-    return val.every((item) => isNodeData(item))
-  }
-  return isDOMText(val) || isNodeSchema(val) || isJSExpression(val)
-}
+) => val is IPublicTypeNodeData | IPublicTypeNodeData[]
 
 const IS_LOCKED: InjectionKey<Ref<boolean>> = Symbol('IS_LOCKED')
 
@@ -329,15 +326,15 @@ export function useLeaf(props: LeafProps) {
     key: string,
     val: unknown,
   ) => {
+    const model = modelOf(key)
     if (key.startsWith('v-model')) {
       // 双向绑定逻辑
-      const matched = key.match(/v-model(?::(\w+))?$/)
-      if (!matched) return target
+      if (!model) return target
 
       let valueProp: string
       let eventProp: string
-      if (matched[1]) {
-        valueProp = lowerFirst(camelize(matched[1]))
+      if (model.arg) {
+        valueProp = model.arg
         eventProp = `onUpdate:${valueProp}`
       } else {
         const model = adapter.modelOf(props.comp)
@@ -357,14 +354,9 @@ export function useLeaf(props: LeafProps) {
             : updateEventFn
       }
       target[valueProp] = val
-    } else if (key.match(/^on[A-Z]/) && isJSFunction(val)) {
-      // 事件绑定逻辑
-
-      // normalize: onUpdateXxx => onUpdate:xxx
-      const matched = key.match(/onUpdate(?::?(\w+))$/)
-      if (matched) {
-        key = `onUpdate:${lowerFirst(camelize(matched[1]))}`
-      }
+    } else if (isEventKey(key) && isJSFunction(val)) {
+      // 事件绑定逻辑: onUpdateXxx => onUpdate:xxx
+      key = normalizeEventKey(key)
 
       // 若事件名称重复，则自动转化为数组
       target[key] = key in target ? ensureArray(target[key]).concat(val) : val

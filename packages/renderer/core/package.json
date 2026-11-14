@@ -8,6 +8,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./runtime": "./src/runtime.ts",
+    "./schema": "./src/shared/schema.ts",
     "./designer": "./src/shared/designer-environment.ts",
     "./simulator.css": "./src/simulator/simulator.css"
   },

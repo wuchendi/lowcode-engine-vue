@@ -308,3 +308,12 @@ children, `onUpdateXxx` handlers (`@update:xxx`), literal `v-model` values
 (plain props), slots without content (left out) and the global data source
 `dataHandler`. E2E: canvas selection, setter edit and undo; CI's
 `webServer` path and the antd1 docs scraper verified; upload-artifact v7.
+
+## 2026-11-14 18:40 [progress]
+
+20261114-1419-schema-semantics: the renderer and the code generator read
+node schemas through `@cdlab996/lowcode-vue-core/schema`; a conformance
+suite (both Vue versions) compares the rendered and the generated output
+and data sources. Fixed on the way: inline text children in generated
+templates, Vue 2 `v-model:arg` (`.sync`), default GET for renderer data
+sources, 204 / error bodies in the generated runtime.

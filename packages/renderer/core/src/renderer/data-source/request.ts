@@ -96,7 +96,7 @@ export class Response<T = unknown> {
 export async function request(options: RequestOptions): Promise<Response> {
   const {
     uri,
-    method,
+    method = 'GET',
     timeout,
     params = {},
     headers = {},

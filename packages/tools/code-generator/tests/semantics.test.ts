@@ -105,4 +105,20 @@ describe('schema semantics shared with the renderer', () => {
       'function (res) { return 1 }',
     ])
   })
+
+  it('keeps text children together (no whitespace between them)', async () => {
+    const code = await page({
+      children: [
+        {
+          componentName: 'div',
+          children: [
+            'Hello',
+            { type: 'JSExpression', value: 'this.name' },
+            { componentName: 'span', children: '!' },
+          ],
+        },
+      ],
+    })
+    expect(code).toContain('<div>Hello{{ name }}<span>!</span></div>')
+  })
 })

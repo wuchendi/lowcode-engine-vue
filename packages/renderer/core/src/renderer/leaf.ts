@@ -13,10 +13,11 @@ import type { ComponentInstance } from '../adapter'
 import { getAdapter } from '../adapter'
 import { useRendererContext } from '../context'
 import { ensureArray, isJSSlot, isNil } from '../shared'
+import { loopArgsOf, splitNodeSchema } from '../shared/schema'
 import { leafProps } from './base'
 import { useScopeVersion } from './root-scope'
 import type { PropSchemaMap, SlotSchemaMap } from './use'
-import { isNodeData, useLeaf } from './use'
+import { useLeaf } from './use'
 
 /**
  * Render state of a node: component props/slots plus the structural
@@ -33,43 +34,29 @@ export interface LeafState {
 }
 
 /**
- * Splits a node schema into component props and slots.
- *
- * - node children become the default slot
- * - JSSlot props become named slots
- * - a `children` prop overrides node children
- * - `className` becomes `class`
+ * Splits a node schema into component props and slots (`splitNodeSchema`,
+ * shared with the code generator). In design mode the named slots come
+ * from the designer's slot nodes.
  */
 function splitSchema(schema: IPublicTypeNodeSchema, node?: Node | null) {
-  const slots: SlotSchemaMap = {}
-  const props: PropSchemaMap = {}
-
-  slots.default = ensureArray(schema.children)
-
-  Object.entries(schema.props ?? {}).forEach(([key, val]) => {
-    if (isJSSlot(val)) {
-      const prop = node?.getProp(key)
-      if (prop && prop.slotNode) {
-        // design mode: export the slot schema from the prop
+  const split = splitNodeSchema(schema)
+  const slots: SlotSchemaMap = { default: split.children as never }
+  for (const [key, slot] of Object.entries(split.slots)) {
+    slots[key] = {
+      componentName: 'Slot',
+      params: slot.params,
+      children: slot.children,
+    } as never
+  }
+  if (node) {
+    for (const [key, value] of Object.entries(schema.props ?? {})) {
+      const prop = isJSSlot(value) ? node.getProp(key) : null
+      if (prop?.slotNode) {
         slots[key] = prop.slotNode.export(IPublicEnumTransformStage.Render)
-      } else if (val.value) {
-        // live mode: use the schema value, skip empty slots
-        slots[key] = {
-          componentName: 'Slot',
-          params: val.params,
-          children: val.value,
-        }
       }
-    } else if (key === 'className') {
-      props.class = val
-    } else if (key === 'children' && isNodeData(val)) {
-      slots.default = ensureArray(val)
-    } else {
-      props[key] = val
     }
-  })
-
-  return { props, slots }
+  }
+  return { props: split.props as PropSchemaMap, slots }
 }
 
 export function createLeafState(
@@ -77,14 +64,10 @@ export function createLeafState(
   node: Node | null,
   isDesignMode: boolean,
 ): LeafState {
-  const loopArgs: [string, string] = ['item', 'index']
-  schema.loopArgs?.forEach((v, i) => {
-    loopArgs[i] = v
-  })
   return {
     ...splitSchema(schema, node),
     loop: schema.loop,
-    loopArgs,
+    loopArgs: loopArgsOf(schema),
     condition: schema.condition ?? true,
     hidden: isDesignMode ? (schema.hidden ?? false) : false,
     locked: node?.isLocked ?? false,

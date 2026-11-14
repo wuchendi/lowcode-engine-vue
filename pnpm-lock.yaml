@@ -889,6 +889,9 @@ importers:
       '@cdlab996/lowcode-tsconfig':
         specifier: workspace:*
         version: link:../../tsconfig
+      '@cdlab996/lowcode-vue-core':
+        specifier: workspace:*
+        version: link:../../renderer/core
       '@types/node':
         specifier: catalog:dev
         version: 26.6.6

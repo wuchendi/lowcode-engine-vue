@@ -78,14 +78,19 @@ export async function request(options) {
   }
   try {
     const response = await fetch(url, init)
-    const data = await response[responseType]()
-    if (!response.ok) {
-      const error = new Error(response.statusText)
-      error.code = response.status
-      error.data = data
-      throw error
+    if (response.ok) {
+      // No content: no body to read
+      if (response.status === 204) return { code: 204, data: null }
+      return { code: response.status, data: await response[responseType]() }
     }
-    return { code: response.status, data }
+    const error = new Error(response.statusText)
+    error.code = response.status
+    try {
+      error.data = await response.json()
+    } catch {
+      error.data = undefined
+    }
+    throw error
   } finally {
     clearTimeout(timer)
   }

@@ -164,3 +164,16 @@ describe('request timeout cleanup (S-03c)', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 })
+
+describe('request method', () => {
+  it('defaults to GET with the params in the URL', async () => {
+    const fetch = mockFetch(
+      () => new globalThis.Response('{}', { status: 200 }),
+    )
+    await request(options({ method: undefined, params: { a: 1 } }))
+    const [url, init] = fetch.mock.calls[0]
+    expect(init?.method).toBe('GET')
+    expect(url).toBe('/api?a=1')
+    expect(init?.body).toBeUndefined()
+  })
+})

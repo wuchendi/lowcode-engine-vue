@@ -1,8 +1,8 @@
 # 20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator
 
-- **status**: draft
+- **status**: completed
 - **createdAt**: 2026-11-14 14:19
-- **approvedAt**: (none)
+- **approvedAt**: 2026-11-14
 - **relatedTask**: 20261114-1419-schema-semantics
 
 ## Context
@@ -89,3 +89,19 @@ script using it, dependency, conformance tests), vitest config.
 - 2026-11-14: the mismatches of the table (except the loop key) are fixed
   in the code generator directly (`tests/semantics.test.ts`); the shared
   module and the conformance suite remain.
+- Implemented: `@cdlab996/lowcode-vue-core/schema` (`splitNodeSchema`,
+  `isNodeData`, `normalizeEventKey` / `eventNameOf`, `modelOf`,
+  `loopArgsOf`, `withGlobalDataHandler`) used by the renderer (`leaf.ts`,
+  `use.ts`, data sources) and the code generator (bundled by tsdown, a dev
+  dependency). A `children` JSSlot prop is the default slot on both sides.
+- Conformance suite `packages/renderer/core/tests/conformance` (runs on Vue
+  2.7 and Vue 3): 12 node fixtures (HTML before and after clicks, method
+  calls) and the data sources (requests and loaded data, generated runtime
+  evaluated as written). It found and fixed:
+  - generated templates put text children on separate lines (rendered as
+    spaces);
+  - Vue 2 `v-model:arg` (now `:arg.sync`);
+  - the renderer's data sources without `method` sent GET requests with a
+    body (now GET by default);
+  - the generated runtime failed on 204 responses and on non-JSON error
+    bodies.

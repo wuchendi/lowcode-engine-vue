@@ -50,5 +50,5 @@ Each plan is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-1419-designer-self-host Designer without third-party CDN**](20261114-1419-designer-self-host.md) `2026-11-14`
 - [x] [**20261114-1419-designer-storage Designer storage interface and project export / import**](20261114-1419-designer-storage.md) `2026-11-14`
 - [x] [**20261114-1419-engine-ext-tests Tests for engine-ext-vue and no global switches**](20261114-1419-engine-ext-tests.md) `2026-11-14`
-- [ ] [**20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator**](20261114-1419-schema-semantics.md) `2026-11-14`
+- [x] [**20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator**](20261114-1419-schema-semantics.md) `2026-11-14`
 - [ ] [**20261114-1419-renderer-without-leaf Render nodes without the Leaf wrapper**](20261114-1419-renderer-without-leaf.md) `2026-11-14`
