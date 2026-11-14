@@ -131,6 +131,7 @@ dev:bare` (port 5577).
 | `pnpm lint`           | Biome lint and format check.                             |
 | `pnpm lint:type`      | Build, then type-check every package and the designer.   |
 | `pnpm test`           | Run the test suites on Vue 2.7 and on Vue 3.             |
+| `pnpm test:e2e`       | Playwright checks of the designer build (see Tests).     |
 | `pnpm format`         | Format with Biome.                                       |
 
 ## Tests
@@ -139,16 +140,45 @@ dev:bare` (port 5577).
 suites (`packages/renderer/core/tests`) with their own `vue`, `vue-router`
 and adapter; each also runs its adapter's suites.
 
+`e2e/` holds Playwright checks of the designer in both Vue versions: it
+loads and renders, the code editor type-checks against the Vue typings, the
+snippet of every material component renders, and the code generator
+produces a project. `pnpm test:e2e` serves the designer build
+(`pnpm build:designer`, then `pnpm -C apps/designer preview`), or runs
+against `DESIGNER_URL` when set. Install the browser once with
+`pnpm exec playwright install chromium`.
+
+## Material metas
+
+The metas of the six component-library materials are generated from the
+docs of the library versions they install (`scripts/materials`):
+
+```bash
+node scripts/materials/fetch-docs.cjs      # docs into .cache/material-docs (GITHUB_TOKEN optional)
+node scripts/materials/scrape-antd1.cjs    # ant-design-vue 1.x docs from its site (Playwright)
+node scripts/materials/parse.cjs           # API tables -> parsed.json
+node scripts/materials/generate.cjs vant4 --write   # element-ui, vant2, antd1, element-plus, vant4, antd4
+```
+
+`recipes.cjs` holds the hand-written snippets. `capture.cjs <2|3> <pc|mobile>
+<group,...>` takes the snippet screenshots from a running designer
+(`DESIGNER_URL`, default `http://localhost:5577`); `generate.cjs` links the
+existing ones.
+
 ## CI and release
 
 - `.github/workflows/ci.yml` runs lint, build + type-check, tests and the
-  designer build on Node 24 and 26 for every push to `main` and every pull
-  request.
+  designer build on Node 24 and 26, and the E2E checks, for every push to
+  `main` and every pull request.
 - `.github/workflows/release.yml` publishes one group per tag to npm through
   trusted publishing (OIDC). The tag is `<group>-v<version>` and releases
   `packages/<group>`: `renderer`, `plugins`, `materials` or `tools` (for
   example `renderer-v1.0.0`). Every package of the group must already carry
-  that version.
+  that version. A group depending on another one is released after it
+  (`scripts/check-release-deps.mjs`: the plugins need the code generator of
+  `tools` on npm).
+- `.github/dependabot.yml` keeps the major versions of Vue, vue-router and the
+  component libraries: the Vue 2 packages stay on the last Vue 2 releases.
 
 ## License
 

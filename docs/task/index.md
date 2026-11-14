@@ -49,3 +49,10 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0632-lowcode-components Low-code components**](20261114-0632-lowcode-components.md) `P2`
 - [x] [**20261114-0812-material-metas-docs Align the material metas with the component docs**](20261114-0812-material-metas-docs.md) `P1`
 - [x] [**20261114-1022-material-screenshots Component screenshots for the materials**](20261114-1022-material-screenshots.md) `P1`
+- [x] [**20261114-1419-audit-fixes Audit fixes: Leaf marker, Dependabot, release order, editor types, builds**](20261114-1419-audit-fixes.md) `P2`
+- [x] [**20261114-1419-repo-scripts-e2e Material scripts and E2E tests in the repository and CI**](20261114-1419-repo-scripts-e2e.md) `P2`
+- [x] [**20261114-1419-designer-self-host Designer without third-party CDN**](20261114-1419-designer-self-host.md) `P2`
+- [x] [**20261114-1419-designer-storage Designer storage interface and project export / import**](20261114-1419-designer-storage.md) `P3`
+- [x] [**20261114-1419-engine-ext-tests Tests for engine-ext-vue and no global switches**](20261114-1419-engine-ext-tests.md) `P3`
+- [-] [**20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator**](20261114-1419-schema-semantics.md) `P2`
+- [-] [**20261114-1419-renderer-without-leaf Render nodes without the Leaf wrapper**](20261114-1419-renderer-without-leaf.md) `P1`

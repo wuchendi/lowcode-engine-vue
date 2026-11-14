@@ -247,3 +247,64 @@ The designer development server served runtime files other than CSS as
 read or clone the vnodes of their children (Element UI Tabs, Ant Design Vue
 Tabs / Steps / Collapse) see the renderer's Leaf wrapper and render wrong in
 the canvas.
+
+## 2026-11-14 14:40 [progress]
+
+20261114-1419-audit-fixes: Leaf is recognised by the `__lowcodeLeaf` option
+in the Vue 2 parent mixin; Dependabot ignores per-target majors; releases
+check that dependencies on other groups are published; the editor reads the
+installed Vue 3 / vue-router 4 typings at build time and the designer
+self-hosts Monaco 0.52.2; material builds copy the `.min` files when the
+plain output is already minified.
+
+## 2026-11-14 14:40 [pitfall]
+
+The CDN Monaco 0.31 of `@alilc/lowcode-plugin-base-monaco-editor` bundles
+TypeScript 4.4, which cannot read Vue 3.5 typings. Monaco workers need an
+absolute `vs` path.
+
+## 2026-11-14 15:30 [progress]
+
+20261114-1419-repo-scripts-e2e: the material meta generator, docs fetcher
+and screenshot capture live in `scripts/materials`; Playwright E2E checks
+of the designer (`e2e/`, `pnpm test:e2e`) run in CI. Fixed the generator
+building Element Plus ElTable from the config-provider page.
+
+## 2026-11-14 15:30 [pitfall]
+
+Element Plus components are registered under their unprefixed names as weak
+entries; anything keyed by "main page of a component" must also look up
+the prefixed export.
+
+## 2026-11-14 16:20 [progress]
+
+20261114-1419-designer-self-host: the designer serves the engine, React,
+Fusion, its theme, lodash and moment from npm and keeps the alicdn fonts,
+images and icon scripts in `public/vendor` (URLs rewritten by file name).
+An E2E check fails on any third-party request.
+
+## 2026-11-14 16:20 [decision]
+
+Third-party asset URLs are localized by file name in the designer only
+(build transform and served runtime files); published packages keep their
+URLs.
+
+## 2026-11-14 16:50 [progress]
+
+20261114-1419-designer-storage: the designer saves through a
+`ProjectStorage` interface (localStorage implementation) and exports /
+imports the project as a versioned JSON file per Vue version.
+
+## 2026-11-14 17:10 [progress]
+
+20261114-1419-engine-ext-tests: engine-ext-vue has unit tests (utils,
+style utils) and jsdom tests (event binding dialog, basic setters); the
+`window.lowcodeSetterSwitch` global and the tip it showed are removed.
+
+## 2026-11-14 18:00 [progress]
+
+Code generator follows the renderer on: a `children` prop overriding node
+children, `onUpdateXxx` handlers (`@update:xxx`), literal `v-model` values
+(plain props), slots without content (left out) and the global data source
+`dataHandler`. E2E: canvas selection, setter edit and undo; CI's
+`webServer` path and the antd1 docs scraper verified; upload-artifact v7.
