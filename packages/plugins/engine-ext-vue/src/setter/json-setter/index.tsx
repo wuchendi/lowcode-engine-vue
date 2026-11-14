@@ -3,6 +3,7 @@ import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor'
 import { js_beautify } from 'js-beautify'
 import React, { PureComponent } from 'react'
 import CustomIcon from '../../components/custom-icon'
+import { intl as packageIntl } from '../../locale'
 import { intl } from './locale'
 
 const defaultEditorOption = {
@@ -92,6 +93,7 @@ export default class JsonSetter extends PureComponent<JsonSetterProps> {
       } catch (e) {
         Dialog.alert({
           title: intl('FailedToSaveData'),
+          locale: { ok: packageIntl('Ok') },
           content: e instanceof Error ? e.message : String(e),
         })
       }
@@ -126,6 +128,7 @@ export default class JsonSetter extends PureComponent<JsonSetterProps> {
             visible={isShowDialog}
             closeMode="close"
             title={intl('EditData')}
+            locale={{ ok: packageIntl('Ok'), cancel: packageIntl('Cancel') }}
             onCancel={this.closeDialog}
             onOk={this.onDialogOk}
             onClose={() => {

@@ -10,22 +10,9 @@ import type {
   PluginProps,
 } from '@alilc/lowcode-types'
 import React, { Component } from 'react'
+import { intl } from '../../locale'
 import { rootMethods, rootState } from '../../utils'
 import './index.less'
-
-const HelpText = `你可以通过点击左侧区域绑定变量或处理函数，当然你也可以在上方输入复杂的表达式。
-输入框内默认支持变量，写法和 JS 写法完全一致。<br>
-this: '容器上下文对象'<br>
-data: '容器的 data' (使用 this.xxx/ this.$data.xxx 访问数据)<br>
-props: '容器的 props' (使用 this.xxx/ this.$props.xxx 访问数据)<br>
-context: '容器的 context'<br>
-schema: '页面上下文对象'<br>
-component: '组件上下文对象'<br>
-constants: '应用常量对象'<br>
-utils: '应用工具对象'<br>
-dataSourceMap: '容器数据源Map'<br>
-field: '表单Field对象'
-`
 
 const defaultEditorProps = {
   width: '100%',
@@ -113,7 +100,8 @@ export default class VariableBindDialog extends Component<
     visiable: false,
     isOverFlowMaxSize: false,
     // stateVaroableList: [],
-    helpText: HelpText,
+    // Messages are ICU texts, without HTML
+    helpText: intl('VariableHelp').replace(/\n/g, '<br>'),
     // contextKeys: [],
     jsCode: '',
     searchValue: '',
@@ -311,15 +299,15 @@ export default class VariableBindDialog extends Component<
         this.setState({
           variableListMap: {
             stateVaroableList: {
-              name: 'State属性',
+              name: intl('StateProps'),
               childrens: stateVaroableList,
             },
             methods: {
-              name: '自定义处理函数',
+              name: intl('CustomMethods'),
               childrens: methods,
             },
             dataSource: {
-              name: '数据源',
+              name: intl('DataSources'),
               childrens: dataSource,
             },
             ...this.extraDataMap,
@@ -418,7 +406,7 @@ export default class VariableBindDialog extends Component<
         <div className="bottom-left-container">
           {jsCode && jsCode.length > 0 && (
             <Button type="normal" warning onClick={this.removeTheBinding}>
-              移除绑定
+              {intl('RemoveBinding')}
             </Button>
           )}
         </div>
@@ -429,11 +417,11 @@ export default class VariableBindDialog extends Component<
             onClick={this.onOk}
             disabled={this.isBtnDisable()}
           >
-            确定
+            {intl('Ok')}
           </Button>
           &nbsp;&nbsp;
           <Button type="normal" onClick={this.closeDialog}>
-            取消
+            {intl('Cancel')}
           </Button>
         </div>
       </div>
@@ -568,7 +556,7 @@ export default class VariableBindDialog extends Component<
   renderTitle = () => {
     return (
       <div className="variable-dialog-title">
-        <span>变量绑定</span>
+        <span>{intl('VariableBinding')}</span>
         <img
           style={{ width: '12px' }}
           src="https://img.alicdn.com/imgextra/i1/O1CN01NlC5mY1bTvrlW3blw_!!6000000003467-55-tps-200-200.svg"
@@ -582,7 +570,7 @@ export default class VariableBindDialog extends Component<
     const { isOverFlowMaxSize, maxTextSize } = this.state
     return isOverFlowMaxSize ? (
       <span className="error-message">
-        表达式文本不能超过{maxTextSize}个字符，请换成函数调用
+        {intl('ExpressionTooLong', { max: maxTextSize })}
       </span>
     ) : null
   }
@@ -623,7 +611,7 @@ export default class VariableBindDialog extends Component<
               onClick={() => this.minimizeClick(false)}
               className="vs-variable-minimize-title"
             >
-              变量绑定
+              {intl('VariableBinding')}
             </span>
             <img
               onClick={this.closeDialog}
@@ -647,7 +635,7 @@ export default class VariableBindDialog extends Component<
         >
           <div className="variable-dialog-body">
             <div className="dialog-left-container">
-              <div className="dialog-small-title">变量列表</div>
+              <div className="dialog-small-title">{intl('VariableList')}</div>
 
               <div className="vs-variable-selector-inner">
                 <ul className="vs-variable-selector-category vs-variable-selector-ul">
@@ -671,9 +659,9 @@ export default class VariableBindDialog extends Component<
                       innerAfter={
                         <Icon type="search" size="xs" style={{ margin: 4 }} />
                       }
-                      placeholder="搜索"
+                      placeholder={intl('Search')}
                       value={searchValue}
-                      aria-label="搜索"
+                      aria-label={intl('Search')}
                       style={{ width: '100%' }}
                       onChange={this.onVariableSearchChange}
                     />
@@ -703,7 +691,7 @@ export default class VariableBindDialog extends Component<
 
             <div className="dialog-right-container">
               <div className="dialog-small-title">
-                绑定 {this.renderErrorMessage()}
+                {intl('Bind')} {this.renderErrorMessage()}
               </div>
               <div
                 id="jsEditorDom"
@@ -727,7 +715,9 @@ export default class VariableBindDialog extends Component<
               </div>
 
               <div className="dialog-help-tip-input">
-                <p className="vs-variable-content-desc-title">用法</p>
+                <p className="vs-variable-content-desc-title">
+                  {intl('Usage')}
+                </p>
                 <p dangerouslySetInnerHTML={{ __html: helpText }} />
               </div>
             </div>

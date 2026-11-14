@@ -20,7 +20,11 @@ function addonCombine(metadata: IPublicTypeTransformedComponentMetadata) {
   const refItem: IPublicTypeFieldConfig = {
     title: {
       label: 'loading',
-      tip: '加载数据时显示动效(v-loading)',
+      tip: {
+        type: 'i18n',
+        'zh-CN': '加载数据时显示动效(v-loading)',
+        'en-US': 'Show a loading animation while loading data (v-loading)',
+      },
       icon: '',
     },
     name: 'v-loading',

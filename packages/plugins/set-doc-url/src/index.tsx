@@ -1,10 +1,15 @@
-import { material } from '@alilc/lowcode-engine'
+import { common, material } from '@alilc/lowcode-engine'
 import type {
   IPublicTypeFieldConfig,
   IPublicTypeTransformedComponentMetadata,
 } from '@alilc/lowcode-types'
 import React from 'react'
 import { name, version } from '../package.json'
+
+const { intl } = common.utils.createIntl({
+  'zh-CN': { Documentation: '使用文档' },
+  'en-US': { Documentation: 'Documentation' },
+})
 
 function addonCombine(metadata: IPublicTypeTransformedComponentMetadata) {
   const { componentName, configure = {} } = metadata
@@ -21,14 +26,13 @@ function addonCombine(metadata: IPublicTypeTransformedComponentMetadata) {
   let propsGroup: IPublicTypeFieldConfig | undefined
 
   const docItem: IPublicTypeFieldConfig = {
-    title: '文档',
+    title: { type: 'i18n', 'zh-CN': '文档', 'en-US': 'Docs' },
     name: 'docUrl',
     setter: () => {
       return (
         <div>
           <a href={docUrl} target="_blank" rel="noreferrer">
-            {' '}
-            使用文档{' '}
+            {intl('Documentation')}
           </a>
         </div>
       )

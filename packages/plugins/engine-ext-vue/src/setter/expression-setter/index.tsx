@@ -4,29 +4,26 @@ import { project } from '@alilc/lowcode-engine'
 import type { IPublicTypeJSExpression } from '@alilc/lowcode-types'
 import { isJSExpression } from '@alilc/lowcode-utils'
 import React, { PureComponent } from 'react'
-
+import type { MessageKey } from '../../locale'
+import { intl } from '../../locale'
 import { rootState } from '../../utils'
-import { generateI18n } from './locale/utils'
-import zhCN from './locale/zh-CN'
 
 import './index.less'
 
 const { Option, AutoComplete } = Select
 const { Tooltip } = Balloon
-const helpMap = {
-  this: '容器上下文对象',
-  state: '容器的state',
-  props: '容器的props',
-  context: '容器的context',
-  schema: '页面上下文对象',
-  component: '组件上下文对象',
-  constants: '应用常量对象',
-  utils: '应用工具对象',
-  dataSourceMap: '容器数据源Map',
-  field: '表单Field对象',
+const helpMap: Record<string, MessageKey> = {
+  this: 'HelpThis',
+  state: 'HelpState',
+  props: 'HelpProps',
+  context: 'HelpContext',
+  schema: 'HelpSchema',
+  component: 'HelpComponent',
+  constants: 'HelpConstants',
+  utils: 'HelpUtils',
+  dataSourceMap: 'HelpDataSourceMap',
+  field: 'HelpField',
 }
-
-type HelpKey = keyof typeof helpMap
 
 interface ExpressionSetterProps {
   value?: IPublicTypeJSExpression | string
@@ -34,8 +31,6 @@ interface ExpressionSetterProps {
   placeholder?: string
   /** Initial completion items. */
   dataSource?: string[]
-  locale?: string
-  messages?: Record<string, string>
 }
 
 interface ExpressionSetterState {
@@ -51,15 +46,11 @@ export default class ExpressionView extends PureComponent<
 
   static defaultProps = {
     dataSource: [],
-    locale: 'zh-CN',
-    messages: zhCN,
     placeholder: '',
     value: '',
   }
 
   expression = React.createRef<HTMLDivElement>()
-
-  i18n: ReturnType<typeof generateI18n>
 
   t: ReturnType<typeof setTimeout> | undefined
 
@@ -78,7 +69,6 @@ export default class ExpressionView extends PureComponent<
 
   constructor(props: ExpressionSetterProps) {
     super(props)
-    this.i18n = generateI18n(props.locale, props.messages)
     this.state = {
       value: ExpressionView.getInitValue(props.value),
       dataSource: props.dataSource || [],
@@ -159,8 +149,8 @@ export default class ExpressionView extends PureComponent<
     const { placeholder } = this.props
     const isValObject = value === '[object Object]'
     const title = isValObject
-      ? this.i18n('valueIllegal')
-      : value || placeholder || this.i18n('jsExpression')
+      ? intl('ExpressionValueIllegal')
+      : value || placeholder || intl('ExpressionJs')
     const cursorIndex = this.getInputCursorPosition()
     const childNode = cursorIndex ? (
       <div className="cursor-blink">
@@ -190,7 +180,7 @@ export default class ExpressionView extends PureComponent<
                   size="small"
                   style={{ width: '100%' }}
                   dataSource={dataSource}
-                  placeholder={placeholder || this.i18n('jsExpression')}
+                  placeholder={placeholder || intl('ExpressionJs')}
                   value={value}
                   disabled={isValObject}
                   innerBefore={
@@ -208,7 +198,7 @@ export default class ExpressionView extends PureComponent<
                       <Option key={key} value={key}>
                         <div className="code-input-value">{key}</div>
                         <div className="code-input-help">
-                          {helpMap[key as HelpKey]}
+                          {helpMap[key] && intl(helpMap[key])}
                         </div>
                       </Option>
                     )

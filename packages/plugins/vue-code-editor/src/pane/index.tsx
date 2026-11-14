@@ -220,6 +220,15 @@ export const CodeEditorPane = ({
     setSchema(newSchema)
   }, [])
 
+  // Show the code of the page being edited
+  useEffect(() => {
+    return project.onChangeDocument((doc) => {
+      const next = doc.exportSchema(IPublicEnumTransformStage.Render) ?? null
+      cssCode.current = next?.css ?? ''
+      setSchema(next)
+    })
+  }, [project])
+
   useEffect(() => {
     return event.on('common:codeEditor.addFunction', (data) => {
       setCurrentTab(TAB_KEY.JS)

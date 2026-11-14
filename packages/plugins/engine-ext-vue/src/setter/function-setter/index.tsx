@@ -8,6 +8,7 @@ import type {
 import { js_beautify } from 'js-beautify'
 import React, { PureComponent } from 'react'
 import './index.less'
+import { intl } from '../../locale'
 
 const SETTER_NAME = 'function-setter'
 
@@ -129,7 +130,7 @@ export default class FunctionSetter extends PureComponent<FunctionSetterProps> {
   renderButton = () => {
     return (
       <Button size="small" type="normal" onClick={() => this.bindFunction()}>
-        绑定函数
+        {intl('BindFunction')}
       </Button>
     )
   }
@@ -200,7 +201,7 @@ export default class FunctionSetter extends PureComponent<FunctionSetterProps> {
       <div>
         <Button size="small" type="primary" onClick={this.openDialog}>
           <Icon type="edit" />
-          编辑函数
+          {intl('EditFunction')}
         </Button>
       </div>
     )
@@ -245,7 +246,8 @@ export default class FunctionSetter extends PureComponent<FunctionSetterProps> {
           <Dialog
             visible={isShowDialog}
             closeMode="close"
-            title="函数编辑"
+            title={intl('FunctionDialogTitle')}
+            locale={{ ok: intl('Ok'), cancel: intl('Cancel') }}
             onCancel={this.closeDialog}
             onOk={this.onDialogOk}
             onClose={() => {

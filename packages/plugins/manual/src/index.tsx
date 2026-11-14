@@ -29,7 +29,7 @@ const PluginManual = (
         props: {
           align: 'bottom',
           icon: IconQuestion,
-          description: '如何使用',
+          description: { type: 'i18n', 'zh-CN': '如何使用', 'en-US': 'Help' },
           onClick() {
             window.open(href, target)?.focus()
           },

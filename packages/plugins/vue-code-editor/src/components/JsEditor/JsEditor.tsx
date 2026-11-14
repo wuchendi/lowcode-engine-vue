@@ -137,6 +137,11 @@ const JsEditor = forwardRef<JsEditorInst, JsEditorProps>((props, ref) => {
     },
   }))
 
+  // Another page opened: its code replaces the edited one
+  useEffect(() => {
+    codeRef.current = props.jsCode || ''
+  }, [props.jsCode])
+
   useEffect(() => {
     if (isFunction(ref)) {
       ref(instance)

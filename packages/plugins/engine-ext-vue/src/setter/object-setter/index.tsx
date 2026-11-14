@@ -14,6 +14,7 @@ import CustomIcon from '../../components/custom-icon'
 import type { PopupContextValue, PopupPipe } from '../../engine-cabin'
 import { designerCabin, editorCabin, skeletonCabin } from '../../engine-cabin'
 import './index.less'
+import { intl } from '../../locale'
 
 const { Title } = editorCabin
 const { isSettingField } = designerCabin
@@ -223,7 +224,7 @@ class RowSetter extends Component<RowSetterProps, RowSetterState> {
           <CustomIcon type="icon-ic_edit" />
         </Button>
         <div className="lc-setter-object-row-body">
-          {this.state.descriptor}：未配置快捷编辑项
+          {intl('ObjectNoQuickEdit', { descriptor: this.state.descriptor })}
         </div>
       </div>
     )

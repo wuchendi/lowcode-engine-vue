@@ -14,6 +14,7 @@ import * as React from 'react'
 import { Component } from 'react'
 import { rootMethods } from '../../utils'
 import './index.less'
+import { intl } from '../../locale'
 
 const defaultParams = '{\n \t "testKey":123 \n}'
 // 模板变量占位
@@ -288,7 +289,7 @@ export default class EventBindDialog extends Component<PluginProps> {
     const formatEventName = this.formatEventName(eventName)
 
     if (SystemEventNameMap[formatEventName]) {
-      Message.error('不可以绑定到系统内置函数,请修改函数名以后重新绑定')
+      Message.error(intl('BuiltinFunctionError'))
       return
     }
 
@@ -335,19 +336,22 @@ export default class EventBindDialog extends Component<PluginProps> {
     return (
       <Dialog
         visible={visiable}
-        title="事件绑定"
+        title={intl('EventBinding')}
+        locale={{ ok: intl('Ok'), cancel: intl('Cancel') }}
         onClose={this.closeDialog}
         onCancel={this.closeDialog}
         onOk={() => this.onOk()}
       >
         <div className="event-dialog-body">
           <div className="dialog-left-container">
-            <div className="dialog-small-title">事件选择</div>
+            <div className="dialog-small-title">{intl('EventSelect')}</div>
 
             <div className="dialog-left-context">
               <ul className="event-type-container">
-                <li className="select-item">内置函数</li>
-                <li className="select-item select-item-active">组件事件</li>
+                <li className="select-item">{intl('BuiltinFunctions')}</li>
+                <li className="select-item select-item-active">
+                  {intl('ComponentEventsTab')}
+                </li>
               </ul>
 
               <div className="event-select-container">
@@ -363,7 +367,7 @@ export default class EventBindDialog extends Component<PluginProps> {
                       }
                       onClick={() => this.onSelectItem('')}
                     >
-                      新建事件
+                      {intl('NewEvent')}
                     </li>
                     {this.eventList.map((item, index) => (
                       <li
@@ -386,10 +390,10 @@ export default class EventBindDialog extends Component<PluginProps> {
 
           <div className="dialog-right-container">
             <div className="dialog-small-title">
-              事件名称
+              {intl('EventName')}
               {(window as any).lowcodeSetterSwitch?.enablePropsEvents && (
                 <HelpTip iconStyle={{ marginLeft: 4 }}>
-                  如需绑定 props 属性，可通过 props.xxx 进行绑定
+                  {intl('EventNameTip')}
                 </HelpTip>
               )}
             </div>
@@ -402,18 +406,17 @@ export default class EventBindDialog extends Component<PluginProps> {
             </div>
 
             <div className="dialog-small-title">
-              扩展参数设置{' '}
+              {intl('ExtParams')}{' '}
               <HelpTip>
-                扩展参数做为单独的一个json格式入参追加在原有透传参数之后
-                如:onClick (event,extParams)
+                {intl('ExtParamsTip')} {intl('ExtParamsExample')}
               </HelpTip>
               <Switch
                 checked={useParams}
                 size="small"
                 style={{ marginLeft: '10px' }}
                 autoWidth
-                checkedChildren="启用"
-                unCheckedChildren="关闭"
+                checkedChildren={intl('Enable')}
+                unCheckedChildren={intl('Disable')}
                 onChange={this.onChange}
               />
             </div>

@@ -28,6 +28,7 @@ import VariableSetter from './setter/variable-setter'
 import { isPlainObject } from './utils'
 import './index.less'
 import packagesInfo from '../package.json'
+import { intl } from './locale'
 // suggest: 做成 StringSetter 的一个参数，
 // export const TextAreaSetter = {
 //   component: TextAreaSetter,
@@ -82,8 +83,8 @@ const DataExpressionSetter = {
     return isJSExpression(v)
   },
   valueType: ['JSExpression'],
-  defaultProps: { placeholder: '请输入表达式' },
-  title: '表达式输入',
+  defaultProps: { placeholder: intl('ExpressionPlaceholder') },
+  title: { type: 'i18n', 'zh-CN': '表达式输入', 'en-US': 'Expression' },
   recommend: true,
 }
 
@@ -94,13 +95,13 @@ const DataVariableSetter = {
     return isJSExpression(v)
   },
   valueType: ['JSExpression'],
-  title: '变量输入',
+  title: { type: 'i18n', 'zh-CN': '变量输入', 'en-US': 'Variable' },
   recommend: true,
 }
 
 const FunctionBindSetter = {
   component: FunctionSetter,
-  title: '函数绑定',
+  title: { type: 'i18n', 'zh-CN': '函数绑定', 'en-US': 'Function' },
   condition: (field: any) => {
     const v = field.getValue()
     return isJSFunction(v)

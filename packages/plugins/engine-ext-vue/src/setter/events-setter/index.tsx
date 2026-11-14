@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import nativeEvents from './native-events'
 
 import './index.less'
+import { intl } from '../../locale'
 
 const { Item, Group } = Menu
 const RadioGroup = Radio.Group
@@ -168,21 +169,21 @@ export default class EventsSetter extends Component<
       eventBtns = [
         {
           value: EVENT_CONTENTS.LIFE_CYCLE_EVENT,
-          label: '生命周期',
+          label: intl('LifeCycles'),
         },
       ]
     } else if (isCustom) {
       eventBtns = [
         {
           value: EVENT_CONTENTS.COMPONENT_EVENT,
-          label: '组件自带事件',
+          label: intl('ComponentEvents'),
         },
       ]
     } else {
       eventBtns = [
         {
           value: EVENT_CONTENTS.NATIVE_EVENT,
-          label: '原生事件',
+          label: intl('NativeEvents'),
         },
       ]
     }
@@ -270,11 +271,11 @@ export default class EventsSetter extends Component<
   renderEventInfoCell = (value, index, record) => {
     let eventTagText = ''
     if (record.type === EVENT_CONTENTS.NATIVE_EVENT) {
-      eventTagText = '原'
+      eventTagText = intl('TagNative')
     } else if (record.type === EVENT_CONTENTS.COMPONENT_EVENT) {
-      eventTagText = '组'
+      eventTagText = intl('TagComponent')
     } else if (record.type === EVENT_CONTENTS.LIFE_CYCLE_EVENT) {
-      eventTagText = '生'
+      eventTagText = intl('TagLifeCycle')
     }
     return (
       <div>
@@ -498,9 +499,9 @@ export default class EventsSetter extends Component<
       <div className="lc-block-setter event-body" onClick={this.closeEventMenu}>
         <div className="event-title">
           {eventBtns.length > 1 ? (
-            <span>点击选择事件类型</span>
+            <span>{intl('SelectEventType')}</span>
           ) : (
-            <span>点击绑定事件</span>
+            <span>{intl('BindEvent')}</span>
           )}
         </div>
 
@@ -552,10 +553,17 @@ export default class EventsSetter extends Component<
         )}
 
         <div className="event-table">
-          <Table dataSource={eventDataList} size="small">
-            <Table.Column title="已有事件" cell={this.renderEventInfoCell} />
+          <Table
+            emptyContent={intl('NoData')}
+            dataSource={eventDataList}
+            size="small"
+          >
             <Table.Column
-              title="操作"
+              title={intl('ExistingEvents')}
+              cell={this.renderEventInfoCell}
+            />
+            <Table.Column
+              title={intl('Actions')}
               cell={this.renderEventOperateCell}
               width={70}
             />

@@ -2,6 +2,7 @@ import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
 import React from 'react'
 import type { VueVersion } from './components/JsEditor/types'
 import icon from './icon'
+import { setupIntl } from './locale'
 import { CodeEditorPane } from './pane'
 import 'uno.css'
 import './style.css'
@@ -12,25 +13,27 @@ export interface VueCodeEditorOptions {
 }
 
 const plugin = (
-  { project, skeleton, event, material }: IPublicModelPluginContext,
+  ctx: IPublicModelPluginContext,
   options: VueCodeEditorOptions = {},
 ) => {
+  const { project, skeleton, event, material } = ctx
   return {
     // 插件对外暴露的数据和方法
     exports: () => ({}),
     // 插件的初始化函数，在引擎初始化之后会立刻调用
     async init() {
+      setupIntl(ctx)
       const schemaDock = skeleton.add({
         area: 'leftArea',
         name: 'codeEditor',
         type: 'PanelDock',
         props: {
           icon,
-          description: '源码面板',
+          description: { type: 'i18n', 'zh-CN': '源码面板', 'en-US': 'Source' },
         },
         panelProps: {
           width: '500px',
-          title: '源码面板',
+          title: { type: 'i18n', 'zh-CN': '源码面板', 'en-US': 'Source' },
         },
         content: (
           <CodeEditorPane

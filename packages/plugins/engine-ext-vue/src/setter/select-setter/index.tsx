@@ -1,6 +1,7 @@
 import { Select } from '@alifd/next'
 import type { DataSourceItem } from '@alifd/next/types/select'
 import React, { PureComponent } from 'react'
+import { intl } from '../../locale'
 
 interface SelectSetterProps {
   onChange: (value: DataSourceItem | DataSourceItem[]) => void
@@ -49,7 +50,7 @@ export default class SelectSetter extends PureComponent<
   SelectSetterState
 > {
   static defaultProps = {
-    placeholder: '请选择',
+    placeholder: intl('SelectPlaceholder'),
     options: [{ label: '-', value: '' }],
     defaultValue: null as any,
     onChange: () => undefined as any,

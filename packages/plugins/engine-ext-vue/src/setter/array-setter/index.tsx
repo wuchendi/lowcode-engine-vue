@@ -12,6 +12,7 @@ import type { PopupContextValue, PopupPipe } from '../../engine-cabin'
 import { editorCabin, skeletonCabin } from '../../engine-cabin'
 import Sortable from './sortable'
 import './style.less'
+import { intl } from '../../locale'
 
 const { Title } = editorCabin
 const { createSettingFieldView, PopupContext } = skeletonCabin
@@ -209,12 +210,10 @@ export class ListSetter extends Component<ArraySetterProps, ArraySetterState> {
       ) : (
         <div className="lc-setter-list-notice">
           {this.props.multiValue ? (
-            <Message type="warning">
-              当前选择了多个节点，且值不一致，修改会覆盖所有值
-            </Message>
+            <Message type="warning">{intl('ArrayMultiValue')}</Message>
           ) : (
             <Message type="notice" size="medium" shape="inline">
-              暂时还没有添加内容
+              {intl('ArrayEmpty')}
             </Message>
           )}
         </div>
@@ -235,7 +234,7 @@ export class ListSetter extends Component<ArraySetterProps, ArraySetterState> {
                 this.onAdd()
               }}
             >
-              <span>添加一项 +</span>
+              <span>{intl('ArrayAdd')}</span>
             </Button>
           ) : (
             renderFooter({ ...this.props, onAdd: this.onAdd.bind(this) })
@@ -342,7 +341,7 @@ export default class ArraySetter extends Component<
     if (mode === 'popup' || forceInline) {
       const title = (
         <Fragment>
-          编辑：
+          {intl('EditPrefix')}
           <Title title={field.title} />
         </Fragment>
       )
@@ -371,7 +370,7 @@ export default class ArraySetter extends Component<
           }}
         >
           <CustomIcon type="icon-bianji" size="small" />
-          {forceInline ? title : '编辑数组'}
+          {forceInline ? title : intl('EditArray')}
         </Button>
       )
     } else {

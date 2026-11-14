@@ -3,6 +3,7 @@ import { project } from '@alilc/lowcode-engine'
 import type { IPublicTypeI18nMap } from '@alilc/lowcode-types'
 import React, { Component } from 'react'
 import './index.less'
+import { intl, isEnglish } from '../../locale'
 import lang from './lang.json'
 
 /** Text of one language. */
@@ -43,7 +44,8 @@ interface I18nSetterState {
 }
 
 function langName(langKey: string) {
-  return lang[langKey as keyof typeof lang]?.i18nLangCN ?? langKey
+  const names = lang[langKey as keyof typeof lang]
+  return (isEnglish() ? names?.i18nLangEN : names?.i18nLangCN) ?? langKey
 }
 
 class I18nSetter extends Component<I18nSetterProps, I18nSetterState> {
@@ -288,7 +290,7 @@ class I18nSetter extends Component<I18nSetterProps, I18nSetterState> {
               type="normal"
               shape="simple"
               style={{ width: '195px' }}
-              placeholder="搜索已定义的文案"
+              placeholder={intl('SearchI18n')}
             />
             <Button
               type="primary"
@@ -296,14 +298,14 @@ class I18nSetter extends Component<I18nSetterProps, I18nSetterState> {
               onClick={this.createNewI18nItemData}
             >
               <Icon type="add" />
-              创建新的多语言文案
+              {intl('NewI18n')}
             </Button>
           </div>
         )}
         {isShowBindDataPopUp && (
           <div className="binddata-popup-container">
             <div className="clear-i18n" onClick={this.clearI18n}>
-              解除文案关联
+              {intl('UnbindI18n')}
             </div>
             {i18nValue.i18nDataList?.map((i18nItem) => {
               return (

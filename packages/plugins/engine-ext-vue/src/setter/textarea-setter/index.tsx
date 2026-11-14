@@ -1,6 +1,7 @@
 import { Input } from '@alifd/next'
 import React, { PureComponent } from 'react'
 import './index.less'
+import { intl } from '../../locale'
 
 interface TextAreaSetterProps {
   onChange: (value: string) => undefined
@@ -20,7 +21,7 @@ export default class TextAreaSetter extends PureComponent<
     onChange: () => undefined,
     value: undefined,
     defaultValue: null as any,
-    placeholder: '请输入',
+    placeholder: intl('InputPlaceholder'),
   }
   static displayName = 'TextAreaSetter'
 

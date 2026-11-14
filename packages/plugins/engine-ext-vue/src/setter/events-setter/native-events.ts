@@ -1,7 +1,8 @@
+import { intl } from '../../locale'
 export default [
   {
     category: 'commonlyEvent',
-    name: '常用事件',
+    name: intl('CommonEvents'),
     eventList: [
       { name: 'onClick' },
       { name: 'onChange' },
@@ -18,7 +19,7 @@ export default [
   },
   {
     category: 'keybordEvent',
-    name: '键盘事件',
+    name: intl('KeyboardEvents'),
     eventList: [
       { name: 'onKeyDown' },
       { name: 'onKeyPress' },
@@ -27,7 +28,7 @@ export default [
   },
   {
     category: 'mouseEvent',
-    name: '鼠标事件',
+    name: intl('MouseEvents'),
     eventList: [
       { name: 'onDoubleClick' },
       { name: 'onDrag' },
@@ -49,7 +50,7 @@ export default [
   },
   {
     category: 'animateEvent',
-    name: '动画事件',
+    name: intl('AnimationEvents'),
     eventList: [
       { name: 'onAnimationStart' },
       { name: 'onAnimationEnd' },

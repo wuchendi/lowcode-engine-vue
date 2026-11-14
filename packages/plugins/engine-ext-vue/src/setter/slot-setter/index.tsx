@@ -2,6 +2,7 @@ import { Button, Icon, Input, Select, Switch } from '@alifd/next'
 import type { IPublicTypeJSSlot } from '@alilc/lowcode-types'
 import React, { Component } from 'react'
 import './index.less'
+import { intl } from '../../locale'
 
 interface Template {
   // 模板标签
@@ -99,8 +100,8 @@ export default class SlotSetter extends Component<{
       onChange,
       supportParams,
       hideParams,
-      checkedText = '启用',
-      unCheckedText = '关闭',
+      checkedText = intl('Enable'),
+      unCheckedText = intl('Disable'),
       templates,
     } = this.props
 
@@ -140,8 +141,8 @@ export default class SlotSetter extends Component<{
         {!hideParams && value && params ? (
           <Input
             className="lc-slot-params"
-            addonTextBefore="入参"
-            placeholder="插槽入参，以逗号分隔"
+            addonTextBefore={intl('SlotParams')}
+            placeholder={intl('SlotParamsPlaceholder')}
             value={params.join(',')}
             onChange={(input) => {
               const val = String(input).trim()
@@ -180,7 +181,7 @@ export default class SlotSetter extends Component<{
                 })
             }}
           >
-            添加入参
+            {intl('AddSlotParams')}
           </Button>
         ) : null}
       </div>

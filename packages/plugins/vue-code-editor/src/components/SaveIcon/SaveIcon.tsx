@@ -1,6 +1,6 @@
 import { Button } from '@alifd/next'
 import React from 'react'
-import { WORDS } from '../../config'
+import { intl } from '../../locale'
 import './SaveIcon.less'
 
 export interface ErrorTipProps {
@@ -16,7 +16,7 @@ export const SaveIcon: React.FC<ErrorTipProps> = ({ isDisabled, onClick }) => {
       }`}
     >
       <Button onClick={onClick} size="small">
-        {WORDS.save}
+        {intl('Save')}
       </Button>
     </div>
   )
