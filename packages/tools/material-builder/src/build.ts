@@ -214,19 +214,39 @@ export async function buildMaterial(args: CommonArgs & { clean?: boolean }) {
   const metaLibrary = `${ctx.library}Meta`
   for (const minify of [false, true]) {
     const suffix = minify ? '.min' : ''
-    await build(
-      createConfig(
-        ctx,
-        ctx.entry,
-        `index${suffix}`,
-        ctx.library,
-        minify,
-        false,
-      ),
-    )
-    await build(
-      createConfig(ctx, metaEntry, `meta${suffix}`, metaLibrary, minify, false),
-    )
+    if (minify && !ctx.sourceMap) {
+      // The plain files are minified already: copy them
+      for (const file of [
+        ...libraryFiles(ctx, 'index'),
+        ...libraryFiles(ctx, 'meta'),
+      ]) {
+        await cp(
+          join(ctx.outDir, file),
+          join(ctx.outDir, file.replace(/(\.\w+)$/, '.min$1')),
+        )
+      }
+    } else {
+      await build(
+        createConfig(
+          ctx,
+          ctx.entry,
+          `index${suffix}`,
+          ctx.library,
+          minify,
+          false,
+        ),
+      )
+      await build(
+        createConfig(
+          ctx,
+          metaEntry,
+          `meta${suffix}`,
+          metaLibrary,
+          minify,
+          false,
+        ),
+      )
+    }
     await writeFile(
       join(ctx.outDir, `assets${suffix}.json`),
       createAssets({
