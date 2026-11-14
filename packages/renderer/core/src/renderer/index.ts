@@ -1,10 +1,9 @@
 export type {
-  LeafComponent,
   LeafProps,
   RendererComponent,
   RendererProps as ContainerRendererProps,
 } from './base'
-export { leafProps, rendererProps } from './base'
+export { rendererProps } from './base'
 export {
   accessLibrary,
   buildComponents,
@@ -21,7 +20,6 @@ export type {
   RequestHandler,
   RequestHandlersMap,
 } from './data-source'
-export { LEAF_MARKER, Leaf } from './leaf'
 export { lowCodeComponent } from './lowcode-component'
 export { Renderer, type RendererProps } from './renderer'
 export {

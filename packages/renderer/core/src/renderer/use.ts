@@ -1,4 +1,4 @@
-import type { Prop } from '@alilc/lowcode-designer'
+import type { Node, Prop } from '@alilc/lowcode-designer'
 import type {
   IPublicTypeNodeData,
   IPublicTypeNodeSchema,
@@ -6,16 +6,18 @@ import type {
   JSFunction,
 } from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
-import type { InjectionKey, Ref } from 'vue'
-import { computed, inject, provide, reactive, ref, toRaw } from 'vue'
-import type { Slot, Slots, VNode, VueComponent } from '../adapter'
-import { getAdapter } from '../adapter'
-import type { CurrentNode } from '../context'
-import {
-  getCurrentNodeKey,
-  getRendererContextKey,
-  useRendererContext,
-} from '../context'
+import type { Ref } from 'vue'
+import { computed, provide, reactive, toRaw } from 'vue'
+import type {
+  ComponentInstance,
+  Slot,
+  Slots,
+  VNode,
+  VueComponent,
+} from '../adapter'
+import { getAdapter, markScopedSlot } from '../adapter'
+import type { RendererContext } from '../context'
+import { getRendererContextKey, useRendererContext } from '../context'
 import type { BlockScope, MaybeArray } from '../shared'
 import {
   ensureArray,
@@ -39,14 +41,12 @@ import {
 } from '../shared/schema'
 import type { LeafProps, RendererProps } from './base'
 import type { LeafState } from './leaf'
-import { createLeafState, Leaf, useLeafStore } from './leaf'
-import { useRootScope } from './root-scope'
+import { createLeafState, useLeafStore } from './leaf'
+import { useRootScope, useScopeVersion } from './root-scope'
 import type { RuntimeScope } from './scope'
 import { mergeScope } from './scope'
 
 export type { Slot, Slots }
-
-const currentNodeKey = getCurrentNodeKey()
 
 export type SlotSchemaMap = {
   [x: string]: IPublicTypeSlotSchema | IPublicTypeNodeData[] | undefined
@@ -60,28 +60,28 @@ export const isNodeData = isSchemaNodeData as (
   val: unknown,
 ) => val is IPublicTypeNodeData | IPublicTypeNodeData[]
 
-const IS_LOCKED: InjectionKey<Ref<boolean>> = Symbol('IS_LOCKED')
-
-export function useLocked(selfLocked: Ref<boolean>) {
-  const parentLocked = inject(IS_LOCKED, null)
-
-  const locked = computed({
-    get: () => parentLocked?.value || selfLocked.value,
-    set: (val) => (selfLocked.value = val),
-  })
-
-  provide(IS_LOCKED, locked)
-
-  return locked
+/** What a node renders with: its scope, designer node and component. */
+interface NodeContext {
+  scope: RuntimeScope
+  node: Node | null
+  comp: VueComponent | null
 }
 
-export function useLeaf(props: LeafProps) {
+/**
+ * Renders schema nodes as their component vnodes (no wrapper component), so
+ * a component sees its children's vnodes and instances. A node's state is
+ * read where its vnode is created: in design mode a change re-renders the
+ * component rendering the node (its container).
+ */
+export function useLeaf(
+  props: LeafProps,
+  // The renderer passes what it provides: inject does not see it
+  context: RendererContext = useRendererContext(),
+  scopeVersion: Ref<number> = useScopeVersion(),
+) {
   const adapter = getAdapter()
-  const context = useRendererContext()
   const { getNode, designMode } = context
   const store = useLeafStore()
-
-  const node = props.schema.id ? getNode(props.schema.id) : null
 
   const isDesignMode = designMode === 'design'
 
@@ -99,34 +99,65 @@ export function useLeaf(props: LeafProps) {
   /** 当前节点的渲染状态，schema 被替换时重新推导 */
   const state = computed(() => resolveState(props.schema))
 
-  // 仅在设计模式下生效
-  const locked = node
-    ? useLocked(
-        computed({
-          get: () => state.value.locked,
-          set: (val) => (state.value.locked = val),
-        }),
-      )
-    : ref(false)
+  /** Whether a designer node or one of its ancestors is locked. */
+  const isLocked = (node: Node | null) => {
+    for (let cur: Node | null = node; cur; cur = cur.parent as Node | null) {
+      if (store.get(cur).locked) return true
+    }
+    return false
+  }
 
-  provide(currentNodeKey, {
-    mode: designMode,
-    node: node,
-    isDesignerEnv: isDesignMode,
-  } as CurrentNode)
+  /**
+   * Props reporting a node's instances to the simulator, one per vnode key:
+   * stable functions (a new one would count as a prop change and re-render
+   * the component). `ref` reports the instance, the unmounted hook its
+   * removal once it is gone.
+   */
+  const instanceProps = new Map<
+    string,
+    { schema: IPublicTypeNodeSchema; props: Record<string, unknown> }
+  >()
+  const instancePropsOf = (key: string, schema: IPublicTypeNodeSchema) => {
+    let entry = instanceProps.get(key)
+    if (!entry) {
+      const created = {
+        schema,
+        props: {
+          ref: (inst: unknown) => {
+            if (inst) {
+              context.triggerCompGetCtx(
+                created.schema,
+                inst as ComponentInstance,
+              )
+            }
+          },
+          ...adapter.unmountedHook(() => {
+            instanceProps.delete(key)
+            context.triggerCompGetCtx(created.schema, null)
+          }),
+        },
+      }
+      instanceProps.set(key, created)
+      entry = created
+    }
+    entry.schema = schema
+    return entry.props
+  }
 
   /**
    * 渲染节点 vnode，循环节点的每一项直接渲染为兄弟节点
    * @param schema - 节点 schema
    * @param blockScope - 节点块级作用域
    * @param comp - 节点渲染的组件，若不传入，则根据节点的 componentName 推断
+   * @param parentScope - 节点所在的作用域（默认为渲染器作用域）
    */
   const renderComp = (
     schema: IPublicTypeNodeData,
     blockScope?: MaybeArray<BlockScope | undefined | null>,
     comp?: VueComponent,
+    parentScope: RuntimeScope = props.scope,
   ): VNode | VNode[] | null => {
-    const mergedScope = mergeScope(props.scope, blockScope)
+    const mergedScope = mergeScope(parentScope, blockScope)
 
     // 若 schema 不为 IPublicTypeNodeSchema，则直接渲染
     if (isString(schema)) {
@@ -157,7 +188,8 @@ export function useLeaf(props: LeafProps) {
       target && nodeSchema.id
         ? store.keyOf(nodeSchema.id, target)
         : nodeSchema.id
-    const { hidden, condition, loop, loopArgs } = resolveState(nodeSchema)
+    const state = resolveState(nodeSchema)
+    const { hidden, condition, loop, loopArgs } = state
     if (hidden) return null
     if (
       typeof condition === 'boolean'
@@ -166,10 +198,25 @@ export function useLeaf(props: LeafProps) {
     )
       return null
 
-    const renderLeaf = (key: string | undefined, scope: RuntimeScope) =>
-      adapter.h(Leaf, { key, comp, scope, schema: nodeSchema })
+    const nodeComp = comp
+    const renderNode = (key: string | undefined, scope: RuntimeScope) => {
+      // A scope change (new bindings) renders the node again
+      void scopeVersion.value
+      const ctx: NodeContext = { scope, node: target, comp: nodeComp }
+      const extraProps =
+        isDesignMode && key !== undefined
+          ? instancePropsOf(key, nodeSchema)
+          : undefined
+      const slots = buildSlots(state.slots, ctx)
+      return adapter.h(
+        nodeComp,
+        { ...buildProps(state.props, ctx, extraProps), key },
+        // Passed slots make Vue update the component on every parent render
+        Object.keys(slots).length ? slots : undefined,
+      )
+    }
 
-    if (!loop) return renderLeaf(baseKey, mergedScope)
+    if (!loop) return renderNode(baseKey, mergedScope)
 
     const items = parseSchema(loop, mergedScope)
     if (!Array.isArray(items)) {
@@ -180,7 +227,7 @@ export function useLeaf(props: LeafProps) {
     const offset = mergedScope.__loopRefOffset ?? 0
     const [itemKey, indexKey] = loopArgs
     return items.map((item, index) =>
-      renderLeaf(
+      renderNode(
         `${baseKey}-${index}`,
         mergeScope(mergedScope, {
           [itemKey]: item,
@@ -198,13 +245,11 @@ export function useLeaf(props: LeafProps) {
    *
    * @param schema - 属性 schema
    * @param scope - 当前作用域
-   * @param blockScope - 当前块级作用域
    * @param prop - 属性对象，仅在 design 模式下有值
    */
   const buildProp = (
     schema: unknown,
     scope: RuntimeScope,
-    blockScope?: BlockScope | null,
     prop?: Prop | null,
   ): unknown => {
     if (isJSExpression(schema) || isJSFunction(schema)) {
@@ -231,14 +276,16 @@ export function useLeaf(props: LeafProps) {
         const slotScope = parseSlotScope(args, slotParams)
         const vnodes: VNode[] = []
         ensureArray(slotSchema).forEach((item) => {
-          vnodes.push(...ensureArray(renderComp(item, [blockScope, slotScope])))
+          vnodes.push(
+            ...ensureArray(renderComp(item, slotScope, undefined, scope)),
+          )
         })
         return vnodes
       }
     } else if (Array.isArray(schema)) {
       // 属性值为 array，递归处理属性的每一项
       return schema.map((item, idx) =>
-        buildProp(item, scope, blockScope, prop?.get(idx) as Prop | null),
+        buildProp(item, scope, prop?.get(idx) as Prop | null),
       )
     } else if (schema && isObject(schema)) {
       // 属性值为 object，递归处理属性的每一项
@@ -247,7 +294,7 @@ export function useLeaf(props: LeafProps) {
         if (key.startsWith('__')) return
         const val = schema[key]
         const childProp = prop?.get(key) as Prop | null
-        res[key] = buildProp(val, scope, blockScope, childProp)
+        res[key] = buildProp(val, scope, childProp)
       })
       return res
     }
@@ -260,13 +307,11 @@ export function useLeaf(props: LeafProps) {
    *
    * @param schema - prop schema
    * @param scope - 当前作用域
-   * @param blockScope - 当前块级作用域
    * @param prop - 属性对象，仅在 design 模式下有值
    */
   const buildRefProp = (
     schema: unknown,
     scope: RuntimeScope,
-    blockScope?: BlockScope | null,
     prop?: Prop | null,
   ): unknown => {
     if (isString(schema)) {
@@ -304,9 +349,9 @@ export function useLeaf(props: LeafProps) {
         lastInst = inst
       }
     } else {
-      const propValue = buildProp(schema, scope, blockScope, prop)
+      const propValue = buildProp(schema, scope, prop)
       return isString(propValue)
-        ? buildRefProp(propValue, scope, blockScope, prop)
+        ? buildRefProp(propValue, scope, prop)
         : propValue
     }
   }
@@ -316,15 +361,16 @@ export function useLeaf(props: LeafProps) {
    * - ref 逻辑 (合并 ref function)
    * - 事件绑定逻辑 (重复注册的事件转化为数组)
    * - 双向绑定逻辑 (v-model)
-   * - 指令绑定逻辑 TODO
    * @param target - 组件属性目标对象
    * @param key - 属性名
    * @param val - 属性值
+   * @param comp - 节点的组件（v-model 的默认 model）
    */
   const processProp = (
     target: Record<string, unknown>,
     key: string,
     val: unknown,
+    comp: VueComponent | null,
   ) => {
     const model = modelOf(key)
     if (key.startsWith('v-model')) {
@@ -337,9 +383,9 @@ export function useLeaf(props: LeafProps) {
         valueProp = model.arg
         eventProp = `onUpdate:${valueProp}`
       } else {
-        const model = adapter.modelOf(props.comp)
-        valueProp = model.prop
-        eventProp = `on${model.event[0].toUpperCase()}${model.event.slice(1)}`
+        const compModel = adapter.modelOf(comp)
+        valueProp = compModel.prop
+        eventProp = `on${compModel.event[0].toUpperCase()}${compModel.event.slice(1)}`
       }
 
       // 若值为表达式，则自定注册 onUpdate 事件，实现双向绑定
@@ -380,47 +426,35 @@ export function useLeaf(props: LeafProps) {
   /**
    * 构建属性，将整个属性 schema 转化为真实的属性值
    * @param propsSchema - 属性 schema
-   * @param blockScope - 当前块级作用域
+   * @param ctx - 节点的作用域、设计器节点和组件
    * @param extraProps - 运行时附加属性
    */
   const buildProps = (
     propsSchema: Record<string, unknown>,
-    blockScope?: BlockScope | null,
+    ctx: NodeContext,
     extraProps?: Record<string, unknown>,
   ): Record<string, unknown> => {
     // 属性预处理
     const processed: Record<string, unknown> = {}
     Object.keys(propsSchema).forEach((propKey) => {
-      processProp(processed, propKey, propsSchema[propKey])
+      processProp(processed, propKey, propsSchema[propKey], ctx.comp)
     })
 
     // 将属性 schema 转化成真实的属性值
     const parsedProps: Record<string, unknown> = {}
-    const mergedScope = blockScope
-      ? mergeScope(props.scope, blockScope)
-      : props.scope
     Object.keys(processed).forEach((propName) => {
       const schema = processed[propName]
+      const prop = ctx.node?.getProp(propName) as Prop | null
       parsedProps[propName] =
         propName === 'ref'
-          ? buildRefProp(
-              schema,
-              mergedScope,
-              blockScope,
-              node?.getProp(propName) as Prop | null,
-            )
-          : buildProp(
-              schema,
-              mergedScope,
-              blockScope,
-              node?.getProp(propName) as Prop | null,
-            )
+          ? buildRefProp(schema, ctx.scope, prop)
+          : buildProp(schema, ctx.scope, prop)
     })
 
     // 应用运行时附加的属性值
     if (extraProps) {
       Object.keys(extraProps).forEach((propKey) => {
-        processProp(parsedProps, propKey, extraProps[propKey])
+        processProp(parsedProps, propKey, extraProps[propKey], ctx.comp)
       })
     }
     return parsedProps
@@ -430,17 +464,18 @@ export function useLeaf(props: LeafProps) {
    * 装饰默认插槽，当插槽为空时，渲染插槽占位符，便于拖拽
    *
    * @param slot - 插槽渲染函数
+   * @param node - 设计器节点
    */
-  const decorateDefaultSlot = (slot: Slot): Slot => {
+  const decorateDefaultSlot = (slot: Slot, node: Node): Slot => {
     return (...args: unknown[]) => {
       const vnodes = slot(...args)
       if (!vnodes.length) {
-        const isLocked = locked.value
+        const locked = isLocked(node)
         const className = {
-          'lc-container-locked': isLocked,
+          'lc-container-locked': locked,
           'lc-container-placeholder': true,
         }
-        const placeholder = isLocked
+        const placeholder = locked
           ? '锁定元素及子元素无法编辑'
           : '拖拽组件或模板到这里'
         vnodes.push(
@@ -458,12 +493,10 @@ export function useLeaf(props: LeafProps) {
   /**
    * 构建所有插槽 schema，将 schema 构建成 slot 函数
    * @param slots - 插槽 schema
-   * @param blockScope - 插槽块级作用域
+   * @param ctx - 节点的作用域、设计器节点和组件
    */
-  const buildSlots = (
-    slots: SlotSchemaMap,
-    blockScope?: BlockScope | null,
-  ): Slots => {
+  const buildSlots = (slots: SlotSchemaMap, ctx: NodeContext): Slots => {
+    const { node, scope } = ctx
     return Object.keys(slots).reduce(
       (prev, next) => {
         const slotSchema = slots[next]
@@ -487,17 +520,19 @@ export function useLeaf(props: LeafProps) {
           // 插槽为数组，则当前插槽不可拖拽编辑，直接渲染插槽内容
           renderSlot = () => {
             return slotSchema.flatMap((item) =>
-              ensureArray(renderComp(item, blockScope)),
+              ensureArray(renderComp(item, null, undefined, scope)),
             )
           }
         } else if (slotSchema!.id) {
-          // 存在 slot id，则当前插槽可拖拽编辑，渲染 Hoc
+          // 存在 slot id，则当前插槽可拖拽编辑
           renderSlot = (...args: unknown[]) => {
             return ensureArray(
-              renderComp(slotSchema!, [
-                blockScope,
+              renderComp(
+                slotSchema!,
                 parseSlotScope(args, slotSchema!.params ?? []),
-              ]),
+                undefined,
+                scope,
+              ),
             )
           }
         } else {
@@ -505,14 +540,17 @@ export function useLeaf(props: LeafProps) {
           renderSlot = (...args: unknown[]) => {
             const slotScope = parseSlotScope(args, slotSchema!.params ?? [])
             return ensureArray(slotSchema!.children).flatMap((item) =>
-              ensureArray(renderComp(item, [blockScope, slotScope])),
+              ensureArray(renderComp(item, slotScope, undefined, scope)),
             )
           }
         }
 
+        const params = Array.isArray(slotSchema) ? [] : slotSchema!.params
+        if (params?.length) markScopedSlot(renderSlot)
+
         prev[next] =
           isDefaultSlot && isDesignMode && node?.isContainer()
-            ? decorateDefaultSlot(renderSlot) // 当节点为容器节点，且为设计模式下，则装饰默认插槽
+            ? decorateDefaultSlot(renderSlot, node) // 当节点为容器节点，且为设计模式下，则装饰默认插槽
             : renderSlot
 
         return prev
@@ -522,8 +560,6 @@ export function useLeaf(props: LeafProps) {
   }
 
   return {
-    node,
-    locked,
     state,
     renderComp,
     buildProps,
@@ -549,15 +585,13 @@ export function useRenderer(
   const designModeRef = computed(() => props.__designMode ?? 'live')
   const componentsRef = computed(() => props.__components)
 
-  provide(
-    contextKey,
-    reactive({
-      designMode: designModeRef,
-      components: componentsRef,
-      getNode: (id: string) => props.__getNode?.(id) ?? null,
-      triggerCompGetCtx: computed(() => props.__triggerCompGetCtx),
-    }),
-  )
+  const rendererContext = reactive({
+    designMode: designModeRef,
+    components: componentsRef,
+    getNode: (id: string) => props.__getNode?.(id) ?? null,
+    triggerCompGetCtx: computed(() => props.__triggerCompGetCtx),
+  }) as unknown as RendererContext
+  provide(contextKey, rendererContext)
 
   return {
     scope,
@@ -566,6 +600,6 @@ export function useRenderer(
     scopeVersion,
     designModeRef,
     componentsRef,
-    ...useLeaf(leafProps),
+    ...useLeaf(leafProps, rendererContext, scopeVersion),
   }
 }

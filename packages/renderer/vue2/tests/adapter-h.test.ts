@@ -1,3 +1,4 @@
+import { markScopedSlot } from '@cdlab996/lowcode-vue-core'
 import { describe, expect, it } from 'vitest'
 import type { CreateElement, VNode } from 'vue'
 import Vue from 'vue'
@@ -25,7 +26,7 @@ describe('vue2Adapter.h', () => {
     vm.$destroy()
   })
 
-  it('passes all slots of a component tag as scoped slots', () => {
+  it('passes the slots with slot props of a component tag as scoped slots', () => {
     const Comp = {
       render(this: Vue, createElement: CreateElement) {
         return createElement('div', [
@@ -40,8 +41,10 @@ describe('vue2Adapter.h', () => {
           Comp,
           {},
           {
-            default: (arg: any) => [createElement('span', arg.v)],
-            extra: (arg: any) => [createElement('b', arg.v)],
+            default: markScopedSlot((arg: any) => [
+              createElement('span', arg.v),
+            ]),
+            extra: markScopedSlot((arg: any) => [createElement('b', arg.v)]),
           },
         ),
     }).$mount()
@@ -49,6 +52,27 @@ describe('vue2Adapter.h', () => {
     const el = vm.$el as HTMLElement
     expect(el.querySelector('p span')?.textContent).toBe('d')
     expect(el.querySelector('i b')?.textContent).toBe('e')
+    vm.$destroy()
+  })
+
+  it('passes default content without slot props as children', () => {
+    let slotted: VNode[] | undefined
+    const Comp = {
+      render(this: Vue, createElement: CreateElement) {
+        slotted = this.$slots.default
+        return createElement('div', this.$slots.default)
+      },
+    }
+    const vm = new Vue({
+      render: (createElement: CreateElement) =>
+        h(Comp, {}, { default: () => [createElement('span', 'child')] }),
+    }).$mount()
+
+    expect((vm.$el as HTMLElement).querySelector('span')?.textContent).toBe(
+      'child',
+    )
+    // The rendered vnodes themselves (with their elements)
+    expect(slotted?.[0].elm).toBe((vm.$el as HTMLElement).firstChild)
     vm.$destroy()
   })
 })

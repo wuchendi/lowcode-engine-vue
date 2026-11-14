@@ -5,7 +5,7 @@ import type {
   VueAdapter,
   VueComponent,
 } from '@cdlab996/lowcode-vue-core'
-import { LEAF_MARKER } from '@cdlab996/lowcode-vue-core'
+import { isScopedSlot } from '@cdlab996/lowcode-vue-core'
 import Vue, {
   h as createElement,
   defineComponent,
@@ -44,6 +44,17 @@ function h(
   if (typeof type === 'string') {
     // Native elements have no slot outlets: every slot becomes children
     return createElement(type, toVNodeData(type, data), slotChildren(slots))
+  }
+  // Default content without slot props is passed as children, as Vue 2
+  // templates do: `$slots.default` then holds the rendered vnodes (Element
+  // UI's Tabs reads their instances)
+  const { default: defaultSlot, ...named } = slots ?? {}
+  if (defaultSlot && !isScopedSlot(defaultSlot)) {
+    return createElement(
+      type as Component,
+      toVNodeData(type, data, named as Record<string, never>),
+      defaultSlot() as never,
+    )
   }
   return createElement(
     type as Component,
@@ -88,33 +99,6 @@ function findPageRecord(matched: RouteRecord[], vm: Vue | null) {
   }
 }
 
-/**
- * Components rendered by a Leaf see their parent component, not the Leaf, in
- * `$parent` and `$children` (Element UI's Steps, Carousel and Tabs use them).
- * The provide chain is unchanged: `_provided` is inherited before
- * `beforeCreate`.
- */
-Vue.mixin({
-  beforeCreate(this: Vue) {
-    const isLeaf = (vm: Vue | null | undefined) =>
-      !!(vm?.$options as Record<string, unknown> | undefined)?.[LEAF_MARKER]
-    const leaf = this.$parent
-    if (!leaf || !isLeaf(leaf) || isLeaf(this)) return
-    let child: Vue = leaf
-    let parent: Vue | null = leaf.$parent
-    while (parent && isLeaf(parent)) {
-      child = parent
-      parent = parent.$parent
-    }
-    if (!parent) return
-    ;(this as { $parent: Vue }).$parent = parent
-    // the component takes the place of its Leaf among the parent's children
-    const index = parent.$children.indexOf(child)
-    if (index >= 0) parent.$children.splice(index, 1, this)
-    else parent.$children.push(this)
-  },
-})
-
 export const vue2Adapter: VueAdapter = {
   version: 2,
   h,
@@ -139,6 +123,8 @@ export const vue2Adapter: VueAdapter = {
       | undefined
     return { prop: model?.prop ?? 'value', event: model?.event ?? 'input' }
   },
+  // Components emit `hook:destroyed` (native tags are wrapped components)
+  unmountedHook: (callback) => ({ 'onHook:destroyed': callback }),
   refsOf: (instance) => instance.$refs,
   onCreated(callback) {
     // Setup bindings reach the instance only after setup returns; Vue 2 then

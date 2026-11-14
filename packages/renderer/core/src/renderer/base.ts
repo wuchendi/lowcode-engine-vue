@@ -87,32 +87,9 @@ export type RendererComponent = {
   }
 }
 
-export const leafProps = {
-  comp: {
-    // a component object, a Vue 2 constructor or Vue 3's Fragment symbol
-    type: null as unknown as PropType<VueComponent | null>,
-    default: undefined,
-  },
-  scope: {
-    type: Object as PropType<RuntimeScope>,
-    default: () => ({}),
-  },
-  schema: {
-    type: Object as PropType<IPublicTypeNodeSchema>,
-    default: () => ({}),
-  },
-} as const
-
+/** The root node a renderer renders and its scope. */
 export interface LeafProps {
   comp?: VueComponent | null
   scope: RuntimeScope
   schema: IPublicTypeNodeSchema
-}
-
-export type LeafComponent = {
-  new (
-    ...args: any[]
-  ): {
-    $props: LeafProps
-  }
 }

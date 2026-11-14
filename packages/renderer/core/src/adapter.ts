@@ -15,6 +15,18 @@ export type Slot = (...args: any[]) => VNode[]
 
 export type Slots = Record<string, Slot | undefined>
 
+const SCOPED = Symbol('scopedSlot')
+
+/** Marks a slot that takes slot props (declared params). */
+export function markScopedSlot<T extends Slot>(slot: T): T {
+  ;(slot as T & { [SCOPED]?: boolean })[SCOPED] = true
+  return slot
+}
+
+/** Whether a slot takes slot props (see `markScopedSlot`). */
+export const isScopedSlot = (slot: Slot) =>
+  !!(slot as Slot & { [SCOPED]?: boolean })[SCOPED]
+
 /** A component public instance (`this` inside a component). */
 export interface ComponentInstance {
   readonly $el: Node | null
@@ -85,6 +97,8 @@ export interface VueAdapter {
   /** `v-model` without argument: prop and event of the component. */
   modelOf(component: unknown): { prop: string; event: string }
 
+  /** Props of a component vnode calling `callback` once it is unmounted. */
+  unmountedHook(callback: () => void): Record<string, unknown>
   /** Writable `$refs` of an instance. */
   refsOf(instance: ComponentInstance): Record<string, unknown>
   /** Runs `callback` where Vue runs `created`: after setup, before mount. */

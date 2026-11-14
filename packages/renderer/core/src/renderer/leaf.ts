@@ -2,22 +2,11 @@ import type { Node, Prop } from '@alilc/lowcode-designer'
 import type { IPublicTypeNodeSchema } from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
 import type { InjectionKey } from 'vue'
-import {
-  defineComponent,
-  inject,
-  onUnmounted,
-  provide,
-  shallowReactive,
-} from 'vue'
-import type { ComponentInstance } from '../adapter'
+import { inject, onUnmounted, provide, shallowReactive } from 'vue'
 import { getAdapter } from '../adapter'
-import { useRendererContext } from '../context'
 import { ensureArray, isJSSlot, isNil } from '../shared'
 import { loopArgsOf, splitNodeSchema } from '../shared/schema'
-import { leafProps } from './base'
-import { useScopeVersion } from './root-scope'
 import type { PropSchemaMap, SlotSchemaMap } from './use'
-import { useLeaf } from './use'
 
 /**
  * Render state of a node: component props/slots plus the structural
@@ -250,49 +239,3 @@ export function useLeafStore(): LeafStore {
   onUnmounted(() => store.dispose())
   return store
 }
-
-/**
- * Leaf component shared by live and design mode. Renders one component
- * instance; loop and condition are resolved by the parent `renderComp`.
- */
-export const Leaf = defineComponent({
-  name: 'Leaf',
-  props: leafProps,
-  setup(props) {
-    const { triggerCompGetCtx, designMode } = useRendererContext()
-    const { state, buildProps, buildSlots } = useLeaf(props)
-
-    const adapter = getAdapter()
-    const scopeVersion = useScopeVersion()
-    const isDesignMode = designMode === 'design'
-    const extraProps = isDesignMode
-      ? {
-          ref: (inst: ComponentInstance | null) =>
-            inst && triggerCompGetCtx(props.schema, inst),
-        }
-      : undefined
-
-    // Lets the simulator drop the instances of this node once they are gone
-    if (isDesignMode) onUnmounted(() => triggerCompGetCtx(props.schema, null))
-
-    return () => {
-      void scopeVersion.value
-      const { comp } = props
-      if (!comp) {
-        return adapter.h('div', null, {
-          default: () => [adapter.text('component not found')],
-        })
-      }
-      const { props: compProps, slots } = state.value
-      return adapter.h(
-        comp,
-        buildProps(compProps, null, extraProps),
-        buildSlots(slots),
-      )
-    }
-  },
-})
-
-/** Option marking the Leaf component (Vue 2 reads it through `$options`). */
-export const LEAF_MARKER = '__lowcodeLeaf'
-;(Leaf as Record<string, unknown>)[LEAF_MARKER] = true

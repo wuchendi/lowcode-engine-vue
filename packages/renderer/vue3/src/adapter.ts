@@ -171,6 +171,7 @@ export const vue3Adapter: VueAdapter = {
   normalizeComponent: (component) => component,
   wrapTag,
   modelOf: () => ({ prop: 'modelValue', event: 'update:modelValue' }),
+  unmountedHook: (callback) => ({ onVnodeUnmounted: callback }),
   refsOf(instance) {
     // A fresh instance shares a frozen empty object; give it its own
     const inst = internal(instance) as { refs: Record<string, unknown> }
