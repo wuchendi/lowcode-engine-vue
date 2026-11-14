@@ -9,6 +9,7 @@ export {
   accessLibrary,
   buildComponents,
   type ComponentsMapItem,
+  componentSchemaOf,
   findComponent,
   getSubComponent,
   isComponentSchema,
@@ -21,6 +22,7 @@ export type {
   RequestHandlersMap,
 } from './data-source'
 export { Leaf } from './leaf'
+export { lowCodeComponent } from './lowcode-component'
 export { Renderer, type RendererProps } from './renderer'
 export {
   BlockRenderer,

@@ -17,6 +17,21 @@ export function isComponentSchema(
   return isObject(val) && val.componentName === 'Component'
 }
 
+/**
+ * The Component root of a component-map entry: the root itself, or the first
+ * root of a project schema (the `schema` of a `devMode: 'lowCode'` component
+ * in the engine assets).
+ */
+export function componentSchemaOf(
+  val: unknown,
+): IPublicTypeComponentSchema | undefined {
+  // `{ devMode: 'lowCode', componentName }` is a componentsMap entry, not a schema
+  if (isComponentSchema(val)) return 'devMode' in val ? undefined : val
+  const tree = isObject(val) ? val.componentsTree : undefined
+  const root = Array.isArray(tree) ? tree[0] : undefined
+  return isComponentSchema(root) ? root : undefined
+}
+
 /** A lower-case name without a library is a native tag. */
 const NATIVE_TAG = /^[a-z][a-z0-9-]*$/
 
@@ -88,9 +103,10 @@ export function buildComponents(
   const components: Record<string, VueComponent> = {}
   Object.keys(componentsMap).forEach((componentName) => {
     const component = componentsMap[componentName]
-    if (isComponentSchema(component)) {
+    const schema = componentSchemaOf(component)
+    if (schema) {
       if (createComponent) {
-        const created = createComponent(component)
+        const created = createComponent(schema)
         if (created) components[componentName] = created
       }
     } else if (adapter.isComponent(component)) {

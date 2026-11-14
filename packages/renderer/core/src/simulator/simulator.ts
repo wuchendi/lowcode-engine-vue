@@ -6,23 +6,15 @@ import type {
 import type { IPublicTypeComponentSchema } from '@alilc/lowcode-types'
 import { IPublicEnumTransformStage } from '@alilc/lowcode-types'
 import type { Ref } from 'vue'
-import {
-  computed,
-  defineComponent,
-  markRaw,
-  reactive,
-  ref,
-  shallowRef,
-} from 'vue'
+import { computed, markRaw, reactive, ref, shallowRef } from 'vue'
 import type { VueComponent } from '../adapter'
 import { getAdapter, getRouterAdapter } from '../adapter'
 import type { ComponentsMapItem } from '../renderer'
 import {
   buildComponents,
   buildUtils,
-  declaredOptions,
   getSubComponent,
-  Renderer,
+  lowCodeComponent,
   rendererConfig,
 } from '../renderer'
 import { AssetLoader } from '../shared'
@@ -339,30 +331,14 @@ export function createSimulatorRenderer(
    * forwards props, other attributes and listeners to the renderer, whose
    * schema component declares the props and emits.
    */
-  simulator.createComponent = (schema: IPublicTypeComponentSchema) => {
-    const { props: declared } = declaredOptions(schema)
-    return markRaw(
-      defineComponent({
-        name: schema.fileName || schema.componentName,
-        inheritAttrs: false,
-        props: Object.keys(declared),
-        setup(props, setupContext) {
-          return () =>
-            adapter.h(Renderer, {
-              ...setupContext.attrs,
-              ...listenersOf(setupContext),
-              schema,
-              components: components.value,
-              designMode: 'live',
-              device: device.value,
-              locale: locale.value,
-              messages: context.i18n,
-              props: { ...props },
-            })
-        },
-      }),
-    )
-  }
+  simulator.createComponent = (schema: IPublicTypeComponentSchema) =>
+    lowCodeComponent(schema, () => ({
+      components: components.value,
+      designMode: 'live',
+      device: device.value,
+      locale: locale.value,
+      messages: context.i18n,
+    }))
 
   // Incremental assets: the host loads a library, then refreshes the metas
   simulator.load = (asset) => loader.load(asset)
@@ -482,16 +458,4 @@ export function createSimulatorRenderer(
   })
 
   return simulator
-}
-
-/** Listeners of a setup context as `onXxx` props (Vue 2 keeps them apart). */
-function listenersOf(context: object): Record<string, unknown> {
-  const listeners = ((context as { listeners?: unknown }).listeners ??
-    {}) as Record<string, unknown>
-  return Object.fromEntries(
-    Object.entries(listeners).map(([name, handler]) => [
-      `on${name[0].toUpperCase()}${name.slice(1)}`,
-      handler,
-    ]),
-  )
 }
