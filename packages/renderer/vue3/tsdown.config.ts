@@ -58,7 +58,7 @@ export default defineConfig((options) =>
           copy: [
             {
               from: '../core/src/simulator/simulator.css',
-              to: 'dist/simulator.css',
+              to: 'dist',
             },
           ],
         },
