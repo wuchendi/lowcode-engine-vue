@@ -32,12 +32,12 @@ export function createStubHost(options: StubHostOptions = {}) {
   const autoruns: Array<() => void> = []
   const host = {
     autoRender: true,
-    libraryMap: {},
+    libraryMap: {} as Record<string, string>,
     locale: options.locale ?? 'zh-CN',
     device: 'default',
     designMode: 'design',
     requestHandlersMap: {},
-    designer: { componentsMap: {} },
+    designer: { componentsMap: {} as Record<string, object> },
     project: {
       documents: options.documents ?? [],
       currentDocument: options.currentDocument ?? null,

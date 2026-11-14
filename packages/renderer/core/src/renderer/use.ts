@@ -80,7 +80,8 @@ export function useLocked(selfLocked: Ref<boolean>) {
 
 export function useLeaf(props: LeafProps) {
   const adapter = getAdapter()
-  const { components, getNode, designMode } = useRendererContext()
+  const context = useRendererContext()
+  const { getNode, designMode } = context
   const store = useLeafStore()
 
   const node = props.schema.id ? getNode(props.schema.id) : null
@@ -142,7 +143,8 @@ export function useLeaf(props: LeafProps) {
 
     // 若不传入 comp，则根据节点的 componentName 推断
     if (!comp) {
-      comp = components[nodeSchema.componentName]
+      // read at render time: the component map may be replaced
+      comp = context.components[nodeSchema.componentName]
     }
 
     if (!comp) {

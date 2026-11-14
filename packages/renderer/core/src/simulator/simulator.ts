@@ -364,6 +364,13 @@ export function createSimulatorRenderer(
     )
   }
 
+  // Incremental assets: the host loads a library, then refreshes the metas
+  simulator.load = (asset) => loader.load(asset)
+  simulator.loadAsyncLibrary = async (asyncLibraryMap) => {
+    await loader.loadAsyncLibrary(asyncLibraryMap)
+    _buildComponents()
+  }
+
   simulator.rerender = () => {
     for (const doc of documentInstances.value) doc.rerender()
   }
