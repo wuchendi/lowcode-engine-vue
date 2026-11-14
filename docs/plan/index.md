@@ -38,3 +38,8 @@ Each plan is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0334-tsconfig-package Shared tsconfig package**](20261114-0334-tsconfig-package.md) `2026-11-14`
 - [x] [**20261114-0403-composition-api-source Composition API in the source panel**](20261114-0403-composition-api-source.md) `2026-11-14`
 - [x] [**20261114-0437-vue-code-generator Vue code generation (phases 1-3)**](20261114-0437-vue-code-generator.md) `2026-11-14`
+- [x] [**20261114-0548-page-management Multi-page management in the designer**](20261114-0548-page-management.md) `2026-11-14`
+- [x] [**20261114-0633-codegen-cli Code generation CLI**](20261114-0633-codegen-cli.md) `2026-11-14`
+- [x] [**20261114-0633-designer-locale Designer Chinese / English switch**](20261114-0633-designer-locale.md) `2026-11-14`
+- [x] [**20261114-0633-blocks Blocks (reusable snippets)**](20261114-0633-blocks.md) `2026-11-14`
+- [x] [**20261114-0633-lowcode-components Low-code components**](20261114-0633-lowcode-components.md) `2026-11-14`

@@ -134,3 +134,76 @@ dev).
 Generated projects are `"type": "module"`, so Vite follows Node's interop: a
 default import of a CommonJS module (`element-ui/lib/loading`) is its
 `module.exports`, with the ES exports on `.default`.
+
+## 2026-11-14 06:30 [progress]
+
+20261114-0547-page-management (plan 20261114-0548-page-management): the
+designer manages several pages. A 页面 panel adds (route path, validated),
+switches and deletes pages; every page is loaded and saved; the preview
+renders the current page (`?page=`) with links to the others; the source
+panel follows the current page. Verified by unit tests and an E2E on both Vue
+versions (add, edit, switch, save, reload, preview, code generation, delete).
+
+## 2026-11-14 06:30 [pitfall]
+
+The official data source pane and schema pane assume one page: they read
+`componentsTree[0]` and import the whole project, so with several pages they
+edit the first page and the schema pane deletes the others. The designer
+registers them with a project scoped to the current page. The source panel
+read the page once on mount and saved it into whatever page was current.
+
+## 2026-11-14 06:55 [progress]
+
+20261114-0632-codegen-cli (plan 20261114-0633-codegen-cli): `lowcode-codegen`
+in `@cdlab996/lowcode-code-generator` generates a project from a project or
+root schema file into a directory or a zip, resolving the material manifests
+from an assets JSON (`--base` for relative package URLs). `materialPackages`
+moved from the designer plugin into the generator; components missing from
+`componentsMap` are found by name in the manifests. Verified by unit tests
+and by running it on the designer assets (both versions) and building the
+output.
+
+## 2026-11-14 07:10 [progress]
+
+20261114-0632-designer-locale (plan 20261114-0633-designer-locale): the
+designer switches between Chinese and English (`@alilc/lowcode-plugin-zh-en`).
+The designer app, the code generator, vue-code-editor, set-doc-url,
+directive-loading, manual and engine-ext-vue (setters, variable and event
+binding dialogs) take their texts from the engine locale. Material titles are
+not translated. Verified by a locale-file test (same keys, English without
+Chinese, valid ICU) and an E2E in English on both Vue versions.
+
+## 2026-11-14 07:10 [pitfall]
+
+The engine's `createIntl` parses messages as ICU: an HTML tag in a message
+(`<br>`) throws `UNCLOSED_TAG` when the module loads, and the designer does
+not start. Fusion components keep their own Chinese defaults (dialog OK /
+Cancel, empty table) unless given texts.
+
+## 2026-11-14 07:25 [progress]
+
+20261114-0632-blocks (plan 20261114-0633-blocks): blocks in the designer. A
+node toolbar action saves the selected node tree as a named block (without
+node ids, in `localStorage` per Vue version); a 区块 panel inserts a copy by
+drag or click and deletes blocks. Verified by unit tests (store, id removal)
+and an E2E on both Vue versions (save, click and drag insertion on another
+page, reload, delete).
+
+## 2026-11-14 07:35 [progress]
+
+20261114-0632-lowcode-components (plan 20261114-0633-lowcode-components):
+low-code components. The pages panel creates `Component` documents; each is
+registered as a `devMode: 'lowCode'` component of the components pane and
+refreshed when edited, so pages drop and configure it like a material
+component. The renderer accepts engine-assets project schemas in the
+component map and exports a runtime `lowCodeComponent` (used by the
+simulator and the preview). Verified by renderer and designer unit tests and
+an E2E on both Vue versions (create, use with a prop, edit, reload, preview,
+code generation, build and run the generated project).
+
+## 2026-11-14 07:35 [pitfall]
+
+`project.exportSchema()` writes `{ devMode: 'lowCode', componentName }`
+entries into `componentsMap` for every component without a package,
+including `Component`, `Page` and native tags: a consumer must not take them
+for schemas or imports.

@@ -42,3 +42,8 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-0346-vue-version-switch Vue version switch in the designer top bar**](20261114-0346-vue-version-switch.md) `P2`
 - [x] [**20261114-0402-composition-api-source Composition API in the source panel**](20261114-0402-composition-api-source.md) `P1`
 - [x] [**20261114-0435-vue-code-generator Vue code generation (Vue 2.7 / Vue 3)**](20261114-0435-vue-code-generator.md) `P1`
+- [x] [**20261114-0547-page-management Multi-page management in the designer**](20261114-0547-page-management.md) `P1`
+- [x] [**20261114-0632-codegen-cli Code generation CLI**](20261114-0632-codegen-cli.md) `P2`
+- [x] [**20261114-0632-designer-locale Designer Chinese / English switch**](20261114-0632-designer-locale.md) `P2`
+- [x] [**20261114-0632-blocks Blocks (reusable snippets)**](20261114-0632-blocks.md) `P2`
+- [x] [**20261114-0632-lowcode-components Low-code components**](20261114-0632-lowcode-components.md) `P2`
