@@ -690,7 +690,11 @@ const meta = {
       loop: true,
       condition: true,
     },
-    component: {},
+    component: {
+      nestingRule: {
+        parentWhitelist: ['ElTable'],
+      },
+    },
   },
   snippets: [
     {

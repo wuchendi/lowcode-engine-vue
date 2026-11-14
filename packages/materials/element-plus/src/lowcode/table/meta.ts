@@ -1,99 +1,15 @@
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
-// Generated from the element-plus docs (config-provider); see https://element-plus.org/zh-CN/component/config-provider.html
+// Generated from the element-plus docs (table); see https://element-plus.org/zh-CN/component/table.html
 const meta = {
   componentName: 'ElTable',
-  title: '全局配置 Table',
+  title: '表格',
   group: 'Element 组件',
-  category: '配置组件',
-  docUrl: 'https://element-plus.org/zh-CN/component/config-provider.html',
+  category: '数据展示',
+  docUrl: 'https://element-plus.org/zh-CN/component/table.html',
   devMode: 'proCode',
   configure: {
     props: [
-      {
-        name: 'showOverflowTooltip',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': 'showOverflowTooltip',
-            'en-US': 'showOverflowTooltip',
-          },
-          tip: 'whether to hide extra content and show them in a tooltip when hovering on the cell.It will affect all the table columns, refer to table tooltip-options',
-        },
-        setter: [
-          {
-            componentName: 'BoolSetter',
-          },
-          {
-            componentName: 'JsonSetter',
-          },
-        ],
-        supportVariable: true,
-      },
-      {
-        name: 'tooltipEffect',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': 'tooltipEffect',
-            'en-US': 'tooltipEffect',
-          },
-          tip: 'the effect of the overflow tooltip',
-        },
-        setter: {
-          componentName: 'RadioGroupSetter',
-          props: {
-            options: [
-              {
-                title: 'dark',
-                value: 'dark',
-              },
-              {
-                title: 'light',
-                value: 'light',
-              },
-            ],
-          },
-        },
-        supportVariable: true,
-        defaultValue: 'dark',
-      },
-      {
-        name: 'tooltipOptions',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': 'tooltipOptions',
-            'en-US': 'tooltipOptions',
-          },
-          tip: 'the options for the overflow tooltip, see the following tooltip component',
-        },
-        setter: 'JsonSetter',
-        supportVariable: true,
-      },
-      {
-        name: 'tooltipFormatter',
-        title: {
-          label: {
-            type: 'i18n',
-            'zh-CN': 'tooltipFormatter',
-            'en-US': 'tooltipFormatter',
-          },
-          tip: 'customize tooltip content when using show-overflow-tooltip',
-        },
-        setter: [
-          {
-            componentName: 'StringSetter',
-          },
-          {
-            componentName: 'JsonSetter',
-          },
-          {
-            componentName: 'FunctionSetter',
-          },
-        ],
-        supportVariable: true,
-      },
       {
         name: 'data',
         title: {
@@ -551,6 +467,47 @@ const meta = {
         supportVariable: true,
       },
       {
+        name: 'tooltipEffect',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tooltipEffect',
+            'en-US': 'tooltipEffect',
+          },
+          tip: 'the effect of the overflow tooltip',
+        },
+        setter: {
+          componentName: 'RadioGroupSetter',
+          props: {
+            options: [
+              {
+                title: 'dark',
+                value: 'dark',
+              },
+              {
+                title: 'light',
+                value: 'light',
+              },
+            ],
+          },
+        },
+        supportVariable: true,
+        defaultValue: 'dark',
+      },
+      {
+        name: 'tooltipOptions',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tooltipOptions',
+            'en-US': 'tooltipOptions',
+          },
+          tip: 'the options for the overflow tooltip, see the following tooltip component',
+        },
+        setter: 'JsonSetter',
+        supportVariable: true,
+      },
+      {
         name: 'appendFilterPanelTo',
         title: {
           label: {
@@ -765,6 +722,26 @@ const meta = {
         defaultValue: false,
       },
       {
+        name: 'showOverflowTooltip',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'showOverflowTooltip',
+            'en-US': 'showOverflowTooltip',
+          },
+          tip: 'whether to hide extra content and show them in a tooltip when hovering on the cell.It will affect all the table columns, refer to table tooltip-options',
+        },
+        setter: [
+          {
+            componentName: 'BoolSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+        ],
+        supportVariable: true,
+      },
+      {
         name: 'flexible',
         title: {
           label: {
@@ -811,6 +788,29 @@ const meta = {
         setter: 'BoolSetter',
         supportVariable: true,
         defaultValue: true,
+      },
+      {
+        name: 'tooltipFormatter',
+        title: {
+          label: {
+            type: 'i18n',
+            'zh-CN': 'tooltipFormatter',
+            'en-US': 'tooltipFormatter',
+          },
+          tip: 'customize tooltip content when using show-overflow-tooltip',
+        },
+        setter: [
+          {
+            componentName: 'StringSetter',
+          },
+          {
+            componentName: 'JsonSetter',
+          },
+          {
+            componentName: 'FunctionSetter',
+          },
+        ],
+        supportVariable: true,
       },
       {
         name: 'preserveExpandedContent',
@@ -1030,7 +1030,7 @@ const meta = {
   },
   snippets: [
     {
-      title: '全局配置 Table',
+      title: '表格',
       screenshot: './screenshots/table.webp',
       schema: {
         componentName: 'ElTable',
