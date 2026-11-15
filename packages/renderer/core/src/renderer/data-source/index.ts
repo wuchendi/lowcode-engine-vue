@@ -13,6 +13,8 @@ import type {
   RequestParams,
 } from './interface'
 import { DataSourceStatus } from './interface'
+import type { JsonpOptions } from './jsonp'
+import { jsonp } from './jsonp'
 import type { Response } from './request'
 import { request } from './request'
 
@@ -133,6 +135,15 @@ export function createDataSourceItem(
 const builtinFetchHandler: RequestHandler = (options) =>
   request(options as unknown as RequestOptions)
 
+const builtinJsonpHandler: RequestHandler = (options) =>
+  jsonp(options as unknown as JsonpOptions)
+
+/** Handlers of the data source types the renderer supports by itself. */
+const BUILTIN_HANDLERS: Record<string, RequestHandler> = {
+  fetch: builtinFetchHandler,
+  jsonp: builtinJsonpHandler,
+}
+
 function resolveRequestHandler(
   type: string | undefined,
   requestHandlersMap: RequestHandlersMap,
@@ -141,7 +152,7 @@ function resolveRequestHandler(
   if (Object.keys(requestHandlersMap).includes(handlerType)) {
     return requestHandlersMap[handlerType]
   }
-  return handlerType === 'fetch' ? builtinFetchHandler : null
+  return BUILTIN_HANDLERS[handlerType] ?? null
 }
 
 export function createDataSourceManager(

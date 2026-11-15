@@ -454,7 +454,11 @@ export function createSimulatorRenderer(
         ...others,
       })
     }
-    context.i18n = data.i18n ?? {}
+  })
+
+  // The project messages (`project.i18n`; the injection carries `appHelper` only)
+  host.i18nConsumer.consume((messages) => {
+    context.i18n = (messages as ProjectContext['i18n'] | undefined) ?? {}
   })
 
   return simulator

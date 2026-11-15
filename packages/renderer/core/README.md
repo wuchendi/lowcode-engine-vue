@@ -32,7 +32,7 @@ src/
     use.ts          node rendering (renderComp, props, slots, refs)
     leaf.ts         node state: split props / slots, designer subscriptions
     root-scope/     `this` of a schema: state, methods, lifecycle, setup()
-    data-source/    data sources and the built-in fetch handler
+    data-source/    data sources and the built-in fetch and jsonp handlers
   shared/
     schema.ts       splitNodeSchema, event keys, v-model, loop arguments,
                     global data handler

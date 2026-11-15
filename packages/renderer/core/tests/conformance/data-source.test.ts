@@ -64,6 +64,23 @@ const dataSource = {
       ),
       options: { uri: 'https://x/rewritten' },
     },
+    {
+      id: 'jsonp',
+      type: 'jsonp',
+      isInit: true,
+      options: { uri: 'https://x/jsonp', params: { q: 'v' } },
+    },
+    {
+      id: 'jsonpFixed',
+      type: 'jsonp',
+      isInit: true,
+      options: {
+        uri: 'https://x/jsonp-fixed',
+        jsonpCallback: 'cb',
+        jsonpCallbackFunction: 'conformanceJsonp',
+      },
+      dataHandler: fn('function (res) { return res.data.url }'),
+    },
   ],
   dataHandler: fn('function (res) { return { global: res.data } }'),
 }
@@ -85,8 +102,31 @@ function stubFetch() {
       })
     }),
   )
+  // JSONP: answer the scripts the page appends (jsdom does not load them)
+  stopJsonp?.()
+  const observer = new MutationObserver((records) => {
+    for (const record of records) {
+      for (const node of record.addedNodes) {
+        if (!(node instanceof HTMLScriptElement) || !node.src) continue
+        const url = new URL(node.src)
+        const callback =
+          url.searchParams.get('callback') ?? url.searchParams.get('cb')!
+        url.searchParams.delete('callback')
+        url.searchParams.delete('cb')
+        // The callback name varies per request: recorded without it
+        requests.push(`JSONP ${url.href}`)
+        ;(window as unknown as Record<string, (data: unknown) => void>)[
+          callback
+        ]({ url: url.href })
+      }
+    }
+  })
+  observer.observe(document, { childList: true, subtree: true })
+  stopJsonp = () => observer.disconnect()
   return requests
 }
+
+let stopJsonp: (() => void) | undefined
 
 /** The generated runtime, evaluated with this Vue. */
 function generatedRuntime() {
@@ -124,6 +164,7 @@ const snapshot = (map: Record<string, { data: unknown; status: string }>) =>
   )
 
 afterEach(() => {
+  stopJsonp?.()
   vi.unstubAllGlobals()
   document.body.innerHTML = ''
 })

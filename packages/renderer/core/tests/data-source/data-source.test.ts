@@ -102,13 +102,13 @@ describe('data source manager', () => {
   it('records an error and rejects for an unknown type without a handler', async () => {
     const errorHandler = vi.fn()
     const { item, scope } = setup({
-      type: 'jsonp',
+      type: 'mtop',
       errorHandler: fn('function (err) { this.onError(err); }'),
     })
     scope.onError = errorHandler
 
     await expect(item.load()).rejects.toThrow(
-      'unsupported data source type: jsonp',
+      'unsupported data source type: mtop',
     )
     expect(item.status).toBe(DataSourceStatus.Error)
     expect(item.error).toBeInstanceOf(Error)

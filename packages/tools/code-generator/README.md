@@ -54,7 +54,7 @@ and the designer plugin use.
   the source panel's code (`meta.originCode`) with the component imports
   added, or an Options API component from `state` / `methods` / `lifeCycles`;
   the root `css` becomes a `<style>` block.
-- `src/lowcode/`, when a page uses them: data sources (`fetch`),
+- `src/lowcode/`, when a page uses them: data sources (`fetch`, `jsonp`),
   `utils`, `constants` and `i18n`, given to each page through a mixin
   (`this.dataSourceMap`, ...); in `setup()`, `this.<context>` is rewritten to
   the page's `lowcode` object.

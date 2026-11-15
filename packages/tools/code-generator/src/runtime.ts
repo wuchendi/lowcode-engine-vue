@@ -96,6 +96,47 @@ export async function request(options) {
   }
 }
 
+let jsonpCounter = 0
+
+/**
+ * Data source \`jsonp\` requests: a script calling \`window[callback](data)\`;
+ * resolves to \`{ code, data }\` like \`request\`.
+ */
+export function jsonp(options) {
+  const {
+    uri,
+    params = {},
+    timeout,
+    jsonpCallback = 'callback',
+    jsonpCallbackFunction = '__lowcode_jsonp_' + Date.now() + '_' + jsonpCounter++,
+  } = options
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    let timer
+    const cleanup = () => {
+      clearTimeout(timer)
+      script.remove()
+      delete window[jsonpCallbackFunction]
+    }
+    window[jsonpCallbackFunction] = (data) => {
+      cleanup()
+      resolve({ code: 200, data })
+    }
+    script.onerror = () => {
+      cleanup()
+      reject(new Error('JSONP request to ' + uri + ' failed'))
+    }
+    if (timeout) {
+      timer = setTimeout(() => {
+        cleanup()
+        reject(new Error('JSONP request to ' + uri + ': timeout'))
+      }, timeout)
+    }
+    script.src = buildUrl(uri, { ...params, [jsonpCallback]: jsonpCallbackFunction })
+    document.head.appendChild(script)
+  })
+}
+
 /** Marks a schema expression: evaluated with the component instance. */
 export function expression(fn) {
   fn.isExpression = true
@@ -123,6 +164,9 @@ export function i18n(key, params = {}) {
   )
 }
 
+/** Requests of the data source types. */
+const HANDLERS = { fetch: request, jsonp }
+
 function createItem(config, getVm) {
   const call = (fn, fallback, ...args) =>
     typeof fn === 'function' ? fn.apply(getVm(), args) : fallback
@@ -136,7 +180,8 @@ function createItem(config, getVm) {
       const { headers: inputHeaders, assignToScope = true, ...inputOptions } =
         otherOptions
       try {
-        if (config.type && config.type !== 'fetch') {
+        const handler = HANDLERS[config.type || 'fetch']
+        if (!handler) {
           throw new Error('unsupported data source type: ' + config.type)
         }
         if (call(resolve(config.shouldFetch, vm), true) === false) return undefined
@@ -153,7 +198,7 @@ function createItem(config, getVm) {
           headers: { ...headers, ...inputHeaders },
           params: mergedParams,
         }
-        const res = await request(call(config.willFetch, requestOptions, requestOptions))
+        const res = await handler(call(config.willFetch, requestOptions, requestOptions))
         const data = call(config.dataHandler, res.data, res)
         item.data = data
         item.status = 'loaded'

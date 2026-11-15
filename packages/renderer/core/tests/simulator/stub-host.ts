@@ -77,6 +77,10 @@ export function createStubHost(options: StubHostOptions = {}) {
     injectionConsumer: {
       consume: vi.fn<(fn: (data: never) => void) => void>(),
     },
+    // The project messages (`project.i18n`)
+    i18nConsumer: {
+      consume: vi.fn<(fn: (data: never) => void) => void>(),
+    },
   }
   return host as typeof host & BuiltinSimulatorHost
 }
