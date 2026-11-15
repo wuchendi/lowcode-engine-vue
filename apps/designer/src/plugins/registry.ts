@@ -7,7 +7,8 @@ import type { IPublicModelPluginContext } from '@alilc/lowcode-types'
  * https://github.com/cdLab996/lowcode-engine-demo-vue?tab=readme-ov-file#-credits
  */
 
-import ComponentsPane from '@alilc/lowcode-plugin-components-pane'
+// The pane of the 2.x plugin: registered here with our titles
+import ComponentsPane from '@alilc/lowcode-plugin-components-pane/es/pane'
 import Inject from '@alilc/lowcode-plugin-inject'
 import SetRefPropPlugin from '@alilc/lowcode-plugin-set-ref-prop'
 import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select'

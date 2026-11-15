@@ -23,11 +23,10 @@ catalogs:
   shared:
     "@alilc/lowcode-designer": ^1.3.4
     "@alilc/lowcode-engine": ^1.3.4
-    "@alilc/lowcode-shell": ^1.3.4
     "@alilc/lowcode-types": ^1.3.4
     "@alilc/lowcode-utils": ^1.3.4
     "@types/react": ^16.14.70
-    intl-messageformat: ^10.7.18
+    intl-messageformat: ^12.1.5
     react: ^16.14.0
     react-dom: ^16.14.0
   materials:
@@ -39,9 +38,6 @@ catalogs:
     vue: 2.7.16
     vue-router: 3.6.5
   vue3:
-    "@vue/test-utils": ^2.4.6
-    lodash: ^4.17.21
-    uuid: ^9.0.1
     vue: 3.5.45
     vue-router: 4.6.4
 
