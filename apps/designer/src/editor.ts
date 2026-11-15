@@ -8,7 +8,31 @@ void (async () => {
   const preference = new Map()
   preference.set('DataSourcePane', {
     importPlugins: [],
-    dataSourceTypes: [{ type: 'fetch' }],
+    dataSourceTypes: [
+      { type: 'fetch' },
+      {
+        type: 'jsonp',
+        // The JSONP options of the renderer and the generated code
+        schema: {
+          type: 'object',
+          properties: {
+            options: {
+              type: 'object',
+              properties: {
+                jsonpCallback: {
+                  title: '回调参数名',
+                  type: 'string',
+                },
+                jsonpCallbackFunction: {
+                  title: '回调函数名',
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
   })
 
   await registerPlugins()
@@ -24,6 +48,8 @@ void (async () => {
       enableCondition: true,
       enableCanvasLock: true,
       supportVariableGlobally: true,
+      // The engine's node menu (select, copy, paste, delete) on right click
+      enableContextMenu: true,
       device,
       simulatorUrl: [runtime.simulator, runtime.simulatorCss],
     },

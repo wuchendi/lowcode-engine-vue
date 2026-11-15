@@ -14,6 +14,7 @@ import {
 } from '@/utils/project-storage'
 import { currentProject, projectStorage, saveProject } from '@/utils/store'
 import { vueVersion } from '@/version'
+import { canvasLocale } from './canvas-locale'
 
 const save = async () => {
   await saveProject()
@@ -28,6 +29,7 @@ const preview = async () => {
     IPublicEnumTransformStage.Save,
   )?.fileName
   if (page) url.searchParams.set('page', page)
+  url.searchParams.set('locale', canvasLocale())
   window.open(url)
 }
 
@@ -78,6 +80,19 @@ const chooseProjectFile = () => {
     if (file) importProject(file).catch((error) => Logger.error(error))
   }
   input.click()
+}
+
+/** Forgets the saved project and starts again from the sample. */
+const resetProject = () => {
+  Dialog.confirm({
+    title: intl('Reset'),
+    content: intl('ResetConfirm', { version: vueVersion === 2 ? '2.7' : '3' }),
+    locale: { ok: intl('Ok'), cancel: intl('Cancel') },
+    onOk: async () => {
+      await projectStorage.clear()
+      window.location.reload()
+    },
+  })
 }
 
 const savePlugin = (ctx: IPublicModelPluginContext) => {
@@ -136,6 +151,14 @@ const savePlugin = (ctx: IPublicModelPluginContext) => {
           { onClick: chooseProjectFile },
           intl('ImportProject'),
         ),
+      })
+
+      skeleton.add({
+        name: 'resetProject',
+        area: 'topArea',
+        type: 'Widget',
+        props: { align: 'right' },
+        content: h(Button, { onClick: resetProject }, intl('Reset')),
       })
 
       skeleton.add({

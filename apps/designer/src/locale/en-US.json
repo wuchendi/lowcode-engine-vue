@@ -29,5 +29,17 @@
   "ImportProject": "Import",
   "ImportProjectConfirm": "The imported project replaces the current one. Import it?",
   "InvalidProjectFile": "Not a valid project file",
-  "ProjectForOtherVue": "This is a Vue {version} project: switch to Vue {version} to import it"
+  "ProjectForOtherVue": "This is a Vue {version} project: switch to Vue {version} to import it",
+  "CanvasLocale": "Canvas language",
+  "Reset": "Reset",
+  "ResetConfirm": "Reset clears the saved Vue {version} project and restores the sample. Continue?",
+  "MaterialsHint": "Enter the URL of a material's assets.json (written by the material builder); its components then show in the components pane.",
+  "AddMaterial": "Add material",
+  "NoMaterials": "No materials added yet",
+  "RemoveMaterial": "Remove material",
+  "MaterialAdded": "This material is added already",
+  "MaterialLoaded": "Material loaded",
+  "MaterialInvalid": "This is not a material assets.json",
+  "MaterialLoadFailed": "The material {url} could not be loaded",
+  "MaterialRemoved": "Removed: save and reload to apply"
 }

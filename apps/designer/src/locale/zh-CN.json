@@ -29,5 +29,17 @@
   "ImportProject": "导入",
   "ImportProjectConfirm": "导入的项目会替换当前项目，确定导入吗？",
   "InvalidProjectFile": "不是有效的项目文件",
-  "ProjectForOtherVue": "这是 Vue {version} 的项目，请切换到 Vue {version} 后导入"
+  "ProjectForOtherVue": "这是 Vue {version} 的项目，请切换到 Vue {version} 后导入",
+  "CanvasLocale": "画布语言",
+  "Reset": "重置",
+  "ResetConfirm": "重置会清除已保存的 Vue {version} 项目，恢复为示例项目，确定吗？",
+  "MaterialsHint": "填写物料 assets.json 的地址（物料构建器生成），添加后即可在组件库中使用。",
+  "AddMaterial": "添加物料",
+  "NoMaterials": "还没有添加物料",
+  "RemoveMaterial": "移除物料",
+  "MaterialAdded": "这个物料已经添加过了",
+  "MaterialLoaded": "物料已加载",
+  "MaterialInvalid": "这不是物料的 assets.json",
+  "MaterialLoadFailed": "物料 {url} 加载失败",
+  "MaterialRemoved": "已移除，保存并刷新后生效"
 }

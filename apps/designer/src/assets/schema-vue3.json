@@ -94,7 +94,10 @@
               "id": "node_ocluqp1per1",
               "props": {
                 "type": "primary",
-                "children": "主按钮",
+                "children": {
+                  "type": "JSExpression",
+                  "value": "this.i18n('demo.primary')"
+                },
                 "htmlType": "button",
                 "size": "middle",
                 "shape": "default",
@@ -114,7 +117,10 @@
               "id": "node_ocluqp1per2",
               "props": {
                 "type": "default",
-                "children": "次按钮",
+                "children": {
+                  "type": "JSExpression",
+                  "value": "this.i18n('demo.secondary')"
+                },
                 "htmlType": "button",
                 "size": "middle",
                 "shape": "default",

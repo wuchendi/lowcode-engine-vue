@@ -13,6 +13,7 @@ function memoryStorage() {
     items,
     getItem: (key: string) => items.get(key) ?? null,
     setItem: (key: string, value: string) => void items.set(key, value),
+    removeItem: (key: string) => void items.delete(key),
   }
 }
 
@@ -42,6 +43,48 @@ describe('createLocalProjectStorage', () => {
       'packages:vue3',
       'projectSchema:vue3',
     ])
+  })
+})
+
+describe('clearing the local project', () => {
+  it('removes the project of its Vue version only', async () => {
+    const backing = memoryStorage()
+    await createLocalProjectStorage(backing, 2).save(record)
+    await createLocalProjectStorage(backing, 3).save(record)
+    await createLocalProjectStorage(backing, 3).clear()
+    expect(await createLocalProjectStorage(backing, 3).load()).toBeUndefined()
+    expect(await createLocalProjectStorage(backing, 2).load()).toEqual(record)
+  })
+})
+
+describe('materials of a project', () => {
+  const withMaterials: ProjectRecord = {
+    ...record,
+    materials: ['https://cdn.test/demo/assets.json'],
+  }
+
+  it('saves and loads them', async () => {
+    const backing = memoryStorage()
+    await createLocalProjectStorage(backing, 3).save(withMaterials)
+    expect(await createLocalProjectStorage(backing, 3).load()).toEqual(
+      withMaterials,
+    )
+    await createLocalProjectStorage(backing, 3).clear()
+    expect(backing.items.size).toBe(0)
+  })
+
+  it('round-trips them through a project file', () => {
+    expect(parseProjectFile(serializeProject(withMaterials, 3), 3)).toEqual(
+      withMaterials,
+    )
+  })
+
+  it('rejects a project file with invalid materials', () => {
+    const text = JSON.stringify({
+      ...JSON.parse(serializeProject(record, 3)),
+      materials: [1],
+    })
+    expect(() => parseProjectFile(text, 3)).toThrow(ProjectFileError)
   })
 })
 

@@ -61,10 +61,29 @@ titles of the material components stay as the metas give them.
 
 Saving stores the project (the schema of every page and component, and the
 material packages) through a `ProjectStorage` (`src/utils/project-storage.ts`,
-`load` / `save`): `src/utils/store.ts` uses the `localStorage` one, per Vue
-version; replace it there to save to a backend. **导出** downloads the
-project as a JSON file (`lowcode-project-vue<2|3>.json`); **导入** replaces
-the project with such a file of the same Vue version and reloads.
-**Preview** opens `preview.html` with the same version and the current page
-(`?page=/about`), which renders the saved schema with `dist/renderer.umd.js`
-and links the other pages.
+`load` / `save` / `clear`): `src/utils/store.ts` uses the `localStorage`
+one, per Vue version; replace it there to save to a backend. **导出**
+downloads the project as a JSON file (`lowcode-project-vue<2|3>.json`);
+**导入** replaces the project with such a file of the same Vue version and
+reloads; **重置** forgets the saved project and starts again from the sample.
+**Preview** opens `preview.html` with the same version, the current page
+(`?page=/about`) and the canvas locale (`?locale=en-US`), which renders the
+saved schema with `dist/renderer.umd.js` and links the other pages and
+locales.
+
+The project messages (`i18n` of the project schema, used as
+`this.i18n('key')`) show in the locale the top bar selects for the canvas
+(中文 / English, independent of the designer language); the sample project
+binds its Vue 3 buttons to them. Right-clicking a canvas node opens the
+engine's node menu (select, copy, paste, delete).
+
+Data sources are `fetch` or `jsonp` (`jsonpCallback`: the callback query
+parameter, `callback` by default; `jsonpCallbackFunction`: a fixed function
+name, as `public/mock/info.jsonp.js` needs).
+
+The **物料** panel adds a material by the URL of its `assets.json` (as the
+material builder writes it; relative URLs inside resolve against it): its
+components join the components pane at once. The URLs are part of the
+project (`ProjectRecord.materials`, saved, exported and imported with it)
+and load again before the pages when the designer opens; a removed
+material leaves once the project is saved and the designer reloaded.

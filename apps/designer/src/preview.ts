@@ -1,4 +1,5 @@
 import type * as LowcodeVue from '@cdlab996/lowcode-vue3'
+import { DEFAULT_LOCALE, LOCALES } from './utils/locales'
 import { findPage } from './utils/pages'
 import { createLocalProjectStorage } from './utils/project-storage'
 import { runtime, vueVersion } from './version'
@@ -13,24 +14,43 @@ function loadScript(src: string) {
   })
 }
 
-/** Links to the other pages, above the preview. */
-function renderPageLinks(
-  tree: { fileName?: string }[],
+function link(label: string, params: URLSearchParams, current: boolean) {
+  const a = document.createElement('a')
+  a.href = `?${params}`
+  a.textContent = label
+  if (current) a.style.fontWeight = '600'
+  return a
+}
+
+/** Links to the other pages and locales, above the preview. */
+function renderNav(
+  pages: { fileName?: string }[],
   current: { fileName?: string } | undefined,
+  locales: typeof LOCALES,
+  locale: string,
   params: URLSearchParams,
 ) {
+  if (pages.length < 2 && locales.length < 2) return
   const nav = document.createElement('nav')
   nav.className = 'lowcode-preview-pages'
   nav.style.cssText =
     'display: flex; gap: 12px; padding: 8px 12px; border-bottom: 1px solid #e6e6e6; font-size: 13px'
-  for (const root of tree) {
-    const link = document.createElement('a')
-    const search = new URLSearchParams(params)
-    search.set('page', root.fileName ?? '')
-    link.href = `?${search}`
-    link.textContent = root.fileName ?? ''
-    if (root === current) link.style.fontWeight = '600'
-    nav.appendChild(link)
+  if (pages.length > 1) {
+    for (const root of pages) {
+      const search = new URLSearchParams(params)
+      search.set('page', root.fileName ?? '')
+      nav.appendChild(link(root.fileName ?? '', search, root === current))
+    }
+  }
+  if (locales.length > 1) {
+    const spacer = document.createElement('span')
+    spacer.style.flex = '1'
+    nav.appendChild(spacer)
+    for (const { label, value } of locales) {
+      const search = new URLSearchParams(params)
+      search.set('locale', value)
+      nav.appendChild(link(label, search, value === locale))
+    }
   }
   document.body.prepend(nav)
 }
@@ -57,7 +77,14 @@ void (async () => {
     (root) => root.componentName !== 'Component',
   )
   const page = findPage(pages, params.get('page'))
-  if (pages.length > 1) renderPageLinks(pages, page, params)
+  // The project messages in the locale of the canvas (`?locale=`)
+  const messages = (saved?.schema?.i18n ?? {}) as Record<
+    string,
+    Record<string, string>
+  >
+  const locale = params.get('locale') ?? DEFAULT_LOCALE
+  const locales = LOCALES.filter(({ value }) => value in messages)
+  renderNav(pages, page, locales, locale, params)
 
   const components: Record<string, unknown> = {}
   for (const item of componentsMap) {
@@ -98,6 +125,8 @@ void (async () => {
       class: 'lowcode-preview',
       schema: page,
       components: built,
+      locale,
+      messages,
     },
     document.getElementById('lce-container')!,
   )

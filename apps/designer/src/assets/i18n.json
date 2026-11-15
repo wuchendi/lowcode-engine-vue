@@ -1,0 +1,10 @@
+{
+  "zh-CN": {
+    "demo.primary": "主按钮",
+    "demo.secondary": "次按钮"
+  },
+  "en-US": {
+    "demo.primary": "Primary",
+    "demo.secondary": "Secondary"
+  }
+}

@@ -346,3 +346,35 @@ screenshot from a third-party host.
 
 tsdown `copy` takes `to` as a directory. The designer's development preview
 served the core's `simulator.css`, so only production builds lacked it.
+
+## 2026-11-15 12:00 [progress]
+
+From the official demo: canvas context menu (`enableContextMenu`), canvas
+locale switch, preview in the canvas locale with the project messages and
+locale links, and a reset to the sample project (`ProjectStorage.clear`).
+Fixed: the canvas never received the project messages (the simulator read
+them from the injection instead of the host's `i18nConsumer`), and saved
+projects did not restore their `i18n`.
+
+## 2026-11-15 12:30 [pitfall]
+
+`@alilc/lowcode-plugin-base-monaco-editor` pins `@monaco-editor/loader`
+1.3.0, which injects Monaco's AMD loader again on every `init()` while
+Monaco loads ("Identifier '_amdLoaderGlobal' has already been declared").
+Hidden while the designer preloaded Monaco; with Monaco on demand it showed
+when editors mounted during the load. Overridden to ^1.7.0 (one copy); the
+code generator E2E delays Monaco to cover it.
+
+## 2026-11-15 14:30 [progress]
+
+JSONP data sources (renderer handler, generated runtime, data source pane
+type with `jsonpCallback` / `jsonpCallbackFunction`, conformance-tested);
+materials added at runtime by their `assets.json` URL (designer 物料 panel,
+saved with the project); Vue 3 targets on vue-router 5.5 (renderer bundles,
+code editor typings, generated projects).
+
+## 2026-11-15 14:30 [pitfall]
+
+`material.setAssets()` is asynchronous: not awaited, it replaced the assets
+the project materials had merged meanwhile (their packages missed from the
+saved project, so the preview could not render them).

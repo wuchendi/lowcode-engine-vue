@@ -8,19 +8,26 @@ import type { VueVersion } from '@/version'
 export interface ProjectRecord {
   schema: IPublicTypeProjectSchema
   packages: IPublicTypePackage[]
+  /** `assets.json` URLs of the materials added to the project. */
+  materials?: string[]
 }
+
+const isStringList = (value: unknown): value is string[] =>
+  Array.isArray(value) && value.every((item) => typeof item === 'string')
 
 /**
  * Where the designer keeps the project of one Vue version. The designer and
  * the preview use the localStorage one (`utils/store.ts`); a backend
- * implements the same two methods.
+ * implements the same methods.
  */
 export interface ProjectStorage {
   load(): Promise<ProjectRecord | undefined>
   save(record: ProjectRecord): Promise<void>
+  /** Forgets the saved project (the designer then starts from the sample). */
+  clear(): Promise<void>
 }
 
-type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem'>
+type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
 
 /** The project in `storage` (localStorage), under keys per Vue version. */
 export function createLocalProjectStorage(
@@ -29,18 +36,31 @@ export function createLocalProjectStorage(
 ): ProjectStorage {
   const schemaKey = `projectSchema:vue${vue}`
   const packagesKey = `packages:vue${vue}`
+  const materialsKey = `materials:vue${vue}`
   return {
     async load() {
       const schema = storage.getItem(schemaKey)
       if (!schema) return undefined
+      const materials = storage.getItem(materialsKey)
       return {
         schema: JSON.parse(schema),
         packages: JSON.parse(storage.getItem(packagesKey) ?? '[]'),
+        ...(materials ? { materials: JSON.parse(materials) } : {}),
       }
     },
     async save(record) {
       storage.setItem(schemaKey, JSON.stringify(record.schema))
       storage.setItem(packagesKey, JSON.stringify(record.packages))
+      if (record.materials?.length) {
+        storage.setItem(materialsKey, JSON.stringify(record.materials))
+      } else {
+        storage.removeItem(materialsKey)
+      }
+    },
+    async clear() {
+      storage.removeItem(schemaKey)
+      storage.removeItem(packagesKey)
+      storage.removeItem(materialsKey)
     },
   }
 }
@@ -86,12 +106,17 @@ export function parseProjectFile(text: string, vue: VueVersion): ProjectRecord {
     file?.format !== FORMAT ||
     file.version !== VERSION ||
     !Array.isArray(schema?.componentsTree) ||
-    !Array.isArray(file.packages)
+    !Array.isArray(file.packages) ||
+    (file.materials !== undefined && !isStringList(file.materials))
   ) {
     throw new ProjectFileError('invalid')
   }
   if (file.vue !== vue) {
     throw new ProjectFileError('otherVue', Number(file.vue))
   }
-  return { schema, packages: file.packages as IPublicTypePackage[] }
+  return {
+    schema,
+    packages: file.packages as IPublicTypePackage[],
+    ...(file.materials ? { materials: file.materials as string[] } : {}),
+  }
 }

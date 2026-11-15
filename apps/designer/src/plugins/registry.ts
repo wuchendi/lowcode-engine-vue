@@ -26,9 +26,11 @@ import { Logo } from '../components/logo/logo'
 import SetterPlugin from '../setters/index'
 import Actions from './actions'
 import BlocksPlugin from './blocks'
+import CanvasLocalePlugin from './canvas-locale'
 import DataSourcePanePlugin from './datasource'
 import ResourceInit from './init'
 import LowCodeComponentsPlugin from './lowcode-components'
+import MaterialsPlugin from './materials'
 import PagesPlugin from './pages'
 import SchemaPlugin from './schema'
 
@@ -98,6 +100,9 @@ export default async function registerPlugins() {
   // 区块：保存节点树，再从面板插入
   await plugins.register(BlocksPlugin)
 
+  // 物料：按 assets.json 地址加载物料
+  await plugins.register(MaterialsPlugin)
+
   // 注册数据源面板
   await plugins.register(DataSourcePanePlugin)
 
@@ -123,6 +128,9 @@ export default async function registerPlugins() {
 
   // 中英文切换
   await plugins.register(ZhEnPlugin)
+
+  // 画布语言切换（项目多语言文案）
+  await plugins.register(CanvasLocalePlugin)
 
   // 注册操作按钮（保存、预览）
   await plugins.register(Actions)
