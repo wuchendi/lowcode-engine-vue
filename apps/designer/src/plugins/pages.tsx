@@ -65,11 +65,10 @@ function AddDialog({
   }
   return (
     <Dialog
-      v2
       visible
       title={intl(config.title)}
       locale={{ ok: intl('Ok'), cancel: intl('Cancel') }}
-      width={400}
+      style={{ width: 400 }}
       onOk={submit}
       onClose={onClose}
       onCancel={onClose}
@@ -128,7 +127,6 @@ function PagesPane({ project }: { project: Project }) {
   const remove = (item: PageItem) => {
     const isPage = item.kind === 'page'
     Dialog.confirm({
-      v2: true,
       title: intl(isPage ? 'DeletePage' : 'DeleteComponent'),
       content: isPage
         ? intl('DeletePageConfirm', { path: item.name })

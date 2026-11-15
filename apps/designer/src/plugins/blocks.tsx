@@ -30,9 +30,8 @@ const BlockIcon = (
 function saveAsBlock(node: IPublicModelNode) {
   let name = node.title ? String(node.title) : node.componentName
   const dialog = Dialog.show({
-    v2: true,
     title: intl('SaveAsBlock'),
-    width: 400,
+    style: { width: 400 },
     locale: { ok: intl('Ok'), cancel: intl('Cancel') },
     content: (
       <Input
@@ -109,7 +108,6 @@ function BlocksPane({ ctx }: { ctx: IPublicModelPluginContext }) {
 
   const remove = (block: Block) => {
     Dialog.confirm({
-      v2: true,
       title: intl('DeleteBlock'),
       content: intl('DeleteBlockConfirm', { name: block.name }),
       locale: { ok: intl('Ok'), cancel: intl('Cancel') },

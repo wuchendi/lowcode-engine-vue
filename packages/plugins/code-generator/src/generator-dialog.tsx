@@ -109,10 +109,9 @@ export function GeneratorButton({
         {intl('Generate')}
       </Button>
       <Dialog
-        v2
         title={intl('DialogTitle', { version: vue === 2 ? '2.7' : '3' })}
         visible={!!project}
-        width="90vw"
+        style={{ width: '90vw' }}
         onClose={() => setProject(null)}
         footer={
           <Button
@@ -158,7 +157,14 @@ export function GeneratorButton({
                     LANGUAGES[current.split('.').pop() ?? ''] ?? 'plaintext'
                   }
                   height="100%"
-                  options={{ readOnly: true, minimap: { enabled: false } }}
+                  // The wrapper too: the editor's 100% refers to it
+                  style={{ height: '100%' }}
+                  options={{
+                    readOnly: true,
+                    minimap: { enabled: false },
+                    // Follows the dialog size (it animates while opening)
+                    automaticLayout: true,
+                  }}
                 />
               </div>
             </div>

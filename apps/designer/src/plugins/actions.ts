@@ -59,7 +59,6 @@ const importProject = async (file: File) => {
     return
   }
   Dialog.confirm({
-    v2: true,
     title: intl('ImportProject'),
     content: intl('ImportProjectConfirm'),
     locale: { ok: intl('Ok'), cancel: intl('Cancel') },

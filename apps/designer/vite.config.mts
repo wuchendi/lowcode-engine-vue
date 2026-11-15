@@ -177,8 +177,9 @@ const MONACO_TOKENIZERS = [
 /**
  * Whether a file of a runtime directory is served and copied. Monaco loads
  * languages and translations on demand: only the used ones ship. The
- * designer loads `index.js`, `index.css`, `meta.js` and the screenshots of
- * a material (not its `.min` copies or `assets.json`).
+ * designer loads `index.js`, `index.css`, `meta.js`, `assets.json` (read
+ * by the code generator) and the screenshots of a material (not its `.min`
+ * copies).
  */
 function isPublished(route: string, file: string) {
   if (route === 'runtime/monaco/vs') {
@@ -191,7 +192,10 @@ function isPublished(route: string, file: string) {
     return true
   }
   if (route.startsWith('materials/')) {
-    return /^(index\.(js|css)|meta\.js|screenshots(\/.*)?)$/.test(file)
+    // assets.json: the code generator reads the imports (`codegen`) from it
+    return /^(index\.(js|css)|meta\.js|assets\.json|screenshots(\/.*)?)$/.test(
+      file,
+    )
   }
   return true
 }
