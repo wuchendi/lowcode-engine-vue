@@ -23,6 +23,17 @@ updates:
         update-types: [version-update:semver-major]
       - dependency-name: element-plus
         update-types: [version-update:semver-major]
+      # The LowCode Engine and Fusion run on React 16
+      - dependency-name: react
+        update-types: [version-update:semver-major]
+      - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: "@types/react"
+        update-types: [version-update:semver-major]
+      # Pinned: 0.53 changed the AMD build the designer serves and 0.55 moved
+      # `languages.typescript` (0.x minors break)
+      - dependency-name: monaco-editor
+        update-types: [version-update:semver-major, version-update:semver-minor]
 
   - package-ecosystem: github-actions
     directory: /
