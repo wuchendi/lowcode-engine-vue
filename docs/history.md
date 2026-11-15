@@ -161,7 +161,7 @@ Capabilities that were not there:
   messages, project export / import / reset, JSONP data sources.
 - A material pipeline: scaffold, builder (with a code generation manifest in
   `assets.json`), metas generated from the library docs.
-- Tests: 483 unit tests, the renderer / generator conformance suite,
+- Tests: 491 unit tests, the renderer / generator conformance suite,
   Playwright checks rendering every material, publint.
 - A designer without third-party requests, deployable as a static site.
 

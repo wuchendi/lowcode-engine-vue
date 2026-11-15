@@ -61,6 +61,10 @@ packages/renderer/
   functions; `text()`; `Fragment` (Vue 2: a `div`); `PassThrough`;
   `RouterView`.
 - **Reactivity gaps**: `set` / `del` for adding and removing reactive keys.
+- **Directives**: `registerDirective(name, directive)` for `v-<name>` props.
+  `buildComponents` calls it for the `directives` a loaded library exports;
+  Vue 2 registers globally, Vue 3 keeps them in the adapter (the canvas and
+  preview apps are created by the adapter, so nothing is registered on them).
 - **Components**: `isComponent`, `normalizeComponent`, `wrapTag` (native tags
   and Vue 2 functional components), `modelOf` (`v-model` prop and event).
 - **Instances**: `refsOf`, `onCreated`, `onRouteGuards`, `unmountedHook`,

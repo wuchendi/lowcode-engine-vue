@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test'
 import { expect, test } from '@playwright/test'
-import { clearPage, openDesigner } from './designer'
+import { clearPage, collectErrors, openDesigner } from './designer'
 
 const MESSAGES = {
   'zh-CN': { 'e2e.hello': '你好' },
@@ -25,6 +25,79 @@ async function i18nPage(page: Page) {
 
 for (const vue of [2, 3] as const) {
   test.describe(`Vue ${vue}`, () => {
+    test('shows the loading mask of a node with v-loading', async ({
+      page,
+    }) => {
+      const errors = collectErrors(page)
+      const frame = await openDesigner(page, vue)
+      await clearPage(page)
+      await page.evaluate(() => {
+        const doc = window.AliLowCodeEngine.project.currentDocument
+        doc.insertNode(doc.root, {
+          componentName: 'VanButton',
+          props: { text: 'Loading' },
+        })
+        doc.insertNode(doc.root, {
+          componentName: 'VanButton',
+          props: { text: 'After' },
+        })
+      })
+      const setLoading = (value: boolean) =>
+        page.evaluate((value) => {
+          const doc = window.AliLowCodeEngine.project.currentDocument
+          doc.root.children.get(0).setPropValue('v-loading', value)
+        }, value)
+      // The directive of Element UI / Element Plus, on a Vant component that
+      // is already rendered without it
+      const mask = frame.locator('.lc-page .el-loading-mask')
+      await expect(frame.locator('.lc-page .van-button')).toHaveCount(2)
+      await setLoading(true)
+      await expect(mask).toBeVisible()
+      await setLoading(false)
+      await expect(mask).toBeHidden()
+      await setLoading(true)
+      await expect(mask).toBeVisible()
+      await expect(frame.locator('.lc-page .van-button')).toHaveCount(2)
+      expect(errors).toEqual([])
+    })
+
+    test('adds v-loading to a rendered node inside a component', async ({
+      page,
+    }) => {
+      const errors = collectErrors(page)
+      const frame = await openDesigner(page, vue)
+      await clearPage(page)
+      await page.evaluate(() => {
+        const doc = window.AliLowCodeEngine.project.currentDocument
+        doc.insertNode(doc.root, {
+          componentName: 'VanTabs',
+          children: [
+            {
+              componentName: 'VanTab',
+              props: { title: 'Tab' },
+              children: [{ componentName: 'VanButton', props: { text: 'In' } }],
+            },
+          ],
+        })
+      })
+      await expect(frame.locator('.lc-page .van-button')).toBeVisible()
+      // The tab pane gains a directive it was rendered without: Vue patches
+      // directives by index, so the vnode must not be patched in place
+      for (const value of [true, false, true]) {
+        await page.evaluate((value) => {
+          const doc = window.AliLowCodeEngine.project.currentDocument
+          const tab = doc.root.children.get(0).children.get(0)
+          tab.setPropValue('v-loading', value)
+        }, value)
+        // Element UI keeps the mask in the DOM, hidden
+        const mask = frame.locator('.lc-page .el-loading-mask')
+        if (value) await expect(mask).toBeVisible()
+        else await expect(mask).toBeHidden()
+      }
+      await expect(frame.locator('.lc-page .van-button')).toBeVisible()
+      expect(errors).toEqual([])
+    })
+
     test('opens the context menu of a canvas node', async ({ page }) => {
       const frame = await openDesigner(page, vue)
       await clearPage(page)

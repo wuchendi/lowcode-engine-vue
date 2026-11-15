@@ -89,6 +89,12 @@ export interface VueAdapter {
   /** Removes a key so that a reactive object notices it. */
   del(target: object, key: string): void
 
+  /**
+   * Makes a directive available to `v-<name>` props, wherever the renderer
+   * is mounted (materials bring theirs: `directives` of a library).
+   */
+  registerDirective(name: string, directive: object): void
+
   isComponent(value: unknown): boolean
   /** Unwraps library-specific component forms (e.g. Vue 2 constructors). */
   normalizeComponent(component: VueComponent): VueComponent

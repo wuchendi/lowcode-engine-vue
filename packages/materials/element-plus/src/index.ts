@@ -1,4 +1,5 @@
 import 'element-plus/dist/index.css'
+import { vLoading } from 'element-plus'
 import packagesInfo from '../package.json'
 
 export {
@@ -110,6 +111,8 @@ export {
   ElWatermark,
   TableV2 as ElTableV2,
 } from 'element-plus'
+
+export const directives = { loading: vLoading }
 
 console.log(
   `%c ${packagesInfo.name} %c v`.concat(packagesInfo.version, ' '),

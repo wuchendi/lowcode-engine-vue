@@ -16,10 +16,12 @@ await plugins.register(DirectiveLoading)
 
 No options. Page and Component roots do not get the switch.
 
-The plugin only adds the setting: the `v-loading` directive itself must be
-registered where the schema renders (the renderer resolves `v-<name>` props
-as directives of the running app). The code generator registers it in the
-generated `src/main.js`, from Element UI (Vue 2.7) or Element Plus (Vue 3).
+The plugin only adds the setting; the `v-loading` directive comes from a
+material. Element UI registers it globally when its script loads (Vue 2.7),
+and `@cdlab996/lowcode-materials-element-plus` exports it in `directives`,
+which the renderer registers (Vue 3). With neither material loaded the prop
+has no effect. The code generator registers the directive in the generated
+`src/main.js`.
 
 ## License
 

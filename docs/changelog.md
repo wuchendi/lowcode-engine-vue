@@ -431,3 +431,30 @@ component instances, mount 149 -> 84 ms, update 95 -> 47 ms). The old
 repositories and packages stay available, frozen, with a notice pointing
 here (`docs/history.md`, `docs/migration.md`, README). `docs/architecture.md`
 describes the canvas protocol.
+
+## 2026-11-15 18:00 [progress]
+
+20261115-1800-vue3-directives: `v-loading` works on Vue 3. Materials can
+export `directives`; `buildComponents` registers them through the new
+`VueAdapter.registerDirective`, and the Element Plus material exports
+`{ loading: vLoading }`. Verified: unit tests on both Vue versions (adapter,
+library directives, manifest parser), a new E2E check on both versions, the
+whole E2E suite (31 tests).
+
+## 2026-11-15 18:00 [pitfall]
+
+A Vue 2 library script can register directives by itself (`window.Vue`); a
+Vue 3 one cannot, and the apps of the canvas and the preview are created by
+the adapter. The Vue 3 adapter skipped an unresolved `v-<name>` prop with
+only Vue's console warning, so the setting silently did nothing.
+
+## 2026-11-15 19:00 [pitfall]
+
+Vue 3 patches the directives of a vnode by index (compiled templates never
+change them): a rendered node that gained `v-loading` in the designer threw
+"Cannot read properties of undefined (reading 'value')" in
+`invokeDirectiveHook` when a parent's directives were merged with it
+(a Vant tab pane), and broke the canvas. The Vue 3 adapter now adds the
+directive keys to the vnode key, so such a node is replaced instead of
+patched. Found only once the directive resolved at all; covered by an
+adapter test and an E2E check (33 E2E tests, 491 unit tests).

@@ -5,6 +5,18 @@ import { buildMaterial } from '../src/build'
 import { readCodegenManifest } from '../src/codegen'
 
 describe('readCodegenManifest', () => {
+  it('keeps the directives of the entry out of the component exports', () => {
+    const manifest = readCodegenManifest(
+      `import { vLoading } from 'element-plus'
+
+export { ElButton } from 'element-plus'
+export const directives = { loading: vLoading }
+`,
+      { dependencies: { 'element-plus': '2.14.8' } },
+    )
+    expect(Object.keys(manifest.exports)).toEqual(['ElButton'])
+  })
+
   it('reads sub-components of imported library components', () => {
     const manifest = readCodegenManifest(
       `import { Select, Tabs as T } from 'ant-design-vue'

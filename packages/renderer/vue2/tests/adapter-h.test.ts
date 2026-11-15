@@ -26,6 +26,18 @@ describe('vue2Adapter.h', () => {
     vm.$destroy()
   })
 
+  it('applies a directive registered through the adapter', () => {
+    const calls: unknown[] = []
+    vue2Adapter.registerDirective('adapter-probe', {
+      bind: (_el: Element, b: { value: unknown }) => calls.push(b.value),
+    })
+    const vm = new Vue({
+      render: () => h('div', { 'v-adapter-probe': 'x' }),
+    }).$mount()
+    expect(calls).toEqual(['x'])
+    vm.$destroy()
+  })
+
   it('passes the slots with slot props of a component tag as scoped slots', () => {
     const Comp = {
       render(this: Vue, createElement: CreateElement) {

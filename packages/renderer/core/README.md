@@ -36,7 +36,8 @@ published package at the tsdown build in `dist`.
 ```text
 src/
   adapter.ts        VueAdapter: the per-version operations (h, text, mount,
-                    set/del, refs, model, unmountedHook, route guards); set by
+                    set/del, refs, model, directives, unmountedHook, route
+                    guards); set by
                     the vue2 / vue3 packages with setAdapter()
   context/          renderer context (design mode, components, getNode)
   renderer/

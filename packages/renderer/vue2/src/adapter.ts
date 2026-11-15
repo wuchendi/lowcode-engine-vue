@@ -109,6 +109,10 @@ export const vue2Adapter: VueAdapter = {
     set(target, key, value)
   },
   del: (target, key) => del(target, key),
+  // Global, as the Vue 2 libraries do themselves when their script loads
+  registerDirective: (name, directive) => {
+    Vue.directive(name, directive)
+  },
   isComponent: (value) =>
     typeof value === 'function' ||
     (!!value &&

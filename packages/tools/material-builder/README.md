@@ -56,6 +56,17 @@ When the material entry re-exports components from packages
 of each component, the bare style imports of the entry and the versions of
 those packages.
 
+A material can bring directives for `v-<name>` props: export them from the
+entry as `directives`, and the renderer registers them when it loads the
+library (on Vue 3 nothing else would: a library script cannot register a
+directive globally there).
+
+```ts
+import { vLoading } from 'element-plus'
+
+export const directives = { loading: vLoading } // v-loading
+```
+
 Snippet screenshots can ship with the material: files under `screenshots/`
 are copied into the output, and a snippet `screenshot` starting with `./`
 (`./screenshots/button.webp`) is resolved against the URL of `meta.js` when

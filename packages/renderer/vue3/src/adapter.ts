@@ -8,6 +8,7 @@ import type {
   Component,
   ComponentInternalInstance,
   ComponentPublicInstance,
+  Directive,
   DirectiveArguments,
   Plugin,
   VNode,
@@ -51,6 +52,9 @@ function findPageRecord(
 
 const DIRECTIVE = /^v-([\w-]+)(?::(\w+))?((?:\.\w+)*)$/
 
+/** Directives of the materials (`registerDirective`), by name. */
+const registeredDirectives = new Map<string, Directive>()
+
 function slotChildren(slots?: Slots): VNode[] {
   if (!slots) return []
   const { default: defaultSlot, ...named } = slots
@@ -62,6 +66,7 @@ function slotChildren(slots?: Slots): VNode[] {
 /** Splits `v-name:arg.mod` keys off the props as directive arguments. */
 function extractDirectives(props: Record<string, unknown>) {
   const directives: DirectiveArguments = []
+  const names: string[] = []
   const rest: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(props)) {
     const match = key.match(DIRECTIVE)
@@ -69,7 +74,9 @@ function extractDirectives(props: Record<string, unknown>) {
       rest[key] = value
       continue
     }
-    const directive = resolveDirective(match[1])
+    // Registered ones first: `resolveDirective` warns when it finds nothing
+    const directive =
+      registeredDirectives.get(match[1]) ?? resolveDirective(match[1])
     if (!directive) continue
     const modifiers = Object.fromEntries(
       (match[3] || '')
@@ -78,8 +85,9 @@ function extractDirectives(props: Record<string, unknown>) {
         .map((m) => [m, true]),
     )
     directives.push([directive, value, match[2], modifiers])
+    names.push(key)
   }
-  return { directives, rest }
+  return { directives, names, rest }
 }
 
 function h(
@@ -87,9 +95,13 @@ function h(
   props?: object | null,
   slots?: Slots,
 ): VNode {
-  const { directives, rest } = extractDirectives(
+  const { directives, names, rest } = extractDirectives(
     (props ?? {}) as Record<string, unknown>,
   )
+  // Vue patches the directives of a vnode by index, as compiled templates
+  // never change them: the old and the new vnode must carry the same ones.
+  // A node that gains or loses a directive becomes another vnode instead.
+  if (names.length) rest.key = `${String(rest.key ?? '')}|${names.join('|')}`
   let vnode: VNode
   if (type === Fragment) {
     vnode = createVNode(
@@ -170,6 +182,9 @@ export const vue3Adapter: VueAdapter = {
       ('render' in value || 'setup' in value || 'template' in value)),
   normalizeComponent: (component) => component,
   wrapTag,
+  registerDirective: (name, directive) => {
+    registeredDirectives.set(name, directive as Directive)
+  },
   modelOf: () => ({ prop: 'modelValue', event: 'update:modelValue' }),
   unmountedHook: (callback) => ({ onVnodeUnmounted: callback }),
   refsOf(instance) {

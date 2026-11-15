@@ -42,6 +42,8 @@ const LIBS = {
     exportPrefix: 'El',
     group: 'Element 组件',
     css: "import 'element-plus/dist/index.css'",
+    // Vue 3 has no global registration: the renderer registers these
+    directives: { loading: 'vLoading' },
     doc: (p) => `https://element-plus.org/zh-CN/component/${p}.html`,
   },
   vant2: {
@@ -834,6 +836,19 @@ if (write) {
   )
   for (const s of subs)
     lines.push(`export const ${s.componentName} = ${s.exportName}.${s.subName}`)
+  // Directives for `v-<name>` props (see the material builder README)
+  const directives = Object.entries(L.directives ?? {})
+  if (directives.length) {
+    lines.splice(
+      2,
+      0,
+      `import { ${directives.map(([, exported]) => exported).join(', ')} } from '${L.pkg}'`,
+    )
+    lines.push(
+      '',
+      `export const directives = { ${directives.map(([name, exported]) => `${name}: ${exported}`).join(', ')} }`,
+    )
+  }
   lines.push(
     '',
     'console.log(',

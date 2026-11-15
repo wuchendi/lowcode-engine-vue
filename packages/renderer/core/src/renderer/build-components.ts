@@ -94,12 +94,31 @@ export function findComponent(
   return getSubComponent(library, paths)
 }
 
+/**
+ * Registers the directives the loaded libraries export as `directives`
+ * (`{ loading: vLoading }`), so that `v-<name>` props resolve them. Vue 3
+ * has no global registration a library script could do by itself.
+ */
+function registerLibraryDirectives(libraryMap: Record<string, string>) {
+  const adapter = getAdapter()
+  const globals = window as unknown as Record<string, unknown>
+  for (const libraryName of Object.values(libraryMap)) {
+    const library = globals[libraryName]
+    const directives = isObject(library) ? library.directives : undefined
+    if (!isObject(directives)) continue
+    for (const [name, directive] of Object.entries(directives)) {
+      if (directive) adapter.registerDirective(name, directive as object)
+    }
+  }
+}
+
 export function buildComponents(
   libraryMap: Record<string, string>,
   componentsMap: Record<string, ComponentsMapItem>,
   createComponent?: (schema: IPublicTypeComponentSchema) => VueComponent | null,
 ): Record<string, VueComponent> {
   const adapter = getAdapter()
+  registerLibraryDirectives(libraryMap)
   const components: Record<string, VueComponent> = {}
   Object.keys(componentsMap).forEach((componentName) => {
     const component = componentsMap[componentName]
