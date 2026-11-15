@@ -738,8 +738,8 @@ importers:
         specifier: ^15.8.1
         version: 15.8.1
       short-uuid:
-        specifier: ^4.2.2
-        version: 4.2.2
+        specifier: ^6.0.3
+        version: 6.0.3
     devDependencies:
       '@alifd/next':
         specifier: catalog:plugins
@@ -4734,9 +4734,9 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  short-uuid@4.2.2:
-    resolution: {integrity: sha512-IE7hDSGV2U/VZoCsjctKX6l5t5ak2jE0+aeGJi3KtvjIUNuZVmHVYUjNBhmo369FIWGDtaieRaO8A83Lvwfpqw==}
-    engines: {node: '>=8'}
+  short-uuid@6.0.3:
+    resolution: {integrity: sha512-UMZ3rYOoid307EqWsPTnoBUSOB51Fi28vUMPigUsSCmbaSvslyf/SlXZWOn4btj8tokhBTBkPFKVKKlIolEG1w==}
+    engines: {node: '>=14.17.0'}
 
   side-channel-list@1.0.1:
     resolution: {integrity: sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==}
@@ -9805,10 +9805,9 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  short-uuid@4.2.2:
+  short-uuid@6.0.3:
     dependencies:
       any-base: 1.1.0
-      uuid: 8.3.2
 
   side-channel-list@1.0.1:
     dependencies:
