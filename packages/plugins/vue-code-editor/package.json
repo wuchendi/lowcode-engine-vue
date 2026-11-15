@@ -44,7 +44,7 @@
     "@alilc/lowcode-plugin-base-monaco-editor": "^1.1.2",
     "@alilc/lowcode-utils": "catalog:shared",
     "acorn": "^8.10.0",
-    "magic-string": "^0.30.3",
+    "magic-string": "^1.4.5",
     "prop-types": "^15.8.1",
     "short-uuid": "^6.0.3"
   },
