@@ -280,8 +280,8 @@ importers:
   apps/designer:
     dependencies:
       '@alilc/lowcode-plugin-components-pane':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^2.0.4
+        version: 2.0.4
       '@alilc/lowcode-plugin-datasource-pane':
         specifier: ^1.0.10
         version: 1.0.11(@alifd/next@1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/node@26.6.6)(@types/react-dom@16.9.25(@types/react@16.14.70))(@types/react@16.14.70)(moment@2.31.0)(monaco-editor@0.52.2)(prop-types@15.8.1)(react-is@18.3.1)(supports-color@6.1.0)(typescript@7.0.2)
@@ -1009,8 +1009,8 @@ packages:
   '@alilc/lowcode-plugin-command@1.3.4':
     resolution: {integrity: sha512-PVbLZ0BbnJWtkMPRrqrGOyAMclYMHlu1v6oHhBsFSrC2jcDIBDJx++k1g47g0HP2IofPKrkwfkDe1W3sYjjHFw==}
 
-  '@alilc/lowcode-plugin-components-pane@1.0.7':
-    resolution: {integrity: sha512-+QIwI81Lc6jrXbH0twXoGABsQFaFOKqD0rla8JLGx6N/NtkuABygtIRIvErQP5SYMc8ul7Kxt7isDwsrT+HbYg==}
+  '@alilc/lowcode-plugin-components-pane@2.0.4':
+    resolution: {integrity: sha512-kTZmddS4D5jD7Ru6p2PGs0L5A+eHVPD/F2PtHco+bK0dLrCkvyHHiRC/YCCEuNUS7HSkzjfVVpMY/otglE4hGw==}
 
   '@alilc/lowcode-plugin-datasource-pane@1.0.11':
     resolution: {integrity: sha512-k31HM526zeDFWvkJOr227xUtaeby3YZAIkgAhC7pAdPhEpYgFQL3xfCS/wBiMsX56Wm8Lmi5Czzr4VuyCzjRSA==}
@@ -5571,7 +5571,7 @@ snapshots:
       - moment
       - react-dom
 
-  '@alilc/lowcode-plugin-components-pane@1.0.7':
+  '@alilc/lowcode-plugin-components-pane@2.0.4':
     dependencies:
       '@alilc/lowcode-types': 1.3.4
       classnames: 2.5.1
