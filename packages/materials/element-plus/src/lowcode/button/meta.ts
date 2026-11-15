@@ -238,7 +238,7 @@ const meta = {
           },
           tip: '图标组件',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

@@ -226,7 +226,7 @@ const meta = {
           },
           tip: '自定义树节点图标组件',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

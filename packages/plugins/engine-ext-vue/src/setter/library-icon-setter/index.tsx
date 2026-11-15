@@ -1,8 +1,8 @@
 import { Balloon, Icon, Input } from '@alifd/next'
 import React, { PureComponent } from 'react'
-import { intl } from '@/locale'
 
 import { elementIcons } from './element/icon'
+import { intl } from './locale'
 import { vantIcons } from './vant/icon'
 
 import './element/icon.css'
@@ -10,12 +10,17 @@ import './vant/icon.css'
 
 import './index.less'
 
-let client: string | null
-let icons: string[] = elementIcons
-
-// const CustomIcon = Icon.createFromIconfontCN({
-//   scriptUrl: '//at.alicdn.com/t/c/font_3713984_n3kn12ey5qi.js',
-// })
+/**
+ * The icon sets of the component libraries. The value is what the library's
+ * `icon` prop takes: the class name for Element UI, the name for Vant.
+ */
+const LIBRARIES = {
+  element: { icons: elementIcons, className: (icon: string) => icon },
+  vant: {
+    icons: vantIcons,
+    className: (icon: string) => `van-icon van-icon-${icon}`,
+  },
+}
 
 interface IconSetterProps {
   value: string
@@ -24,7 +29,8 @@ interface IconSetterProps {
   placeholder: string
   hasClear: boolean
   onChange: (icon: string) => undefined
-  icons: string[]
+  /** Icon set to choose from (`element` by default). */
+  library?: keyof typeof LIBRARIES
 }
 interface SetterValueType {
   props?: {
@@ -36,18 +42,16 @@ interface IconSetterState {
   setterValue: SetterValueType | string | null
 }
 
-export default class IconSetter extends PureComponent<
+/** `CIconSetter`: picks an icon of a component library (Element UI, Vant). */
+export default class LibraryIconSetter extends PureComponent<
   IconSetterProps,
   IconSetterState
 > {
-  static displayName = 'CIconSetter'
-
   static defaultProps = {
     value: undefined,
     type: 'string',
     defaultValue: '',
     hasClear: true,
-    icons,
     placeholder: intl('SelectIcon'),
     onChange: () => undefined,
   }
@@ -57,6 +61,7 @@ export default class IconSetter extends PureComponent<
     prevState: IconSetterState,
   ) {
     const { value, defaultValue } = nextProps
+
     if (prevState.setterValue == null) {
       if (value === undefined && defaultValue) {
         return {
@@ -68,15 +73,6 @@ export default class IconSetter extends PureComponent<
     return {
       setterValue: value,
     }
-  }
-
-  componentDidMount(): void {
-    const qs = new URLSearchParams(location.search)
-    client = qs.get('client')
-    icons = client && client === 'h5' ? vantIcons : elementIcons
-
-    // 手动更新组件
-    this.forceUpdate()
   }
 
   state = {
@@ -107,14 +103,15 @@ export default class IconSetter extends PureComponent<
   }
 
   render() {
-    const { placeholder, hasClear } = this.props
+    const { placeholder, hasClear, library } = this.props
     const { setterValue } = this.state
+    const { icons, className } = LIBRARIES[library ?? 'element']
     const _value =
       typeof setterValue === 'object'
         ? (setterValue as unknown as SetterValueType)?.props?.type
         : setterValue
 
-    const currentIcon = <Icon size="xs" type={_value} />
+    const currentIcon = _value ? <i className={className(_value)} /> : null
     const clearIcon = hasClear && (
       <Icon
         size="xs"
@@ -141,33 +138,28 @@ export default class IconSetter extends PureComponent<
         />
       </div>
     )
-    const InnerBeforeNode = (
-      <Balloon
-        className={'lowcode-icon-content'}
-        trigger={triggerNode}
-        needAdjust
-        triggerType="click"
-        closable={false}
-        alignEdge
-        align="l"
-        popupClassName="lowcode-icon-setter-popup"
-      >
-        <ul className="lowcode-icon-list">
-          {icons.map((icon) => (
-            <li key={icon} onClick={() => this.onSelectIcon(icon)}>
-              {client === 'h5' ? (
-                <i className={'van-icon-' + icon}></i>
-              ) : (
-                <i className={icon}></i>
-              )}
-              {/* <Icon type={icon} size="medium" /> */}
-              {/* <CustomIcon type={icon} size="medium" /> */}
-            </li>
-          ))}
-        </ul>
-      </Balloon>
-    )
 
-    return <div className="lc-icon-setter">{InnerBeforeNode}</div>
+    return (
+      <div className="lc-icon-setter">
+        <Balloon
+          className={'lowcode-icon-content'}
+          trigger={triggerNode}
+          needAdjust
+          triggerType="click"
+          closable={false}
+          alignEdge
+          align="l"
+          popupClassName="lowcode-icon-setter-popup"
+        >
+          <ul className="lowcode-icon-list">
+            {icons.map((icon) => (
+              <li key={icon} onClick={() => this.onSelectIcon(icon)}>
+                <i className={className(icon)}></i>
+              </li>
+            ))}
+          </ul>
+        </Balloon>
+      </div>
+    )
   }
 }

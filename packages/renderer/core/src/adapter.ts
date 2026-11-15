@@ -38,6 +38,18 @@ export interface ComponentInstance {
 /** Navigation guard callback, `next` style. */
 export type RouteGuard = (to: unknown, from: unknown, next: () => void) => void
 
+/**
+ * Every slot of a native element as its children: elements have no slot
+ * outlets. (Vnodes of the running Vue version.)
+ */
+export function slotChildren<T extends VNode = VNode>(slots?: Slots): T[] {
+  if (!slots) return []
+  const { default: defaultSlot, ...named } = slots
+  return [defaultSlot, ...Object.values(named)].flatMap((slot) =>
+    slot ? (slot() as T[]) || [] : [],
+  )
+}
+
 export interface RouteRecordInput {
   name: string
   path: string
@@ -109,12 +121,6 @@ export interface VueAdapter {
   refsOf(instance: ComponentInstance): Record<string, unknown>
   /** Runs `callback` where Vue runs `created`: after setup, before mount. */
   onCreated(callback: () => void): void
-  /** Registers route guards for the current component. */
-  onRouteGuards(guards: {
-    beforeRouteUpdate?: RouteGuard
-    beforeRouteLeave?: RouteGuard
-  }): void
-
   instanceId(instance: ComponentInstance): number
   isAlive(instance: ComponentInstance): boolean
   /** DOM nodes rendered by an instance, or null when it renders nothing. */

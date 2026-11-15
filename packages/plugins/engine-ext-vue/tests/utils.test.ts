@@ -1,6 +1,11 @@
 import type { IPublicTypeRootSchema } from '@alilc/lowcode-types'
 import { describe, expect, it } from 'vitest'
-import { isPlainObject, rootMethods, rootState } from '../src/utils'
+import {
+  currentRoot,
+  isPlainObject,
+  rootMethods,
+  rootState,
+} from '../src/utils'
 
 const root = {
   componentName: 'Page',
@@ -31,5 +36,25 @@ describe('isPlainObject', () => {
     expect(isPlainObject([])).toBe(false)
     expect(isPlainObject(new Date())).toBe(false)
     expect(isPlainObject(null)).toBe(false)
+  })
+})
+
+describe('currentRoot', () => {
+  const first = { componentName: 'Page', fileName: '/' }
+  const second = { componentName: 'Page', fileName: '/about' }
+  const exportSchema = () => ({ componentsTree: [first, second] })
+
+  it('is the document being edited, not the first of the project', () => {
+    const project = {
+      currentDocument: { exportSchema: () => second },
+      exportSchema,
+    }
+    expect(currentRoot(project as never)).toBe(second)
+  })
+
+  it('falls back to the first root without a current document', () => {
+    expect(currentRoot({ currentDocument: null, exportSchema } as never)).toBe(
+      first,
+    )
   })
 })

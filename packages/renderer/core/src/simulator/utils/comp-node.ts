@@ -1,5 +1,5 @@
 import type { ComponentInstance } from '../../adapter'
-import { isObject } from './check'
+import { isObject } from '../../shared'
 
 const SYMBOL_VDID = Symbol('_LCDocId')
 const SYMBOL_VNID = Symbol('_LCNodeId')

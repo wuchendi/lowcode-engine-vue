@@ -16,7 +16,7 @@ const recipes = require('./recipes.cjs')
 
 const [lib, ...flags] = process.argv.slice(2)
 const write = flags.includes('--write')
-const { DOCS, MATERIALS } = require('./paths.cjs')
+const { DOCS, LIBRARIES, MATERIALS } = require('./paths.cjs')
 if (!MATERIALS[lib])
   throw new Error(
     `Unknown library ${lib}: ${Object.keys(MATERIALS).join(', ')}`,
@@ -27,17 +27,13 @@ const docs = JSON.parse(readFileSync(join(DOCS, lib, 'parsed.json'), 'utf8'))
 
 const LIBS = {
   'element-ui': {
-    pkg: 'element-ui',
     entry: 'element-ui/lib/element-ui.common.js',
-    vue: 2,
     prefix: 'El',
     group: 'Element 组件',
     css: "import 'element-ui/lib/theme-chalk/index.css'",
     doc: (p) => `https://element.eleme.cn/#/zh-CN/component/${p}`,
   },
   'element-plus': {
-    pkg: 'element-plus',
-    vue: 3,
     prefix: 'El',
     exportPrefix: 'El',
     group: 'Element 组件',
@@ -47,26 +43,20 @@ const LIBS = {
     doc: (p) => `https://element-plus.org/zh-CN/component/${p}.html`,
   },
   vant2: {
-    pkg: 'vant',
     entry: 'vant/lib/index.js',
-    vue: 2,
     prefix: 'Van',
     group: 'Vant 组件',
     css: "import 'vant/lib/index.css'",
     doc: (p) => `https://vant-ui.github.io/vant/v2/#/zh-CN/${p}`,
   },
   vant4: {
-    pkg: 'vant',
     entry: 'vant/lib/index.js',
-    vue: 3,
     prefix: 'Van',
     group: 'Vant 组件',
     css: "import 'vant/lib/index.css'",
     doc: (p) => `https://vant-ui.github.io/vant/#/zh-CN/${p}`,
   },
   antd1: {
-    pkg: 'ant-design-vue',
-    vue: 2,
     prefix: 'A',
     group: 'Ant Design 组件',
     css: "import 'ant-design-vue/dist/antd.css'",
@@ -74,14 +64,15 @@ const LIBS = {
     subs: true,
   },
   antd4: {
-    pkg: 'ant-design-vue',
-    vue: 3,
     prefix: 'A',
     group: 'Ant Design 组件',
     css: "import 'ant-design-vue/dist/reset.css'",
     doc: (p) => `https://antdv.com/components/${p}-cn`,
   },
 }
+// Package and Vue version of each library: one table for every script
+for (const key of Object.keys(LIBS)) Object.assign(LIBS[key], LIBRARIES[key])
+
 const L = LIBS[lib]
 
 // ---------- browser globals for the libraries ----------
@@ -291,6 +282,12 @@ function parseDefault(raw, kind) {
   return undefined
 }
 
+/**
+ * Icon set of `CIconSetter` for the `icon` props of a library. Element Plus
+ * takes icon components, not the class names of Element UI.
+ */
+const ICON_LIBRARY = { 'element-ui': 'element', vant2: 'vant', vant4: 'vant' }
+
 function setterOf(name, row, runtimeProp) {
   const t = (row.type || '').toLowerCase()
   const types = new Set()
@@ -335,8 +332,11 @@ function setterOf(name, row, runtimeProp) {
     setters.push(
       /color/i.test(name)
         ? 'ColorSetter'
-        : name === 'icon' && /element|vant/.test(lib)
-          ? 'CIconSetter'
+        : name === 'icon' && ICON_LIBRARY[lib]
+          ? {
+              componentName: 'CIconSetter',
+              props: { library: ICON_LIBRARY[lib] },
+            }
           : 'StringSetter',
     )
   }

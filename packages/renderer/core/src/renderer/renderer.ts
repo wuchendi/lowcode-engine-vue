@@ -12,7 +12,7 @@ import type { RendererComponent } from './base'
 import { rendererConfig } from './config'
 import type { RequestHandlersMap } from './data-source'
 import { RENDERER_COMPS } from './renderers'
-import { schemaComponent } from './schema-component'
+import { listenersAsProps, schemaComponent } from './schema-component'
 import type { RuntimeScope } from './scope'
 
 export interface RendererProps {
@@ -79,17 +79,6 @@ const props = {
  * Renders a LowCode Engine container schema (Page, Block, Component) with
  * the given components.
  */
-/** Listeners of the instance as `onXxx` props (Vue 2 keeps them apart). */
-function listenersAsProps(context: object) {
-  const listeners = ((context as { listeners?: unknown }).listeners ??
-    {}) as Record<string, unknown>
-  const result: Record<string, unknown> = {}
-  for (const [name, handler] of Object.entries(listeners)) {
-    result[`on${name[0].toUpperCase()}${name.slice(1)}`] = handler
-  }
-  return result
-}
-
 export const Renderer = defineComponent({
   name: 'LowCodeRenderer',
   // Attributes and listeners go to the schema's root component explicitly

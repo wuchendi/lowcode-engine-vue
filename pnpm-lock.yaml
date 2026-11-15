@@ -207,9 +207,6 @@ catalogs:
       specifier: ^5.1.0
       version: 5.1.0
   materials:
-    '@types/lodash':
-      specifier: ^4.17.27
-      version: 4.17.27
     lodash:
       specifier: ^4.17.21
       version: 4.18.1
@@ -497,18 +494,6 @@ importers:
       '@cdlab996/lowcode-tsconfig':
         specifier: workspace:*
         version: link:../../tsconfig
-      '@types/lodash':
-        specifier: catalog:materials
-        version: 4.17.27
-      '@types/react':
-        specifier: catalog:shared
-        version: 16.14.70
-      lodash:
-        specifier: catalog:materials
-        version: 4.18.1
-      react:
-        specifier: catalog:shared
-        version: 16.14.0
       vite:
         specifier: catalog:dev
         version: 8.3.8(@types/node@26.6.6)(jiti@2.7.0)(less@4.9.1)(sass@1.108.2)(yaml@2.9.1)
@@ -531,15 +516,6 @@ importers:
       '@cdlab996/lowcode-tsconfig':
         specifier: workspace:*
         version: link:../../tsconfig
-      '@types/lodash':
-        specifier: catalog:materials
-        version: 4.17.27
-      less:
-        specifier: catalog:dev
-        version: 4.9.1
-      lodash:
-        specifier: catalog:materials
-        version: 4.18.1
       vite:
         specifier: catalog:dev
         version: 8.3.8(@types/node@26.6.6)(jiti@2.7.0)(less@4.9.1)(sass@1.108.2)(yaml@2.9.1)
@@ -562,12 +538,6 @@ importers:
       '@cdlab996/lowcode-tsconfig':
         specifier: workspace:*
         version: link:../../tsconfig
-      '@types/lodash':
-        specifier: catalog:materials
-        version: 4.17.27
-      lodash:
-        specifier: catalog:materials
-        version: 4.18.1
       vite:
         specifier: catalog:dev
         version: 8.3.8(@types/node@26.6.6)(jiti@2.7.0)(less@4.9.1)(sass@1.108.2)(yaml@2.9.1)
@@ -605,9 +575,6 @@ importers:
 
   packages/plugins/directive-loading:
     devDependencies:
-      '@alifd/next':
-        specifier: catalog:plugins
-        version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
         version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)
@@ -692,9 +659,6 @@ importers:
 
   packages/plugins/manual:
     devDependencies:
-      '@alifd/next':
-        specifier: catalog:plugins
-        version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-types':
         specifier: catalog:shared
         version: 1.3.4
@@ -713,9 +677,6 @@ importers:
 
   packages/plugins/set-doc-url:
     devDependencies:
-      '@alifd/next':
-        specifier: catalog:plugins
-        version: 1.27.34(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@alilc/lowcode-engine':
         specifier: catalog:shared
         version: 1.3.4(@alifd/meet-react@2.9.9(rax@1.2.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(@types/react@16.14.70)(moment@2.31.0)(reflect-metadata@0.2.2)
@@ -832,15 +793,9 @@ importers:
 
   packages/renderer/vue2:
     dependencies:
-      '@alilc/lowcode-types':
-        specifier: catalog:shared
-        version: 1.3.4
       '@cdlab996/lowcode-vue-core':
         specifier: workspace:*
         version: link:../core
-      intl-messageformat:
-        specifier: catalog:shared
-        version: 12.1.5
     devDependencies:
       '@alilc/lowcode-designer':
         specifier: catalog:shared
@@ -860,15 +815,9 @@ importers:
 
   packages/renderer/vue3:
     dependencies:
-      '@alilc/lowcode-types':
-        specifier: catalog:shared
-        version: 1.3.4
       '@cdlab996/lowcode-vue-core':
         specifier: workspace:*
         version: link:../core
-      intl-messageformat:
-        specifier: catalog:shared
-        version: 12.1.5
     devDependencies:
       '@alilc/lowcode-designer':
         specifier: catalog:shared

@@ -10,6 +10,21 @@ import {
 
 type PropOption = Record<string, unknown> | null
 
+/**
+ * Listeners of a setup context as `onXxx` props (Vue 2 keeps them apart
+ * from the attributes; Vue 3 has none: they already are `onXxx` attrs).
+ */
+export function listenersAsProps(context: object): Record<string, unknown> {
+  const listeners = ((context as { listeners?: unknown }).listeners ??
+    {}) as Record<string, unknown>
+  return Object.fromEntries(
+    Object.entries(listeners).map(([name, handler]) => [
+      `on${name[0].toUpperCase()}${name.slice(1)}`,
+      handler,
+    ]),
+  )
+}
+
 export interface DeclaredOptions {
   props: Record<string, PropOption>
   emits: string[]

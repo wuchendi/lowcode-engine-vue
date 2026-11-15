@@ -2,6 +2,7 @@ import { Select } from '@alifd/next'
 import type { DataSourceItem } from '@alifd/next/types/select'
 import { project } from '@alilc/lowcode-engine'
 import React, { PureComponent } from 'react'
+import { currentRoot } from '../../utils'
 import './index.less'
 
 interface ClassNameSetterProps {
@@ -33,8 +34,7 @@ export default class ClassNameView extends PureComponent<
   }
 
   getClassNameList = () => {
-    const schema = project.exportSchema()
-    const css = schema.componentsTree[0].css
+    const css = currentRoot(project as never)?.css
     const classNameList: string[] = []
     if (css) {
       const re = /\.?\w+[^{]+\{[^}]*\}/g

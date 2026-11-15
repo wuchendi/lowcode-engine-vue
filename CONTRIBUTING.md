@@ -83,7 +83,7 @@ Versions are managed through catalogs in `pnpm-workspace.yaml`:
   used across groups. Keep `@alilc/*` here.
 - `vue2-7` / `vue3` — Vue and vue-router of each version.
 - `plugins` — Fusion (`@alifd/next`) for the designer plugins.
-- `materials` — lodash, bundled into the material metas.
+- `materials` — lodash, which the designer serves to its page (the setters read it as a global).
 - `dev` — tooling (Biome, TypeScript, Vitest, tsdown, Vite).
 
 ## Material metas

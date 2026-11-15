@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { Balloon, Icon, Input } from '@alifd/next'
 import React, { PureComponent } from 'react'
 

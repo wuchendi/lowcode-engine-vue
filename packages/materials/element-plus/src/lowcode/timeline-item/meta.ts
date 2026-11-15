@@ -169,7 +169,7 @@ const meta = {
           },
           tip: '自定义图标',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

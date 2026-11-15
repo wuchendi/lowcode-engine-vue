@@ -14,6 +14,7 @@ import FunctionSetter from './setter/function-setter'
 import I18nSetter from './setter/i18n-setter'
 import IconSetter from './setter/icon-setter'
 import JsonSetter from './setter/json-setter'
+import LibraryIconSetter from './setter/library-icon-setter'
 import MixedSetter from './setter/mixed-setter'
 import NumberSetter from './setter/number-setter'
 import ObjectSetter from './setter/object-setter'
@@ -29,16 +30,6 @@ import { isPlainObject } from './utils'
 import './index.less'
 import packagesInfo from '../package.json'
 import { intl } from './locale'
-// suggest: 做成 StringSetter 的一个参数，
-// export const TextAreaSetter = {
-//   component: TextAreaSetter,
-//   title: 'TextareaSetter',
-//   recommend: true,
-//   condition: (field: any) => {
-//     const v = field.getValue();
-//     return typeof v === 'string';
-//   },
-// };
 
 export const DateSetter = DatePicker
 export const DateYearSetter = DatePicker.YearPicker
@@ -184,6 +175,8 @@ const setterMap = {
   JsonSetter: DataJsonSetter,
   StyleSetter: StyleSetterV2,
   IconSetter,
+  // Icons of Element UI and Vant, for the materials of those libraries
+  CIconSetter: LibraryIconSetter,
   ClassNameSetter,
   I18nSetter,
   FunctionSetter: FunctionBindSetter,
@@ -218,5 +211,3 @@ console.log(
   'padding: 2px 1px; border-radius: 0 3px 3px 0; color: #fff; background: #42c02e; font-weight: bold;',
 )
 export default engineExt
-
-// registerSetter(builtinSetters);

@@ -6,12 +6,13 @@ import type { IEditorInstance } from '@alilc/lowcode-plugin-base-monaco-editor/e
 import type {
   IPublicModelSettingField,
   IPublicTypeProjectSchema,
+  IPublicTypeRootSchema,
   PluginConfig,
   PluginProps,
 } from '@alilc/lowcode-types'
 import React, { Component } from 'react'
 import { intl } from '../../locale'
-import { rootMethods, rootState } from '../../utils'
+import { currentRoot, rootMethods, rootState } from '../../utils'
 import './index.less'
 
 const defaultEditorProps = {
@@ -99,10 +100,7 @@ export default class VariableBindDialog extends Component<
   state: VariableBindDialogState = {
     visiable: false,
     isOverFlowMaxSize: false,
-    // stateVaroableList: [],
-    // Messages are ICU texts, without HTML
     helpText: intl('VariableHelp').replace(/\n/g, '<br>'),
-    // contextKeys: [],
     jsCode: '',
     searchValue: '',
     variableListMap: {}, // 变量列表
@@ -135,9 +133,10 @@ export default class VariableBindDialog extends Component<
     )
   }
 
-  exportSchema = () => {
-    // 可以定制getSchema方法
-    return this.props.config?.props?.getSchema?.() || project.exportSchema()
+  /** The root being edited; `getSchema` of the config can replace it. */
+  rootSchema = (): IPublicTypeRootSchema | undefined => {
+    const custom = this.props.config?.props?.getSchema?.()
+    return custom ? custom.componentsTree[0] : currentRoot(project as never)
   }
 
   initCode = () => {
@@ -148,8 +147,6 @@ export default class VariableBindDialog extends Component<
 
     this.setState({
       jsCode,
-      // fullScreenStatus: false,
-      // stateVaroableList: [],
       searchValue: '',
       variableListMap: {}, // 变量列表
       selParentVariable: null, // 选中的父级变量
@@ -167,8 +164,7 @@ export default class VariableBindDialog extends Component<
    * @return {Array}
    */
   getMethods(): VariableTreeNode[] {
-    const schema = this.exportSchema()
-    return rootMethods(schema.componentsTree[0]).map((key) => ({
+    return rootMethods(this.rootSchema()).map((key) => ({
       label: key,
       key,
     }))
@@ -180,9 +176,7 @@ export default class VariableBindDialog extends Component<
    * @return {Array}
    */
   getVarableList(): VariableTreeNode[] {
-    const schema = this.exportSchema()
-
-    const stateMap = rootState(schema.componentsTree[0])
+    const stateMap = rootState(this.rootSchema())
     const dataSourceMap: Record<string, unknown> = {}
 
     for (const key in stateMap) {
@@ -207,9 +201,6 @@ export default class VariableBindDialog extends Component<
     }
     const treeList: VariableTreeNode[] = []
     this.walkNode(dataSourceMap, treeList, '')
-    // this.setState({
-    //   treeList
-    // })
     return treeList
   }
 
@@ -268,8 +259,7 @@ export default class VariableBindDialog extends Component<
    * @return {Array}
    */
   getDataSource(): VariableTreeNode[] {
-    const schema = this.exportSchema()
-    const stateMap = schema.componentsTree[0]?.dataSource
+    const stateMap = this.rootSchema()?.dataSource
     const list = stateMap?.list || []
     const dataSource: VariableTreeNode[] = []
 
@@ -482,18 +472,6 @@ export default class VariableBindDialog extends Component<
     } else {
       childrenVariableList = variableListMap[key].childrens
     }
-
-    // const matchedKeys = [];
-    // const loop = data =>
-    //   data.forEach(item => {
-    //     if (item.label.indexOf(value) > -1) {
-    //       matchedKeys.push(item.key);
-    //     }
-    //     if (item.children && item.children.length) {
-    //       loop(item.children);
-    //     }
-    //   });
-    // loop(childrenVariableList);
 
     this.setState({
       selParentVariable: key,

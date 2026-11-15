@@ -30,10 +30,6 @@ export default class ColorSetter extends React.Component<
   componentDidMount() {
     this.screenChange()
     this.changeWidth()
-    // const { onChange, value, defaultValue } = this.props;
-    // if (value == undefined && defaultValue) {
-    //   onChange(defaultValue);
-    // }
   }
   /**
    * 屏幕分辨率监听

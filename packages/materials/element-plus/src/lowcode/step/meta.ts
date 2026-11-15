@@ -46,7 +46,7 @@ const meta = {
           },
           tip: 'Step 组件的自定义图标。也支持 slot 方式写入',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

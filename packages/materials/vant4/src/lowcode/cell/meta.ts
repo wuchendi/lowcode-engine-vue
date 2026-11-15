@@ -107,7 +107,12 @@ const meta = {
           },
           tip: '左侧图标名称或图片链接，等同于 Icon 组件的 name 属性',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'vant',
+          },
+        },
         supportVariable: true,
       },
       {

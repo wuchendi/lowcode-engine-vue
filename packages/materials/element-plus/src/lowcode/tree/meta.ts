@@ -325,7 +325,7 @@ const meta = {
           },
           tip: 'custom tree node icon component',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

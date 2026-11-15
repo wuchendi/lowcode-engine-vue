@@ -101,7 +101,12 @@ const meta = {
           },
           tip: '图标类名',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'element',
+          },
+        },
         supportVariable: true,
       },
     ],

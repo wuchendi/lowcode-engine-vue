@@ -44,12 +44,10 @@
     "prepack": "pnpm build"
   },
   "peerDependencies": {
-    "@alifd/next": "*",
     "@alilc/lowcode-types": "^1.0.0",
     "react": ">=16"
   },
   "devDependencies": {
-    "@alifd/next": "catalog:plugins",
     "@alilc/lowcode-types": "catalog:shared",
     "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@types/react": "catalog:shared",

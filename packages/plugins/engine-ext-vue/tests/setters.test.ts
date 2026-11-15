@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom'
 import { act, Simulate } from 'react-dom/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import BoolSetter from '../src/setter/bool-setter'
+import LibraryIconSetter from '../src/setter/library-icon-setter'
 import NumberSetter from '../src/setter/number-setter'
 import RadioGroupSetter from '../src/setter/radiogroup-setter'
 import StringSetter from '../src/setter/string-setter'
@@ -27,6 +28,32 @@ afterEach(() => {
 })
 
 describe('setters', () => {
+  it('LibraryIconSetter lists the icons of the given library', () => {
+    const open = (props: object) => {
+      // (typed getDerivedStateFromProps: not a ComponentType<any>)
+      const root = render(LibraryIconSetter as never, props)
+      act(() => {
+        ;(root.querySelector('.lc-icon-setter input') as HTMLElement).click()
+      })
+      return [...document.body.querySelectorAll('.lowcode-icon-list li i')]
+    }
+    // Element UI class names by default
+    const element = open({ value: '', onChange: vi.fn() })
+    expect(element.length).toBeGreaterThan(100)
+    expect(element[0]!.className).toMatch(/^el-icon-/)
+    ReactDOM.unmountComponentAtNode(container!)
+    document.body.innerHTML = ''
+
+    // Vant: the value is the icon name, shown with the van-icon classes
+    const onChange = vi.fn()
+    const vant = open({ value: '', library: 'vant', onChange })
+    expect(vant[0]!.className).toBe('van-icon van-icon-success')
+    act(() => {
+      ;(vant[0]!.parentElement as HTMLElement).click()
+    })
+    expect(onChange).toHaveBeenCalledWith('success')
+  })
+
   it('StringSetter shows and changes the value', () => {
     const onChange = vi.fn()
     const input = render(StringSetter, { value: 'a', onChange }).querySelector(

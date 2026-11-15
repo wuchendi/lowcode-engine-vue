@@ -87,7 +87,12 @@ const meta = {
           },
           tip: 'Icon',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'element',
+          },
+        },
         supportVariable: true,
         defaultValue: 'el-icon-question',
       },

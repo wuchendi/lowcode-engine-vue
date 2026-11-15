@@ -4,6 +4,7 @@ import type {
   VueAdapter,
   VueComponent,
 } from '@cdlab996/lowcode-vue-core'
+import { slotChildren } from '@cdlab996/lowcode-vue-core'
 import type {
   Component,
   ComponentInternalInstance,
@@ -19,49 +20,16 @@ import {
   h as createVNode,
   defineComponent,
   Fragment,
-  getCurrentInstance,
   isVNode,
   onBeforeMount,
-  onBeforeUnmount,
   resolveDirective,
   withDirectives,
 } from 'vue'
-
-/** Instance seen through vue-router 4 / 5 (types only; no vue-router import). */
-interface RouteRecordLike {
-  instances: Record<string, unknown>
-}
-interface RouteLike {
-  matched: RouteRecordLike[]
-}
-interface RouterLike {
-  beforeEach(
-    guard: (to: RouteLike, from: RouteLike, next: () => void) => void,
-  ): () => void
-}
-
-function findPageRecord(
-  matched: RouteRecordLike[],
-  instance: ComponentPublicInstance | null,
-) {
-  for (let cur = instance; cur; cur = cur.$parent) {
-    const record = matched.find((r) => r.instances.default === cur)
-    if (record) return record
-  }
-}
 
 const DIRECTIVE = /^v-([\w-]+)(?::(\w+))?((?:\.\w+)*)$/
 
 /** Directives of the materials (`registerDirective`), by name. */
 const registeredDirectives = new Map<string, Directive>()
-
-function slotChildren(slots?: Slots): VNode[] {
-  if (!slots) return []
-  const { default: defaultSlot, ...named } = slots
-  return [defaultSlot, ...Object.values(named)].flatMap((slot) =>
-    slot ? (slot() as VNode[]) || [] : [],
-  )
-}
 
 /** Splits `v-name:arg.mod` keys off the props as directive arguments. */
 function extractDirectives(props: Record<string, unknown>) {
@@ -107,11 +75,11 @@ function h(
     vnode = createVNode(
       Fragment,
       { key: rest.key as string },
-      slotChildren(slots),
+      slotChildren<VNode>(slots),
     )
   } else if (typeof type === 'string') {
     // Native elements have no slot outlets: every slot becomes children
-    vnode = createVNode(type, rest, slotChildren(slots))
+    vnode = createVNode(type, rest, slotChildren<VNode>(slots))
   } else {
     vnode = createVNode(type as Component, rest, slots as never)
   }
@@ -126,7 +94,7 @@ function wrapTag(tag: string | VueComponent): VueComponent {
         createVNode(
           tag as Component,
           { ...attrs },
-          slotChildren(slots as Slots),
+          slotChildren<VNode>(slots as Slots),
         )
     },
   })
@@ -194,25 +162,6 @@ export const vue3Adapter: VueAdapter = {
     return inst.refs
   },
   onCreated: (callback) => onBeforeMount(callback),
-  onRouteGuards(guards) {
-    // `$router.beforeEach` on the route record rendering this page, like the
-    // Vue 2 adapter (vue-router's composition guards would import vue-router)
-    const proxy = getCurrentInstance()?.proxy ?? null
-    const router = (proxy as unknown as { $router?: RouterLike } | null)
-      ?.$router
-    if (!proxy || !router) return
-    const unregister = router.beforeEach((to, from, next) => {
-      const record = findPageRecord(from.matched, proxy)
-      const callback =
-        record &&
-        (to.matched.includes(record)
-          ? guards.beforeRouteUpdate
-          : guards.beforeRouteLeave)
-      if (callback) callback.call(proxy, to, from, next)
-      else next()
-    })
-    onBeforeUnmount(unregister)
-  },
   instanceId: (instance) => internal(instance).uid,
   isAlive: (instance) => !internal(instance).isUnmounted,
   domNodesOf(instance) {

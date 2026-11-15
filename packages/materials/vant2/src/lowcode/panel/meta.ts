@@ -59,7 +59,12 @@ const meta = {
           },
           tip: '标题左侧图标名称或图片链接',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'vant',
+          },
+        },
         supportVariable: true,
       },
       {

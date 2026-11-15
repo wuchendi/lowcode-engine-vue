@@ -24,7 +24,7 @@ It reads `React`, `ReactDOM`, `PropTypes`, `moment`, `_` (lodash), `Next`
 
 `StringSetter`, `TextAreaSetter`, `NumberSetter`, `BoolSetter`,
 `SelectSetter`, `RadioGroupSetter`, `DateSetter` (and year / month / range), `TimePicker`,
-`ColorSetter`, `IconSetter`, `ClassNameSetter`, `StyleSetter`, `I18nSetter`,
+`ColorSetter`, `IconSetter`, `CIconSetter`, `ClassNameSetter`, `StyleSetter`, `I18nSetter`,
 `TitleSetter`, `JsonSetter`, `ArraySetter`, `ObjectSetter`, `MixedSetter`,
 `SlotSetter`, `FunctionSetter`, `EventsSetter`, `ExpressionSetter` and
 `VariableSetter`, plus the variable and event binding dialogs.
@@ -35,6 +35,12 @@ What differs from the React bundle:
   on `this`: `state`, `methods` and the bindings returned by `setup()`
   (`meta.setupBindings`, written by
   [`@cdlab996/lowcode-plugin-vue-code-editor`](../vue-code-editor)).
+- They read the document being edited (the current page or low-code
+  component), not the first root of the project.
+- `CIconSetter` picks an icon of a component library, with its font bundled:
+  `{ componentName: 'CIconSetter', props: { library: 'vant' } }` (`element`,
+  the Element UI class names, by default). The materials of this repository
+  use it for their `icon` props.
 - Texts follow the engine locale (`zh-CN` / `en-US`).
 
 ## Development

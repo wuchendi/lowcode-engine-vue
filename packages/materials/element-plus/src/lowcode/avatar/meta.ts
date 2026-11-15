@@ -20,7 +20,7 @@ const meta = {
           },
           tip: 'representation type to icon, more info on icon component.',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
       },
       {

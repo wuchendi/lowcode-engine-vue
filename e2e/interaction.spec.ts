@@ -46,3 +46,35 @@ for (const vue of [2, 3] as const) {
     await expect(button).toContainText('Before')
   })
 }
+
+for (const vue of [2, 3] as const) {
+  test(`Vue ${vue}: picks a Vant icon with the icon setter`, async ({
+    page,
+  }) => {
+    const frame = await openDesigner(page, vue)
+    await clearPage(page)
+    await page.evaluate(() => {
+      const doc = window.AliLowCodeEngine.project.currentDocument
+      const node = doc.insertNode(doc.root, {
+        componentName: 'VanButton',
+        props: { text: 'Icon' },
+      })
+      node.select()
+    })
+    // The setter of the materials' `icon` props comes from engine-ext-vue,
+    // with the icon set of the library and its font
+    await page.locator('.lc-settings-main .lc-icon-setter input').click()
+    const icons = page.locator('.lowcode-icon-list li i.van-icon')
+    await expect(icons.first()).toBeVisible()
+    expect(await icons.count()).toBeGreaterThan(100)
+    expect(
+      await icons
+        .first()
+        .evaluate((el) => document.fonts.check('14px vant-icon') && !!el),
+    ).toBe(true)
+    await page.locator('.lowcode-icon-list li i.van-icon-plus').click()
+    await expect(
+      frame.locator('.lc-page .van-button .van-icon-plus'),
+    ).toBeVisible()
+  })
+}

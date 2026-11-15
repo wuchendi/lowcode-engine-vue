@@ -33,7 +33,12 @@ const meta = {
           },
           tip: '图标',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'vant',
+          },
+        },
         supportVariable: true,
       },
       {

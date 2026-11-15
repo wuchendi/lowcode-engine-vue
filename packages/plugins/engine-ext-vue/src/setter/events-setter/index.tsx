@@ -5,6 +5,7 @@ import nativeEvents from './native-events'
 
 import './index.less'
 import { intl } from '../../locale'
+import { currentRoot } from '../../utils'
 
 const { Item, Group } = Menu
 const RadioGroup = Radio.Group
@@ -88,28 +89,6 @@ export default class EventsSetter extends Component<
     eventDataList: eventDataListOf(this.props.value),
   }
 
-  // constructor (){
-  //   super();
-  //   debugger;
-  //   // if (!this.props || !this.props.value){
-  //   //   this.setState({
-  //   //     eventDataList:[]
-  //   //   })
-  //   // }
-  // }
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   debugger;
-  //   // const { value } = nextProps;
-  //   // debugger;
-  //   // if (value !== prevState.eventDataList) {
-  //   //   return {
-  //   //     value,
-  //   //   };
-  //   // }
-  //   return null;
-  // }
-
   componentDidMount() {
     // console.log(this.state.eventDataList);
     this.initEventBtns()
@@ -125,9 +104,7 @@ export default class EventsSetter extends Component<
   initLifeCycleEventDataList = () => {
     const { isRoot } = this.state
     if (isRoot && !this.props.value) {
-      const schema = project.exportSchema()
-
-      const lifeCycles = schema.componentsTree[0].lifeCycles
+      const lifeCycles = currentRoot(project as never)?.lifeCycles
       const eventDataList: EventData[] = []
       if (lifeCycles) {
         for (const key in lifeCycles) {
@@ -382,9 +359,6 @@ export default class EventsSetter extends Component<
         functionName: eventName,
       })
     })
-    // editor.emit('sourceEditor.focusByFunction',{
-    //   functionName:eventName
-    // })
   }
 
   closeEventMenu = () => {
@@ -397,11 +371,6 @@ export default class EventsSetter extends Component<
 
   openDeleteEventDialog = (eventName: string) => {
     this.deleteEvent(eventName)
-    // Dialog.confirm({
-    //   title: '删除事件',
-    //   content: '确定删除当前事件吗',
-    //   onOk: () => this.deleteEvent(eventName),
-    // });
   }
 
   deleteEvent = (eventName: string) => {
@@ -442,7 +411,6 @@ export default class EventsSetter extends Component<
       }
       return item
     })
-    // this.setBindEventName(bindEventName);
     event.emit(
       'eventBindDialog.openDialog',
 
@@ -464,9 +432,7 @@ export default class EventsSetter extends Component<
     eventDataList.map((item) => {
       if (item.name === bindEventName) {
         item.relatedEventName = relatedEventName
-        // if (paramStr) {
         item.paramStr = paramStr
-        // }
       }
 
       return item
@@ -477,8 +443,6 @@ export default class EventsSetter extends Component<
     })
 
     this.props.onChange({ eventDataList, eventList })
-
-    // this.closeDialog();
   }
 
   render() {

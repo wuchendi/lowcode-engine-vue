@@ -177,7 +177,12 @@ const meta = {
           },
           tip: '节点图标',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'element',
+          },
+        },
         supportVariable: true,
       },
       {

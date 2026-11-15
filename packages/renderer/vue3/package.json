@@ -50,9 +50,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@alilc/lowcode-types": "catalog:shared",
-    "@cdlab996/lowcode-vue-core": "workspace:*",
-    "intl-messageformat": "catalog:shared"
+    "@cdlab996/lowcode-vue-core": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.5.0",

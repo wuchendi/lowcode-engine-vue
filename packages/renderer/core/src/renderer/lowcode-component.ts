@@ -3,19 +3,7 @@ import { defineComponent, markRaw } from 'vue'
 import type { VueComponent } from '../adapter'
 import { getAdapter } from '../adapter'
 import { Renderer } from './renderer'
-import { declaredOptions } from './schema-component'
-
-/** Listeners of a setup context as `onXxx` props (Vue 2 keeps them apart). */
-function listenersOf(context: object): Record<string, unknown> {
-  const listeners = ((context as { listeners?: unknown }).listeners ??
-    {}) as Record<string, unknown>
-  return Object.fromEntries(
-    Object.entries(listeners).map(([name, handler]) => [
-      `on${name[0].toUpperCase()}${name.slice(1)}`,
-      handler,
-    ]),
-  )
-}
+import { declaredOptions, listenersAsProps } from './schema-component'
 
 /**
  * A low-code component: renders its schema with the renderer props given by
@@ -39,7 +27,7 @@ export function lowCodeComponent(
         return () =>
           adapter.h(Renderer, {
             ...setupContext.attrs,
-            ...listenersOf(setupContext),
+            ...listenersAsProps(setupContext),
             ...rendererProps(),
             schema,
             props: { ...props },

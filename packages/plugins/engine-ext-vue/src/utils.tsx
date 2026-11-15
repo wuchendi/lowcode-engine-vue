@@ -27,6 +27,28 @@ function setupBindingsOf(root: IPublicTypeRootSchema | undefined) {
   return isObject(bindings) ? (bindings as SetupBindings) : {}
 }
 
+/** The part of the engine's project the setters read. */
+interface ProjectLike {
+  currentDocument?: {
+    exportSchema(stage: never): IPublicTypeRootSchema | undefined
+  } | null
+  exportSchema(stage?: never): { componentsTree: IPublicTypeRootSchema[] }
+}
+
+/**
+ * The root schema being edited: the current page or component. A project
+ * has several documents, and `exportSchema().componentsTree[0]` is always
+ * the first page.
+ */
+export function currentRoot(
+  project: ProjectLike,
+): IPublicTypeRootSchema | undefined {
+  return (
+    project.currentDocument?.exportSchema('save' as never) ??
+    project.exportSchema().componentsTree[0]
+  )
+}
+
 /** State of a root schema: `state` and the state returned by `setup()`. */
 export function rootState(
   root: IPublicTypeRootSchema | undefined,

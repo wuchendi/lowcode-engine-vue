@@ -21,7 +21,6 @@ type EditorDidMount = NonNullable<IGeneralManacoEditorProps['editorDidMount']>
 
 const defaultEditorOption = {
   readOnly: false,
-  // automaticLayout: true,
   folding: true, // 默认开启折叠代码功能
   wordWrap: 'off',
   formatOnPaste: true,

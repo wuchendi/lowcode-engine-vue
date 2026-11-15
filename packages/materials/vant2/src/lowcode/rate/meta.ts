@@ -138,7 +138,12 @@ const meta = {
           },
           tip: '选中时的图标名称或图片链接',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'vant',
+          },
+        },
         supportVariable: true,
         defaultValue: 'star',
       },

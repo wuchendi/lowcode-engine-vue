@@ -12,30 +12,24 @@ const {
   writeFileSync,
 } = require('node:fs')
 const { join, resolve } = require('node:path')
-const { MATERIALS, LIBS } = require('./paths.cjs')
+const { LIBRARIES, LIBS, MATERIALS } = require('./paths.cjs')
 
 /** What the template cannot read from the package. */
 const INFO = {
   'element-ui': {
     title: 'Element UI',
-    lib: 'element-ui',
-    vue: 2,
     release: 'the last Element UI release',
     home: 'https://element.eleme.cn/#/zh-CN',
     docs: 'https://element.eleme.cn/#/zh-CN/component/installation',
   },
   vant2: {
     title: 'Vant 2',
-    lib: 'vant',
-    vue: 2,
     release: 'the last Vant 2 release',
     home: 'https://vant-ui.github.io/vant/v2/#/zh-CN/',
     docs: 'https://vant-ui.github.io/vant/v2/#/zh-CN/',
   },
   antd1: {
     title: 'Ant Design Vue 1',
-    lib: 'ant-design-vue',
-    vue: 2,
     release: 'the last 1.x release, the last one supporting Vue 2',
     home: 'https://1x.antdv.com/docs/vue/introduce-cn/',
     docs: 'https://1x.antdv.com/docs/vue/introduce-cn/',
@@ -43,22 +37,16 @@ const INFO = {
   },
   'element-plus': {
     title: 'Element Plus',
-    lib: 'element-plus',
-    vue: 3,
     home: 'https://element-plus.org/zh-CN/',
     docs: 'https://element-plus.org/zh-CN/component/overview.html',
   },
   vant4: {
     title: 'Vant 4',
-    lib: 'vant',
-    vue: 3,
     home: 'https://vant-ui.github.io/vant/#/zh-CN/',
     docs: 'https://vant-ui.github.io/vant/#/zh-CN/',
   },
   antd4: {
     title: 'Ant Design Vue 4',
-    lib: 'ant-design-vue',
-    vue: 3,
     home: 'https://antdv.com/docs/vue/introduce-cn',
     docs: 'https://antdv.com/docs/vue/introduce-cn',
   },
@@ -74,7 +62,11 @@ const libraryOf = (name) =>
 
 function render(key) {
   const dir = MATERIALS[key]
-  const info = INFO[key]
+  const info = {
+    ...INFO[key],
+    lib: LIBRARIES[key].pkg,
+    vue: LIBRARIES[key].vue,
+  }
   const pkg = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8'))
   const version = pkg.dependencies[info.lib]
   const count = readdirSync(join(dir, 'src/lowcode')).filter((name) =>

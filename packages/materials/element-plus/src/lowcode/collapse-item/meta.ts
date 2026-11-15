@@ -53,7 +53,7 @@ const meta = {
           },
           tip: 'icon of the collapse item',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
         defaultValue: 'ArrowRight',
       },

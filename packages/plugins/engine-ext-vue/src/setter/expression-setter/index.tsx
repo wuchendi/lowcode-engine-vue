@@ -6,7 +6,7 @@ import { isJSExpression } from '@alilc/lowcode-utils'
 import React, { PureComponent } from 'react'
 import type { MessageKey } from '../../locale'
 import { intl } from '../../locale'
-import { rootState } from '../../utils'
+import { currentRoot, rootState } from '../../utils'
 
 import './index.less'
 
@@ -75,17 +75,6 @@ export default class ExpressionView extends PureComponent<
     }
   }
 
-  // static getDerivedStateFromProps(props: { value: any }, state: { preValue: any }) {
-  //   const curValue = ExpressionView.getInitValue(props.value);
-  //   if (curValue !== state.preValue) {
-  //     return {
-  //       preValue: curValue,
-  //       value: curValue,
-  //     };
-  //   }
-  //   return null;
-  // }
-
   onChange(value: string) {
     const realInputValue = value
     this.setState({ value: realInputValue })
@@ -105,11 +94,11 @@ export default class ExpressionView extends PureComponent<
    * @return {Array}
    */
   getDataSource(): string[] {
-    const schema = project.exportSchema()
-    const stateMap = rootState(schema.componentsTree[0])
+    const root = currentRoot(project as never)
+    const stateMap = rootState(root)
     const dataSource: string[] = []
 
-    const datasourceMap = schema.componentsTree[0]?.dataSource
+    const datasourceMap = root?.dataSource
     const list = datasourceMap?.list || []
 
     for (const key in stateMap) {
@@ -139,10 +128,6 @@ export default class ExpressionView extends PureComponent<
     if (!lastKey) return true
     return String(item.value).indexOf(lastKey) > -1
   }
-
-  // handleClick = () => {
-  //   this.props.field.editor.emit('variableBindDialog.open');
-  // }
 
   render() {
     const { value, dataSource } = this.state

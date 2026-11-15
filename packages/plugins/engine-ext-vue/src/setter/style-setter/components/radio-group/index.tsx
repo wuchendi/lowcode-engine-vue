@@ -48,9 +48,6 @@ export default (props: radioProps) => {
           value={value}
           shape="button"
           onChange={(val) => onRadioChange(styleKey, val)}
-          // onClick={(event) => {
-          //   onRadioClick(event, styleKey, value);
-          // }}
           aria-labelledby="groupId"
         >
           {dataList &&
@@ -102,9 +99,6 @@ export default (props: radioProps) => {
         value={value}
         shape="button"
         onChange={(val) => onRadioChange(styleKey, val)}
-        // onClick={(event) => {
-        //   onRadioClick(event, styleKey, value);
-        // }}
         aria-labelledby="groupId"
       >
         {dataList &&

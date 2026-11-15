@@ -75,10 +75,6 @@ export interface RendererProps {
   __onRuntimeScope?: (scope: RuntimeScope) => void
 }
 
-export const baseRendererPropKeys = Object.keys(
-  rendererProps,
-) as (keyof RendererProps)[]
-
 export type RendererComponent = {
   new (
     ...args: any[]

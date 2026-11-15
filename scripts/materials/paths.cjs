@@ -15,4 +15,20 @@ const MATERIALS = {
   antd4: join(ROOT, 'packages/materials/antd-vue4'),
 }
 
-module.exports = { ROOT, DOCS, MATERIALS, LIBS: Object.keys(MATERIALS) }
+/** The component library of each material: npm package and Vue version. */
+const LIBRARIES = {
+  'element-ui': { pkg: 'element-ui', vue: 2 },
+  vant2: { pkg: 'vant', vue: 2 },
+  antd1: { pkg: 'ant-design-vue', vue: 2 },
+  'element-plus': { pkg: 'element-plus', vue: 3 },
+  vant4: { pkg: 'vant', vue: 3 },
+  antd4: { pkg: 'ant-design-vue', vue: 3 },
+}
+
+module.exports = {
+  ROOT,
+  DOCS,
+  MATERIALS,
+  LIBRARIES,
+  LIBS: Object.keys(MATERIALS),
+}

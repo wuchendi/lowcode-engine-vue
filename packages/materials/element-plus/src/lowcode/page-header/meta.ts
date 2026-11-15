@@ -20,7 +20,7 @@ const meta = {
           },
           tip: 'Page Header 的图标 Icon 组件',
         },
-        setter: 'CIconSetter',
+        setter: 'StringSetter',
         supportVariable: true,
         defaultValue: 'Back',
       },

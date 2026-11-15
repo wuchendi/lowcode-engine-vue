@@ -458,3 +458,31 @@ change them): a rendered node that gained `v-loading` in the designer threw
 directive keys to the vnode key, so such a node is replaced instead of
 patched. Found only once the directive resolved at all; covered by an
 adapter test and an E2E check (33 E2E tests, 491 unit tests).
+
+## 2026-11-15 20:00 [progress]
+
+20261115-2000-duplication-cleanup, after an audit for duplicated
+functionality and dead code:
+
+- `CIconSetter` moved from the designer app into `lowcode-engine-ext-vue`
+  (the materials referenced a setter only the app registered). It takes the
+  icon set as a `library` prop instead of reading `?client=h5`, and bundles
+  the fonts (the Element one pointed at a path that did not exist). The
+  Element Plus metas use `StringSetter` for `icon`: Element Plus takes
+  components, not the Element UI class names.
+- The expression, class name and events setters and the variable / event
+  binding dialogs read the current document (`currentRoot`) instead of
+  `componentsTree[0]`, the first page of the project.
+- The designer no longer overrides `ExpressionSetter` (its copy ignored the
+  bindings of `setup()`).
+- Core: route guards are implemented once (`VueAdapter.onRouteGuards` is
+  gone), `slotChildren` and `listenersAsProps` exist once, dead simulator
+  helpers (`check-node`, `logger`, a second `isObject`) and
+  `baseRendererPropKeys` are removed.
+- Unused dependencies removed (lodash / react / less in three materials,
+  `@alifd/next` peers of three plugins, two dependencies of vue2 / vue3
+  that the core already brings); the material scripts share one library
+  table; commented-out code removed from engine-ext-vue; unused Vue shims
+  removed from the materials.
+
+Verified: lint, type-check, 491 unit tests, publint, 35 E2E tests.

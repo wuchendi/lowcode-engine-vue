@@ -32,7 +32,6 @@ catalogs:
     react: ^16.14.0
     react-dom: ^16.14.0
   materials:
-    "@types/lodash": ^4.17.27
     lodash: ^4.17.21
   plugins:
     "@alifd/next": ^1.27.34

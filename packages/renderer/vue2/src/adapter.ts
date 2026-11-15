@@ -1,23 +1,20 @@
 import type {
   ComponentInstance,
-  RouteGuard,
   Slots,
   VueAdapter,
   VueComponent,
 } from '@cdlab996/lowcode-vue-core'
-import { isScopedSlot } from '@cdlab996/lowcode-vue-core'
+import { isScopedSlot, slotChildren } from '@cdlab996/lowcode-vue-core'
 import Vue, {
   h as createElement,
   defineComponent,
   del,
   getCurrentInstance,
-  onBeforeUnmount,
   set,
 } from 'vue'
 import type { Component } from 'vue/types/options'
 import type { VNode } from 'vue/types/vnode'
 import type VueRouter from 'vue-router'
-import type { Route, RouteRecord } from 'vue-router'
 import { getComponentOption, toVNodeData } from './vnode-data'
 
 /** Vue 2 internals the public typings omit. */
@@ -25,14 +22,6 @@ type Vue2Instance = ComponentInstance & {
   readonly _uid: number
   readonly _isDestroyed: boolean
   $options: { created?: Array<() => void> }
-}
-
-function slotChildren(slots?: Slots): VNode[] {
-  if (!slots) return []
-  const { default: defaultSlot, ...named } = slots
-  return [defaultSlot, ...Object.values(named)].flatMap((slot) =>
-    slot ? (slot() as VNode[]) || [] : [],
-  )
 }
 
 function h(
@@ -43,7 +32,11 @@ function h(
   const data = (props ?? {}) as Record<string, unknown>
   if (typeof type === 'string') {
     // Native elements have no slot outlets: every slot becomes children
-    return createElement(type, toVNodeData(type, data), slotChildren(slots))
+    return createElement(
+      type,
+      toVNodeData(type, data),
+      slotChildren<VNode>(slots),
+    )
   }
   // Default content without slot props is passed as children, as Vue 2
   // templates do: `$slots.default` then holds the rendered vnodes (Element
@@ -71,7 +64,7 @@ function wrapTag(tag: string | VueComponent): VueComponent {
           tag as Component,
           // Copy attrs: Vue removes the keys it extracts as props
           { attrs: { ...attrs }, on: listeners },
-          slotChildren(slots as Slots),
+          slotChildren<VNode>(slots as Slots),
         )
     },
   })
@@ -90,13 +83,6 @@ const PassThrough = {
   render(_h: unknown, ctx: { scopedSlots: Slots }) {
     return ctx.scopedSlots.default?.({}) ?? []
   },
-}
-
-function findPageRecord(matched: RouteRecord[], vm: Vue | null) {
-  for (let cur = vm; cur; cur = cur.$parent) {
-    const record = matched.find((r) => r.instances.default === cur)
-    if (record) return record
-  }
 }
 
 export const vue2Adapter: VueAdapter = {
@@ -135,22 +121,6 @@ export const vue2Adapter: VueAdapter = {
     // calls `created`. Queue on this instance's own hook list.
     const vm = getCurrentInstance()!.proxy as unknown as Vue2Instance
     vm.$options.created = [...(vm.$options.created ?? []), callback]
-  },
-  onRouteGuards(guards) {
-    const vm = getCurrentInstance()?.proxy as unknown as Vue
-    const router = vm?.$router
-    if (!router) return
-    const unregister = router.beforeEach((to, from, next) => {
-      const record = findPageRecord(from.matched, vm)
-      const callback: RouteGuard | undefined =
-        record &&
-        (to.matched.includes(record)
-          ? guards.beforeRouteUpdate
-          : guards.beforeRouteLeave)
-      if (callback) callback.call(vm, to as Route, from as Route, next)
-      else next()
-    })
-    onBeforeUnmount(unregister)
   },
   instanceId: (instance) => (instance as Vue2Instance)._uid,
   isAlive: (instance) => !(instance as Vue2Instance)._isDestroyed,

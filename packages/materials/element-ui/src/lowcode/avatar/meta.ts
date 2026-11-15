@@ -20,7 +20,12 @@ const meta = {
           },
           tip: '设置头像的图标类型，参考 Icon 组件',
         },
-        setter: 'CIconSetter',
+        setter: {
+          componentName: 'CIconSetter',
+          props: {
+            library: 'element',
+          },
+        },
         supportVariable: true,
       },
       {

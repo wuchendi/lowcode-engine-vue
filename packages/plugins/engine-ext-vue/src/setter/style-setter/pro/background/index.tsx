@@ -218,18 +218,12 @@ export default (props: fontProps) => {
 
   const backToBgImgUrl = (styleUrl: string | number | undefined) => {
     if (typeof styleUrl === 'string' && styleUrl) {
-      // const reg = /^url\(.*\)/;
-      // var result = styleUrl.match(reg);
       const newUrl = styleUrl.substring(
         styleUrl.indexOf('(') + 1,
         styleUrl.indexOf(')'),
       )
 
       return newUrl
-      // return styleUrl.substring(
-      //   styleUrl.indexOf("(") + 1,
-      //   styleUrl.indexOf(")") - 1
-      // );
     } else {
       return ''
     }
