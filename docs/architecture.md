@@ -62,6 +62,25 @@ canvas iframe
   option (`{ vue: 2 | 3 }`: the source panel's typings, the generated
   project).
 
+## The canvas protocol
+
+What the simulator (`core/src/simulator`) and the engine's host exchange:
+
+| Direction            | What                                                                       | How                                                                                                                                                                                            |
+| -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| host → simulator     | library map, components map, device, locale, design mode, request handlers | `host.connect()` reaction; components are rebuilt when the maps change                                                                                                                         |
+| host → simulator     | documents of the project                                                   | `host.autorun()`: one route of the in-memory router per document, removed with it; the current document is the current route                                                                   |
+| simulator → renderer | the schema of a document                                                   | a computed over `document.export(Render)`; `rerender()` bumps a timestamp                                                                                                                      |
+| host → renderer      | a prop or child change of a node                                           | the node state subscribes to `node.onPropChange` / `onChildrenChange` (design mode); the node's container re-renders                                                                           |
+| renderer → host      | component instances of a node                                              | `ref` -> `onCompGetCtx` -> `mountInstance`: records `(document, node, instance id)` and calls `host.setInstance`; an unmount reports `null` and dead instances (`adapter.isAlive`) are dropped |
+| host → simulator     | which node owns a DOM element or an instance                               | the root element of each instance carries its node id; `getClosestNodeInstance` walks up from the element                                                                                      |
+| host → simulator     | the DOM nodes and rectangles of an instance                                | `findDOMNodes` (`adapter.domNodesOf`), `getClientRects`                                                                                                                                        |
+
+The module has no import-time side effects: `createSimulatorRenderer(host)`
+creates it, `installSimulatorRenderer()` (the UMD bundle) exposes it as
+`window.SimulatorRenderer`. It is tested under jsdom with a stub host
+(`core/tests/simulator`).
+
 ## One core, two adapters
 
 The core is written against the Composition API that Vue 2.7 and Vue 3

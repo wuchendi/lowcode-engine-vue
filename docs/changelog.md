@@ -411,3 +411,23 @@ engine-ext-vue READMEs and the unified-renderer note are corrected
 designer's help button opens the usage guide
 (`/posts/lowcode-engine-vue-guide/`). Verified: lint, type-check, 483 unit
 tests; E2E not run (no behaviour change besides the help link).
+
+## 2026-11-15 16:00 [progress]
+
+20261115-1600-history-migration-docs: `docs/history.md` records the lineage
+(KNXCloud's renderer, the Vue 2.7 fork of 2023, eight repositories), the
+problems of the old packages (the 31 findings of the renderer audit, two
+renderers drifting, the wrapper per node, hand-written metas, CDN) and what
+answers each. `docs/migration.md` maps the old packages to the new ones and
+lists the API and rendering differences with the steps to move over. The
+README links both under "Background". Docs only.
+
+## 2026-11-15 17:00 [progress]
+
+Docs: `docs/history.md` gains a measurement of the published Vue 2.7
+renderer 1.0.0 against the core (1000-row loop under jsdom: 3001 -> 4
+expression compilations per mount, 3000 -> 0 per update, 3006 -> 2004
+component instances, mount 149 -> 84 ms, update 95 -> 47 ms). The old
+repositories and packages stay available, frozen, with a notice pointing
+here (`docs/history.md`, `docs/migration.md`, README). `docs/architecture.md`
+describes the canvas protocol.

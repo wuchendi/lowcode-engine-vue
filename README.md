@@ -7,7 +7,7 @@ Vue renderer, designer simulator, designer plugins, materials and tooling for
 - Designer: <https://lowcode-vue.pages.dev/> (Vue 3) ·
   <https://lowcode-vue.pages.dev/?vue=2> (Vue 2.7)
 - Usage guide (Chinese): <https://wcd.pages.dev/posts/lowcode-engine-vue-guide/>
-- Write-up of the design (Chinese): <https://wcd.pages.dev/posts/lowcode-engine-vue/>
+- Write-up of the rebuild (Chinese): <https://wcd.pages.dev/posts/lowcode-engine-vue/>
 
 ![The designer on Vue 3: components pane, canvas and settings pane](./docs/assets/designer.png)
 
@@ -19,6 +19,23 @@ behind a small adapter. The core is `@cdlab996/lowcode-vue-core`;
 re-export its API with their adapter installed. See
 [docs/architecture.md](./docs/architecture.md) and
 [docs/design/unified-renderer.md](./docs/design/unified-renderer.md).
+
+## Background
+
+This repository replaces eight older ones (they stay available, frozen, and
+point here): a Vue 2.7 fork of the community
+Vue 3 renderer ([KNXCloud/lowcode-engine-vue](https://github.com/KNXCloud/lowcode-engine-vue)),
+and separate repositories for the setters, plugins, material tooling,
+materials and a demo designer.
+
+- [docs/history.md](./docs/history.md): where the code comes from, what was
+  wrong with the old packages (a Vue 3 renderer ported to Vue 2 without its
+  semantics, two renderers drifting apart, a wrapper component around every
+  node, hand-written material metas) and what changed in response.
+- [docs/migration.md](./docs/migration.md): old and new package names, what
+  differs in the API and in rendering, and the steps to move over.
+- The write-up of the rebuild (Chinese):
+  <https://wcd.pages.dev/posts/lowcode-engine-vue/>.
 
 ## Which package
 
