@@ -32,6 +32,7 @@ pnpm lint:type          # build, then type-check every package and e2e/
 pnpm test               # Vitest: projects vue2, vue3, plugins, designer, materials, tools
 pnpm build:designer     # production designer build (apps/designer/dist)
 pnpm test:e2e           # Playwright against the designer build (or $DESIGNER_URL)
+pnpm clean              # remove node_modules and build outputs
 ```
 
 Run `pnpm lint`, `pnpm lint:type` and `pnpm test` before reporting work as
@@ -100,9 +101,9 @@ chromium`, or the `mcr.microsoft.com/playwright:v1.65.0-noble` image.
 ### Deploy
 
 - `.github/workflows/deploy.yml` deploys `apps/designer/dist` to Cloudflare
-  Pages after CI passes on `main` (secrets `CLOUDFLARE_API_TOKEN`,
-  `CLOUDFLARE_ACCOUNT_ID`; skipped without them). The site must stay static
-  and served from a domain root.
+  Pages when run by hand (secrets `CLOUDFLARE_API_TOKEN`,
+  `CLOUDFLARE_ACCOUNT_ID`). The site must stay static and served from a
+  domain root.
 
 ## Environment notes
 

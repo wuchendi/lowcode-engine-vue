@@ -137,6 +137,7 @@ dev:bare` (port 5577).
 | `pnpm test`           | Run the test suites on Vue 2.7 and on Vue 3.             |
 | `pnpm test:e2e`       | Playwright checks of the designer build (see Tests).     |
 | `pnpm format`         | Format with Biome.                                       |
+| `pnpm clean`          | Remove `node_modules` and build outputs (then install).  |
 
 ## Tests
 
@@ -190,12 +191,15 @@ The designer build (`pnpm build:designer`, `apps/designer/dist`) is a static
 site with no third-party requests. Serve it at the root of a domain (it uses
 root paths such as `/runtime/...`).
 
-`.github/workflows/deploy.yml` deploys it to Cloudflare Pages after CI passes
-on `main`, or when run by hand. It needs the repository secrets
+`.github/workflows/deploy.yml` deploys it to Cloudflare Pages when run by
+hand (Actions -> Deploy designer -> Run workflow; the branch picked is the
+Pages branch, `main` is production). It needs the repository secrets
 `CLOUDFLARE_API_TOKEN` (permission _Account / Cloudflare Pages / Edit_) and
 `CLOUDFLARE_ACCOUNT_ID`; the optional variable `CLOUDFLARE_PAGES_PROJECT`
 names the project (`lowcode-vue` by default, created on the first deploy).
-Without the secrets the workflow skips the deploy.
+Cloudflare's Git integration works too: build command `pnpm build:designer`,
+output directory `apps/designer/dist`, variables `NODE_VERSION=24.15.0` and
+`PNPM_VERSION=12.16.1`.
 
 By hand:
 

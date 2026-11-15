@@ -23,6 +23,7 @@
     "prepare": "pnpm build",
     "dev": "node scripts/dev.mjs",
     "build:designer": "pnpm -C apps/designer build",
+    "clean": "bash ./scripts/clean.sh",
     "lint": "biome check",
     "lint:type": "pnpm build && pnpm -r lint:type && tsc -p ./tsconfig.node.json && tsc -p ./e2e/tsconfig.json",
     "format": "biome format --write",
