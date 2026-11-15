@@ -1,7 +1,8 @@
 name: Deploy designer
 
 # Deploys the designer (apps/designer/dist, a static site) to Cloudflare
-# Pages once CI passed on main, or on demand.
+# Pages. Manual: Actions -> Deploy designer -> Run workflow (pick the branch
+# to deploy; main is the production branch).
 #
 # Setup (repository settings):
 # - secret CLOUDFLARE_API_TOKEN: API token with "Account / Cloudflare Pages /
@@ -9,13 +10,8 @@ name: Deploy designer
 # - secret CLOUDFLARE_ACCOUNT_ID
 # - variable CLOUDFLARE_PAGES_PROJECT (optional, default "lowcode-vue"): the
 #   Pages project, created on the first deploy
-# Without the secrets the deploy is skipped.
 
 on:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -28,58 +24,41 @@ permissions:
 jobs:
   deploy:
     name: Cloudflare Pages
-    # Only commits CI accepted (pushes to main), or a manual run
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
       PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT || 'lowcode-vue' }}
-      # The commit CI tested
-      COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
+      BRANCH: ${{ github.ref_name }}
     steps:
       # The secrets reach only the steps that need them (not the install
       # scripts of the dependencies)
       - name: Check the Cloudflare settings
-        id: settings
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "configured=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID are not set: deploy skipped"
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets"
+            exit 1
           fi
 
       - uses: actions/checkout@v7
-        if: steps.settings.outputs.configured == 'true'
-        with:
-          ref: ${{ env.COMMIT }}
 
       - uses: pnpm/action-setup@v6
-        if: steps.settings.outputs.configured == 'true'
 
       - uses: actions/setup-node@v7
-        if: steps.settings.outputs.configured == 'true'
         with:
           node-version: 24
           cache: pnpm
 
       # Also builds the packages (prepare)
       - run: pnpm install --frozen-lockfile
-        if: steps.settings.outputs.configured == 'true'
 
       - name: Build designer
-        if: steps.settings.outputs.configured == 'true'
         run: pnpm build:designer
 
       # Fails when the project exists already: then the deploy goes on
       - name: Create the Pages project if missing
-        if: steps.settings.outputs.configured == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -88,12 +67,11 @@ jobs:
           --production-branch main || true
 
       - name: Deploy
-        if: steps.settings.outputs.configured == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: >-
           pnpm dlx wrangler@4 pages deploy apps/designer/dist
           --project-name "$PROJECT"
-          --branch main
-          --commit-hash "$COMMIT"
+          --branch "$BRANCH"
+          --commit-hash "$GITHUB_SHA"
