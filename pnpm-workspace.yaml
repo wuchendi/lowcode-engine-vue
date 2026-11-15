@@ -27,7 +27,7 @@ catalogs:
     "@alilc/lowcode-types": ^1.3.4
     "@alilc/lowcode-utils": ^1.3.4
     "@types/react": ^16.14.70
-    intl-messageformat: ^10.7.18
+    intl-messageformat: ^12.1.5
     react: ^16.14.0
     react-dom: ^16.14.0
   materials:
