@@ -12,7 +12,7 @@ await plugins.register(VueCodeEditor, { vue: 2 }) // or 3 (default)
 ```
 
 `vue` selects the Vue and vue-router declarations of the editor (Vue 2.7 +
-vue-router 3, or Vue 3 + vue-router 4); they load on demand.
+vue-router 3, or Vue 3 + vue-router 5); they load on demand.
 
 New pages start with the Composition API (`setup()`); pages written with the
 Options API keep it. On save, the code is stored in `meta.originCode` and

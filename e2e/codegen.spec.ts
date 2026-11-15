@@ -4,6 +4,15 @@ import { collectErrors, openDesigner } from './designer'
 for (const vue of [2, 3] as const) {
   test(`generates the Vue ${vue} project of the page`, async ({ page }) => {
     const errors = collectErrors(page)
+    // A slow Monaco: the editors of the files clicked meanwhile all wait for
+    // the one load (no second AMD loader)
+    await page.route(
+      '**/runtime/monaco/vs/editor/editor.main.js',
+      async (route) => {
+        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await route.continue()
+      },
+    )
     await openDesigner(page, vue)
     await page.locator('.lc-top-area button', { hasText: '出码' }).click()
     const files = page.locator('.lowcode-code-generator-files li')

@@ -37,8 +37,8 @@ function chunks(file: string, content: string, found = new Map<string, string>()
 }
 
 /**
- * The typings of the installed Vue 3 (`vue-3`) and vue-router 4
- * (`vue-router-4`), each registered as `node_modules/<name>/index.d.ts` so
+ * The typings of the installed Vue 3 (`vue-3`) and vue-router 5
+ * (`vue-router-5`), each registered as `node_modules/<name>/index.d.ts` so
  * their imports of each other resolve in Monaco.
  */
 export function readVue3Types(root: string = join(import.meta.dirname, '..')): ExtraLib[] {
@@ -47,7 +47,7 @@ export function readVue3Types(root: string = join(import.meta.dirname, '..')): E
   const runtimeCore = typings(runtimeDom.dir, '@vue/runtime-core')
   const reactivity = typings(runtimeCore.dir, '@vue/reactivity')
   const shared = typings(runtimeCore.dir, '@vue/shared')
-  const router = typings(root, 'vue-router-4')
+  const router = typings(root, 'vue-router-5')
   return Object.entries({
     vue,
     '@vue/runtime-dom': runtimeDom,

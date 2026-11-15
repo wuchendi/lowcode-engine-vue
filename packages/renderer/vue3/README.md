@@ -4,7 +4,7 @@ LowCode Engine renderer and designer simulator for **Vue 3**. Same API as
 `@cdlab996/lowcode-vue2`; only the peer Vue version differs.
 
 ```bash
-pnpm add @cdlab996/lowcode-vue3 vue vue-router@4
+pnpm add @cdlab996/lowcode-vue3 vue vue-router@5
 ```
 
 Entries: `.` (full API, including the designer simulator), `./runtime`
@@ -35,7 +35,7 @@ Renderer props: `schema`, `components`, `scope`, `designMode`, `device`,
 - Preview page: load Vue and `dist/renderer.umd.js`; the API is
   `window.LCVueRenderer`.
 
-Both bundles include vue-router 4; Vue is read from `window.Vue`.
+Both bundles include vue-router 5; Vue is read from `window.Vue`.
 
 ## License
 

@@ -11,7 +11,7 @@ describe('readVue3Types', () => {
     ]),
   )
 
-  it('reads the typings of the installed Vue 3 and vue-router 4', () => {
+  it('reads the typings of the installed Vue 3 and vue-router 5', () => {
     expect([...byName.keys()].sort()).toEqual([
       '@vue/reactivity',
       '@vue/runtime-core',
@@ -28,9 +28,9 @@ describe('readVue3Types', () => {
   })
 
   it('includes the declaration chunks the typings import', () => {
-    // vue-router 4.6 declares RouterHistory in a `router-<hash>.d.mts` chunk
+    // vue-router 5 declares RouterHistory in an `index-<hash>.d.ts` chunk
     const chunk = libs.find((lib) =>
-      /^file:\/\/\/node_modules\/vue-router\/router-[\w-]+\.d\.mts$/.test(
+      /^file:\/\/\/node_modules\/vue-router\/(?!index\.d\.ts$)[\w-]+\.d\.m?ts$/.test(
         lib.path,
       ),
     )

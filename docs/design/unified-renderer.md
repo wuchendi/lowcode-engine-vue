@@ -16,7 +16,7 @@ few and concentrated:
 | vnode data         | `VNodeData` (`props`/`attrs`/`on`/`scopedSlots`) | flat props, `Fragment`, directives |
 | instance internals | `_uid`, `_isDestroyed`, `$options.created`       | `$.uid`, `$.isUnmounted`, `$.refs` |
 | mount              | `new Vue(...)`                                   | `createApp(...)`                   |
-| router             | vue-router 3 (no `removeRoute`)                  | vue-router 4                       |
+| router             | vue-router 3 (no `removeRoute`)                  | vue-router 5 (4 works too)         |
 | `v-model`          | `model` option / `value` + `input`               | `modelValue` + `update:modelValue` |
 
 Keeping two renderers meant every schema feature, fix and test had to be done

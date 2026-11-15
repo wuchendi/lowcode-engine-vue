@@ -26,7 +26,7 @@ import {
   withDirectives,
 } from 'vue'
 
-/** Instance seen through vue-router 4 (types only; no vue-router import). */
+/** Instance seen through vue-router 4 / 5 (types only; no vue-router import). */
 interface RouteRecordLike {
   instances: Record<string, unknown>
 }

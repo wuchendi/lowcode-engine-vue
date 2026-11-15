@@ -12,7 +12,7 @@ export const VERSIONS = {
   vue3: '3.5.45',
   vue2: '2.7.16',
   router3: '3.6.5',
-  router4: '4.6.4',
+  router5: '5.5.1',
   vite: '^8.0.0',
   pluginVue: '^6.0.0',
   pluginVue2: '^2.3.4',
@@ -96,7 +96,7 @@ export function projectFiles(input: ProjectInput): Record<string, string> {
   const dependencies: Record<string, string> = {
     vue: vue === 3 ? VERSIONS.vue3 : VERSIONS.vue2,
     ...(withRouter
-      ? { 'vue-router': vue === 3 ? VERSIONS.router4 : VERSIONS.router3 }
+      ? { 'vue-router': vue === 3 ? VERSIONS.router5 : VERSIONS.router3 }
       : {}),
     ...Object.fromEntries(directives.map((d) => [d.package, d.version])),
     ...input.dependencies,

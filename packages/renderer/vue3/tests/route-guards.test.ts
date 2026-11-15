@@ -28,7 +28,7 @@ const pageSchema = {
   },
 }
 
-describe('route guards (vue-router 4)', () => {
+describe('route guards (vue-router 5)', () => {
   let app: App | undefined
   const show = ref(true)
 

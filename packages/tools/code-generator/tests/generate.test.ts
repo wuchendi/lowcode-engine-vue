@@ -55,7 +55,7 @@ describe('generateProject (Vue 3)', async () => {
     expect(pkg.dependencies).toMatchObject({
       vant: '^4.8.10',
       vue: '3.5.45',
-      'vue-router': '4.6.4',
+      'vue-router': '5.5.1',
     })
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue')
     expect(files['src/main.js']).toContain("import 'vant/lib/index.css'")
