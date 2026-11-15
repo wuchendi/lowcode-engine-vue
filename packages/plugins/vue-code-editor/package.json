@@ -56,7 +56,7 @@
   "devDependencies": {
     "@alifd/next": "catalog:plugins",
     "@alilc/lowcode-types": "catalog:shared",
-    "@babel/types": "^7.22.11",
+    "@babel/types": "^8.1.2",
     "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@monaco-editor/loader": "^1.3.3",
     "@types/prop-types": "^15.7.15",
