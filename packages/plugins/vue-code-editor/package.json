@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-plugin-vue-code-editor",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/vue-code-editor",
@@ -21,12 +21,11 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.mjs"
     },
     "./style.css": "./dist/style.css"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/types/index.d.ts",
   "files": [

@@ -85,7 +85,7 @@ chromium`, or the `mcr.microsoft.com/playwright:v1.65.0-noble` image.
 ### Materials (`packages/materials`)
 
 - Metas (`src/lowcode/*/meta.ts`) and `src/index.ts` are generated from the
-  library docs by `scripts/materials` (see README "Material metas"). Do not
+  library docs by `scripts/materials` (see CONTRIBUTING.md "Material metas"). Do not
   edit them by hand: change `generate.cjs` / `recipes.cjs` and regenerate.
 - The component library versions are pinned to the last releases supporting
   the target Vue version (Vue 2: element-ui 2.15, vant 2, ant-design-vue 1).
@@ -93,10 +93,15 @@ chromium`, or the `mcr.microsoft.com/playwright:v1.65.0-noble` image.
 
 ### Release
 
-- Tags `<group>-v<version>` publish `packages/<group>` (`renderer`,
-  `plugins`, `materials`, `tools`) to npm through trusted publishing. A
-  group depending on another one is released after it
-  (`scripts/check-release-deps.mjs`).
+- One version for every public package: `pnpm release` (bumpp) bumps it and
+  tags `v<version>`; the tag publishes all packages to npm through trusted
+  publishing. Do not bump one package on its own.
+- Packages depend on each other with `workspace:*`; nothing is inlined from
+  another package except in the UMD bundles.
+- `@cdlab996/lowcode-vue-core` exports its sources inside the repository
+  (tests, type-checks and `pnpm dev` use them); `publishConfig` points the
+  published package at `dist`. Keep both export maps in sync.
+- `pnpm check:publint` must pass.
 
 ### Deploy
 

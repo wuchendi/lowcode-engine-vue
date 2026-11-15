@@ -114,7 +114,8 @@ export default async function registerPlugins() {
 
   // 注册 使用手册
   await plugins.register(ManualPlugin, {
-    href: 'https://github.com/cdLab996/lowcode-engine-demo-vue',
+    // The usage guide of this designer
+    href: 'https://wcd.pages.dev/posts/lowcode-engine-vue-guide/',
   })
 
   // 画布切换

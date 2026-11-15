@@ -1,43 +1,36 @@
-# 🚀 @cdlab996/lowcode-plugin-set-doc-url
+# @cdlab996/lowcode-plugin-set-doc-url
 
-Lowcode Plugin Component material new documentation address
+[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-set-doc-url?logo=npm)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-set-doc-url)
 
-[![NPM](https://nodei.co/npm/@cdlab996/lowcode-plugin-set-doc-url.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@cdlab996/lowcode-plugin-set-doc-url/)
+LowCode Engine designer plugin: shows a 使用文档 (Documentation) link in the
+属性 (Props) group of the settings pane, for every component whose meta has a
+`docUrl`.
 
-[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-set-doc-url.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-set-doc-url)
-[![npm downloads](https://img.shields.io/npm/dm/@cdlab996/lowcode-plugin-set-doc-url.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-set-doc-url)
-
-## ⚡ Usage
-
-### Register the plugin
-
-```jsx
+```ts
 import { plugins } from '@alilc/lowcode-engine'
-import PluginSetDocUrlProp from '@cdlab996/lowcode-plugin-set-doc-url'
+import SetDocUrl from '@cdlab996/lowcode-plugin-set-doc-url'
 
-// Register with the engine
-plugins.register(PluginSetDocUrlProp)
+await plugins.register(SetDocUrl)
 ```
 
-### Plugin Properties & Methods
-
-none
-
-### Components Materials
+No options. The link comes from the component meta:
 
 ```ts
 import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
 const meta: IPublicTypeComponentMetadata = {
-  group: 'Element-plus',
   componentName: 'ElButton',
+  title: 'Button',
   docUrl: 'https://element-plus.org/zh-CN/component/button.html',
-  configure: {
-    props: [],
-    supports: {},
-  },
-  snippets: [],
+  // ...
 }
 
 export default meta
 ```
+
+Components without a `docUrl`, and Page and Component roots, show no link.
+The metas of the `@cdlab996/lowcode-materials-*` packages all have one.
+
+## License
+
+[MIT](https://github.com/wuchendi/lowcode-engine-vue/blob/main/LICENSE)

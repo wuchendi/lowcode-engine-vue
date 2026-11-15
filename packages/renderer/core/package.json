@@ -1,10 +1,24 @@
 {
   "name": "@cdlab996/lowcode-vue-core",
   "type": "module",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.2.0",
   "description": "Vue-version independent core of the LowCode Engine Vue renderer and simulator.",
+  "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/renderer/core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchendi/lowcode-engine-vue.git",
+    "directory": "packages/renderer/core"
+  },
+  "bugs": {
+    "url": "https://github.com/wuchendi/lowcode-engine-vue/issues"
+  },
+  "keywords": [
+    "vue",
+    "lowcode",
+    "lowcode-engine"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./runtime": "./src/runtime.ts",
@@ -12,19 +26,58 @@
     "./designer": "./src/shared/designer-environment.ts",
     "./simulator.css": "./src/simulator/simulator.css"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "lint:type": "tsc -p ./tsconfig.json --noEmit"
+    "build": "tsdown",
+    "lint:type": "tsc -p ./tsconfig.json --noEmit",
+    "prepack": "pnpm build"
   },
   "dependencies": {
+    "@alilc/lowcode-types": "catalog:shared",
     "intl-messageformat": "catalog:shared"
   },
   "peerDependencies": {
     "vue": "^2.7.16 || ^3.5.0"
   },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@alilc/lowcode-designer": "catalog:shared",
-    "@alilc/lowcode-types": "catalog:shared",
     "@cdlab996/lowcode-tsconfig": "workspace:*",
+    "tsdown": "catalog:dev",
     "vue": "catalog:vue3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "./runtime": {
+        "types": "./dist/runtime.d.mts",
+        "default": "./dist/runtime.mjs"
+      },
+      "./schema": {
+        "types": "./dist/schema.d.mts",
+        "default": "./dist/schema.mjs"
+      },
+      "./designer": {
+        "types": "./dist/designer.d.mts",
+        "default": "./dist/designer.mjs"
+      },
+      "./simulator.css": "./dist/simulator.css",
+      "./package.json": "./package.json"
+    },
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.mts"
   }
 }

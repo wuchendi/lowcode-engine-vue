@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-plugin-manual",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/manual",

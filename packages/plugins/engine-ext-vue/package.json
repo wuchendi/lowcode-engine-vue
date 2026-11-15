@@ -1,6 +1,6 @@
 {
   "name": "@cdlab996/lowcode-engine-ext-vue",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Setters and binding panels of the LowCode Engine designer, adapted to Vue materials.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",

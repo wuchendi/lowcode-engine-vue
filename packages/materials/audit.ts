@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { join } from 'node:path'
 import { readCodegenManifest } from '../tools/material-builder/src/codegen'
+
+const { renderDir } = createRequire(import.meta.url)(
+  '../../scripts/materials/readme.cjs',
+) as { renderDir(dir: string): string }
 
 /** Native attributes the docs list and the components forward to an inner element. */
 const NATIVE_ATTRS = new Set([
@@ -87,6 +92,11 @@ export function auditMetas({
     pkg,
   )
   const issues: AuditIssue[] = []
+  if (readFileSync(join(dir, 'README.md'), 'utf8') !== renderDir(dir))
+    issues.push({
+      component: 'README.md',
+      issue: 'out of date: run node scripts/materials/readme.cjs',
+    })
   for (const { default: meta } of Object.values(metas)) {
     const component = meta.componentName
     const report = (issue: string) => issues.push({ component, issue })

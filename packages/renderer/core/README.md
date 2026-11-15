@@ -1,12 +1,22 @@
 # @cdlab996/lowcode-vue-core
 
 Vue-version independent core of the LowCode Engine renderer and designer
-simulator. **Private**: it is not published. `@cdlab996/lowcode-vue2` and
-`@cdlab996/lowcode-vue3` bundle it (a dev dependency, inlined by tsdown) and
-re-export its API with their adapter installed; the code generator inlines
-its `./schema` entry the same way.
+simulator. Applications install `@cdlab996/lowcode-vue2` or
+`@cdlab996/lowcode-vue3`: both depend on this package and re-export its API
+with their adapter installed (importing them calls `setAdapter()`). The code
+generator depends on its `./schema` entry.
 
-The package exports TypeScript sources; there is no build step.
+Use the core directly only to share code between the two Vue versions (a
+library written against the renderer API) or for the schema rules; import a
+distribution first so an adapter is set.
+
+```bash
+pnpm add @cdlab996/lowcode-vue3   # or @cdlab996/lowcode-vue2
+```
+
+Inside the repository the package exports its TypeScript sources (tests,
+type-checks and `pnpm dev` use them directly); `publishConfig` points the
+published package at the tsdown build in `dist`.
 
 ## Entries
 
@@ -17,6 +27,9 @@ The package exports TypeScript sources; there is no build step.
 | `./schema`        | how a node schema is read; shared with the code generator (no Vue import) |
 | `./designer`      | `setupDesignerEnvironment(project, { vue })` for the designer page        |
 | `./simulator.css` | canvas styles                                                             |
+
+`vue` (`^2.7.16 || ^3.5.0`) is an optional peer dependency: `./schema` and
+`./designer` do not import it.
 
 ## Layout
 

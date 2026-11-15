@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-engine-vue",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.2.0",
   "private": true,
   "packageManager": "pnpm@12.16.1",
   "description": "LowCode Engine renderer, designer simulator, plugins, materials and tooling for Vue 2.7 and Vue 3.",
@@ -26,16 +26,20 @@
     "clean": "bash ./scripts/clean.sh",
     "lint": "biome check",
     "lint:type": "pnpm build && pnpm -r lint:type && tsc -p ./tsconfig.node.json && tsc -p ./e2e/tsconfig.json",
+    "check:publint": "pnpm -r --filter \"./packages/**\" --filter \"!@cdlab996/lowcode-tsconfig\" exec publint --strict",
     "format": "biome format --write",
     "test": "vitest --run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "release": "bumpp"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:dev",
     "@cdlab996/lowcode-tsconfig": "workspace:*",
     "@playwright/test": "catalog:dev",
     "@types/node": "catalog:dev",
+    "bumpp": "catalog:dev",
     "jsdom": "catalog:dev",
+    "publint": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:dev"
   }

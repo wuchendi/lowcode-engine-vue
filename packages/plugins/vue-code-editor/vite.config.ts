@@ -18,8 +18,8 @@ export default defineConfig({
     target: 'es2018',
     lib: {
       entry: './src/index.tsx',
-      formats: ['es', 'cjs'],
-      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs'),
+      formats: ['es'],
+      fileName: () => 'index.mjs',
       cssFileName: 'style',
     },
     rollupOptions: {

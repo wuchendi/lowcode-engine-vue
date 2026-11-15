@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-materials-element-plus",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Element Plus materials for the LowCode Engine (Vue 3).",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",

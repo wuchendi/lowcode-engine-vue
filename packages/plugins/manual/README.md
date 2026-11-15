@@ -1,42 +1,24 @@
-# 🚀 @cdlab996/lowcode-plugin-manual
+# @cdlab996/lowcode-plugin-manual
 
-Lowcode Plugin Manual
+[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-manual?logo=npm)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-manual)
 
-> tips: Due to the official plugins not supporting URL configuration, it has been separated
-
-[![NPM](https://nodei.co/npm/@cdlab996/lowcode-plugin-manual.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@cdlab996/lowcode-plugin-manual/)
-
-[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-manual.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-manual)
-[![npm downloads](https://img.shields.io/npm/dm/@cdlab996/lowcode-plugin-manual.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-manual)
-
-## ⚡ Usage
-
-### Register the plugin
-
-```jsx
-import { plugins } from '@alilc/lowcode-engine'
-import PluginManual from '@cdlab996/lowcode-plugin-manual'
-
-// Register with the engine
-plugins.register(PluginManual)
-```
-
-### Plugin Properties & Methods
+LowCode Engine designer plugin: a help button (如何使用) at the bottom of the
+left bar that opens a link. A fork of the official
+[lowcode-plugin-manual](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-manual),
+whose link cannot be configured.
 
 ```ts
-interface Options {
-  /**
-   * Link address, default is 'https://lowcode-engine.cn/index'
-   */
-  href?: string
-  /**
-   * Link target, default is '_blank'
-   */
-  target?: '_blank' | '_self' | '_parent' | '_top' | string
-}
+import { plugins } from '@alilc/lowcode-engine'
+import Manual from '@cdlab996/lowcode-plugin-manual'
+
+await plugins.register(Manual, { href: 'https://example.com/guide' })
 ```
 
-## 📝 License
+| Option   | Description                                                  |
+| -------- | ------------------------------------------------------------ |
+| `href`   | Link to open (default `https://lowcode-engine.cn/index`).    |
+| `target` | Link target: `_blank` (default), `_self`, `_parent`, `_top`. |
 
-This is a fork
-from [lowcode-plugin-manual](https://github.com/alibaba/lowcode-plugins/tree/main/packages/plugin-manual)
+## License
+
+[MIT](https://github.com/wuchendi/lowcode-engine-vue/blob/main/LICENSE)

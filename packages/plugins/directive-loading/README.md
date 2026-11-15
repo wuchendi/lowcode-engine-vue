@@ -1,24 +1,26 @@
-# 🚀 @cdlab996/lowcode-plugin-directive-loading
+# @cdlab996/lowcode-plugin-directive-loading
 
-Vue Custom Directive - v-loading
+[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-directive-loading?logo=npm)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-directive-loading)
 
-[![NPM](https://nodei.co/npm/@cdlab996/lowcode-plugin-directive-loading.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@cdlab996/lowcode-plugin-directive-loading/)
+LowCode Engine designer plugin: adds a **loading** switch (`v-loading`) to
+the 高级 (Advanced) group of every component's settings pane. The value is a
+boolean or a bound variable and is saved as the `v-loading` prop of the node,
+which the Vue renderer applies as a directive.
 
-[![npm version](https://img.shields.io/npm/v/@cdlab996/lowcode-plugin-directive-loading.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-directive-loading)
-[![npm downloads](https://img.shields.io/npm/dm/@cdlab996/lowcode-plugin-directive-loading.svg)](https://www.npmjs.com/package/@cdlab996/lowcode-plugin-directive-loading)
-
-## ⚡ Usage
-
-### Register the plugin
-
-```jsx
+```ts
 import { plugins } from '@alilc/lowcode-engine'
-import PluginManual from '@cdlab996/lowcode-plugin-directive-loading'
+import DirectiveLoading from '@cdlab996/lowcode-plugin-directive-loading'
 
-// Register with the engine
-plugins.register(PluginManual)
+await plugins.register(DirectiveLoading)
 ```
 
-### Plugin Properties & Methods
+No options. Page and Component roots do not get the switch.
 
-none
+The plugin only adds the setting: the `v-loading` directive itself must be
+registered where the schema renders (the renderer resolves `v-<name>` props
+as directives of the running app). The code generator registers it in the
+generated `src/main.js`, from Element UI (Vue 2.7) or Element Plus (Vue 3).
+
+## License
+
+[MIT](https://github.com/wuchendi/lowcode-engine-vue/blob/main/LICENSE)

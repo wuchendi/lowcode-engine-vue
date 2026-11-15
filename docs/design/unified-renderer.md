@@ -28,7 +28,7 @@ compiler and data-source fixes and most tests).
 
 ```
 packages/renderer/
-  core/   private, bundled into both distributions
+  core/   @cdlab996/lowcode-vue-core, a dependency of both distributions
     src/adapter.ts      VueAdapter interface, setAdapter / getAdapter
     src/shared/         no `vue` import: expression compiler, schema parsing,
                         i18n, asset loader, designer environment
@@ -36,12 +36,14 @@ packages/renderer/
     src/renderer/       Renderer, Page/Block/Component renderers, leaf,
                         root scope, data source, component building
     src/simulator/      designer simulator, document instances, canvas utils
-  vue2/   @cdlab996/lowcode-vue2: Vue 2.7 adapter + core
-  vue3/   @cdlab996/lowcode-vue3: Vue 3 adapter + core
+  vue2/   @cdlab996/lowcode-vue2: Vue 2.7 adapter, re-exports the core
+  vue3/   @cdlab996/lowcode-vue3: Vue 3 adapter, re-exports the core
 ```
 
-- The core imports the shared Composition API from `vue` directly; each
-  distribution resolves `vue` to its own version. It is type-checked against
+- The core imports the shared Composition API from `vue` directly; it
+  resolves to the application's Vue (a peer dependency). The distributions
+  keep the core external in their ESM builds, so an application has one core
+  and one adapter; their UMD bundles inline it. It is type-checked against
   both Vue 2.7 and Vue 3 typings (through each distribution).
 - Each distribution calls `setAdapter()` when imported; the core calls
   `getAdapter()` for everything version-specific.
@@ -61,8 +63,8 @@ packages/renderer/
 - **Reactivity gaps**: `set` / `del` for adding and removing reactive keys.
 - **Components**: `isComponent`, `normalizeComponent`, `wrapTag` (native tags
   and Vue 2 functional components), `modelOf` (`v-model` prop and event).
-- **Instances**: `refsOf`, `onCreated`, `onRouteGuards`, `instanceId`,
-  `isAlive`, `domNodesOf`.
+- **Instances**: `refsOf`, `onCreated`, `onRouteGuards`, `unmountedHook`,
+  `instanceId`, `isAlive`, `domNodesOf`.
 - **App**: `mount`.
 - **Router** (`RouterAdapter`, installed by the full entry only):
   `RouterView`, `createMemoryRouter` (add/remove routes, replace, guard).
@@ -106,11 +108,11 @@ for it.
   `events` and a stylesheet into the canvas and preview bundles; the core
   keeps equivalent guards instead. Designer-side code (plugins, designer app)
   runs next to the engine's React and uses `@alilc/lowcode-utils`.
-
 - One compiler: cached per source, `this` rewritten by a scanner (strings,
   template text, comments and regexes untouched), bare identifiers resolved
   through the scope with `with`, functions bound to the scope.
-- One data-source engine with the `fetch` handler and `requestHandlersMap`;
+- One data-source engine with the `fetch` and `jsonp` handlers and
+  `requestHandlersMap`;
   initial-load failures are recorded on the item, never unhandled.
 
 ## Simulator
@@ -118,9 +120,44 @@ for it.
 `createSimulatorRenderer(host)` has no import-time side effects;
 `installSimulatorRenderer()` (run by `simulator.umd.js`) exposes it as
 `window.SimulatorRenderer`. Each document is a route of an in-memory router;
-removed documents remove their route. Leaves report their instances through
-`onCompGetCtx` and report `null` on unmount, which drops dead instances.
-`createComponent` renders low-code component schemas with `initProps`.
+removed documents remove their route. `createComponent` renders low-code
+component schemas with `initProps`.
+
+## Rendering model
+
+Every node renders as the vnode of its own component (`h(comp, props,
+slots)`); there is no wrapper component between a parent and its children,
+so libraries that read `slots.default()` vnodes (Ant Design's Select, Table,
+Tree) or walk `$parent` / `$children` (Element UI's Steps, Tabs) see what
+they expect.
+
+- `renderer/leaf.ts` is the node state, not a component: it splits the
+  schema into props and slots (`shared/schema.ts`) and, in design mode,
+  subscribes to the designer node (`onPropChange` / `onChildrenChange`).
+- The state is read where the node's vnode is created. A slot function runs
+  in the component that renders the slot, so a change re-renders the node's
+  container and Vue patches what changed.
+- Instances reach the simulator (`onCompGetCtx`) through a `ref` and the
+  adapter's `unmountedHook` props; an unmount reports `null`, which drops
+  dead instances. Both are cached per node key: a new function on a vnode,
+  or a slots object, forces the child to update on every parent render, so
+  no slots object is passed when a node has no slots.
+- `inject` does not see a `provide` of the same component, so the renderer
+  context is passed explicitly inside one setup.
+- Vue 2: default slot content without slot props is passed as children (as
+  compiled templates do), so `$slots.default` holds the rendered vnodes
+  instead of producing new ones on each read; slots with params are marked
+  with `markScopedSlot`.
+
+## Schema semantics
+
+How a node schema is read (a `children` prop vs node children, `JSSlot`
+props, `onUpdateXxx` events, `v-model[:arg]`, loop arguments, the global
+`dataHandler`) lives in `core/src/shared/schema.ts`
+(`@cdlab996/lowcode-vue-core/schema`, no Vue import) and is shared with the
+code generator. `core/tests/conformance` renders fixtures with the renderer
+and with the generated templates and runtime, on both Vue versions, and
+compares the HTML, the method calls and the data source requests.
 
 ## Tests
 

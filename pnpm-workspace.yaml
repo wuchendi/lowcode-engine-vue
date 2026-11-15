@@ -12,8 +12,10 @@ catalogs:
     "@playwright/test": 1.65.0
     "@types/node": ^26.6.6
     "@vitejs/plugin-react": ^6.3.0
+    bumpp: ^12.3.0
     jsdom: ^31.0.1
     less: ^4.9.1
+    publint: ^0.3.25
     sass: ^1.108.2
     tsdown: ^0.23.7
     typescript: ^7.0.2

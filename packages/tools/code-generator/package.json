@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-code-generator",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Generate Vue 2.7 / Vue 3 projects from LowCode Engine schemas.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@alilc/lowcode-types": "catalog:shared",
+    "@cdlab996/lowcode-vue-core": "workspace:*",
     "acorn": "^8.19.0",
     "fflate": "^0.8.3",
     "magic-string": "^1.4.5",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "@cdlab996/lowcode-tsconfig": "workspace:*",
-    "@cdlab996/lowcode-vue-core": "workspace:*",
     "@types/node": "catalog:dev",
     "tsdown": "catalog:dev",
     "vue": "catalog:vue3"

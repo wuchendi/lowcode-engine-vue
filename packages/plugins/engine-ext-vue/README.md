@@ -20,6 +20,23 @@ Load it after the engine, in place of `@alilc/lowcode-engine-ext`:
 It reads `React`, `ReactDOM`, `PropTypes`, `moment`, `_` (lodash), `Next`
 (`@alifd/next`) and `AliLowCodeEngine` from the page.
 
+## Setters
+
+`StringSetter`, `TextAreaSetter`, `NumberSetter`, `BoolSetter`,
+`SelectSetter`, `RadioGroupSetter`, `DateSetter` (and year / month / range), `TimePicker`,
+`ColorSetter`, `IconSetter`, `ClassNameSetter`, `StyleSetter`, `I18nSetter`,
+`TitleSetter`, `JsonSetter`, `ArraySetter`, `ObjectSetter`, `MixedSetter`,
+`SlotSetter`, `FunctionSetter`, `EventsSetter`, `ExpressionSetter` and
+`VariableSetter`, plus the variable and event binding dialogs.
+
+What differs from the React bundle:
+
+- The binding dialogs and the expression setter list what a Vue page exposes
+  on `this`: `state`, `methods` and the bindings returned by `setup()`
+  (`meta.setupBindings`, written by
+  [`@cdlab996/lowcode-plugin-vue-code-editor`](../vue-code-editor)).
+- Texts follow the engine locale (`zh-CN` / `en-US`).
+
 ## Development
 
 ```bash

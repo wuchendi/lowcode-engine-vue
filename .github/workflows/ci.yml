@@ -44,6 +44,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Check the package manifests
+        run: pnpm check:publint
+
       - name: Build designer
         run: pnpm build:designer
 

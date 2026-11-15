@@ -1,6 +1,6 @@
 {
   "name": "@cdlab996/lowcode-plugin-code-generator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "description": "Code generation for the LowCode Engine designer: Vue 2.7 / Vue 3 projects from the current schema.",
   "author": "wudi <wuchendi96@gmail.com>",

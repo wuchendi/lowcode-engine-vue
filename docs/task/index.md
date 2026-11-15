@@ -56,3 +56,5 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261114-1419-engine-ext-tests Tests for engine-ext-vue and no global switches**](20261114-1419-engine-ext-tests.md) `P3`
 - [x] [**20261114-1419-schema-semantics Shared schema semantics for the renderer and the code generator**](20261114-1419-schema-semantics.md) `P2`
 - [x] [**20261114-1419-renderer-without-leaf Render nodes without the Leaf wrapper**](20261114-1419-renderer-without-leaf.md) `P1`
+- [x] [**20261115-1200-public-core-unified-release Public core package and one version for all packages**](20261115-1200-public-core-unified-release.md) `P2`
+- [x] [**20261115-1500-docs-refresh Refresh the repository and package docs**](20261115-1500-docs-refresh.md) `P3`

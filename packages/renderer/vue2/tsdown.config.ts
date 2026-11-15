@@ -1,9 +1,9 @@
 import type { UserConfig } from 'tsdown'
 import { defineConfig } from 'tsdown'
 
-// The core is private: bundle it into every output. Vue and vue-router stay
-// external (peers); @alilc/* and intl-messageformat are dependencies.
-const bundled = [/^@cdlab996\/lowcode-vue-core/]
+// ESM build: the core, @alilc/* and intl-messageformat are dependencies,
+// Vue and vue-router peers; all stay external. The UMD bundles inline
+// everything but Vue.
 
 const umd = (entry: string, file: string, minify: boolean): UserConfig => ({
   dts: false,
@@ -48,19 +48,9 @@ export default defineConfig((options) =>
           entry: ['./src/index.ts', './src/runtime.ts', './src/designer.ts'],
           target: 'ES2018',
           clean: true,
-          deps: {
-            alwaysBundle: bundled,
-            dts: {
-              alwaysBundle: [/^@cdlab996\/lowcode-vue-core/],
-              neverBundle: [/^@alilc\//],
-            },
-          },
-          copy: [
-            {
-              from: '../core/src/simulator/simulator.css',
-              to: 'dist',
-            },
-          ],
+          deps: { dts: { neverBundle: [/^@alilc\//] } },
+          // Kept as `<package>/simulator.css` for the designer setups using it
+          copy: [{ from: '../core/src/simulator/simulator.css', to: 'dist' }],
         },
         // Preview pages: the renderer API as `window.LCVueRenderer`
         umd('./src/umd/renderer.ts', 'renderer.umd.js', true),
