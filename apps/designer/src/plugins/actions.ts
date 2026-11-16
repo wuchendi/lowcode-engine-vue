@@ -177,7 +177,8 @@ const savePlugin = (ctx: IPublicModelPluginContext) => {
         ),
       })
 
-      hotkey.bind('command+s', async (e) => {
+      // `mod`: ⌘ on macOS, Ctrl elsewhere (`command` is ⌘ only)
+      hotkey.bind('mod+s', async (e) => {
         e.preventDefault()
         await save()
       })

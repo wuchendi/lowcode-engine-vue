@@ -178,6 +178,28 @@ for (const vue of [2, 3] as const) {
   })
 }
 
+// The shortcut is Ctrl+S on Windows / Linux and ⌘S on macOS
+test('saves the project with the keyboard shortcut', async ({ page }) => {
+  let frame = await openDesigner(page, 3)
+  await clearPage(page)
+  await page.evaluate(() => {
+    const doc = window.AliLowCodeEngine.project.currentDocument
+    doc.insertNode(doc.root, {
+      componentName: 'VanButton',
+      props: { text: 'Shortcut' },
+    })
+  })
+  await expect(frame.locator('.lc-page')).toContainText('Shortcut')
+  await page.locator('.lc-top-area').click()
+  await page.keyboard.press('ControlOrMeta+s')
+  await expect
+    .poll(() => page.evaluate(() => localStorage.getItem('projectSchema:vue3')))
+    .toContain('Shortcut')
+  await page.reload()
+  frame = await openDesigner(page, 3)
+  await expect(frame.locator('.lc-page')).toContainText('Shortcut')
+})
+
 for (const vue of [2, 3] as const) {
   test(`Vue ${vue}: loads JSONP data sources in the canvas and the preview`, async ({
     page,

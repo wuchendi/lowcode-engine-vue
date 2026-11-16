@@ -486,3 +486,11 @@ functionality and dead code:
   removed from the materials.
 
 Verified: lint, type-check, 491 unit tests, publint, 35 E2E tests.
+
+## 2026-11-16 12:00 [pitfall]
+
+The designer's save shortcut was bound to `command+s`: in the engine's
+hotkey map `command` is the Meta key, so Ctrl+S on Windows / Linux opened
+the browser's "save page" dialog instead. It is `mod+s` now (⌘ on macOS,
+Ctrl elsewhere), covered by an E2E check pressing `ControlOrMeta+s`
+(36 E2E tests).
