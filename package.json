@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-engine-vue",
   "type": "module",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "packageManager": "pnpm@12.16.1",
   "description": "LowCode Engine renderer, designer simulator, plugins, materials and tooling for Vue 2.7 and Vue 3.",

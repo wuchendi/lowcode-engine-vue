@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-vue-core",
   "type": "module",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Vue-version independent core of the LowCode Engine Vue renderer and simulator.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",

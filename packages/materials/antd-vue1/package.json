@@ -1,7 +1,7 @@
 {
   "name": "@cdlab996/lowcode-materials-antd-vue1",
   "type": "module",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Ant Design Vue 1 materials for the LowCode Engine (Vue 2.7).",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",

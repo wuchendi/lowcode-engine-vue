@@ -1,7 +1,8 @@
 {
   "name": "@cdlab996/lowcode-plugin-manual",
   "type": "module",
-  "version": "1.2.0",
+  "version": "2.0.0",
+  "description": "LowCode Engine designer plugin: a help button in the left bar that opens a user manual link.",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/manual",

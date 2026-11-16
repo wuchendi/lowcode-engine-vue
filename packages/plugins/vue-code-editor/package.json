@@ -1,7 +1,8 @@
 {
   "name": "@cdlab996/lowcode-plugin-vue-code-editor",
   "type": "module",
-  "version": "1.2.0",
+  "version": "2.0.0",
+  "description": "Vue source panel for the LowCode Engine designer: edit a page as a Vue component (setup() or Options API).",
   "author": "wudi <wuchendi96@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/wuchendi/lowcode-engine-vue/tree/main/packages/plugins/vue-code-editor",
