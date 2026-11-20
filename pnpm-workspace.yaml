@@ -9,7 +9,7 @@ packages:
 catalogs:
   dev:
     "@biomejs/biome": ^2.6.7
-    "@playwright/test": 1.65.0
+    "@playwright/test": 1.65.1
     "@types/node": ^26.6.6
     "@vitejs/plugin-react": ^6.3.0
     bumpp: ^12.3.0
