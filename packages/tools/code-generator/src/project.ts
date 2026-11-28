@@ -9,10 +9,10 @@ import { toCode } from './value'
  * to install.
  */
 export const VERSIONS = {
-  vue3: '3.5.45',
+  vue3: '3.5.46',
   vue2: '2.7.16',
   router3: '3.6.5',
-  router5: '5.5.1',
+  router5: '5.5.3',
   vite: '^8.0.0',
   pluginVue: '^6.0.0',
   pluginVue2: '^2.3.4',

@@ -16,7 +16,9 @@ const umd = (entry: string, file: string, minify: boolean): UserConfig => ({
   minify,
   define: {
     'process.env.NODE_ENV': JSON.stringify('production'),
-    // Feature flags of the bundled vue-router (esm-bundler build)
+    // Feature flags of the bundled vue-router (esm-bundler build); 5.5.3
+    // reads `__VUE_OPTIONS_API__` too, and an undefined flag throws at run time
+    __VUE_OPTIONS_API__: 'true',
     __VUE_PROD_DEVTOOLS__: 'false',
   },
   // Everything but Vue is bundled on purpose: no bundling hint

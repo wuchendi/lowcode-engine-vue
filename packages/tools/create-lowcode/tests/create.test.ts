@@ -31,7 +31,7 @@ describe('createProject', () => {
     const pkg = await readJson('my-materials', 'package.json')
     expect(pkg.name).toBe('my-materials')
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue')
-    expect(pkg.devDependencies.vue).toBe('3.5.45')
+    expect(pkg.devDependencies.vue).toBe('3.5.46')
     expect(await read('my-materials', 'vite.config.ts')).toContain(
       "from '@vitejs/plugin-vue'",
     )

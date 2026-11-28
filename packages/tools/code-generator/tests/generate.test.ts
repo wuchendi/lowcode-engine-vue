@@ -54,8 +54,8 @@ describe('generateProject (Vue 3)', async () => {
     // Vue and the router at the versions the materials target
     expect(pkg.dependencies).toMatchObject({
       vant: '^4.8.10',
-      vue: '3.5.45',
-      'vue-router': '5.5.1',
+      vue: '3.5.46',
+      'vue-router': '5.5.3',
     })
     expect(pkg.devDependencies).toHaveProperty('@vitejs/plugin-vue')
     expect(files['src/main.js']).toContain("import 'vant/lib/index.css'")

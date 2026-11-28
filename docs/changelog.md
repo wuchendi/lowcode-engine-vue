@@ -494,3 +494,24 @@ hotkey map `command` is the Meta key, so Ctrl+S on Windows / Linux opened
 the browser's "save page" dialog instead. It is `mod+s` now (⌘ on macOS,
 Ctrl elsewhere), covered by an E2E check pressing `ControlOrMeta+s`
 (36 E2E tests).
+
+## 2026-11-28 10:00 [progress]
+
+20261128-1000-dependency-upgrade: Biome 2.6.9, Playwright 1.65.1,
+@types/node 26.6.11, Vite 8.4.0, Vitest 5.1.2, intl-messageformat 12.2.1,
+Vue 3.5.46, vue-router 5.5.3, @babel/types 8.1.3, in the catalogs, the
+scaffold templates, the versions of generated projects and the source panel
+typings. The pinned lines are unchanged. `@babel/types` is no longer a
+dependency: the source panel used it for one type cast of acorn's result,
+which acorn types itself. Verified: lint, type-check, 491
+unit tests, publint, 36 E2E tests.
+
+## 2026-11-28 10:00 [pitfall]
+
+vue-router 5.5.3 reads the `__VUE_OPTIONS_API__` build flag. The UMD bundles
+inline its esm-bundler build and only defined `__VUE_PROD_DEVTOOLS__`, so
+the Vue 3 canvas threw "**VUE_OPTIONS_API** is not defined" and rendered
+nothing. Unit tests do not load the bundles: only the E2E checks showed it.
+Dependabot splits a dependency of the root and of the scaffold templates
+into one pull request per directory, and `versions.test.ts` fails each of
+them alone.

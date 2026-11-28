@@ -38,7 +38,7 @@ pnpm clean              # remove node_modules and build outputs
 Run `pnpm lint`, `pnpm lint:type` and `pnpm test` before reporting work as
 done; run the E2E checks when the designer, the renderer, the materials or
 the code generator change. Browsers for E2E: `pnpm exec playwright install
-chromium`, or the `mcr.microsoft.com/playwright:v1.65.0-noble` image.
+chromium`, or the `mcr.microsoft.com/playwright:v1.65.1-noble` image.
 
 ## Rules by area
 

@@ -8,9 +8,9 @@ packages:
 
 catalogs:
   dev:
-    "@biomejs/biome": ^2.6.7
-    "@playwright/test": 1.65.0
-    "@types/node": ^26.6.6
+    "@biomejs/biome": ^2.6.9
+    "@playwright/test": 1.65.1
+    "@types/node": ^26.6.11
     "@vitejs/plugin-react": ^6.3.0
     bumpp: ^12.3.0
     jsdom: ^31.0.1
@@ -20,15 +20,15 @@ catalogs:
     tsdown: ^0.23.7
     typescript: ^7.0.2
     unocss: ^66.13.0
-    vite: ^8.3.8
-    vitest: ^5.1.0
+    vite: ^8.4.0
+    vitest: ^5.1.2
   shared:
     "@alilc/lowcode-designer": ^1.3.4
     "@alilc/lowcode-engine": ^1.3.4
     "@alilc/lowcode-types": ^1.3.4
     "@alilc/lowcode-utils": ^1.3.4
     "@types/react": ^16.14.70
-    intl-messageformat: ^12.1.5
+    intl-messageformat: ^12.2.1
     react: ^16.14.0
     react-dom: ^16.14.0
   materials:
@@ -39,8 +39,8 @@ catalogs:
     vue: 2.7.16
     vue-router: 3.6.5
   vue3:
-    vue: 3.5.45
-    vue-router: 5.5.1
+    vue: 3.5.46
+    vue-router: 5.5.3
 
 overrides:
   # @alilc/lowcode-plugin-base-monaco-editor pins 1.3.0, which injects Monaco's
