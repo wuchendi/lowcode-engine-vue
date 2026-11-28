@@ -2,7 +2,6 @@ import type {
   IPublicTypeJSExpression,
   IPublicTypeJSFunction,
 } from '@alilc/lowcode-types'
-import type { Program } from '@babel/types'
 import { parse } from 'acorn'
 import MagicString from 'magic-string'
 
@@ -215,7 +214,7 @@ export function parseCode(
   const program = parse(code, {
     ecmaVersion: 'latest',
     sourceType: 'module',
-  }) as Program
+  })
 
   const state = {}
   const methods = {}
@@ -229,7 +228,8 @@ export function parseCode(
   if (program.type === 'Program') {
     for (const node of program.body) {
       if (node.type === 'ImportDeclaration') {
-        const from = node.source.value
+        // A module specifier is a string literal
+        const from = String(node.source.value)
         node.specifiers.forEach((item) => {
           const localName = parseLocalName(item.local.name)
           globalVars[localName] = localName
@@ -240,7 +240,7 @@ export function parseCode(
               item.type === 'ImportSpecifier'
                 ? item.imported.type === 'Identifier'
                   ? item.imported.name
-                  : item.imported.value
+                  : String(item.imported.value)
                 : item.type === 'ImportDefaultSpecifier'
                   ? 'default'
                   : null,

@@ -61,3 +61,4 @@ Each task is a single line linking to its detail file. All detailed information 
 - [x] [**20261115-1600-history-migration-docs History and migration docs**](20261115-1600-history-migration-docs.md) `P3`
 - [x] [**20261115-1800-vue3-directives v-loading has no effect on Vue 3**](20261115-1800-vue3-directives.md) `P1`
 - [x] [**20261115-2000-duplication-cleanup Remove duplicated functionality and dead code**](20261115-2000-duplication-cleanup.md) `P1`
+- [x] [**20261128-1000-dependency-upgrade Upgrade the dependencies to their latest versions**](20261128-1000-dependency-upgrade.md) `P2`
